@@ -25,6 +25,6 @@ class ResUsers(models.Model):
     def SELF_READABLE_FIELDS(self):
         return super().SELF_READABLE_FIELDS + ['polres_id', 'polsek_id', 'subdit_id']
 
-    @property
-    def SELF_WRITEABLE_FIELDS(self):
-        return super().SELF_WRITEABLE_FIELDS + ['polres_id', 'polsek_id', 'subdit_id']
+    # polres_id / polsek_id / subdit_id menentukan cakupan data (record rule),
+    # jadi sengaja TIDAK dimasukkan ke SELF_WRITEABLE_FIELDS: user tidak boleh
+    # mengubah cakupannya sendiri. Hanya administrator yang boleh mengubahnya.

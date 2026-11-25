@@ -40,6 +40,11 @@ class Patroli(models.Model):
     keterangan = fields.Text('Keterangan', tracking=True)
     subdit_id = fields.Many2one('petapantau.subdit', string='Subdit', tracking=True,
                                 help='Diisi otomatis dari form publik atau user subdit yang input')
+    form_config_id = fields.Many2one(
+        'petapantau.patroli.form_config', string='Form Publik Asal',
+        readonly=True, copy=False, index=True, ondelete='set null',
+        help='Form publik (QR) yang membuat data ini. Hanya form tersebut yang boleh '
+             'mengubah data ini lewat jalur publik.')
     submitter_ip = fields.Char('IP Address', readonly=True, copy=False)
     submitter_ua = fields.Char('Browser / OS', readonly=True, copy=False)
     state = fields.Selection([

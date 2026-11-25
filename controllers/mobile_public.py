@@ -622,6 +622,17 @@ self.addEventListener('fetch', e => {
             [('public_token', '=', token), ('is_aktif', '=', True)], limit=1
         )
 
+    def _patroli_pub_record(self, config, record_id):
+        """Patroli yang boleh diakses form publik ini: harus dibuat oleh form_config yang sama."""
+        try:
+            rid = int(record_id)
+        except (TypeError, ValueError):
+            return request.env['petapantau.patroli']
+        rec = request.env['petapantau.patroli'].sudo().browse(rid)
+        if not rec.exists() or rec.form_config_id != config:
+            return request.env['petapantau.patroli']
+        return rec
+
     @http.route('/patroli/<string:token>', type='http', auth='public', csrf=False, website=False)
     def patroli_public_form(self, token, **kwargs):
         config = self._patroli_pub_valid(token)
@@ -796,6 +807,7 @@ self.addEventListener('fetch', e => {
                 'polres_id':     polres_id,
                 'polsek_id':     polsek_id,
                 'subdit_id':     config.subdit_id.id if config.subdit_id else False,
+                'form_config_id': config.id,
                 'kabupaten_id':  kabupaten_id,
                 'kecamatan_id':  kecamatan_id,
                 'desa_id':       desa_id,
@@ -815,7 +827,8 @@ self.addEventListener('fetch', e => {
 
     @http.route('/patroli/api/personel_add', type='jsonrpc', auth='public', csrf=False)
     def patroli_pub_personel_add(self, token, record_id, nama, pangkat=None, **kwargs):
-        if not token or not self._patroli_pub_valid(token):
+        config = self._patroli_pub_valid(token) if token else False
+        if not config:
             return {'error': 'unauthorized'}
         nama = (nama or '').strip()
         if not nama:
@@ -826,8 +839,8 @@ self.addEventListener('fetch', e => {
         if len(pangkat) > 100:
             return {'error': 'Pangkat terlalu panjang (maks 100 karakter)'}
         try:
-            rec = request.env['petapantau.patroli'].sudo().browse(int(record_id))
-            if not rec.exists():
+            rec = self._patroli_pub_record(config, record_id)
+            if not rec:
                 return {'error': 'Data tidak ditemukan'}
             if rec.state != 'PROSES':
                 return {'error': 'Tidak dapat menambah personel pada patroli yang sudah selesai'}
@@ -843,11 +856,12 @@ self.addEventListener('fetch', e => {
 
     @http.route('/patroli/api/personel_remove', type='jsonrpc', auth='public', csrf=False)
     def patroli_pub_personel_remove(self, token, personel_id, **kwargs):
-        if not token or not self._patroli_pub_valid(token):
+        config = self._patroli_pub_valid(token) if token else False
+        if not config:
             return {'error': 'unauthorized'}
         try:
             p = request.env['petapantau.personel_patroli'].sudo().browse(int(personel_id))
-            if not p.exists():
+            if not p.exists() or p.patroli_id.form_config_id != config:
                 return {'error': 'not found'}
             if p.patroli_id.state != 'PROSES':
                 return {'error': 'Tidak dapat menghapus personel dari patroli yang sudah selesai'}
@@ -860,7 +874,8 @@ self.addEventListener('fetch', e => {
     @http.route('/patroli/api/lokasi_add', type='jsonrpc', auth='public', csrf=False)
     def patroli_pub_lokasi_add(self, token, record_id, latitude, longitude,
                                 tanggal=None, catatan=None, foto=None, **kwargs):
-        if not token or not self._patroli_pub_valid(token):
+        config = self._patroli_pub_valid(token) if token else False
+        if not config:
             return {'error': 'unauthorized'}
 
         # ── Validasi wajib ────────────────────────────────────────────────────
@@ -892,9 +907,11 @@ self.addEventListener('fetch', e => {
         if len(catatan) > 2000:
             return {'error': 'Catatan terlalu panjang (maks 2000 karakter)'}
 
-        rec = request.env['petapantau.patroli'].sudo().browse(int(record_id))
-        if not rec.exists():
+        rec = self._patroli_pub_record(config, record_id)
+        if not rec:
             return {'error': 'Data tidak ditemukan'}
+        if rec.state != 'PROSES':
+            return {'error': 'Tidak dapat menambah titik lokasi pada patroli yang sudah selesai'}
         try:
             tgl_str = (tanggal or '').replace('T', ' ')
             tgl_utc = _wib_to_utc(tgl_str) if tgl_str else datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
@@ -916,11 +933,12 @@ self.addEventListener('fetch', e => {
 
     @http.route('/patroli/api/lokasi_remove', type='jsonrpc', auth='public', csrf=False)
     def patroli_pub_lokasi_remove(self, token, lokasi_id, **kwargs):
-        if not token or not self._patroli_pub_valid(token):
+        config = self._patroli_pub_valid(token) if token else False
+        if not config:
             return {'error': 'unauthorized'}
         try:
             l = request.env['petapantau.lokasi_patroli'].sudo().browse(int(lokasi_id))
-            if not l.exists():
+            if not l.exists() or l.patroli_id.form_config_id != config:
                 return {'error': 'not found'}
             if l.patroli_id.state != 'PROSES':
                 return {'error': 'Tidak dapat menghapus titik lokasi dari patroli yang sudah selesai'}
@@ -932,7 +950,8 @@ self.addEventListener('fetch', e => {
 
     @http.route('/patroli/api/set_selesai', type='jsonrpc', auth='public', csrf=False)
     def patroli_pub_set_selesai(self, token, record_id, tanggal_selesai, **kwargs):
-        if not token or not self._patroli_pub_valid(token):
+        config = self._patroli_pub_valid(token) if token else False
+        if not config:
             return {'error': 'unauthorized'}
         if not tanggal_selesai:
             return {'error': 'Tanggal selesai harus diisi'}
@@ -948,8 +967,8 @@ self.addEventListener('fetch', e => {
         if not parsed_ok:
             return {'error': 'Format tanggal selesai tidak valid'}
         try:
-            rec = request.env['petapantau.patroli'].sudo().browse(int(record_id))
-            if not rec.exists():
+            rec = self._patroli_pub_record(config, record_id)
+            if not rec:
                 return {'error': 'Data tidak ditemukan'}
             if rec.state == 'SELESAI':
                 return {'success': True}
