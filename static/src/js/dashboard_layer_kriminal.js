@@ -1,0 +1,719 @@
+﻿/** @odoo-module **/
+
+import { initLokasiOverlay, updateLokasiOverlayMarkers } from './dashboard_overlay_lokasi';
+import { fmtTanggal, renderKabupatenSummaryMarkers, renderSummaryMarkers, wibDateStartUtc, wibDateEndUtc } from './dashboard_helpers';
+
+/**
+ * Peta Kriminal
+ * Choropleth kriminalitas per kabupaten/kecamatan — warna berdasarkan jumlah kasus.
+ */
+
+// ── Skala warna berdasarkan jumlah kasus ────────────────────────────────────
+export const KRIMINAL_COLORS = [
+    { min: 2001, max: Infinity, color: '#922b21', label: '> 2.000 Kasus' },
+    { min: 1001, max: 2000,    color: '#e74c3c', label: '> 1.000 Kasus' },
+    { min:  501, max: 1000,    color: '#e67e22', label: '> 500 Kasus'   },
+    { min:    1, max:  500,    color: '#f1c40f', label: '>= 1 Kasus'    },
+    { min:    0, max:    0,    color: '#abebc6', label: 'Tidak Ada Kasus' },
+];
+
+export function getKriminalColor(jumlah) {
+    for (const tier of KRIMINAL_COLORS) {
+        if (jumlah >= tier.min) return tier.color;
+    }
+    return '#abebc6';
+}
+
+// ── Legend Control ───────────────────────────────────────────────────────────
+export function addKriminalLegend(ctx) {
+    if (ctx.kriminalLegend) {
+        ctx.kriminalLegend.remove();
+        ctx.kriminalLegend = null;
+    }
+
+    const KriminalLegend = L.Control.extend({
+        onAdd() {
+            const div = L.DomUtil.create('div', 'petapantau-legend petapantau-legend--kriminal');
+            div.innerHTML = `
+                <div class="petapantau-legend-title">
+                    <i class="fa fa-exclamation-triangle"></i> Legenda Kriminalitas
+                </div>
+                <ul class="petapantau-legend-list">
+                    ${KRIMINAL_COLORS.map(tier => `
+                        <li>
+                            <span class="petapantau-legend-swatch" style="background:${tier.color};"></span>
+                            <span class="petapantau-legend-label">${tier.label}</span>
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+            L.DomEvent.disableClickPropagation(div);
+            L.DomEvent.disableScrollPropagation(div);
+            return div;
+        },
+        onRemove() {}
+    });
+
+    ctx.kriminalLegend = new KriminalLegend({ position: 'bottomright' });
+    ctx.kriminalLegend.addTo(ctx.map);
+}
+
+export function removeKriminalLegend(ctx) {
+    if (ctx.kriminalLegend) {
+        ctx.kriminalLegend.remove();
+        ctx.kriminalLegend = null;
+    }
+}
+
+// ── Helpers: baca nilai filter aktif ────────────────────────────────────────
+function _getActiveFilters(ctx) {
+    return {
+        tahun:        ctx.filterTahun?.el?.value        || '',
+        polresId:     ctx._polresFilterId,
+        dateFrom:     ctx.activeDateFrom                 || '',
+        dateTo:       ctx.activeDateTo                   || '',
+        jenisLp:      ctx.filterJenisLP?.el?.value      || '',
+        kategoriId:   ctx.filterKategori?.el?.value     ? parseInt(ctx.filterKategori.el.value)     : null,
+        subKategoriId:ctx.filterSubKategori?.el?.value  ? parseInt(ctx.filterSubKategori.el.value)  : null,
+        stateValue:   ctx.filterState?.el?.value        || '',
+    };
+}
+
+// ── Helper: build domain dari objek filters ──────────────────────────────────
+function _buildDomain(filters, extraDomain = []) {
+    const domain = [...extraDomain];
+    if (filters.tahun)        domain.push(['tahun', '=',  filters.tahun]);
+    if (filters.dateFrom)     domain.push(['tanggal_kejadian',        '>=', wibDateStartUtc(filters.dateFrom)]);
+    if (filters.dateTo)       domain.push(['tanggal_kejadian',        '<=', wibDateEndUtc(filters.dateTo)]);
+    if (filters.jenisLp)      domain.push(['jenis_lp',                '=',  filters.jenisLp]);
+    if (filters.kategoriId)   domain.push(['kategori_id',             '=',  filters.kategoriId]);
+    if (filters.subKategoriId)domain.push(['sub_kategori_id',         '=',  filters.subKategoriId]);
+    if (filters.stateValue)   domain.push(['status_perkara',          '=',  filters.stateValue]);
+    return domain;
+}
+
+// ── Label periode untuk popup ────────────────────────────────────────────────
+function _periodeLabel(filters) {
+    const parts = [];
+    if (filters.tahun)    parts.push(`Tahun ${filters.tahun}`);
+    if (filters.dateFrom) parts.push(`dari ${filters.dateFrom}`);
+    if (filters.dateTo)   parts.push(`s/d ${filters.dateTo}`);
+    return parts.length ? parts.join(', ') : 'Semua Periode';
+}
+
+// ── Helper: parse kabupaten_id dari hasil read_group ─────────────────────────
+function _buildKasusMap(groups) {
+    const kasusMap = {};
+    for (const g of groups) {
+        if (!g.kabupaten_id) continue;
+        const kabId = Array.isArray(g.kabupaten_id) ? g.kabupaten_id[0] : g.kabupaten_id;
+        kasusMap[kabId] = g.__count || 0;
+    }
+    return kasusMap;
+}
+
+function _buildKecamatanKasusMap(groups) {
+    const kasusMap = {};
+    for (const g of groups) {
+        if (!g.kecamatan_id) continue;
+        const kecId = Array.isArray(g.kecamatan_id) ? g.kecamatan_id[0] : g.kecamatan_id;
+        kasusMap[kecId] = g.__count || 0;
+    }
+    return kasusMap;
+}
+
+function _buildDesaKasusMap(groups) {
+    const kasusMap = {};
+    for (const g of groups) {
+        if (!g.desa_id) continue;
+        const desaId = Array.isArray(g.desa_id) ? g.desa_id[0] : g.desa_id;
+        kasusMap[desaId] = g.__count || 0;
+    }
+    return kasusMap;
+}
+
+// ── Helper: load marker titik koordinat kriminalitas ─────────────────────────
+// limit: max records diambil — di kabupaten dibatasi agar tidak berat, desa bebas
+async function _loadKriminalMarkers(ctx, domain, limit) {
+    ctx.markerLayerGroup.clearLayers();
+
+    const markerDomain = [['latitude', '!=', 0], ['longitude', '!=', 0], ...domain];
+    const searchOpts   = limit ? { limit, order: 'tanggal_kejadian desc' } : { order: 'tanggal_kejadian desc' };
+
+    const [categories, records] = await Promise.all([
+        ctx.orm.searchRead('petapantau.kategori_kriminal', [], ['id', 'icon']),
+        ctx.orm.searchRead(
+            'petapantau.kriminalitas',
+            markerDomain,
+            ['id', 'code', 'no_lp', 'latitude', 'longitude', 'tempat_kejadian',
+             'jenis_tkp_id', 'kategori_id', 'sub_kategori_id', 'status_perkara', 'tanggal_kejadian'],
+            searchOpts,
+        ),
+    ]);
+
+    const categoryIconMap = {};
+    for (const cat of categories) categoryIconMap[cat.id] = cat.icon || 'fa-exclamation-triangle';
+
+    records.forEach(r => {
+        const isSelesai   = r.status_perkara === 'SELESAI';
+        const statusColor = isSelesai ? '#27ae60' : '#e74c3c';
+        const statusLabel = isSelesai ? 'Selesai' : 'Proses';
+        const kategori    = Array.isArray(r.kategori_id)     ? r.kategori_id[1]     : '-';
+        const subKategori = Array.isArray(r.sub_kategori_id) ? r.sub_kategori_id[1] : '-';
+        const jenisTkp    = Array.isArray(r.jenis_tkp_id)    ? r.jenis_tkp_id[1]    : '-';
+        const tglKejadian = fmtTanggal(r.tanggal_kejadian);
+        const katId       = Array.isArray(r.kategori_id) ? r.kategori_id[0] : null;
+        const faIcon      = (katId && categoryIconMap[katId]) ? categoryIconMap[katId] : 'fa-exclamation-triangle';
+
+        const icon = L.divIcon({
+            className: '',
+            html: `<div class="petapantau-crime-marker" style="border-color:${statusColor};">
+                       <i class="fa ${faIcon}" style="color:${statusColor};"></i>
+                   </div>`,
+            iconSize:   [24, 24],
+            iconAnchor: [12, 12],
+        });
+
+        const marker = L.marker([r.latitude, r.longitude], { icon });
+
+        marker.bindPopup(`
+            <div class="petapantau-popup">
+                <div class="petapantau-popup-header" style="background:#922b21;">
+                    <i class="fa ${faIcon}"></i>
+                    <strong>${r.code}</strong>
+                </div>
+                <div class="petapantau-popup-body">
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-file-text-o"></i> No LP</td>
+                            <td><strong>${r.no_lp || '-'}</strong></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-calendar"></i> Tanggal</td>
+                            <td><strong>${tglKejadian}</strong></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-map-marker"></i> TKP</td>
+                            <td><strong>${r.tempat_kejadian || '-'}</strong></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-tag"></i> Jenis TKP</td>
+                            <td><strong>${jenisTkp}</strong></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-list"></i> Kategori</td>
+                            <td><strong>${kategori}</strong></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-sitemap"></i> Sub Kategori</td>
+                            <td><strong>${subKategori}</strong></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-flag"></i> Status</td>
+                            <td><strong style="color:${statusColor};">${statusLabel}</strong></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="petapantau-popup-footer">
+                    <button class="petapantau-btn-detail" style="background:#922b21;" id="btn-detail-kriminal-${r.id}">
+                        <i class="fa fa-external-link"></i> Lihat Detail
+                    </button>
+                </div>
+            </div>
+        `, { maxWidth: 280, className: 'petapantau-leaflet-popup' });
+
+        marker.on('popupopen', () => {
+            setTimeout(() => {
+                const btn = document.getElementById(`btn-detail-kriminal-${r.id}`);
+                if (btn) btn.addEventListener('click', () => ctx.action.doAction({
+                    type: 'ir.actions.act_window',
+                    res_model: 'petapantau.kriminalitas',
+                    res_id: r.id,
+                    views: [[false, 'form']],
+                    target: 'current',
+                }));
+            }, 0);
+        });
+
+        ctx.markerLayerGroup.addLayer(marker);
+    });
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// LEVEL 1 — KABUPATEN
+// ════════════════════════════════════════════════════════════════════════════
+export async function loadModeKriminal(ctx) {
+    const ver = ctx._modeVersion;
+    addKriminalLegend(ctx);
+    ctx.currentLevel = 'kabupaten';
+
+    const filters = _getActiveFilters(ctx);
+    const baseDomain = filters.polresId ? [['polres_id', '=', filters.polresId]] : [];
+
+    try {
+        const kabDomain = filters.kabupatenId ? [['id', '=', filters.kabupatenId]] : [];
+        const [groups, records] = await Promise.all([
+            ctx.orm.call(
+                'petapantau.kriminalitas',
+                'read_group',
+                [_buildDomain(filters, baseDomain), ['kabupaten_id'], ['kabupaten_id']],
+                { lazy: false }
+            ),
+            ctx.orm.searchRead(
+                'petapantau.kabupaten',
+                kabDomain,
+                ['id', 'code', 'name', 'type', 'kecamatan_ids', 'geometry'],
+            ),
+        ]);
+        const kasusMap = _buildKasusMap(groups);
+
+        const features = records
+            .filter(r => r.geometry)
+            .map(r => {
+                try {
+                    const jumlah = kasusMap[r.id] || 0;
+                    return {
+                        type: "Feature",
+                        geometry: JSON.parse(r.geometry),
+                        properties: {
+                            id: r.id, code: r.code, name: r.name, type: r.type,
+                            jumlah_kecamatan: r.kecamatan_ids ? r.kecamatan_ids.length : 0,
+                            jumlah_kasus: jumlah,
+                            color: getKriminalColor(jumlah),
+                        }
+                    };
+                } catch (e) {
+                    console.warn(`Gagal parse geometry kabupaten: ${r.name}`, e);
+                    return null;
+                }
+            })
+            .filter(Boolean);
+
+        if (features.length === 0) return;
+
+        const geoLayer = L.geoJSON({ type: "FeatureCollection", features }, {
+            style: (feature) => ({
+                color: '#555555', weight: 1.5, opacity: 1,
+                fillColor: feature.properties.color, fillOpacity: 0.45,
+            }),
+            onEachFeature: (feature, layer) => {
+                const props = feature.properties;
+
+                layer.on('add', () => {
+                    const bounds = layer.getBounds();
+                    const label = L.marker(bounds.getCenter(), {
+                        icon: L.divIcon({
+                            className: 'kabupaten-label',
+                            html: `<span>${props.name}</span>`,
+                            iconSize: null,
+                        }),
+                        interactive: false,
+                        zIndexOffset: -100,
+                    });
+                    label._polygonBounds = bounds;
+                    ctx.kabupatenLabelGroup.addLayer(label);
+                });
+
+                layer.on('mouseover', () => { layer.setStyle({ weight: 2.5, fillOpacity: 0.65 }); layer.bringToFront(); });
+                layer.on('mouseout',  () => { layer.setStyle({ weight: 1.5, fillOpacity: 0.45 }); });
+                layer.on('click', (e) => _showKriminalKabupatenPopup(ctx, e, props, layer, filters));
+            }
+        });
+
+        if (ctx._modeVersion !== ver) return;
+        ctx.kabupatenLayerGroup.addLayer(geoLayer);
+        ctx._fitBoundsZoomedIn(geoLayer.getBounds());
+        renderKabupatenSummaryMarkers(ctx, geoLayer, filters, 'jumlah_kasus',
+            `<i class="fa fa-exclamation-triangle"></i> Peta Kriminal`,
+            'fa-map-marker', drillDownKriminalKecamatan);
+    } catch (error) {
+        console.error("Gagal memuat data kriminalitas:", error);
+    }
+    if (ctx._modeVersion !== ver) return;
+    await initLokasiOverlay(ctx);
+}
+
+// ── Popup Kabupaten ──────────────────────────────────────────────────────────
+function _showKriminalKabupatenPopup(ctx, e, props, layer, filters) {
+    const tipeLabel  = props.type === 'KOTA' ? 'Kota' : 'Kabupaten';
+    const kasusLabel = props.jumlah_kasus > 0
+        ? `<strong style="color:${props.color};">${props.jumlah_kasus.toLocaleString('id-ID')} Kasus</strong>`
+        : `<strong style="color:#27ae60;">Tidak Ada Kasus</strong>`;
+
+    const popupContent = `
+        <div class="petapantau-popup">
+            <div class="petapantau-popup-header" style="background:#922b21;">
+                <i class="fa fa-exclamation-triangle"></i>
+                <strong>${tipeLabel} ${props.name}</strong>
+            </div>
+            <div class="petapantau-popup-body">
+                <table>
+                    <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
+                    <tr><td><i class="fa fa-calendar"></i> Periode</td><td><strong>${_periodeLabel(filters)}</strong></td></tr>
+                    <tr><td><i class="fa fa-list"></i> Kecamatan</td><td><strong>${props.jumlah_kecamatan} Kecamatan</strong></td></tr>
+                    <tr><td><i class="fa fa-exclamation-circle" style="color:#e74c3c;"></i> Kasus</td><td>${kasusLabel}</td></tr>
+                </table>
+            </div>
+            <div class="petapantau-popup-footer">
+                <button class="petapantau-btn-detail" style="background:#922b21;" id="btn-kriminal-kec-${props.id}">
+                    <i class="fa fa-search-plus"></i> Lihat Detail Kecamatan
+                </button>
+            </div>
+        </div>
+    `;
+
+    const popup = L.popup({ maxWidth: 280, className: 'petapantau-leaflet-popup' })
+        .setLatLng(e.latlng)
+        .setContent(popupContent);
+
+    popup.once('add', () => {
+        setTimeout(() => {
+            const btn = document.getElementById(`btn-kriminal-kec-${props.id}`);
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    ctx.map.closePopup();
+                    ctx._updateBreadcrumb(`<i class="fa fa-exclamation-triangle"></i> Peta Kriminal`);
+                    ctx._appendBreadcrumb(`<i class="fa fa-map-marker"></i> ${tipeLabel} ${props.name}`);
+                    drillDownKriminalKecamatan(ctx, props, layer, filters);
+                });
+            }
+        }, 0);
+    });
+
+    popup.openOn(ctx.map);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// LEVEL 2 — KECAMATAN
+// ════════════════════════════════════════════════════════════════════════════
+export async function drillDownKriminalKecamatan(ctx, kabProps, kabLayer, filters) {
+    ctx.currentLevel = 'kecamatan';
+    ctx.kabupatenLayerGroup.clearLayers();
+    ctx.kabupatenLabelGroup.clearLayers();
+    ctx.kecamatanLayerGroup.clearLayers();
+    ctx.kecamatanLabelGroup.clearLayers();
+
+    ctx._fitBoundsZoomedIn(kabLayer.getBounds(), { padding: [40, 40] });
+
+    try {
+        const domain = _buildDomain(filters, [['kabupaten_id', '=', kabProps.id]]);
+        const [groups, records] = await Promise.all([
+            ctx.orm.call(
+                'petapantau.kriminalitas',
+                'read_group',
+                [domain, ['kecamatan_id'], ['kecamatan_id']],
+                { lazy: false }
+            ),
+            ctx.orm.searchRead(
+                'petapantau.kecamatan',
+                [['kabupaten_id', '=', kabProps.id]],
+                ['id', 'code', 'name', 'desa_ids', 'geometry'],
+            ),
+        ]);
+        const kasusMap = _buildKecamatanKasusMap(groups);
+
+        const features = records
+            .filter(r => r.geometry)
+            .map(r => {
+                try {
+                    const jumlah = kasusMap[r.id] || 0;
+                    return {
+                        type: "Feature",
+                        geometry: JSON.parse(r.geometry),
+                        properties: {
+                            id: r.id, code: r.code, name: r.name,
+                            jumlah_desa: r.desa_ids ? r.desa_ids.length : 0,
+                            jumlah_kasus: jumlah,
+                            color: getKriminalColor(jumlah),
+                        }
+                    };
+                } catch (e) {
+                    console.warn(`Gagal parse geometry kecamatan: ${r.name}`, e);
+                    return null;
+                }
+            })
+            .filter(Boolean);
+
+        if (features.length === 0) {
+            console.warn('[drillDownKriminalKecamatan] Tidak ada kecamatan dengan geometry.');
+            await loadModeKriminal(ctx);
+            return;
+        }
+
+        const geoLayer = L.geoJSON({ type: "FeatureCollection", features }, {
+            style: (feature) => ({
+                color: '#555555', weight: 1.5, opacity: 1,
+                fillColor: feature.properties.color, fillOpacity: 0.45,
+            }),
+            onEachFeature: (feature, layer) => {
+                const props = feature.properties;
+
+                layer.on('add', () => {
+                    const bounds = layer.getBounds();
+                    const label = L.marker(bounds.getCenter(), {
+                        icon: L.divIcon({
+                            className: 'kabupaten-label',
+                            html: `<span>${props.name}</span>`,
+                            iconSize: null,
+                        }),
+                        interactive: false,
+                        zIndexOffset: -100,
+                    });
+                    label._polygonBounds = bounds;
+                    ctx.kecamatanLabelGroup.addLayer(label);
+                });
+
+                layer.on('mouseover', () => { layer.setStyle({ weight: 2.5, fillOpacity: 0.65 }); layer.bringToFront(); });
+                layer.on('mouseout',  () => { layer.setStyle({ weight: 1.5, fillOpacity: 0.45 }); });
+                layer.on('click', (e) => _showKriminalKecamatanPopup(ctx, e, props, layer, filters, kabProps, kabLayer));
+            }
+        });
+
+        ctx.kecamatanLayerGroup.addLayer(geoLayer);
+        renderSummaryMarkers(ctx, geoLayer, 'jumlah_kasus', (props, polygonLayer) => {
+            ctx._appendBreadcrumb(`<i class="fa fa-map"></i> Kec. ${props.name}`);
+            drillDownKriminalDesa(ctx, props, polygonLayer, filters, kabProps, kabLayer);
+        });
+        _addKriminalBackButton(ctx, 'kabupaten', { kabProps, kabLayer, filters });
+
+        // Sinkronkan dropdown kabupaten + KPI + grafik ke scope kabupaten yang dipilih
+        ctx.drillKabupatenId = kabProps.id;
+        ctx.drillKecamatanId = null;
+        ctx._updateFilterSummary(ctx.currentMode);
+        ctx._updateKpiCards(ctx.currentMode);
+        ctx._updateCharts(ctx.currentMode);
+        updateLokasiOverlayMarkers(ctx);
+
+    } catch (error) {
+        console.error("Gagal memuat data kecamatan kriminal:", error);
+    }
+}
+
+// ── Popup Kecamatan ──────────────────────────────────────────────────────────
+function _showKriminalKecamatanPopup(ctx, e, props, layer, filters, kabProps, kabLayer) {
+    const kasusLabel = props.jumlah_kasus > 0
+        ? `<strong style="color:${props.color};">${props.jumlah_kasus.toLocaleString('id-ID')} Kasus</strong>`
+        : `<strong style="color:#27ae60;">Tidak Ada Kasus</strong>`;
+
+    const popupContent = `
+        <div class="petapantau-popup">
+            <div class="petapantau-popup-header" style="background:#c0392b;">
+                <i class="fa fa-map"></i>
+                <strong>Kec. ${props.name}</strong>
+            </div>
+            <div class="petapantau-popup-body">
+                <table>
+                    <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
+                    <tr><td><i class="fa fa-calendar"></i> Periode</td><td><strong>${_periodeLabel(filters)}</strong></td></tr>
+                    <tr><td><i class="fa fa-home"></i> Desa/Kel.</td><td><strong>${props.jumlah_desa} Desa/Kelurahan</strong></td></tr>
+                    <tr><td><i class="fa fa-exclamation-circle" style="color:#e74c3c;"></i> Kasus</td><td>${kasusLabel}</td></tr>
+                </table>
+            </div>
+            <div class="petapantau-popup-footer">
+                <button class="petapantau-btn-detail" style="background:#c0392b;" id="btn-kriminal-desa-${props.id}">
+                    <i class="fa fa-search-plus"></i> Lihat Detail Desa/Kelurahan
+                </button>
+            </div>
+        </div>
+    `;
+
+    const popup = L.popup({ maxWidth: 280, className: 'petapantau-leaflet-popup' })
+        .setLatLng(e.latlng)
+        .setContent(popupContent);
+
+    popup.once('add', () => {
+        setTimeout(() => {
+            const btn = document.getElementById(`btn-kriminal-desa-${props.id}`);
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    ctx.map.closePopup();
+                    ctx._appendBreadcrumb(`<i class="fa fa-map"></i> Kec. ${props.name}`);
+                    drillDownKriminalDesa(ctx, props, layer, filters, kabProps, kabLayer);
+                });
+            }
+        }, 0);
+    });
+
+    popup.openOn(ctx.map);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// LEVEL 3 — DESA
+// ════════════════════════════════════════════════════════════════════════════
+export async function drillDownKriminalDesa(ctx, kecProps, kecLayer, filters, kabProps, kabLayer) {
+    ctx.currentLevel = 'desa';
+    ctx.kecamatanLayerGroup.clearLayers();
+    ctx.kecamatanLabelGroup.clearLayers();
+    ctx.summaryMarkerGroup?.clearLayers();
+    ctx.desaLayerGroup.clearLayers();
+    ctx.desaLabelGroup.clearLayers();
+
+    ctx.map.fitBounds(kecLayer.getBounds(), { padding: [40, 40] });
+
+    try {
+        const domain = _buildDomain(filters, [['kecamatan_id', '=', kecProps.id]]);
+        const [groups, records] = await Promise.all([
+            ctx.orm.call(
+                'petapantau.kriminalitas',
+                'read_group',
+                [domain, ['desa_id'], ['desa_id']],
+                { lazy: false }
+            ),
+            ctx.orm.searchRead(
+                'petapantau.desa',
+                [['kecamatan_id', '=', kecProps.id]],
+                ['id', 'code', 'name', 'type', 'geometry'],
+            ),
+        ]);
+        const kasusMap = _buildDesaKasusMap(groups);
+
+        const features = records
+            .filter(r => r.geometry)
+            .map(r => {
+                try {
+                    const jumlah = kasusMap[r.id] || 0;
+                    return {
+                        type: "Feature",
+                        geometry: JSON.parse(r.geometry),
+                        properties: {
+                            id: r.id, code: r.code, name: r.name, type: r.type,
+                            jumlah_kasus: jumlah,
+                            color: getKriminalColor(jumlah),
+                        }
+                    };
+                } catch (e) {
+                    console.warn(`Gagal parse geometry desa: ${r.name}`, e);
+                    return null;
+                }
+            })
+            .filter(Boolean);
+
+        if (features.length === 0) {
+            console.warn('[drillDownKriminalDesa] Tidak ada desa dengan geometry.');
+            drillDownKriminalKecamatan(ctx, kabProps, kabLayer, filters);
+            return;
+        }
+
+        const geoLayer = L.geoJSON({ type: "FeatureCollection", features }, {
+            style: (feature) => ({
+                color: '#555555', weight: 1.5, opacity: 1,
+                fillColor: feature.properties.color, fillOpacity: 0.45,
+            }),
+            onEachFeature: (feature, layer) => {
+                const props = feature.properties;
+
+                layer.on('add', () => {
+                    const bounds = layer.getBounds();
+                    const label = L.marker(bounds.getCenter(), {
+                        icon: L.divIcon({
+                            className: 'kabupaten-label',
+                            html: `<span>${props.name}</span>`,
+                            iconSize: null,
+                        }),
+                        interactive: false,
+                        zIndexOffset: -100,
+                    });
+                    label._polygonBounds = bounds;
+                    ctx.desaLabelGroup.addLayer(label);
+                });
+
+                layer.on('mouseover', () => { layer.setStyle({ weight: 2.5, fillOpacity: 0.65 }); layer.bringToFront(); });
+                layer.on('mouseout',  () => { layer.setStyle({ weight: 1.5, fillOpacity: 0.45 }); });
+                layer.on('click', (e) => _showKriminalDesaPopup(ctx, e, props, filters));
+            }
+        });
+
+        ctx.desaLayerGroup.addLayer(geoLayer);
+        await _loadKriminalMarkers(ctx, _buildDomain(filters, [['kecamatan_id', '=', kecProps.id]]), null);
+        _addKriminalBackButton(ctx, 'kecamatan', { kecProps, kecLayer, filters, kabProps, kabLayer });
+
+        // Sinkronkan KPI dan grafik ke scope kecamatan yang dipilih
+        ctx.drillKecamatanId = kecProps.id;
+        ctx._updateKpiCards(ctx.currentMode);
+        ctx._updateCharts(ctx.currentMode);
+        updateLokasiOverlayMarkers(ctx);
+
+    } catch (error) {
+        console.error("Gagal memuat data desa kriminal:", error);
+    }
+}
+
+// ── Popup Desa ───────────────────────────────────────────────────────────────
+function _showKriminalDesaPopup(ctx, e, props, filters) {
+    const tipeLabel  = props.type === 'KELURAHAN' ? 'Kelurahan' : 'Desa';
+    const kasusLabel = props.jumlah_kasus > 0
+        ? `<strong style="color:${props.color};">${props.jumlah_kasus.toLocaleString('id-ID')} Kasus</strong>`
+        : `<strong style="color:#27ae60;">Tidak Ada Kasus</strong>`;
+
+    const popupContent = `
+        <div class="petapantau-popup">
+            <div class="petapantau-popup-header" style="background:#922b21;">
+                <i class="fa fa-home"></i>
+                <strong>${tipeLabel} ${props.name}</strong>
+            </div>
+            <div class="petapantau-popup-body">
+                <table>
+                    <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
+                    <tr><td><i class="fa fa-tag"></i> Tipe</td><td><strong>${tipeLabel}</strong></td></tr>
+                    <tr><td><i class="fa fa-calendar"></i> Periode</td><td><strong>${_periodeLabel(filters)}</strong></td></tr>
+                    <tr><td><i class="fa fa-exclamation-circle" style="color:#e74c3c;"></i> Kasus</td><td>${kasusLabel}</td></tr>
+                </table>
+            </div>
+        </div>
+    `;
+
+    L.popup({ maxWidth: 280, className: 'petapantau-leaflet-popup' })
+        .setLatLng(e.latlng)
+        .setContent(popupContent)
+        .openOn(ctx.map);
+}
+
+// ── Back Button khusus mode kriminal ─────────────────────────────────────────
+function _addKriminalBackButton(ctx, targetLevel, backCtx) {
+    if (ctx.backButton) { ctx.backButton.remove(); ctx.backButton = null; }
+
+    const labelMap = {
+        kabupaten: 'Kembali ke Peta Kabupaten',
+        kecamatan: 'Kembali ke Peta Kecamatan',
+    };
+
+    const BackControl = L.Control.extend({
+        onAdd: () => {
+            const btn = L.DomUtil.create('button', 'petapantau-btn-back');
+            btn.innerHTML = `<i class="fa fa-arrow-left"></i> ${labelMap[targetLevel] || 'Kembali'}`;
+            L.DomEvent.on(btn, 'click', async (ev) => {
+                L.DomEvent.stopPropagation(ev);
+                ctx.map.closePopup();
+                if (ctx.backButton) { ctx.backButton.remove(); ctx.backButton = null; }
+
+                if (targetLevel === 'kabupaten') {
+                    ctx.kecamatanLayerGroup.clearLayers();
+                    ctx.kecamatanLabelGroup.clearLayers();
+                    ctx.drillKabupatenId = null;
+                    ctx.drillKecamatanId = null;
+                    ctx._updateBreadcrumb(`<i class="fa fa-exclamation-triangle"></i> Peta Kriminal`);
+                    ctx._updateFilterSummary(ctx.currentMode);
+                    await loadModeKriminal(ctx);
+                    ctx._updateKpiCards(ctx.currentMode);
+                    ctx._updateCharts(ctx.currentMode);
+
+                } else if (targetLevel === 'kecamatan' && backCtx) {
+                    ctx.desaLayerGroup.clearLayers();
+                    ctx.desaLabelGroup.clearLayers();
+                    ctx.drillKecamatanId = null;
+                    const items = ctx.breadcrumbRef.el.querySelectorAll('.petapantau-breadcrumb-item');
+                    if (items.length > 1) {
+                        items[items.length - 1].previousSibling?.remove();
+                        items[items.length - 1].remove();
+                    }
+                    await drillDownKriminalKecamatan(ctx, backCtx.kabProps, backCtx.kabLayer, backCtx.filters);
+                }
+            });
+            return btn;
+        },
+        onRemove: () => {}
+    });
+
+    ctx.backButton = new BackControl({ position: 'topleft' });
+    ctx.backButton.addTo(ctx.map);
+}

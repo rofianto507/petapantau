@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_petapantau_kategori_lalu_lintas_list" model="ir.ui.view">
+            <field name="name">kategori_lalu_lintas.list.petapantau</field>
+            <field name="model">petapantau.kategori_lalu_lintas</field>
+            <field name="arch" type="xml">
+                <list string="Kategori Lalu Lintas">
+                    <field name="icon_preview" widget="html" string="Icon" nolabel="1"/>
+                    <field name="name"/>
+                    <field name="lalin_proses" string="Proses" optional="show"/>
+                    <field name="lalin_selesai" string="Selesai" optional="show"/>
+                    <field name="icon" optional="show"/>
+                    <field name="keterangan" optional="show"/>
+                </list>
+            </field>
+        </record>
+        <record id="view_petapantau_kategori_lalu_lintas_form" model="ir.ui.view">
+            <field name="name">kategori_lalu_lintas.form.petapantau</field>
+            <field name="model">petapantau.kategori_lalu_lintas</field>
+            <field name="arch" type="xml">
+                <form string="Kategori Lalu Lintas">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object"
+                                    name="action_view_lalin_proses" icon="fa-spinner">
+                                <field name="lalin_proses" widget="statinfo" string="Proses"/>
+                            </button>
+                            <button class="oe_stat_button" type="object"
+                                    name="action_view_lalin_selesai" icon="fa-check-circle">
+                                <field name="lalin_selesai" widget="statinfo" string="Selesai"/>
+                            </button>
+                        </div>
+                        <group>
+                            <group string="Informasi">
+                                <field name="name"/>
+                                <field name="icon"/>
+                                <field name="keterangan"/>
+                            </group>
+                            <group string="Preview Icon Peta">
+                                <field name="icon_preview" widget="html" readonly="1" nolabel="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_petapantau_kategori_lalu_lintas" model="ir.actions.act_window">
+            <field name="name">Kategori Lalu Lintas</field>
+            <field name="res_model">petapantau.kategori_lalu_lintas</field>
+            <field name="view_mode">list,form</field>
+        </record>
+    </data>
+</odoo>

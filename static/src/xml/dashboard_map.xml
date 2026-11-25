@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="petapantau.DashboardMap">
+        <div class="petapantau-dashboard">
+
+            <!-- ══ SIDEBAR ══ -->
+            <div class="petapantau-sidebar" t-ref="sidebar" t-att-class="navSecurity.cls">
+                <!-- Collapse button di atas -->
+                <div class="petapantau-sidebar-top">
+                    <button class="petapantau-collapse-btn" t-on-click="onToggleSidebar">
+                        <i class="fa fa-angle-double-left" t-ref="collapseIcon"/>
+                        <span t-ref="collapseText"/>
+                    </button>
+                </div>
+
+                <div class="petapantau-sidebar-section-title">PETA</div>
+
+                <nav class="petapantau-nav">
+                    <a class="petapantau-nav-item active" data-mode="umum" t-on-click="onNavClick">
+                        <i class="fa fa-map"/>
+                        <span>Peta Umum</span>
+                    </a>
+                    <a class="petapantau-nav-item" data-mode="kriminal" t-on-click="onNavClick">
+                        <i class="fa fa-exclamation-triangle"/>
+                        <span>Peta Kriminalitas</span>
+                    </a>
+                    <a class="petapantau-nav-item" data-mode="bencana" t-on-click="onNavClick">
+                        <i class="fa fa-bolt"/>
+                        <span>Peta Bencana</span>
+                    </a>
+                    <a class="petapantau-nav-item" data-mode="lalin" t-on-click="onNavClick">
+                        <i class="fa fa-car"/>
+                        <span>Peta Lalu Lintas</span>
+                    </a>
+                    <a class="petapantau-nav-item" data-mode="patroli" t-on-click="onNavClick">
+                        <i class="fa fa-car"/>
+                        <span>Peta Patroli</span>
+                    </a>
+                    <a class="petapantau-nav-item" data-mode="lokasi" t-on-click="onNavClick">
+                        <i class="fa fa-map-marker"/>
+                        <span>Lokasi Penting</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- ══ MAIN CONTENT ══ -->
+            <div class="petapantau-main-content">
+
+                <!-- STICKY HEADER: filter + summary + KPI -->
+                <div class="petapantau-sticky-header">
+
+                <!-- TOP ROW: breadcrumb + filter -->
+                <div class="petapantau-top-row">
+                    <div class="petapantau-breadcrumb-box" t-ref="breadcrumb">
+                        <i class="fa fa-map"/> Peta Umum
+                    </div>
+                    <div class="petapantau-filter-box">
+                        <i class="fa fa-filter"/>
+                        <select class="petapantau-select" t-ref="filterJenisLP" t-on-change="onFilterChange">
+                            <option value="">Semua Jenis LP</option>
+                            <option value="LP A">LP A</option>
+                            <option value="LP B">LP B</option>
+                        </select>
+                        <select class="petapantau-select" t-ref="filterKategori" t-on-change="onKategoriChange">
+                            <option value="">Semua Kategori</option>
+                        </select>
+                        <select class="petapantau-select" t-ref="filterSubKategori" t-on-change="onFilterChange">
+                            <option value="">Semua Sub Kategori</option>
+                        </select>
+                        <select class="petapantau-select" t-ref="filterTahun" t-on-change="onFilterChange">
+                            <option value="">Semua Tahun</option>
+                        </select>
+                        <select class="petapantau-select" t-ref="filterPolres" t-on-change="onFilterChange">
+                            <option value="">Semua Polres</option>
+                        </select>
+                        <select class="petapantau-select" t-ref="filterState" t-on-change="onFilterChange">
+                            <option value="">Semua Status</option>
+                        </select>
+                        <div class="petapantau-date-range" t-ref="filterDateRangeWrapper">
+                            <i class="fa fa-calendar"/>
+                            <input type="text" class="petapantau-flatpickr-input" t-ref="filterDateRange"
+                                placeholder="Pilih Rentang Tanggal" readonly="true"/>
+                            <button class="petapantau-date-clear" t-ref="filterDateClear"
+                                t-on-click="onClearDate" title="Reset Tanggal">
+                                <i class="fa fa-times"/>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter aktif summary + sumber dokumen info -->
+                <div class="petapantau-summary-row">
+                    <div class="petapantau-filter-summary" t-ref="filterSummary"/>
+                    <div class="petapantau-sumber-info" t-ref="sumberInfo"/>
+                </div>
+
+                <!-- KPI ROW — diisi oleh JS sesuai mode aktif -->
+                <div class="petapantau-kpi-row" t-ref="kpiRow"/>
+
+                </div><!-- end petapantau-sticky-header -->
+
+                <!-- MAP -->
+                <div class="petapantau-map-wrapper" t-ref="mapWrapper">
+                    <div t-ref="mapContainer" class="petapantau-map-container" tabindex="-1"/>
+                </div>
+
+
+
+
+                <!-- CHART BENCANA ROW — hanya untuk mode bencana -->
+                <div class="petapantau-chart-row" t-ref="chartBencanaRow">
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-bar-chart"/> Grafik Total Bencana per Kabupaten
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartBencanaBar"/>
+                    </div>
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title" t-ref="chartBencanaDonutTitle">
+                            <i class="fa fa-pie-chart"/> Bencana Berdasarkan Kategori (Semua Wilayah)
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartBencanaDonut"/>
+                    </div>
+                </div>
+
+                <!-- CHART LALIN ROW — hanya untuk mode lalin -->
+                <div class="petapantau-chart-row" t-ref="chartLalinRow">
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-bar-chart"/> Grafik Total Lalu Lintas per Kabupaten
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartLalinBar"/>
+                    </div>
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title" t-ref="chartLalinDonutTitle">
+                            <i class="fa fa-pie-chart"/> Lalu Lintas Berdasarkan Kategori (Semua Wilayah)
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartLalinDonut"/>
+                    </div>
+                </div>
+
+                <!-- CHART LALIN ROW 2 — jenis jalan + waktu kejadian -->
+                <div class="petapantau-chart-row" t-ref="chartLalinRow2">
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-road"/> Lalu Lintas per Jenis Jalan
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartLalinJenisJalan"/>
+                    </div>
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-clock-o"/> Rentang Waktu Kejadian Lalu Lintas
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartLalinWaktu"/>
+                    </div>
+                </div>
+
+
+                <!-- CHART PATROLI ROW — hanya untuk mode patroli -->
+                <div class="petapantau-chart-row" t-ref="chartPatroliRow">
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-bar-chart"/> Grafik Total Patroli per Polres
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartPatroliBar"/>
+                    </div>
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-line-chart"/> Patroli dan Titik Lokasi per Bulan
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartPatroliTrend"/>
+                    </div>
+                </div>
+
+                <!-- CHART LOKASI ROW — hanya untuk mode lokasi -->
+                <div class="petapantau-chart-row" t-ref="chartLokasiRow">
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-bar-chart"/> Grafik Total Lokasi Penting per Kabupaten
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartLokasiBar"/>
+                    </div>
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title" t-ref="chartLokasiDonutTitle">
+                            <i class="fa fa-pie-chart"/> Lokasi Penting Berdasarkan Kategori (Semua Wilayah)
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartLokasiDonut"/>
+                    </div>
+                </div>
+
+
+                <!-- CHART ROW 1 — di bawah map, hanya untuk mode kriminal -->
+                <div class="petapantau-chart-row" t-ref="chartRow">
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-bar-chart"/> Grafik Total Kriminalitas per Kabupaten
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartBar"/>
+                    </div>
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title" t-ref="chartDonutTitle">
+                            <i class="fa fa-pie-chart"/> Grafik Kriminalitas Berdasarkan Kategori (Semua Wilayah)
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartDonut"/>
+                    </div>
+                </div>
+
+                <!-- CHART ROW 2 — lokasi kejahatan + sub kategori -->
+                <div class="petapantau-chart-row" t-ref="chartRow2">
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-map-pin"/> Lokasi Kejahatan Terbanyak
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartTkp"/>
+                    </div>
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-tags"/> Sub Kategori Kejahatan Terbanyak
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartSubKat"/>
+                    </div>
+                </div>
+
+                <!-- CHART ROW 3 — trend bulanan (2/3) + statistik waktu (1/3) -->
+                <div class="petapantau-chart-row" t-ref="chartRow3">
+                    <div class="petapantau-chart-card petapantau-chart-card--wide">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-line-chart"/> Trend Kriminalitas
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartTrend"/>
+                    </div>
+                    <div class="petapantau-chart-card petapantau-chart-card--narrow">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-clock-o"/> Statistik Waktu Kriminalitas
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartWaktu"/>
+                    </div>
+                </div>
+
+                <!-- CHART ROW 5 — data tahunan perbandingan dua tahun, full lebar -->
+                <div class="petapantau-chart-row" t-ref="chartRow5">
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-line-chart"/> Data Tahunan
+                        </div>
+                        <div class="petapantau-chart-body petapantau-chart-body--tall" t-ref="chartTahunan"/>
+                    </div>
+                </div>
+
+                <!-- CHART ROW 4 — waktu kejadian per sub kategori (Curat, Curas, Curanmor) -->
+                <div class="petapantau-chart-row" t-ref="chartRow4">
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-clock-o"/> Waktu Kejadian Curat
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartCurat"/>
+                    </div>
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-clock-o"/> Waktu Kejadian Curas
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartCuras"/>
+                    </div>
+                    <div class="petapantau-chart-card">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-clock-o"/> Waktu Kejadian Curanmor
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartCuranmor"/>
+                    </div>
+                </div>
+
+                <!-- DATA TABLE KRIMINALITAS -->
+                <div class="petapantau-chart-row" t-ref="tableKriminalRow">
+                    <div class="petapantau-data-table-card">
+                        <div class="petapantau-chart-title"><i class="fa fa-table"/> Data Kriminalitas</div>
+                        <div t-ref="tableKriminalBody"/>
+                    </div>
+                </div>
+
+
+                <!-- DATA TABLE BENCANA -->
+                <div class="petapantau-chart-row" t-ref="tableBencanaRow">
+                    <div class="petapantau-data-table-card">
+                        <div class="petapantau-chart-title"><i class="fa fa-table"/> Data Bencana</div>
+                        <div t-ref="tableBencanaBody"/>
+                    </div>
+                </div>
+
+                <!-- DATA TABLE LALU LINTAS -->
+                <div class="petapantau-chart-row" t-ref="tableLalinRow">
+                    <div class="petapantau-data-table-card">
+                        <div class="petapantau-chart-title"><i class="fa fa-table"/> Data Lalu Lintas</div>
+                        <div t-ref="tableLalinBody"/>
+                    </div>
+                </div>
+
+
+
+                <!-- CHART PATROLI WAKTU — distribusi 8 slot waktu vs kriminalitas -->
+                <div class="petapantau-chart-row" t-ref="chartPatroliWaktuRow">
+                    <div class="petapantau-chart-card" style="flex:1;">
+                        <div class="petapantau-chart-title">
+                            <i class="fa fa-clock-o"/> Distribusi Waktu Patroli &amp; Kriminalitas
+                        </div>
+                        <div class="petapantau-chart-body" t-ref="chartPatroliWaktu"/>
+                    </div>
+                </div>
+
+                <!-- DATA TABLE PATROLI -->
+                <div class="petapantau-chart-row" t-ref="tablePatroliRow">
+                    <div class="petapantau-data-table-card">
+                        <div class="petapantau-chart-title"><i class="fa fa-table"/> Data Patroli</div>
+                        <div t-ref="tablePatroliBody"/>
+                    </div>
+                </div>
+
+                <!-- DATA TABLE LOKASI PENTING -->
+                <div class="petapantau-chart-row" t-ref="tableLokasiRow">
+                    <div class="petapantau-data-table-card">
+                        <div class="petapantau-chart-title"><i class="fa fa-table"/> Data Lokasi Penting</div>
+                        <div t-ref="tableLokasiBody"/>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </t>
+</templates>

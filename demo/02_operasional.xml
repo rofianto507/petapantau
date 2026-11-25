@@ -1,0 +1,2673 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Demo Data — Data Operasional PetaPantau (Polda D.I. Yogyakarta)
+    Koordinat berada di dalam batas desa yang dirujuk; tanggal relatif terhadap tanggal instalasi.
+-->
+<odoo>
+    <data noupdate="1">
+
+        <!-- KRIMINALITAS -->
+        <record id="demo_krim_01" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1001/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=93)).strftime('%Y-%m-%d 03:19:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=92)).strftime('%Y-%m-%d 16:28:00')"/>
+            <field name="tempat_kejadian">Sindutan, Kec. Temon</field>
+            <field name="latitude">-7.89301</field>
+            <field name="longitude">110.048297</field>
+            <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_mobil"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_kulon_progo"/>
+            <field name="polsek_id" ref="polsek_34_01_01"/>
+            <field name="kabupaten_id" ref="kab_34_01"/>
+            <field name="kecamatan_id" ref="kec_34_01_01"/>
+            <field name="desa_id" ref="desa_34_01_01_2002"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_lidik"/>
+            <field name="uraian_singkat">Data demo — curanmor di wilayah Kabupaten Kulon Progo.</field>
+        </record>
+        <record id="demo_krim_02" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1002/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=317)).strftime('%Y-%m-%d 18:11:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=316)).strftime('%Y-%m-%d 16:05:00')"/>
+            <field name="tempat_kejadian">Tambakromo, Kec. Ponjong</field>
+            <field name="latitude">-7.916321</field>
+            <field name="longitude">110.767844</field>
+            <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_motor"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_gunungkidul"/>
+            <field name="polsek_id" ref="polsek_34_03_10"/>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_10"/>
+            <field name="desa_id" ref="desa_34_03_10_2003"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — curanmor di wilayah Kabupaten Gunungkidul.</field>
+        </record>
+        <record id="demo_krim_03" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1003/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=138)).strftime('%Y-%m-%d 00:51:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=137)).strftime('%Y-%m-%d 19:48:00')"/>
+            <field name="tempat_kejadian">Umbulharjo, Kec. Cangkringan</field>
+            <field name="latitude">-7.563116</field>
+            <field name="longitude">110.442063</field>
+            <field name="kategori_id" ref="demo_kat_krim_jalanan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_jalanan_jambret"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_17"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_17"/>
+            <field name="desa_id" ref="desa_34_04_17_2005"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_sidik"/>
+            <field name="uraian_singkat">Data demo — kejahatan jalanan di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_04" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1004/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=117)).strftime('%Y-%m-%d 14:03:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=116)).strftime('%Y-%m-%d 16:58:00')"/>
+            <field name="tempat_kejadian">Pleret, Kec. Pleret</field>
+            <field name="latitude">-7.870388</field>
+            <field name="longitude">110.397658</field>
+            <field name="kategori_id" ref="demo_kat_krim_narkoba"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_narkoba_sabu"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_kos"/>
+            <field name="subdit_id" ref="demo_subdit_resnarkoba"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_13"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_13"/>
+            <field name="desa_id" ref="desa_34_02_13_2002"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — narkoba di wilayah Kabupaten Bantul.</field>
+        </record>
+        <record id="demo_krim_05" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1005/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=297)).strftime('%Y-%m-%d 18:44:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=296)).strftime('%Y-%m-%d 17:28:00')"/>
+            <field name="tempat_kejadian">Sidokarto, Kec. Godean</field>
+            <field name="latitude">-7.788295</field>
+            <field name="longitude">110.304679</field>
+            <field name="kategori_id" ref="demo_kat_krim_narkoba"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_narkoba_sabu"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_kos"/>
+            <field name="subdit_id" ref="demo_subdit_resnarkoba"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_02"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_02"/>
+            <field name="desa_id" ref="desa_34_04_02_2005"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_lidik"/>
+            <field name="uraian_singkat">Data demo — narkoba di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_06" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1006/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=36)).strftime('%Y-%m-%d 13:28:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=35)).strftime('%Y-%m-%d 14:48:00')"/>
+            <field name="tempat_kejadian">Kalitirto, Kec. Berbah</field>
+            <field name="latitude">-7.794054</field>
+            <field name="longitude">110.452352</field>
+            <field name="kategori_id" ref="demo_kat_krim_narkoba"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_narkoba_ganja"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_kos"/>
+            <field name="subdit_id" ref="demo_subdit_resnarkoba"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_08"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_08"/>
+            <field name="desa_id" ref="desa_34_04_08_2003"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — narkoba di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_07" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1007/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=300)).strftime('%Y-%m-%d 21:58:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=299)).strftime('%Y-%m-%d 16:15:00')"/>
+            <field name="tempat_kejadian">Semaki, Kec. Umbulharjo</field>
+            <field name="latitude">-7.800528</field>
+            <field name="longitude">110.385577</field>
+            <field name="kategori_id" ref="demo_kat_krim_narkoba"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_narkoba_ganja"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_kos"/>
+            <field name="subdit_id" ref="demo_subdit_resnarkoba"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_13"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_13"/>
+            <field name="desa_id" ref="desa_34_71_13_1001"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — narkoba di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_08" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1008/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=296)).strftime('%Y-%m-%d 01:50:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=295)).strftime('%Y-%m-%d 20:56:00')"/>
+            <field name="tempat_kejadian">Wirobrajan, Kec. Wirobrajan</field>
+            <field name="latitude">-7.80412</field>
+            <field name="longitude">110.351159</field>
+            <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_motor"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_07"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_07"/>
+            <field name="desa_id" ref="desa_34_71_07_1002"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — curanmor di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_09" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1009/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=49)).strftime('%Y-%m-%d 06:29:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=48)).strftime('%Y-%m-%d 13:42:00')"/>
+            <field name="tempat_kejadian">Palbapang, Kec. Bantul</field>
+            <field name="latitude">-7.913504</field>
+            <field name="longitude">110.320335</field>
+            <field name="kategori_id" ref="demo_kat_krim_jalanan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_jalanan_jambret"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_08"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_08"/>
+            <field name="desa_id" ref="desa_34_02_08_2001"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_lidik"/>
+            <field name="uraian_singkat">Data demo — kejahatan jalanan di wilayah Kabupaten Bantul.</field>
+        </record>
+        <record id="demo_krim_10" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1010/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=288)).strftime('%Y-%m-%d 20:26:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=287)).strftime('%Y-%m-%d 20:30:00')"/>
+            <field name="tempat_kejadian">Girikarto, Kec. Panggang</field>
+            <field name="latitude">-8.083913</field>
+            <field name="longitude">110.453803</field>
+            <field name="kategori_id" ref="demo_kat_krim_penipuan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_penipuan_gelap"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_toko"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimsus"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_gunungkidul"/>
+            <field name="polsek_id" ref="polsek_34_03_06"/>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_06"/>
+            <field name="desa_id" ref="desa_34_03_06_2001"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_sidik"/>
+            <field name="uraian_singkat">Data demo — penipuan / penggelapan di wilayah Kabupaten Gunungkidul.</field>
+        </record>
+        <record id="demo_krim_11" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1011/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=192)).strftime('%Y-%m-%d 21:48:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=191)).strftime('%Y-%m-%d 08:01:00')"/>
+            <field name="tempat_kejadian">Donoharjo, Kec. Ngaglik</field>
+            <field name="latitude">-7.682922</field>
+            <field name="longitude">110.391966</field>
+            <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_ringan"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_12"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_12"/>
+            <field name="desa_id" ref="desa_34_04_12_2006"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_sidik"/>
+            <field name="uraian_singkat">Data demo — penganiayaan di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_12" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1012/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=216)).strftime('%Y-%m-%d 08:22:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=215)).strftime('%Y-%m-%d 17:36:00')"/>
+            <field name="tempat_kejadian">Karangrejek, Kec. Wonosari</field>
+            <field name="latitude">-7.989251</field>
+            <field name="longitude">110.60489</field>
+            <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_ringan"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_gunungkidul"/>
+            <field name="polsek_id" ref="polsek_34_03_01"/>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_01"/>
+            <field name="desa_id" ref="desa_34_03_01_2014"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — penganiayaan di wilayah Kabupaten Gunungkidul.</field>
+        </record>
+        <record id="demo_krim_13" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1013/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=161)).strftime('%Y-%m-%d 23:13:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=160)).strftime('%Y-%m-%d 12:01:00')"/>
+            <field name="tempat_kejadian">Tambakrejo, Kec. Tempel</field>
+            <field name="latitude">-7.687274</field>
+            <field name="longitude">110.295547</field>
+            <field name="kategori_id" ref="demo_kat_krim_narkoba"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_narkoba_ganja"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_kos"/>
+            <field name="subdit_id" ref="demo_subdit_resnarkoba"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_14"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_14"/>
+            <field name="desa_id" ref="desa_34_04_14_2002"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — narkoba di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_14" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1014/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=245)).strftime('%Y-%m-%d 02:25:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=244)).strftime('%Y-%m-%d 15:03:00')"/>
+            <field name="tempat_kejadian">Sumberarum, Kec. Moyudan</field>
+            <field name="latitude">-7.756965</field>
+            <field name="longitude">110.236778</field>
+            <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_berat"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_03"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_03"/>
+            <field name="desa_id" ref="desa_34_04_03_2004"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_lidik"/>
+            <field name="uraian_singkat">Data demo — penganiayaan di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_15" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1015/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=303)).strftime('%Y-%m-%d 10:44:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=302)).strftime('%Y-%m-%d 17:12:00')"/>
+            <field name="tempat_kejadian">Pakuncen, Kec. Wirobrajan</field>
+            <field name="latitude">-7.797145</field>
+            <field name="longitude">110.354935</field>
+            <field name="kategori_id" ref="demo_kat_krim_jalanan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_jalanan_klitih"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_07"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_07"/>
+            <field name="desa_id" ref="desa_34_71_07_1001"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_sidik"/>
+            <field name="uraian_singkat">Data demo — kejahatan jalanan di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_16" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1016/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=66)).strftime('%Y-%m-%d 15:13:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=65)).strftime('%Y-%m-%d 13:53:00')"/>
+            <field name="tempat_kejadian">Kepuharjo, Kec. Cangkringan</field>
+            <field name="latitude">-7.619683</field>
+            <field name="longitude">110.461207</field>
+            <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_berat"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_17"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_17"/>
+            <field name="desa_id" ref="desa_34_04_17_2004"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — penganiayaan di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_17" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1017/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=107)).strftime('%Y-%m-%d 08:32:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=106)).strftime('%Y-%m-%d 17:47:00')"/>
+            <field name="tempat_kejadian">Gilangharjo, Kec. Pandak</field>
+            <field name="latitude">-7.932913</field>
+            <field name="longitude">110.294986</field>
+            <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_motor"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_06"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_06"/>
+            <field name="desa_id" ref="desa_34_02_06_2003"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — curanmor di wilayah Kabupaten Bantul.</field>
+        </record>
+        <record id="demo_krim_18" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1018/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=45)).strftime('%Y-%m-%d 11:27:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=44)).strftime('%Y-%m-%d 09:55:00')"/>
+            <field name="tempat_kejadian">Umbulmartani, Kec. Ngemplak</field>
+            <field name="latitude">-7.674794</field>
+            <field name="longitude">110.435294</field>
+            <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_ringan"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_11"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_11"/>
+            <field name="desa_id" ref="desa_34_04_11_2005"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — penganiayaan di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_19" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1019/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=188)).strftime('%Y-%m-%d 08:00:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=187)).strftime('%Y-%m-%d 16:19:00')"/>
+            <field name="tempat_kejadian">Tirtomulyo, Kec. Kretek</field>
+            <field name="latitude">-7.973902</field>
+            <field name="longitude">110.294406</field>
+            <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_motor"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_03"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_03"/>
+            <field name="desa_id" ref="desa_34_02_03_2001"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — curanmor di wilayah Kabupaten Bantul.</field>
+        </record>
+        <record id="demo_krim_20" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1020/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=182)).strftime('%Y-%m-%d 20:05:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=181)).strftime('%Y-%m-%d 15:02:00')"/>
+            <field name="tempat_kejadian">Balong, Kec. Girisubo</field>
+            <field name="latitude">-8.165379</field>
+            <field name="longitude">110.704289</field>
+            <field name="kategori_id" ref="demo_kat_krim_curat"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curat_rumah"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_rumah"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_gunungkidul"/>
+            <field name="polsek_id" ref="polsek_34_03_16"/>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_16"/>
+            <field name="desa_id" ref="desa_34_03_16_2001"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — pencurian dengan pemberatan (curat) di wilayah Kabupaten Gunungkidul.</field>
+        </record>
+        <record id="demo_krim_21" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1021/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=181)).strftime('%Y-%m-%d 01:27:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=180)).strftime('%Y-%m-%d 20:51:00')"/>
+            <field name="tempat_kejadian">Kadipaten, Kec. Kraton</field>
+            <field name="latitude">-7.810434</field>
+            <field name="longitude">110.357751</field>
+            <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_berat"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_09"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_09"/>
+            <field name="desa_id" ref="desa_34_71_09_1003"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — penganiayaan di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_22" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1022/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=310)).strftime('%Y-%m-%d 07:41:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=309)).strftime('%Y-%m-%d 20:50:00')"/>
+            <field name="tempat_kejadian">Sidomulyo, Kec. Godean</field>
+            <field name="latitude">-7.791769</field>
+            <field name="longitude">110.295979</field>
+            <field name="kategori_id" ref="demo_kat_krim_jalanan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_jalanan_klitih"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_02"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_02"/>
+            <field name="desa_id" ref="desa_34_04_02_2003"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_lidik"/>
+            <field name="uraian_singkat">Data demo — kejahatan jalanan di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_23" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1023/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=128)).strftime('%Y-%m-%d 18:30:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=127)).strftime('%Y-%m-%d 08:00:00')"/>
+            <field name="tempat_kejadian">Mantrijeron, Kec. Mantrijeron</field>
+            <field name="latitude">-7.815234</field>
+            <field name="longitude">110.366554</field>
+            <field name="kategori_id" ref="demo_kat_krim_narkoba"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_narkoba_ganja"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_kos"/>
+            <field name="subdit_id" ref="demo_subdit_resnarkoba"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_08"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_08"/>
+            <field name="desa_id" ref="desa_34_71_08_1003"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — narkoba di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_24" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1024/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=284)).strftime('%Y-%m-%d 08:49:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=283)).strftime('%Y-%m-%d 07:23:00')"/>
+            <field name="tempat_kejadian">Kepuharjo, Kec. Cangkringan</field>
+            <field name="latitude">-7.600883</field>
+            <field name="longitude">110.453907</field>
+            <field name="kategori_id" ref="demo_kat_krim_penipuan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_penipuan_gelap"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_toko"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimsus"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_17"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_17"/>
+            <field name="desa_id" ref="desa_34_04_17_2004"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_sidik"/>
+            <field name="uraian_singkat">Data demo — penipuan / penggelapan di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_25" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1025/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=199)).strftime('%Y-%m-%d 10:58:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=198)).strftime('%Y-%m-%d 09:12:00')"/>
+            <field name="tempat_kejadian">Pandowoharjo, Kec. Sleman</field>
+            <field name="latitude">-7.687663</field>
+            <field name="longitude">110.373028</field>
+            <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_mobil"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_13"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_13"/>
+            <field name="desa_id" ref="desa_34_04_13_2004"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — curanmor di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_26" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1026/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=17)).strftime('%Y-%m-%d 01:18:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=16)).strftime('%Y-%m-%d 17:33:00')"/>
+            <field name="tempat_kejadian">Sentolo, Kec. Sentolo</field>
+            <field name="latitude">-7.841247</field>
+            <field name="longitude">110.216722</field>
+            <field name="kategori_id" ref="demo_kat_krim_jalanan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_jalanan_klitih"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_kulon_progo"/>
+            <field name="polsek_id" ref="polsek_34_01_06"/>
+            <field name="kabupaten_id" ref="kab_34_01"/>
+            <field name="kecamatan_id" ref="kec_34_01_06"/>
+            <field name="desa_id" ref="desa_34_01_06_2007"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — kejahatan jalanan di wilayah Kabupaten Kulon Progo.</field>
+        </record>
+        <record id="demo_krim_27" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1027/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=109)).strftime('%Y-%m-%d 23:38:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=108)).strftime('%Y-%m-%d 13:28:00')"/>
+            <field name="tempat_kejadian">Tirtorahayu, Kec. Galur</field>
+            <field name="latitude">-7.935278</field>
+            <field name="longitude">110.18427</field>
+            <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_mobil"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_kulon_progo"/>
+            <field name="polsek_id" ref="polsek_34_01_04"/>
+            <field name="kabupaten_id" ref="kab_34_01"/>
+            <field name="kecamatan_id" ref="kec_34_01_04"/>
+            <field name="desa_id" ref="desa_34_01_04_2005"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_sidik"/>
+            <field name="uraian_singkat">Data demo — curanmor di wilayah Kabupaten Kulon Progo.</field>
+        </record>
+        <record id="demo_krim_28" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1028/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=130)).strftime('%Y-%m-%d 06:19:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=129)).strftime('%Y-%m-%d 14:41:00')"/>
+            <field name="tempat_kejadian">Tegalrejo, Kec. Tegalrejo</field>
+            <field name="latitude">-7.7904</field>
+            <field name="longitude">110.349888</field>
+            <field name="kategori_id" ref="demo_kat_krim_narkoba"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_narkoba_sabu"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_kos"/>
+            <field name="subdit_id" ref="demo_subdit_resnarkoba"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_01"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_01"/>
+            <field name="desa_id" ref="desa_34_71_01_1003"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — narkoba di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_29" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1029/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=174)).strftime('%Y-%m-%d 11:52:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=173)).strftime('%Y-%m-%d 19:53:00')"/>
+            <field name="tempat_kejadian">Tambakrejo, Kec. Tempel</field>
+            <field name="latitude">-7.687291</field>
+            <field name="longitude">110.304801</field>
+            <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_mobil"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_14"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_14"/>
+            <field name="desa_id" ref="desa_34_04_14_2002"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_lidik"/>
+            <field name="uraian_singkat">Data demo — curanmor di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_30" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1030/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=32)).strftime('%Y-%m-%d 13:19:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=31)).strftime('%Y-%m-%d 14:30:00')"/>
+            <field name="tempat_kejadian">Ambarketawang, Kec. Gamping</field>
+            <field name="latitude">-7.82276</field>
+            <field name="longitude">110.314158</field>
+            <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_motor"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_01"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_01"/>
+            <field name="desa_id" ref="desa_34_04_01_2002"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_sidik"/>
+            <field name="uraian_singkat">Data demo — curanmor di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_31" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1031/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=93)).strftime('%Y-%m-%d 15:26:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=92)).strftime('%Y-%m-%d 07:26:00')"/>
+            <field name="tempat_kejadian">Sidomulyo, Kec. Bambanglipuro</field>
+            <field name="latitude">-7.946131</field>
+            <field name="longitude">110.288354</field>
+            <field name="kategori_id" ref="demo_kat_krim_penipuan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_penipuan_gelap"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_toko"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimsus"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_05"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_05"/>
+            <field name="desa_id" ref="desa_34_02_05_2001"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — penipuan / penggelapan di wilayah Kabupaten Bantul.</field>
+        </record>
+        <record id="demo_krim_32" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1032/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=139)).strftime('%Y-%m-%d 00:16:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=138)).strftime('%Y-%m-%d 09:50:00')"/>
+            <field name="tempat_kejadian">Wukirsari, Kec. Imogiri</field>
+            <field name="latitude">-7.89565</field>
+            <field name="longitude">110.418295</field>
+            <field name="kategori_id" ref="demo_kat_krim_narkoba"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_narkoba_ganja"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_kos"/>
+            <field name="subdit_id" ref="demo_subdit_resnarkoba"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_10"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_10"/>
+            <field name="desa_id" ref="desa_34_02_10_2003"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — narkoba di wilayah Kabupaten Bantul.</field>
+        </record>
+        <record id="demo_krim_33" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1033/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=29)).strftime('%Y-%m-%d 06:31:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=28)).strftime('%Y-%m-%d 18:30:00')"/>
+            <field name="tempat_kejadian">Gerbosari, Kec. Samigaluh</field>
+            <field name="latitude">-7.668017</field>
+            <field name="longitude">110.178588</field>
+            <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_ringan"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_kulon_progo"/>
+            <field name="polsek_id" ref="polsek_34_01_11"/>
+            <field name="kabupaten_id" ref="kab_34_01"/>
+            <field name="kecamatan_id" ref="kec_34_01_11"/>
+            <field name="desa_id" ref="desa_34_01_11_2005"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — penganiayaan di wilayah Kabupaten Kulon Progo.</field>
+        </record>
+        <record id="demo_krim_34" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1034/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=65)).strftime('%Y-%m-%d 11:17:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=64)).strftime('%Y-%m-%d 07:47:00')"/>
+            <field name="tempat_kejadian">Tirtomartani, Kec. Kalasan</field>
+            <field name="latitude">-7.776506</field>
+            <field name="longitude">110.471009</field>
+            <field name="kategori_id" ref="demo_kat_krim_narkoba"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_narkoba_sabu"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_kos"/>
+            <field name="subdit_id" ref="demo_subdit_resnarkoba"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_10"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_10"/>
+            <field name="desa_id" ref="desa_34_04_10_2002"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — narkoba di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_35" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1035/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=139)).strftime('%Y-%m-%d 04:53:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=138)).strftime('%Y-%m-%d 07:29:00')"/>
+            <field name="tempat_kejadian">Umbulharjo, Kec. Cangkringan</field>
+            <field name="latitude">-7.583952</field>
+            <field name="longitude">110.440212</field>
+            <field name="kategori_id" ref="demo_kat_krim_jalanan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_jalanan_jambret"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_17"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_17"/>
+            <field name="desa_id" ref="desa_34_04_17_2005"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — kejahatan jalanan di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_36" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1036/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=56)).strftime('%Y-%m-%d 01:00:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=55)).strftime('%Y-%m-%d 15:25:00')"/>
+            <field name="tempat_kejadian">Baciro, Kec. Gondokusuman</field>
+            <field name="latitude">-7.79782</field>
+            <field name="longitude">110.379056</field>
+            <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_berat"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_03"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_03"/>
+            <field name="desa_id" ref="desa_34_71_03_1004"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_sidik"/>
+            <field name="uraian_singkat">Data demo — penganiayaan di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_37" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1037/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=210)).strftime('%Y-%m-%d 13:44:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=209)).strftime('%Y-%m-%d 08:30:00')"/>
+            <field name="tempat_kejadian">Pacarejo, Kec. Semanu</field>
+            <field name="latitude">-8.049997</field>
+            <field name="longitude">110.595684</field>
+            <field name="kategori_id" ref="demo_kat_krim_jalanan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_jalanan_klitih"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_gunungkidul"/>
+            <field name="polsek_id" ref="polsek_34_03_08"/>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_08"/>
+            <field name="desa_id" ref="desa_34_03_08_2003"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — kejahatan jalanan di wilayah Kabupaten Gunungkidul.</field>
+        </record>
+        <record id="demo_krim_38" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1038/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=149)).strftime('%Y-%m-%d 18:47:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=148)).strftime('%Y-%m-%d 09:26:00')"/>
+            <field name="tempat_kejadian">Demangan, Kec. Gondokusuman</field>
+            <field name="latitude">-7.787782</field>
+            <field name="longitude">110.385227</field>
+            <field name="kategori_id" ref="demo_kat_krim_penipuan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_penipuan_gelap"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_toko"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimsus"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_03"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_03"/>
+            <field name="desa_id" ref="desa_34_71_03_1001"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — penipuan / penggelapan di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_39" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1039/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=222)).strftime('%Y-%m-%d 04:13:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=221)).strftime('%Y-%m-%d 17:16:00')"/>
+            <field name="tempat_kejadian">Bunder, Kec. Patuk</field>
+            <field name="latitude">-7.890771</field>
+            <field name="longitude">110.519157</field>
+            <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_ringan"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_gunungkidul"/>
+            <field name="polsek_id" ref="polsek_34_03_04"/>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_04"/>
+            <field name="desa_id" ref="desa_34_03_04_2001"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — penganiayaan di wilayah Kabupaten Gunungkidul.</field>
+        </record>
+        <record id="demo_krim_40" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1040/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=129)).strftime('%Y-%m-%d 12:52:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=128)).strftime('%Y-%m-%d 07:08:00')"/>
+            <field name="tempat_kejadian">Pandowoharjo, Kec. Sleman</field>
+            <field name="latitude">-7.712401</field>
+            <field name="longitude">110.367367</field>
+            <field name="kategori_id" ref="demo_kat_krim_narkoba"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_narkoba_sabu"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_kos"/>
+            <field name="subdit_id" ref="demo_subdit_resnarkoba"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_13"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_13"/>
+            <field name="desa_id" ref="desa_34_04_13_2004"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — narkoba di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_41" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1041/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=85)).strftime('%Y-%m-%d 15:56:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=84)).strftime('%Y-%m-%d 10:37:00')"/>
+            <field name="tempat_kejadian">Bener, Kec. Tegalrejo</field>
+            <field name="latitude">-7.782289</field>
+            <field name="longitude">110.355432</field>
+            <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_mobil"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_01"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_01"/>
+            <field name="desa_id" ref="desa_34_71_01_1004"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — curanmor di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_42" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1042/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=129)).strftime('%Y-%m-%d 22:40:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=128)).strftime('%Y-%m-%d 15:55:00')"/>
+            <field name="tempat_kejadian">Pendoworejo, Kec. Girimulyo</field>
+            <field name="latitude">-7.740989</field>
+            <field name="longitude">110.194948</field>
+            <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_motor"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_kulon_progo"/>
+            <field name="polsek_id" ref="polsek_34_01_09"/>
+            <field name="kabupaten_id" ref="kab_34_01"/>
+            <field name="kecamatan_id" ref="kec_34_01_09"/>
+            <field name="desa_id" ref="desa_34_01_09_2003"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_sidik"/>
+            <field name="uraian_singkat">Data demo — curanmor di wilayah Kabupaten Kulon Progo.</field>
+        </record>
+        <record id="demo_krim_43" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1043/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=301)).strftime('%Y-%m-%d 02:21:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=300)).strftime('%Y-%m-%d 18:12:00')"/>
+            <field name="tempat_kejadian">Tegaltirto, Kec. Berbah</field>
+            <field name="latitude">-7.811908</field>
+            <field name="longitude">110.442826</field>
+            <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_motor"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_08"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_08"/>
+            <field name="desa_id" ref="desa_34_04_08_2002"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_lidik"/>
+            <field name="uraian_singkat">Data demo — curanmor di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_44" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1044/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=45)).strftime('%Y-%m-%d 01:57:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=44)).strftime('%Y-%m-%d 09:14:00')"/>
+            <field name="tempat_kejadian">Bawuran, Kec. Pleret</field>
+            <field name="latitude">-7.865634</field>
+            <field name="longitude">110.440841</field>
+            <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_mobil"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_13"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_13"/>
+            <field name="desa_id" ref="desa_34_02_13_2004"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — curanmor di wilayah Kabupaten Bantul.</field>
+        </record>
+        <record id="demo_krim_45" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1045/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=245)).strftime('%Y-%m-%d 22:40:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=244)).strftime('%Y-%m-%d 16:07:00')"/>
+            <field name="tempat_kejadian">Patangpuluhan, Kec. Wirobrajan</field>
+            <field name="latitude">-7.810985</field>
+            <field name="longitude">110.350929</field>
+            <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_berat"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_07"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_07"/>
+            <field name="desa_id" ref="desa_34_71_07_1003"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_lidik"/>
+            <field name="uraian_singkat">Data demo — penganiayaan di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_46" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1046/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=269)).strftime('%Y-%m-%d 13:42:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=268)).strftime('%Y-%m-%d 08:19:00')"/>
+            <field name="tempat_kejadian">Bendung, Kec. Semin</field>
+            <field name="latitude">-7.852251</field>
+            <field name="longitude">110.721263</field>
+            <field name="kategori_id" ref="demo_kat_krim_jalanan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_jalanan_klitih"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_gunungkidul"/>
+            <field name="polsek_id" ref="polsek_34_03_12"/>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_12"/>
+            <field name="desa_id" ref="desa_34_03_12_2005"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_sidik"/>
+            <field name="uraian_singkat">Data demo — kejahatan jalanan di wilayah Kabupaten Gunungkidul.</field>
+        </record>
+        <record id="demo_krim_47" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1047/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=155)).strftime('%Y-%m-%d 05:52:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=154)).strftime('%Y-%m-%d 12:13:00')"/>
+            <field name="tempat_kejadian">Tirtomartani, Kec. Kalasan</field>
+            <field name="latitude">-7.749927</field>
+            <field name="longitude">110.47472</field>
+            <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_berat"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_10"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_10"/>
+            <field name="desa_id" ref="desa_34_04_10_2002"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — penganiayaan di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_48" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1048/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=272)).strftime('%Y-%m-%d 08:29:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=271)).strftime('%Y-%m-%d 11:45:00')"/>
+            <field name="tempat_kejadian">Palbapang, Kec. Bantul</field>
+            <field name="latitude">-7.912666</field>
+            <field name="longitude">110.332214</field>
+            <field name="kategori_id" ref="demo_kat_krim_narkoba"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_narkoba_ganja"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_kos"/>
+            <field name="subdit_id" ref="demo_subdit_resnarkoba"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_08"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_08"/>
+            <field name="desa_id" ref="desa_34_02_08_2001"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — narkoba di wilayah Kabupaten Bantul.</field>
+        </record>
+        <record id="demo_krim_49" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1049/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=193)).strftime('%Y-%m-%d 23:32:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=192)).strftime('%Y-%m-%d 16:48:00')"/>
+            <field name="tempat_kejadian">Bausasran, Kec. Danurejan</field>
+            <field name="latitude">-7.791534</field>
+            <field name="longitude">110.377317</field>
+            <field name="kategori_id" ref="demo_kat_krim_curat"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curat_toko"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_rumah"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_04"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_04"/>
+            <field name="desa_id" ref="desa_34_71_04_1003"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — pencurian dengan pemberatan (curat) di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_50" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1050/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=268)).strftime('%Y-%m-%d 07:45:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=267)).strftime('%Y-%m-%d 20:10:00')"/>
+            <field name="tempat_kejadian">Baciro, Kec. Gondokusuman</field>
+            <field name="latitude">-7.794955</field>
+            <field name="longitude">110.379013</field>
+            <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_ringan"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_03"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_03"/>
+            <field name="desa_id" ref="desa_34_71_03_1004"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — penganiayaan di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_51" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1051/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=315)).strftime('%Y-%m-%d 19:24:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=314)).strftime('%Y-%m-%d 18:45:00')"/>
+            <field name="tempat_kejadian">Semaki, Kec. Umbulharjo</field>
+            <field name="latitude">-7.79794</field>
+            <field name="longitude">110.384585</field>
+            <field name="kategori_id" ref="demo_kat_krim_jalanan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_jalanan_jambret"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_13"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_13"/>
+            <field name="desa_id" ref="desa_34_71_13_1001"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — kejahatan jalanan di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_52" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1052/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=191)).strftime('%Y-%m-%d 23:20:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=190)).strftime('%Y-%m-%d 17:43:00')"/>
+            <field name="tempat_kejadian">Bener, Kec. Tegalrejo</field>
+            <field name="latitude">-7.77709</field>
+            <field name="longitude">110.35332</field>
+            <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_ringan"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_01"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_01"/>
+            <field name="desa_id" ref="desa_34_71_01_1004"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — penganiayaan di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_53" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1053/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=103)).strftime('%Y-%m-%d 17:42:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=102)).strftime('%Y-%m-%d 09:53:00')"/>
+            <field name="tempat_kejadian">Hargobinangun, Kec. Pakem</field>
+            <field name="latitude">-7.598111</field>
+            <field name="longitude">110.435492</field>
+            <field name="kategori_id" ref="demo_kat_krim_jalanan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_jalanan_jambret"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_16"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_16"/>
+            <field name="desa_id" ref="desa_34_04_16_2005"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_lidik"/>
+            <field name="uraian_singkat">Data demo — kejahatan jalanan di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_54" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1054/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=21)).strftime('%Y-%m-%d 00:37:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=20)).strftime('%Y-%m-%d 18:37:00')"/>
+            <field name="tempat_kejadian">Potorono, Kec. Banguntapan</field>
+            <field name="latitude">-7.843054</field>
+            <field name="longitude">110.42775</field>
+            <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_mobil"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_12"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_12"/>
+            <field name="desa_id" ref="desa_34_02_12_2006"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_lidik"/>
+            <field name="uraian_singkat">Data demo — curanmor di wilayah Kabupaten Bantul.</field>
+        </record>
+        <record id="demo_krim_55" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1055/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=45)).strftime('%Y-%m-%d 02:46:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=44)).strftime('%Y-%m-%d 15:37:00')"/>
+            <field name="tempat_kejadian">Ngupasan, Kec. Gondomanan</field>
+            <field name="latitude">-7.799285</field>
+            <field name="longitude">110.366633</field>
+            <field name="kategori_id" ref="demo_kat_krim_curat"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curat_toko"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_rumah"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_10"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_10"/>
+            <field name="desa_id" ref="desa_34_71_10_1001"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — pencurian dengan pemberatan (curat) di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_56" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP A</field>
+            <field name="no_lp">LP/A/1056/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=303)).strftime('%Y-%m-%d 14:31:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=302)).strftime('%Y-%m-%d 19:41:00')"/>
+            <field name="tempat_kejadian">Trihanggo, Kec. Gamping</field>
+            <field name="latitude">-7.767209</field>
+            <field name="longitude">110.349115</field>
+            <field name="kategori_id" ref="demo_kat_krim_narkoba"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_narkoba_sabu"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_kos"/>
+            <field name="subdit_id" ref="demo_subdit_resnarkoba"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_01"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_01"/>
+            <field name="desa_id" ref="desa_34_04_01_2005"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — narkoba di wilayah Kabupaten Sleman.</field>
+        </record>
+        <record id="demo_krim_57" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1057/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=45)).strftime('%Y-%m-%d 14:30:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=44)).strftime('%Y-%m-%d 15:07:00')"/>
+            <field name="tempat_kejadian">Kalidengen, Kec. Temon</field>
+            <field name="latitude">-7.897966</field>
+            <field name="longitude">110.083807</field>
+            <field name="kategori_id" ref="demo_kat_krim_penipuan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_penipuan_online"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_toko"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimsus"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_kulon_progo"/>
+            <field name="polsek_id" ref="polsek_34_01_01"/>
+            <field name="kabupaten_id" ref="kab_34_01"/>
+            <field name="kecamatan_id" ref="kec_34_01_01"/>
+            <field name="desa_id" ref="desa_34_01_01_2005"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — penipuan / penggelapan di wilayah Kabupaten Kulon Progo.</field>
+        </record>
+        <record id="demo_krim_58" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1058/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=179)).strftime('%Y-%m-%d 03:07:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=178)).strftime('%Y-%m-%d 15:17:00')"/>
+            <field name="tempat_kejadian">Panggungharjo, Kec. Sewon</field>
+            <field name="latitude">-7.860248</field>
+            <field name="longitude">110.357999</field>
+            <field name="kategori_id" ref="demo_kat_krim_curat"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_curat_rumah"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_rumah"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_15"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_15"/>
+            <field name="desa_id" ref="desa_34_02_15_2004"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_rj"/>
+            <field name="uraian_singkat">Data demo — pencurian dengan pemberatan (curat) di wilayah Kabupaten Bantul.</field>
+        </record>
+        <record id="demo_krim_59" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1059/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=282)).strftime('%Y-%m-%d 00:47:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=281)).strftime('%Y-%m-%d 11:10:00')"/>
+            <field name="tempat_kejadian">Keparakan, Kec. Mergangsan</field>
+            <field name="latitude">-7.809351</field>
+            <field name="longitude">110.37156</field>
+            <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_ringan"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_12"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_12"/>
+            <field name="desa_id" ref="desa_34_71_12_1001"/>
+            <field name="status_perkara">SELESAI</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_p21"/>
+            <field name="uraian_singkat">Data demo — penganiayaan di wilayah Kota Yogyakarta.</field>
+        </record>
+        <record id="demo_krim_60" model="petapantau.kriminalitas">
+            <field name="jenis_lp">LP B</field>
+            <field name="no_lp">LP/B/1060/2026/SPKT/POLDA DIY</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=63)).strftime('%Y-%m-%d 04:41:00')"/>
+            <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=62)).strftime('%Y-%m-%d 16:46:00')"/>
+            <field name="tempat_kejadian">Imogiri, Kec. Imogiri</field>
+            <field name="latitude">-7.91651</field>
+            <field name="longitude">110.378272</field>
+            <field name="kategori_id" ref="demo_kat_krim_jalanan"/>
+            <field name="sub_kategori_id" ref="demo_sub_kat_jalanan_jambret"/>
+            <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="sumber_dokumen_id" ref="demo_sdok_krim_2026"/>
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_10"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_10"/>
+            <field name="desa_id" ref="desa_34_02_10_2008"/>
+            <field name="status_perkara">PROSES</field>
+            <field name="sub_status_perkara_id" ref="demo_sub_status_sidik"/>
+            <field name="uraian_singkat">Data demo — kejahatan jalanan di wilayah Kabupaten Bantul.</field>
+        </record>
+        <!-- BENCANA -->
+        <record id="demo_bcn_01" model="petapantau.bencana">
+            <field name="nama_bencana">Awan panas guguran Merapi</field>
+            <field name="kategori_id" ref="demo_kat_bcn_merapi"/>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=33)).strftime('%Y-%m-%d 08:42:00')"/>
+            <field name="penyebab">Data demo</field>
+            <field name="tindak_lanjut">Pengamanan lokasi dan evakuasi warga bersama BPBD</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_bcn_2026"/>
+            <field name="latitude">-7.811827</field>
+            <field name="longitude">110.290843</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_01"/>
+            <field name="desa_id" ref="desa_34_04_01_2001"/>
+        </record>
+        <record id="demo_bcn_02" model="petapantau.bencana">
+            <field name="nama_bencana">Banjir luapan Sungai Opak</field>
+            <field name="kategori_id" ref="demo_kat_bcn_banjir"/>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=104)).strftime('%Y-%m-%d 15:40:00')"/>
+            <field name="penyebab">Data demo</field>
+            <field name="tindak_lanjut">Pengamanan lokasi dan evakuasi warga bersama BPBD</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_bcn_2026"/>
+            <field name="latitude">-7.893809</field>
+            <field name="longitude">110.377267</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_09"/>
+            <field name="desa_id" ref="desa_34_02_09_2004"/>
+        </record>
+        <record id="demo_bcn_03" model="petapantau.bencana">
+            <field name="nama_bencana">Longsor tebing Kalibawang</field>
+            <field name="kategori_id" ref="demo_kat_bcn_longsor"/>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=172)).strftime('%Y-%m-%d 15:19:00')"/>
+            <field name="penyebab">Data demo</field>
+            <field name="tindak_lanjut">Pengamanan lokasi dan evakuasi warga bersama BPBD</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_bcn_2026"/>
+            <field name="latitude">-7.888166</field>
+            <field name="longitude">110.086506</field>
+            <field name="state">NON AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_01"/>
+            <field name="kecamatan_id" ref="kec_34_01_01"/>
+            <field name="desa_id" ref="desa_34_01_01_2005"/>
+        </record>
+        <record id="demo_bcn_04" model="petapantau.bencana">
+            <field name="nama_bencana">Longsor jalan Patuk</field>
+            <field name="kategori_id" ref="demo_kat_bcn_longsor"/>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=46)).strftime('%Y-%m-%d 02:17:00')"/>
+            <field name="penyebab">Data demo</field>
+            <field name="tindak_lanjut">Pengamanan lokasi dan evakuasi warga bersama BPBD</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_bcn_2026"/>
+            <field name="latitude">-7.9608</field>
+            <field name="longitude">110.66276</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_09"/>
+            <field name="desa_id" ref="desa_34_03_09_2004"/>
+        </record>
+        <record id="demo_bcn_05" model="petapantau.bencana">
+            <field name="nama_bencana">Puting beliung permukiman</field>
+            <field name="kategori_id" ref="demo_kat_bcn_angin"/>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=53)).strftime('%Y-%m-%d 06:16:00')"/>
+            <field name="penyebab">Data demo</field>
+            <field name="tindak_lanjut">Pengamanan lokasi dan evakuasi warga bersama BPBD</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_bcn_2026"/>
+            <field name="latitude">-7.748875</field>
+            <field name="longitude">110.322178</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_02"/>
+            <field name="desa_id" ref="desa_34_04_02_2007"/>
+        </record>
+        <record id="demo_bcn_06" model="petapantau.bencana">
+            <field name="nama_bencana">Kebakaran ruko</field>
+            <field name="kategori_id" ref="demo_kat_bcn_kebakaran"/>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=202)).strftime('%Y-%m-%d 18:17:00')"/>
+            <field name="penyebab">Data demo</field>
+            <field name="tindak_lanjut">Pengamanan lokasi dan evakuasi warga bersama BPBD</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_bcn_2026"/>
+            <field name="latitude">-7.79352</field>
+            <field name="longitude">110.371057</field>
+            <field name="state">NON AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_04"/>
+            <field name="desa_id" ref="desa_34_71_04_1002"/>
+        </record>
+        <record id="demo_bcn_07" model="petapantau.bencana">
+            <field name="nama_bencana">Genangan banjir Kali Code</field>
+            <field name="kategori_id" ref="demo_kat_bcn_banjir"/>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=76)).strftime('%Y-%m-%d 10:44:00')"/>
+            <field name="penyebab">Data demo</field>
+            <field name="tindak_lanjut">Pengamanan lokasi dan evakuasi warga bersama BPBD</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_bcn_2026"/>
+            <field name="latitude">-7.792234</field>
+            <field name="longitude">110.37385</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_04"/>
+            <field name="desa_id" ref="desa_34_71_04_1003"/>
+        </record>
+        <record id="demo_bcn_08" model="petapantau.bencana">
+            <field name="nama_bencana">Gempa bumi M4,9 selatan Bantul</field>
+            <field name="kategori_id" ref="demo_kat_bcn_gempa"/>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=35)).strftime('%Y-%m-%d 03:12:00')"/>
+            <field name="penyebab">Data demo</field>
+            <field name="tindak_lanjut">Pengamanan lokasi dan evakuasi warga bersama BPBD</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_bcn_2026"/>
+            <field name="latitude">-7.893363</field>
+            <field name="longitude">110.353591</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_08"/>
+            <field name="desa_id" ref="desa_34_02_08_2005"/>
+        </record>
+        <record id="demo_bcn_09" model="petapantau.bencana">
+            <field name="nama_bencana">Kebakaran lahan jati</field>
+            <field name="kategori_id" ref="demo_kat_bcn_kebakaran"/>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=168)).strftime('%Y-%m-%d 21:01:00')"/>
+            <field name="penyebab">Data demo</field>
+            <field name="tindak_lanjut">Pengamanan lokasi dan evakuasi warga bersama BPBD</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_bcn_2026"/>
+            <field name="latitude">-7.847875</field>
+            <field name="longitude">110.723401</field>
+            <field name="state">NON AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_12"/>
+            <field name="desa_id" ref="desa_34_03_12_2005"/>
+        </record>
+        <record id="demo_bcn_10" model="petapantau.bencana">
+            <field name="nama_bencana">Pohon tumbang akibat angin kencang</field>
+            <field name="kategori_id" ref="demo_kat_bcn_angin"/>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=126)).strftime('%Y-%m-%d 11:32:00')"/>
+            <field name="penyebab">Data demo</field>
+            <field name="tindak_lanjut">Pengamanan lokasi dan evakuasi warga bersama BPBD</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_bcn_2026"/>
+            <field name="latitude">-7.912924</field>
+            <field name="longitude">110.137605</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_01"/>
+            <field name="kecamatan_id" ref="kec_34_01_03"/>
+            <field name="desa_id" ref="desa_34_01_03_2006"/>
+        </record>
+        <!-- LALU LINTAS -->
+        <record id="demo_lalin_01" model="petapantau.lalu_lintas">
+            <field name="kategori_id" ref="demo_kat_lalin_rawan"/>
+            <field name="jenis_jalan_id" ref="demo_jenis_jalan_nasional"/>
+            <field name="nama_lokasi">Simpang Empat Janti (Ring Road Timur)</field>
+            <field name="penanggung_jawab">Satlantas Polres Bantul</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=283)).strftime('%Y-%m-%d 05:51:00')"/>
+            <field name="latitude">-7.7832</field>
+            <field name="longitude">110.414</field>
+            <field name="penyebab">Data demo</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_lalin_2026"/>
+            <field name="state">PROSES</field>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_12"/>
+            <field name="desa_id" ref="desa_34_02_12_2002"/>
+        </record>
+        <record id="demo_lalin_02" model="petapantau.lalu_lintas">
+            <field name="kategori_id" ref="demo_kat_lalin_macet"/>
+            <field name="jenis_jalan_id" ref="demo_jenis_jalan_kabupaten"/>
+            <field name="nama_lokasi">Kawasan Malioboro</field>
+            <field name="penanggung_jawab">Satlantas Polresta Yogyakarta</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=104)).strftime('%Y-%m-%d 14:16:00')"/>
+            <field name="latitude">-7.7924</field>
+            <field name="longitude">110.3658</field>
+            <field name="penyebab">Data demo</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_lalin_2026"/>
+            <field name="state">PROSES</field>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_05"/>
+            <field name="desa_id" ref="desa_34_71_05_1001"/>
+        </record>
+        <record id="demo_lalin_03" model="petapantau.lalu_lintas">
+            <field name="kategori_id" ref="demo_kat_lalin_laka"/>
+            <field name="jenis_jalan_id" ref="demo_jenis_jalan_nasional"/>
+            <field name="nama_lokasi">Jl. Magelang Km 7</field>
+            <field name="penanggung_jawab">Satlantas Polresta Sleman</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=221)).strftime('%Y-%m-%d 01:32:00')"/>
+            <field name="latitude">-7.7517</field>
+            <field name="longitude">110.36</field>
+            <field name="penyebab">Data demo</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_lalin_2026"/>
+            <field name="state">SELESAI</field>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_06"/>
+            <field name="desa_id" ref="desa_34_04_06_2001"/>
+        </record>
+        <record id="demo_lalin_04" model="petapantau.lalu_lintas">
+            <field name="kategori_id" ref="demo_kat_lalin_rawan"/>
+            <field name="jenis_jalan_id" ref="demo_jenis_jalan_nasional"/>
+            <field name="nama_lokasi">Simpang Empat Condongcatur</field>
+            <field name="penanggung_jawab">Satlantas Polresta Sleman</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=286)).strftime('%Y-%m-%d 08:16:00')"/>
+            <field name="latitude">-7.7477</field>
+            <field name="longitude">110.4167</field>
+            <field name="penyebab">Data demo</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_lalin_2026"/>
+            <field name="state">PROSES</field>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_07"/>
+            <field name="desa_id" ref="desa_34_04_07_2002"/>
+        </record>
+        <record id="demo_lalin_05" model="petapantau.lalu_lintas">
+            <field name="kategori_id" ref="demo_kat_lalin_laka"/>
+            <field name="jenis_jalan_id" ref="demo_jenis_jalan_provinsi"/>
+            <field name="nama_lokasi">Jl. Bantul - Simpang Klodran</field>
+            <field name="penanggung_jawab">Satlantas Polres Bantul</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=268)).strftime('%Y-%m-%d 23:07:00')"/>
+            <field name="latitude">-7.8879</field>
+            <field name="longitude">110.3307</field>
+            <field name="penyebab">Data demo</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_lalin_2026"/>
+            <field name="state">PROSES</field>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_08"/>
+            <field name="desa_id" ref="desa_34_02_08_2003"/>
+        </record>
+        <record id="demo_lalin_06" model="petapantau.lalu_lintas">
+            <field name="kategori_id" ref="demo_kat_lalin_macet"/>
+            <field name="jenis_jalan_id" ref="demo_jenis_jalan_kabupaten"/>
+            <field name="nama_lokasi">Jl. Jenderal Sudirman - Tugu</field>
+            <field name="penanggung_jawab">Satlantas Polresta Yogyakarta</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=32)).strftime('%Y-%m-%d 06:43:00')"/>
+            <field name="latitude">-7.7829</field>
+            <field name="longitude">110.3874</field>
+            <field name="penyebab">Data demo</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_lalin_2026"/>
+            <field name="state">SELESAI</field>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_03"/>
+            <field name="desa_id" ref="desa_34_71_03_1003"/>
+        </record>
+        <record id="demo_lalin_07" model="petapantau.lalu_lintas">
+            <field name="kategori_id" ref="demo_kat_lalin_laka"/>
+            <field name="jenis_jalan_id" ref="demo_jenis_jalan_nasional"/>
+            <field name="nama_lokasi">Jl. Wates - Bundaran Wates</field>
+            <field name="penanggung_jawab">Satlantas Polres Kulon Progo</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=60)).strftime('%Y-%m-%d 15:57:00')"/>
+            <field name="latitude">-7.8655</field>
+            <field name="longitude">110.1594</field>
+            <field name="penyebab">Data demo</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_lalin_2026"/>
+            <field name="state">PROSES</field>
+            <field name="kabupaten_id" ref="kab_34_01"/>
+            <field name="kecamatan_id" ref="kec_34_01_02"/>
+            <field name="desa_id" ref="desa_34_01_02_1008"/>
+        </record>
+        <record id="demo_lalin_08" model="petapantau.lalu_lintas">
+            <field name="kategori_id" ref="demo_kat_lalin_rawan"/>
+            <field name="jenis_jalan_id" ref="demo_jenis_jalan_nasional"/>
+            <field name="nama_lokasi">Bukit Bego / Jalan Wonosari - Patuk</field>
+            <field name="penanggung_jawab">Satlantas Polres Gunungkidul</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=21)).strftime('%Y-%m-%d 04:43:00')"/>
+            <field name="latitude">-7.838</field>
+            <field name="longitude">110.534</field>
+            <field name="penyebab">Data demo</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_lalin_2026"/>
+            <field name="state">PROSES</field>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_04"/>
+            <field name="desa_id" ref="desa_34_03_04_2007"/>
+        </record>
+        <record id="demo_lalin_09" model="petapantau.lalu_lintas">
+            <field name="kategori_id" ref="demo_kat_lalin_laka"/>
+            <field name="jenis_jalan_id" ref="demo_jenis_jalan_nasional"/>
+            <field name="nama_lokasi">Jl. Solo - Kalasan</field>
+            <field name="penanggung_jawab">Satlantas Polresta Sleman</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=159)).strftime('%Y-%m-%d 06:20:00')"/>
+            <field name="latitude">-7.7735</field>
+            <field name="longitude">110.4826</field>
+            <field name="penyebab">Data demo</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_lalin_2026"/>
+            <field name="state">SELESAI</field>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_09"/>
+            <field name="desa_id" ref="desa_34_04_09_2006"/>
+        </record>
+        <record id="demo_lalin_10" model="petapantau.lalu_lintas">
+            <field name="kategori_id" ref="demo_kat_lalin_macet"/>
+            <field name="jenis_jalan_id" ref="demo_jenis_jalan_nasional"/>
+            <field name="nama_lokasi">Simpang Empat Pelem Gurih (Ring Road Barat)</field>
+            <field name="penanggung_jawab">Satlantas Polres Bantul</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=82)).strftime('%Y-%m-%d 04:48:00')"/>
+            <field name="latitude">-7.81</field>
+            <field name="longitude">110.3233</field>
+            <field name="penyebab">Data demo</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_lalin_2026"/>
+            <field name="state">PROSES</field>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_16"/>
+            <field name="desa_id" ref="desa_34_02_16_2003"/>
+        </record>
+        <record id="demo_lalin_11" model="petapantau.lalu_lintas">
+            <field name="kategori_id" ref="demo_kat_lalin_laka"/>
+            <field name="jenis_jalan_id" ref="demo_jenis_jalan_provinsi"/>
+            <field name="nama_lokasi">Jl. Baron - Tanjungsari</field>
+            <field name="penanggung_jawab">Satlantas Polres Gunungkidul</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=55)).strftime('%Y-%m-%d 19:54:00')"/>
+            <field name="latitude">-7.9667</field>
+            <field name="longitude">110.6</field>
+            <field name="penyebab">Data demo</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_lalin_2026"/>
+            <field name="state">PROSES</field>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_01"/>
+            <field name="desa_id" ref="desa_34_03_01_2001"/>
+        </record>
+        <record id="demo_lalin_12" model="petapantau.lalu_lintas">
+            <field name="kategori_id" ref="demo_kat_lalin_rawan"/>
+            <field name="jenis_jalan_id" ref="demo_jenis_jalan_kabupaten"/>
+            <field name="nama_lokasi">Simpang Empat Gembira Loka</field>
+            <field name="penanggung_jawab">Satlantas Polresta Yogyakarta</field>
+            <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=92)).strftime('%Y-%m-%d 03:27:00')"/>
+            <field name="latitude">-7.8011</field>
+            <field name="longitude">110.392</field>
+            <field name="penyebab">Data demo</field>
+            <field name="sumber_dokumen_id" ref="demo_sdok_lalin_2026"/>
+            <field name="state">SELESAI</field>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_13"/>
+            <field name="desa_id" ref="desa_34_71_13_1002"/>
+        </record>
+        <!-- LOKASI PENTING -->
+        <record id="demo_lokasi_01" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_polisi"/>
+            <field name="nama_lokasi">Markas Polda D.I. Yogyakarta</field>
+            <field name="alamat_lengkap">Jl. Padjajaran, Ring Road Utara, Condongcatur</field>
+            <field name="latitude">-7.7505</field>
+            <field name="longitude">110.4178</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_07"/>
+            <field name="desa_id" ref="desa_34_04_07_2002"/>
+        </record>
+        <record id="demo_lokasi_02" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_polisi"/>
+            <field name="nama_lokasi">Polresta Yogyakarta</field>
+            <field name="alamat_lengkap">Jl. Reksobayan No. 1</field>
+            <field name="latitude">-7.7976</field>
+            <field name="longitude">110.3649</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_10"/>
+            <field name="desa_id" ref="desa_34_71_10_1001"/>
+        </record>
+        <record id="demo_lokasi_03" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_polisi"/>
+            <field name="nama_lokasi">Polresta Sleman</field>
+            <field name="alamat_lengkap">Jl. Magelang Km 12, Beran</field>
+            <field name="latitude">-7.7142</field>
+            <field name="longitude">110.3554</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_13"/>
+            <field name="desa_id" ref="desa_34_04_13_2003"/>
+        </record>
+        <record id="demo_lokasi_04" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_polisi"/>
+            <field name="nama_lokasi">Polres Bantul</field>
+            <field name="alamat_lengkap">Jl. Jenderal Sudirman, Bantul</field>
+            <field name="latitude">-7.889</field>
+            <field name="longitude">110.329</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_08"/>
+            <field name="desa_id" ref="desa_34_02_08_2003"/>
+        </record>
+        <record id="demo_lokasi_05" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_polisi"/>
+            <field name="nama_lokasi">Polres Gunungkidul</field>
+            <field name="alamat_lengkap">Jl. MGR Sugiyopranoto, Wonosari</field>
+            <field name="latitude">-7.9659</field>
+            <field name="longitude">110.6016</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_01"/>
+            <field name="desa_id" ref="desa_34_03_01_2001"/>
+        </record>
+        <record id="demo_lokasi_06" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_rs"/>
+            <field name="nama_lokasi">RSUP Dr. Sardjito</field>
+            <field name="alamat_lengkap">Jl. Kesehatan No. 1, Sekip</field>
+            <field name="latitude">-7.7685</field>
+            <field name="longitude">110.3735</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_06"/>
+            <field name="desa_id" ref="desa_34_04_06_2001"/>
+        </record>
+        <record id="demo_lokasi_07" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_rs"/>
+            <field name="nama_lokasi">RS Bethesda</field>
+            <field name="alamat_lengkap">Jl. Jenderal Sudirman No. 70</field>
+            <field name="latitude">-7.7829</field>
+            <field name="longitude">110.3778</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_03"/>
+            <field name="desa_id" ref="desa_34_71_03_1005"/>
+        </record>
+        <record id="demo_lokasi_08" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_kampus"/>
+            <field name="nama_lokasi">Universitas Gadjah Mada</field>
+            <field name="alamat_lengkap">Bulaksumur</field>
+            <field name="latitude">-7.7713</field>
+            <field name="longitude">110.3775</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_07"/>
+            <field name="desa_id" ref="desa_34_04_07_2001"/>
+        </record>
+        <record id="demo_lokasi_09" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_kampus"/>
+            <field name="nama_lokasi">Universitas Negeri Yogyakarta</field>
+            <field name="alamat_lengkap">Jl. Colombo No. 1, Karangmalang</field>
+            <field name="latitude">-7.776</field>
+            <field name="longitude">110.3866</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_07"/>
+            <field name="desa_id" ref="desa_34_04_07_2001"/>
+        </record>
+        <record id="demo_lokasi_10" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_pasar"/>
+            <field name="nama_lokasi">Pasar Beringharjo</field>
+            <field name="alamat_lengkap">Jl. Margo Mulyo, Malioboro</field>
+            <field name="latitude">-7.7985</field>
+            <field name="longitude">110.3654</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_10"/>
+            <field name="desa_id" ref="desa_34_71_10_1001"/>
+        </record>
+        <record id="demo_lokasi_11" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_wisata"/>
+            <field name="nama_lokasi">Keraton Yogyakarta</field>
+            <field name="alamat_lengkap">Jl. Rotowijayan</field>
+            <field name="latitude">-7.8053</field>
+            <field name="longitude">110.3642</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_09"/>
+            <field name="desa_id" ref="desa_34_71_09_1003"/>
+        </record>
+        <record id="demo_lokasi_12" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_wisata"/>
+            <field name="nama_lokasi">Candi Prambanan</field>
+            <field name="alamat_lengkap">Jl. Raya Solo - Yogyakarta</field>
+            <field name="latitude">-7.752</field>
+            <field name="longitude">110.4915</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_09"/>
+            <field name="desa_id" ref="desa_34_04_09_2006"/>
+        </record>
+        <record id="demo_lokasi_13" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_wisata"/>
+            <field name="nama_lokasi">Pantai Parangtritis</field>
+            <field name="alamat_lengkap">Parangtritis, Kretek</field>
+            <field name="latitude">-8.0245</field>
+            <field name="longitude">110.3299</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_03"/>
+            <field name="desa_id" ref="desa_34_02_03_2002"/>
+        </record>
+        <record id="demo_lokasi_14" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_wisata"/>
+            <field name="nama_lokasi">Pantai Indrayanti</field>
+            <field name="alamat_lengkap">Tepus, Gunungkidul</field>
+            <field name="latitude">-8.1505</field>
+            <field name="longitude">110.6125</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_07"/>
+            <field name="desa_id" ref="desa_34_03_07_2004"/>
+        </record>
+        <record id="demo_lokasi_15" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_transport"/>
+            <field name="nama_lokasi">Bandara Internasional Yogyakarta (YIA)</field>
+            <field name="alamat_lengkap">Temon, Kulon Progo</field>
+            <field name="latitude">-7.9047</field>
+            <field name="longitude">110.0571</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_01"/>
+            <field name="kecamatan_id" ref="kec_34_01_01"/>
+            <field name="desa_id" ref="desa_34_01_01_2004"/>
+        </record>
+        <record id="demo_lokasi_16" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_transport"/>
+            <field name="nama_lokasi">Stasiun Tugu Yogyakarta</field>
+            <field name="alamat_lengkap">Jl. Pasar Kembang</field>
+            <field name="latitude">-7.7893</field>
+            <field name="longitude">110.3631</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_05"/>
+            <field name="desa_id" ref="desa_34_71_05_1001"/>
+        </record>
+        <record id="demo_lokasi_17" model="petapantau.lokasi_penting">
+            <field name="kategori_id" ref="demo_kat_lokasi_pemerintahan"/>
+            <field name="nama_lokasi">Kompleks Kepatihan (Kantor Gubernur DIY)</field>
+            <field name="alamat_lengkap">Jl. Malioboro</field>
+            <field name="latitude">-7.7926</field>
+            <field name="longitude">110.3653</field>
+            <field name="state">AKTIF</field>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_05"/>
+            <field name="desa_id" ref="desa_34_71_05_1001"/>
+        </record>
+        <!-- PATROLI + PERSONEL + TITIK LOKASI -->
+        <record id="demo_patroli_01" model="petapantau.patroli">
+            <field name="polres_id" ref="polres_kulon_progo"/>
+            <field name="polsek_id" ref="polsek_34_01_02"/>
+            <field name="kabupaten_id" ref="kab_34_01"/>
+            <field name="kecamatan_id" ref="kec_34_01_02"/>
+            <field name="desa_id" ref="desa_34_01_02_2005"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=11)).strftime('%Y-%m-%d 16:00:00')"/>
+            <field name="state">PROSES</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_001" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_01"/>
+            <field name="nama">LUKMAN HAKIM</field>
+            <field name="pangkat">BRIPKA</field>
+        </record>
+        <record id="demo_personel_patroli_002" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_01"/>
+            <field name="nama">SIGIT PURNOMO</field>
+            <field name="pangkat">BRIPDA</field>
+        </record>
+        <record id="demo_lokasi_patroli_001" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_01"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=11)).strftime('%Y-%m-%d 08:04:00')"/>
+            <field name="latitude">-7.897831</field>
+            <field name="longitude">110.142516</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_02" model="petapantau.patroli">
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_05"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_05"/>
+            <field name="desa_id" ref="desa_34_02_05_2003"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=9)).strftime('%Y-%m-%d 19:47:00')"/>
+            <field name="tanggal_selesai" eval="(DateTime.today() - relativedelta(days=9)).strftime('%Y-%m-%d 16:30:00')"/>
+            <field name="state">SELESAI</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_003" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_02"/>
+            <field name="nama">HENDRA KURNIAWAN</field>
+            <field name="pangkat">BRIPTU</field>
+        </record>
+        <record id="demo_personel_patroli_004" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_02"/>
+            <field name="nama">IRFAN HIDAYAT</field>
+            <field name="pangkat">AIPDA</field>
+        </record>
+        <record id="demo_personel_patroli_005" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_02"/>
+            <field name="nama">YOGA PAMUNGKAS</field>
+            <field name="pangkat">BRIGPOL</field>
+        </record>
+        <record id="demo_lokasi_patroli_002" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_02"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=9)).strftime('%Y-%m-%d 08:29:00')"/>
+            <field name="latitude">-7.930478</field>
+            <field name="longitude">110.332753</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_003" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_02"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=9)).strftime('%Y-%m-%d 10:26:00')"/>
+            <field name="latitude">-7.931504</field>
+            <field name="longitude">110.316218</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_004" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_02"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=9)).strftime('%Y-%m-%d 12:01:00')"/>
+            <field name="latitude">-7.939033</field>
+            <field name="longitude">110.310842</field>
+            <field name="catatan">Titik pantau 3 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_03" model="petapantau.patroli">
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_07"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_07"/>
+            <field name="desa_id" ref="desa_34_02_07_2001"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=8)).strftime('%Y-%m-%d 16:52:00')"/>
+            <field name="state">PROSES</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_006" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_03"/>
+            <field name="nama">YOGA PAMUNGKAS</field>
+            <field name="pangkat">AIPTU</field>
+        </record>
+        <record id="demo_personel_patroli_007" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_03"/>
+            <field name="nama">HENDRA KURNIAWAN</field>
+            <field name="pangkat">BRIPKA</field>
+        </record>
+        <record id="demo_lokasi_patroli_005" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_03"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=8)).strftime('%Y-%m-%d 08:45:00')"/>
+            <field name="latitude">-7.869255</field>
+            <field name="longitude">110.262075</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_006" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_03"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=8)).strftime('%Y-%m-%d 10:36:00')"/>
+            <field name="latitude">-7.854716</field>
+            <field name="longitude">110.270509</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_007" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_03"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=8)).strftime('%Y-%m-%d 12:35:00')"/>
+            <field name="latitude">-7.858911</field>
+            <field name="longitude">110.269779</field>
+            <field name="catatan">Titik pantau 3 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_04" model="petapantau.patroli">
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_08"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_08"/>
+            <field name="desa_id" ref="desa_34_71_08_1002"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=22)).strftime('%Y-%m-%d 17:33:00')"/>
+            <field name="tanggal_selesai" eval="(DateTime.today() - relativedelta(days=22)).strftime('%Y-%m-%d 16:30:00')"/>
+            <field name="state">SELESAI</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_008" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_04"/>
+            <field name="nama">TEGUH SANTOSO</field>
+            <field name="pangkat">AIPTU</field>
+        </record>
+        <record id="demo_personel_patroli_009" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_04"/>
+            <field name="nama">KURNIA ADI</field>
+            <field name="pangkat">BRIPDA</field>
+        </record>
+        <record id="demo_lokasi_patroli_008" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_04"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=22)).strftime('%Y-%m-%d 08:22:00')"/>
+            <field name="latitude">-7.822446</field>
+            <field name="longitude">110.361005</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_009" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_04"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=22)).strftime('%Y-%m-%d 10:01:00')"/>
+            <field name="latitude">-7.820844</field>
+            <field name="longitude">110.35626</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_05" model="petapantau.patroli">
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_12"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_12"/>
+            <field name="desa_id" ref="desa_34_02_12_2003"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=23)).strftime('%Y-%m-%d 14:34:00')"/>
+            <field name="tanggal_selesai" eval="(DateTime.today() - relativedelta(days=23)).strftime('%Y-%m-%d 16:30:00')"/>
+            <field name="state">SELESAI</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+            <field name="subdit_id" ref="demo_subdit_samapta"/>
+        </record>
+        <record id="demo_personel_patroli_010" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_05"/>
+            <field name="nama">DIMAS SAPUTRA</field>
+            <field name="pangkat">AIPTU</field>
+        </record>
+        <record id="demo_personel_patroli_011" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_05"/>
+            <field name="nama">JOKO SUSILO</field>
+            <field name="pangkat">AIPTU</field>
+        </record>
+        <record id="demo_lokasi_patroli_010" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_05"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=23)).strftime('%Y-%m-%d 08:59:00')"/>
+            <field name="latitude">-7.82961</field>
+            <field name="longitude">110.394973</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_011" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_05"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=23)).strftime('%Y-%m-%d 10:01:00')"/>
+            <field name="latitude">-7.829177</field>
+            <field name="longitude">110.396956</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_06" model="petapantau.patroli">
+            <field name="polres_id" ref="polres_kulon_progo"/>
+            <field name="polsek_id" ref="polsek_34_01_01"/>
+            <field name="kabupaten_id" ref="kab_34_01"/>
+            <field name="kecamatan_id" ref="kec_34_01_01"/>
+            <field name="desa_id" ref="desa_34_01_01_2007"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d 07:36:00')"/>
+            <field name="state">PROSES</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_012" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_06"/>
+            <field name="nama">IRFAN HIDAYAT</field>
+            <field name="pangkat">AIPDA</field>
+        </record>
+        <record id="demo_personel_patroli_013" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_06"/>
+            <field name="nama">BAYU SETIAWAN</field>
+            <field name="pangkat">BRIPDA</field>
+        </record>
+        <record id="demo_personel_patroli_014" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_06"/>
+            <field name="nama">HENDRA KURNIAWAN</field>
+            <field name="pangkat">AIPTU</field>
+        </record>
+        <record id="demo_lokasi_patroli_012" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_06"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d 08:09:00')"/>
+            <field name="latitude">-7.893834</field>
+            <field name="longitude">110.103035</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_013" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_06"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d 10:38:00')"/>
+            <field name="latitude">-7.880908</field>
+            <field name="longitude">110.102567</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_014" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_06"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d 12:24:00')"/>
+            <field name="latitude">-7.889402</field>
+            <field name="longitude">110.098129</field>
+            <field name="catatan">Titik pantau 3 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_07" model="petapantau.patroli">
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_14"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_14"/>
+            <field name="desa_id" ref="desa_34_71_14_1001"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=4)).strftime('%Y-%m-%d 19:43:00')"/>
+            <field name="tanggal_selesai" eval="(DateTime.today() - relativedelta(days=4)).strftime('%Y-%m-%d 16:30:00')"/>
+            <field name="state">SELESAI</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_015" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_07"/>
+            <field name="nama">ANDI PRASETYO</field>
+            <field name="pangkat">BRIPKA</field>
+        </record>
+        <record id="demo_personel_patroli_016" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_07"/>
+            <field name="nama">FAJAR NUGROHO</field>
+            <field name="pangkat">BRIPTU</field>
+        </record>
+        <record id="demo_lokasi_patroli_015" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_07"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=4)).strftime('%Y-%m-%d 08:12:00')"/>
+            <field name="latitude">-7.810463</field>
+            <field name="longitude">110.398604</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_016" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_07"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=4)).strftime('%Y-%m-%d 10:44:00')"/>
+            <field name="latitude">-7.812556</field>
+            <field name="longitude">110.398557</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_08" model="petapantau.patroli">
+            <field name="polres_id" ref="polres_gunungkidul"/>
+            <field name="polsek_id" ref="polsek_34_03_13"/>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_13"/>
+            <field name="desa_id" ref="desa_34_03_13_2004"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=18)).strftime('%Y-%m-%d 09:33:00')"/>
+            <field name="tanggal_selesai" eval="(DateTime.today() - relativedelta(days=18)).strftime('%Y-%m-%d 16:30:00')"/>
+            <field name="state">SELESAI</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_017" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_08"/>
+            <field name="nama">ANDI PRASETYO</field>
+            <field name="pangkat">BRIPTU</field>
+        </record>
+        <record id="demo_personel_patroli_018" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_08"/>
+            <field name="nama">YOGA PAMUNGKAS</field>
+            <field name="pangkat">BRIPTU</field>
+        </record>
+        <record id="demo_lokasi_patroli_017" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_08"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=18)).strftime('%Y-%m-%d 08:27:00')"/>
+            <field name="latitude">-7.849669</field>
+            <field name="longitude">110.696513</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_09" model="petapantau.patroli">
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_14"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_14"/>
+            <field name="desa_id" ref="desa_34_04_14_2001"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d 17:00:00')"/>
+            <field name="state">PROSES</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_019" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_09"/>
+            <field name="nama">EKO WIBOWO</field>
+            <field name="pangkat">BRIPKA</field>
+        </record>
+        <record id="demo_personel_patroli_020" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_09"/>
+            <field name="nama">YOGA PAMUNGKAS</field>
+            <field name="pangkat">BRIGPOL</field>
+        </record>
+        <record id="demo_personel_patroli_021" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_09"/>
+            <field name="nama">JOKO SUSILO</field>
+            <field name="pangkat">AIPDA</field>
+        </record>
+        <record id="demo_lokasi_patroli_018" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_09"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d 08:03:00')"/>
+            <field name="latitude">-7.697327</field>
+            <field name="longitude">110.292691</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_019" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_09"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d 10:30:00')"/>
+            <field name="latitude">-7.707525</field>
+            <field name="longitude">110.275824</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_020" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_09"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d 12:59:00')"/>
+            <field name="latitude">-7.701342</field>
+            <field name="longitude">110.286423</field>
+            <field name="catatan">Titik pantau 3 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_021" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_09"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d 14:55:00')"/>
+            <field name="latitude">-7.707796</field>
+            <field name="longitude">110.278317</field>
+            <field name="catatan">Titik pantau 4 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_10" model="petapantau.patroli">
+            <field name="polres_id" ref="polres_gunungkidul"/>
+            <field name="polsek_id" ref="polsek_34_03_17"/>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_17"/>
+            <field name="desa_id" ref="desa_34_03_17_2003"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=22)).strftime('%Y-%m-%d 14:51:00')"/>
+            <field name="tanggal_selesai" eval="(DateTime.today() - relativedelta(days=22)).strftime('%Y-%m-%d 16:30:00')"/>
+            <field name="state">SELESAI</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+            <field name="subdit_id" ref="demo_subdit_samapta"/>
+        </record>
+        <record id="demo_personel_patroli_022" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_10"/>
+            <field name="nama">ANDI PRASETYO</field>
+            <field name="pangkat">BRIPKA</field>
+        </record>
+        <record id="demo_personel_patroli_023" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_10"/>
+            <field name="nama">LUKMAN HAKIM</field>
+            <field name="pangkat">BRIPKA</field>
+        </record>
+        <record id="demo_lokasi_patroli_022" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_10"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=22)).strftime('%Y-%m-%d 08:53:00')"/>
+            <field name="latitude">-8.134484</field>
+            <field name="longitude">110.555196</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_023" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_10"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=22)).strftime('%Y-%m-%d 10:11:00')"/>
+            <field name="latitude">-8.134459</field>
+            <field name="longitude">110.555378</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_11" model="petapantau.patroli">
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_15"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_15"/>
+            <field name="desa_id" ref="desa_34_04_15_2002"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=23)).strftime('%Y-%m-%d 06:31:00')"/>
+            <field name="tanggal_selesai" eval="(DateTime.today() - relativedelta(days=23)).strftime('%Y-%m-%d 16:30:00')"/>
+            <field name="state">SELESAI</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_024" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_11"/>
+            <field name="nama">KURNIA ADI</field>
+            <field name="pangkat">BRIGPOL</field>
+        </record>
+        <record id="demo_personel_patroli_025" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_11"/>
+            <field name="nama">GALIH PRATAMA</field>
+            <field name="pangkat">AIPTU</field>
+        </record>
+        <record id="demo_lokasi_patroli_024" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_11"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=23)).strftime('%Y-%m-%d 08:03:00')"/>
+            <field name="latitude">-7.649341</field>
+            <field name="longitude">110.382524</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_025" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_11"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=23)).strftime('%Y-%m-%d 10:04:00')"/>
+            <field name="latitude">-7.651035</field>
+            <field name="longitude">110.380599</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_026" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_11"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=23)).strftime('%Y-%m-%d 12:45:00')"/>
+            <field name="latitude">-7.681259</field>
+            <field name="longitude">110.370869</field>
+            <field name="catatan">Titik pantau 3 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_12" model="petapantau.patroli">
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_12"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_12"/>
+            <field name="desa_id" ref="desa_34_02_12_2001"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=4)).strftime('%Y-%m-%d 20:08:00')"/>
+            <field name="tanggal_selesai" eval="(DateTime.today() - relativedelta(days=4)).strftime('%Y-%m-%d 16:30:00')"/>
+            <field name="state">SELESAI</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_026" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_12"/>
+            <field name="nama">LUKMAN HAKIM</field>
+            <field name="pangkat">BRIPTU</field>
+        </record>
+        <record id="demo_personel_patroli_027" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_12"/>
+            <field name="nama">BAYU SETIAWAN</field>
+            <field name="pangkat">BRIPKA</field>
+        </record>
+        <record id="demo_personel_patroli_028" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_12"/>
+            <field name="nama">JOKO SUSILO</field>
+            <field name="pangkat">AIPDA</field>
+        </record>
+        <record id="demo_lokasi_patroli_027" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_12"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=4)).strftime('%Y-%m-%d 08:07:00')"/>
+            <field name="latitude">-7.81575</field>
+            <field name="longitude">110.419089</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_028" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_12"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=4)).strftime('%Y-%m-%d 10:54:00')"/>
+            <field name="latitude">-7.81332</field>
+            <field name="longitude">110.421693</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_13" model="petapantau.patroli">
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_07"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_07"/>
+            <field name="desa_id" ref="desa_34_71_07_1001"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=0)).strftime('%Y-%m-%d 08:01:00')"/>
+            <field name="state">PROSES</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_029" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_13"/>
+            <field name="nama">TEGUH SANTOSO</field>
+            <field name="pangkat">BRIPDA</field>
+        </record>
+        <record id="demo_personel_patroli_030" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_13"/>
+            <field name="nama">ANDI PRASETYO</field>
+            <field name="pangkat">AIPDA</field>
+        </record>
+        <record id="demo_personel_patroli_031" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_13"/>
+            <field name="nama">EKO WIBOWO</field>
+            <field name="pangkat">AIPTU</field>
+        </record>
+        <record id="demo_lokasi_patroli_029" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_13"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=0)).strftime('%Y-%m-%d 08:44:00')"/>
+            <field name="latitude">-7.798639</field>
+            <field name="longitude">110.349508</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_030" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_13"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=0)).strftime('%Y-%m-%d 10:48:00')"/>
+            <field name="latitude">-7.797295</field>
+            <field name="longitude">110.354994</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_031" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_13"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=0)).strftime('%Y-%m-%d 12:49:00')"/>
+            <field name="latitude">-7.796644</field>
+            <field name="longitude">110.351617</field>
+            <field name="catatan">Titik pantau 3 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_14" model="petapantau.patroli">
+            <field name="polres_id" ref="polres_gunungkidul"/>
+            <field name="polsek_id" ref="polsek_34_03_13"/>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_13"/>
+            <field name="desa_id" ref="desa_34_03_13_2003"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=18)).strftime('%Y-%m-%d 10:56:00')"/>
+            <field name="tanggal_selesai" eval="(DateTime.today() - relativedelta(days=18)).strftime('%Y-%m-%d 16:30:00')"/>
+            <field name="state">SELESAI</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_032" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_14"/>
+            <field name="nama">JOKO SUSILO</field>
+            <field name="pangkat">BRIPKA</field>
+        </record>
+        <record id="demo_personel_patroli_033" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_14"/>
+            <field name="nama">SIGIT PURNOMO</field>
+            <field name="pangkat">BRIPTU</field>
+        </record>
+        <record id="demo_lokasi_patroli_032" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_14"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=18)).strftime('%Y-%m-%d 08:32:00')"/>
+            <field name="latitude">-7.817545</field>
+            <field name="longitude">110.678358</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_033" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_14"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=18)).strftime('%Y-%m-%d 10:38:00')"/>
+            <field name="latitude">-7.815257</field>
+            <field name="longitude">110.677629</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_034" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_14"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=18)).strftime('%Y-%m-%d 12:32:00')"/>
+            <field name="latitude">-7.814313</field>
+            <field name="longitude">110.672981</field>
+            <field name="catatan">Titik pantau 3 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_15" model="petapantau.patroli">
+            <field name="polres_id" ref="polres_kulon_progo"/>
+            <field name="polsek_id" ref="polsek_34_01_11"/>
+            <field name="kabupaten_id" ref="kab_34_01"/>
+            <field name="kecamatan_id" ref="kec_34_01_11"/>
+            <field name="desa_id" ref="desa_34_01_11_2007"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=16)).strftime('%Y-%m-%d 11:50:00')"/>
+            <field name="tanggal_selesai" eval="(DateTime.today() - relativedelta(days=16)).strftime('%Y-%m-%d 16:30:00')"/>
+            <field name="state">SELESAI</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+            <field name="subdit_id" ref="demo_subdit_samapta"/>
+        </record>
+        <record id="demo_personel_patroli_034" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_15"/>
+            <field name="nama">KURNIA ADI</field>
+            <field name="pangkat">BRIPDA</field>
+        </record>
+        <record id="demo_personel_patroli_035" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_15"/>
+            <field name="nama">LUKMAN HAKIM</field>
+            <field name="pangkat">AIPTU</field>
+        </record>
+        <record id="demo_personel_patroli_036" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_15"/>
+            <field name="nama">FAJAR NUGROHO</field>
+            <field name="pangkat">BRIGPOL</field>
+        </record>
+        <record id="demo_lokasi_patroli_035" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_15"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=16)).strftime('%Y-%m-%d 08:26:00')"/>
+            <field name="latitude">-7.677399</field>
+            <field name="longitude">110.151897</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_16" model="petapantau.patroli">
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="polsek_id" ref="polsek_34_02_13"/>
+            <field name="kabupaten_id" ref="kab_34_02"/>
+            <field name="kecamatan_id" ref="kec_34_02_13"/>
+            <field name="desa_id" ref="desa_34_02_13_2003"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=24)).strftime('%Y-%m-%d 12:00:00')"/>
+            <field name="state">PROSES</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_037" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_16"/>
+            <field name="nama">TEGUH SANTOSO</field>
+            <field name="pangkat">BRIPKA</field>
+        </record>
+        <record id="demo_personel_patroli_038" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_16"/>
+            <field name="nama">RIZKY RAMADHAN</field>
+            <field name="pangkat">BRIPTU</field>
+        </record>
+        <record id="demo_personel_patroli_039" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_16"/>
+            <field name="nama">FAJAR NUGROHO</field>
+            <field name="pangkat">BRIGPOL</field>
+        </record>
+        <record id="demo_lokasi_patroli_036" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_16"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=24)).strftime('%Y-%m-%d 08:24:00')"/>
+            <field name="latitude">-7.894097</field>
+            <field name="longitude">110.404403</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_037" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_16"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=24)).strftime('%Y-%m-%d 10:02:00')"/>
+            <field name="latitude">-7.882796</field>
+            <field name="longitude">110.422843</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_038" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_16"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=24)).strftime('%Y-%m-%d 12:59:00')"/>
+            <field name="latitude">-7.890607</field>
+            <field name="longitude">110.407033</field>
+            <field name="catatan">Titik pantau 3 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_039" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_16"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=24)).strftime('%Y-%m-%d 14:39:00')"/>
+            <field name="latitude">-7.888617</field>
+            <field name="longitude">110.399495</field>
+            <field name="catatan">Titik pantau 4 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_17" model="petapantau.patroli">
+            <field name="polres_id" ref="polres_gunungkidul"/>
+            <field name="polsek_id" ref="polsek_34_03_15"/>
+            <field name="kabupaten_id" ref="kab_34_03"/>
+            <field name="kecamatan_id" ref="kec_34_03_15"/>
+            <field name="desa_id" ref="desa_34_03_15_2006"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=2)).strftime('%Y-%m-%d 12:48:00')"/>
+            <field name="state">PROSES</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_040" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_17"/>
+            <field name="nama">JOKO SUSILO</field>
+            <field name="pangkat">AIPTU</field>
+        </record>
+        <record id="demo_personel_patroli_041" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_17"/>
+            <field name="nama">DIMAS SAPUTRA</field>
+            <field name="pangkat">AIPTU</field>
+        </record>
+        <record id="demo_personel_patroli_042" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_17"/>
+            <field name="nama">YOGA PAMUNGKAS</field>
+            <field name="pangkat">AIPTU</field>
+        </record>
+        <record id="demo_lokasi_patroli_040" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_17"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=2)).strftime('%Y-%m-%d 08:16:00')"/>
+            <field name="latitude">-8.061293</field>
+            <field name="longitude">110.533482</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_041" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_17"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=2)).strftime('%Y-%m-%d 10:19:00')"/>
+            <field name="latitude">-8.043122</field>
+            <field name="longitude">110.538995</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_18" model="petapantau.patroli">
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_04"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_04"/>
+            <field name="desa_id" ref="desa_34_71_04_1002"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=11)).strftime('%Y-%m-%d 06:37:00')"/>
+            <field name="tanggal_selesai" eval="(DateTime.today() - relativedelta(days=11)).strftime('%Y-%m-%d 16:30:00')"/>
+            <field name="state">SELESAI</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_043" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_18"/>
+            <field name="nama">SIGIT PURNOMO</field>
+            <field name="pangkat">AIPDA</field>
+        </record>
+        <record id="demo_personel_patroli_044" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_18"/>
+            <field name="nama">DIMAS SAPUTRA</field>
+            <field name="pangkat">AIPTU</field>
+        </record>
+        <record id="demo_personel_patroli_045" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_18"/>
+            <field name="nama">IRFAN HIDAYAT</field>
+            <field name="pangkat">BRIGPOL</field>
+        </record>
+        <record id="demo_lokasi_patroli_042" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_18"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=11)).strftime('%Y-%m-%d 08:09:00')"/>
+            <field name="latitude">-7.792823</field>
+            <field name="longitude">110.371071</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_043" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_18"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=11)).strftime('%Y-%m-%d 10:09:00')"/>
+            <field name="latitude">-7.795686</field>
+            <field name="longitude">110.370811</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_044" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_18"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=11)).strftime('%Y-%m-%d 12:17:00')"/>
+            <field name="latitude">-7.790724</field>
+            <field name="longitude">110.373687</field>
+            <field name="catatan">Titik pantau 3 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_045" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_18"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=11)).strftime('%Y-%m-%d 14:10:00')"/>
+            <field name="latitude">-7.792286</field>
+            <field name="longitude">110.372073</field>
+            <field name="catatan">Titik pantau 4 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_19" model="petapantau.patroli">
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="polsek_id" ref="polsek_34_04_10"/>
+            <field name="kabupaten_id" ref="kab_34_04"/>
+            <field name="kecamatan_id" ref="kec_34_04_10"/>
+            <field name="desa_id" ref="desa_34_04_10_2004"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=7)).strftime('%Y-%m-%d 17:10:00')"/>
+            <field name="tanggal_selesai" eval="(DateTime.today() - relativedelta(days=7)).strftime('%Y-%m-%d 16:30:00')"/>
+            <field name="state">SELESAI</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+        </record>
+        <record id="demo_personel_patroli_046" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_19"/>
+            <field name="nama">KURNIA ADI</field>
+            <field name="pangkat">AIPDA</field>
+        </record>
+        <record id="demo_personel_patroli_047" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_19"/>
+            <field name="nama">TEGUH SANTOSO</field>
+            <field name="pangkat">BRIGPOL</field>
+        </record>
+        <record id="demo_personel_patroli_048" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_19"/>
+            <field name="nama">JOKO SUSILO</field>
+            <field name="pangkat">BRIGPOL</field>
+        </record>
+        <record id="demo_lokasi_patroli_046" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_19"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=7)).strftime('%Y-%m-%d 08:51:00')"/>
+            <field name="latitude">-7.718097</field>
+            <field name="longitude">110.461729</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_047" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_19"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=7)).strftime('%Y-%m-%d 10:03:00')"/>
+            <field name="latitude">-7.730756</field>
+            <field name="longitude">110.474379</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_048" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_19"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=7)).strftime('%Y-%m-%d 12:38:00')"/>
+            <field name="latitude">-7.73046</field>
+            <field name="longitude">110.466334</field>
+            <field name="catatan">Titik pantau 3 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_patroli_20" model="petapantau.patroli">
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_11"/>
+            <field name="kabupaten_id" ref="kab_34_71"/>
+            <field name="kecamatan_id" ref="kec_34_71_11"/>
+            <field name="desa_id" ref="desa_34_71_11_1001"/>
+            <field name="tanggal_mulai" eval="(DateTime.today() - relativedelta(days=22)).strftime('%Y-%m-%d 12:46:00')"/>
+            <field name="state">PROSES</field>
+            <field name="keterangan">Patroli dialogis dan pemantauan titik rawan (data demo)</field>
+            <field name="subdit_id" ref="demo_subdit_samapta"/>
+        </record>
+        <record id="demo_personel_patroli_049" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_20"/>
+            <field name="nama">IRFAN HIDAYAT</field>
+            <field name="pangkat">AIPDA</field>
+        </record>
+        <record id="demo_personel_patroli_050" model="petapantau.personel_patroli">
+            <field name="patroli_id" ref="demo_patroli_20"/>
+            <field name="nama">EKO WIBOWO</field>
+            <field name="pangkat">AIPDA</field>
+        </record>
+        <record id="demo_lokasi_patroli_049" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_20"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=22)).strftime('%Y-%m-%d 08:27:00')"/>
+            <field name="latitude">-7.80037</field>
+            <field name="longitude">110.374295</field>
+            <field name="catatan">Titik pantau 1 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_050" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_20"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=22)).strftime('%Y-%m-%d 10:16:00')"/>
+            <field name="latitude">-7.798309</field>
+            <field name="longitude">110.373496</field>
+            <field name="catatan">Titik pantau 2 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_051" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_20"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=22)).strftime('%Y-%m-%d 12:45:00')"/>
+            <field name="latitude">-7.796974</field>
+            <field name="longitude">110.373809</field>
+            <field name="catatan">Titik pantau 3 - situasi aman terkendali</field>
+        </record>
+        <record id="demo_lokasi_patroli_052" model="petapantau.lokasi_patroli">
+            <field name="patroli_id" ref="demo_patroli_20"/>
+            <field name="tanggal" eval="(DateTime.today() - relativedelta(days=22)).strftime('%Y-%m-%d 14:02:00')"/>
+            <field name="latitude">-7.80076</field>
+            <field name="longitude">110.376293</field>
+            <field name="catatan">Titik pantau 4 - situasi aman terkendali</field>
+        </record>
+
+    </data>
+</odoo>

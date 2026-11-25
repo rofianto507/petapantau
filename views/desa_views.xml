@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_petapantau_desa_list" model="ir.ui.view">
+            <field name="name">desa.list.petapantau</field>
+            <field name="model">petapantau.desa</field>
+            <field name="arch" type="xml">
+                <list string="Desa/Kelurahan">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="kecamatan_id"/>
+                    <field name="kabupaten_id" optional="show"/>
+                    <field name="has_geometry" string="Ada Peta" widget="boolean" optional="show"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_petapantau_desa_form" model="ir.ui.view">
+            <field name="name">desa.form.petapantau</field>
+            <field name="model">petapantau.desa</field>
+            <field name="arch" type="xml">
+                <form string="Desa/Kelurahan">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="name"/>
+                                <field name="type"/>
+                            </group>
+                            <group>
+                                <field name="kecamatan_id"/>
+                                <field name="kabupaten_id" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Peta">
+                                <group>
+                                    <field name="geometry" widget="geojson_map" nolabel="1"/>
+                                </group>
+                                <group>
+                                    <field name="geometry" widget="text" string="Raw GeoJSON"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_petapantau_desa_search" model="ir.ui.view">
+            <field name="name">desa.search.petapantau</field>
+            <field name="model">petapantau.desa</field>
+            <field name="arch" type="xml">
+                <search string="Cari Desa/Kelurahan">
+                    <field name="name" string="Nama Desa/Kel."/>
+                    <field name="code" string="Kode"/>
+                    <field name="kecamatan_id" string="Kecamatan"/>
+                    <field name="kabupaten_id" string="Kabupaten/Kota"/>
+                    <separator/>
+                    <filter string="Desa" name="filter_desa"
+                            domain="[('type', '=', 'DESA')]"/>
+                    <filter string="Kelurahan" name="filter_kelurahan"
+                            domain="[('type', '=', 'KELURAHAN')]"/>
+                    <separator/>
+                    <filter string="Ada Peta (Geometry)" name="filter_ada_geometry"
+                            domain="[('has_geometry', '=', True)]"/>
+                    <filter string="Belum Ada Peta" name="filter_belum_geometry"
+                            domain="[('has_geometry', '=', False)]"/>
+                    <group>
+                        <filter string="Kecamatan" name="groupby_kecamatan"
+                                context="{'group_by': 'kecamatan_id'}"/>
+                        <filter string="Kabupaten/Kota" name="groupby_kabupaten"
+                                context="{'group_by': 'kabupaten_id'}"/>
+                        <filter string="Tipe" name="groupby_type"
+                                context="{'group_by': 'type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_petapantau_desa" model="ir.actions.act_window">
+            <field name="name">Desa/Kelurahan</field>
+            <field name="res_model">petapantau.desa</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_petapantau_desa_search"/>
+        </record>
+    </data>
+</odoo>

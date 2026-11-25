@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="petapantau.ImagePopupField">
+        <div class="pg-image-popup-field">
+
+            <!-- Hidden file input (edit mode only) -->
+            <input t-if="isEditable"
+                type="file"
+                accept="image/*"
+                class="d-none"
+                t-ref="fileInput"
+                t-on-change="onFileChange"
+            />
+
+            <t t-if="imageSrc">
+                <!-- Foto tersedia -->
+                <div class="pg-foto-wrapper">
+                    <img
+                        t-att-src="imageSrc"
+                        class="pg-foto-preview"
+                        t-on-click="openPopup"
+                        alt="Foto"
+                    />
+                    <t t-if="isEditable">
+                        <div class="pg-foto-actions">
+                            <button class="pg-foto-action-btn" type="button"
+                                t-on-click.stop="triggerUpload" title="Ganti Foto">
+                                <i class="fa fa-pencil"/>
+                            </button>
+                            <button class="pg-foto-action-btn pg-foto-action-btn--danger" type="button"
+                                t-on-click.stop="clearImage" title="Hapus Foto">
+                                <i class="fa fa-trash"/>
+                            </button>
+                        </div>
+                    </t>
+                </div>
+            </t>
+
+            <t t-else="">
+                <!-- Belum ada foto -->
+                <t t-if="isEditable">
+                    <div class="pg-foto-placeholder pg-foto-placeholder--upload"
+                        t-on-click="triggerUpload">
+                        <i class="fa fa-camera fa-3x"/>
+                        <p class="mt-2 mb-0">Klik untuk upload foto</p>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="pg-foto-placeholder">
+                        <i class="fa fa-image fa-3x"/>
+                        <p class="mt-2 mb-0">Belum ada foto</p>
+                    </div>
+                </t>
+            </t>
+
+            <!-- Lightbox popup -->
+            <t t-if="state.showPopup">
+                <div class="pg-image-overlay" t-on-click="closePopup">
+                    <button class="pg-popup-close" t-on-click="closePopup">&#x2715;</button>
+                    <img
+                        t-att-src="imageSrc"
+                        class="pg-foto-fullsize"
+                        alt="Foto"
+                    />
+                </div>
+            </t>
+
+        </div>
+    </t>
+</templates>

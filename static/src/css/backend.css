@@ -1,0 +1,160 @@
+/**
+ * Aturan ini menargetkan elemen dengan kelas kustom kita di dalam sebuah form sheet.
+ * 'grid-column: 1 / -1;' adalah perintah CSS Grid yang berarti:
+ * "Mulai dari garis grid pertama dan rentangkan hingga garis grid terakhir".
+ * Ini akan memaksa elemen untuk mengambil lebar penuh.
+ */
+.o_form_sheet .o_field_map_full_width {
+    grid-column: 1 / -1 !important;
+    display: grid;
+}
+
+/* ── Foto popup widget ─────────────────────────────────────────────────── */
+.pg-image-popup-field {
+    padding: 4px 0;
+}
+
+.pg-foto-wrapper {
+    display: inline-block;
+    position: relative;
+}
+
+.pg-foto-preview {
+    display: block;
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    max-height: 280px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    cursor: zoom-in;
+    transition: opacity 0.15s ease;
+}
+
+.pg-foto-wrapper:hover .pg-foto-preview {
+    opacity: 0.82;
+}
+
+.pg-foto-actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 8px 6px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.55));
+    border-radius: 0 0 8px 8px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    pointer-events: none;
+}
+
+.pg-foto-wrapper:hover .pg-foto-actions {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.pg-foto-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.20);
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.15s;
+    line-height: 1;
+}
+
+.pg-foto-action-btn:hover {
+    background: rgba(255,255,255,0.40);
+}
+
+.pg-foto-action-btn--danger:hover {
+    background: rgba(220,53,69,0.75);
+}
+
+.pg-foto-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    border: 2px dashed #ced4da;
+    border-radius: 8px;
+    min-height: 140px;
+    color: #adb5bd;
+}
+
+.pg-foto-placeholder--upload {
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.pg-foto-placeholder--upload:hover {
+    border-color: #7b5ca5;
+    color: #7b5ca5;
+    background: #f8f4fc;
+}
+
+/* Overlay / lightbox */
+.pg-image-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+    animation: pg-fade-in 0.15s ease;
+}
+
+@keyframes pg-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.pg-foto-fullsize {
+    max-width: 92vw;
+    max-height: 92vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+}
+
+.pg-popup-close {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px 8px;
+    opacity: 0.8;
+    transition: opacity 0.15s;
+    z-index: 10001;
+}
+
+.pg-popup-close:hover {
+    opacity: 1;
+}
+
+/* Sembunyikan item user menu yang tidak diperlukan */
+[data-menu="account"],
+[data-menu="install_pwa"],
+[data-menu="support"],
+[data-menu="shortcuts"] {
+    display: none !important;
+}

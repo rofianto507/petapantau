@@ -1,0 +1,72 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_polres_admin,polres admin,model_petapantau_polres,petapantau.group_admin,1,1,1,1
+access_polsek_admin,polsek admin,model_petapantau_polsek,petapantau.group_admin,1,1,1,1
+access_kabupaten_admin,kabupaten admin,model_petapantau_kabupaten,petapantau.group_admin,1,1,1,1
+access_kecamatan_admin,kecamatan admin,model_petapantau_kecamatan,petapantau.group_admin,1,1,1,1
+access_desa_admin,desa admin,model_petapantau_desa,petapantau.group_admin,1,1,1,1
+access_sumber_dokumen_admin,sumber_dokumen admin,model_petapantau_sumber_dokumen,petapantau.group_admin,1,1,1,1
+access_kategori_kriminal_admin,kategori_kriminal admin,model_petapantau_kategori_kriminal,petapantau.group_admin,1,1,1,1
+access_sub_kategori_kriminal_admin,sub_kategori_kriminal admin,model_petapantau_sub_kategori_kriminal,petapantau.group_admin,1,1,1,1
+access_kategori_bencana_admin,kategori_bencana admin,model_petapantau_kategori_bencana,petapantau.group_admin,1,1,1,1
+access_kategori_lalu_lintas_admin,kategori_lalu_lintas admin,model_petapantau_kategori_lalu_lintas,petapantau.group_admin,1,1,1,1
+access_kategori_lokasi_admin,kategori_lokasi admin,model_petapantau_kategori_lokasi,petapantau.group_admin,1,1,1,1
+access_jenis_jalan_admin,jenis_jalan admin,model_petapantau_jenis_jalan,petapantau.group_admin,1,1,1,1
+access_modus_operandi_admin,modus_operandi admin,model_petapantau_modus_operandi,petapantau.group_admin,1,1,1,1
+access_jenis_tkp_admin,jenis_tkp admin,model_petapantau_jenis_tkp,petapantau.group_admin,1,1,1,1
+access_subdit_admin,subdit admin,model_petapantau_subdit,petapantau.group_admin,1,1,1,1
+access_sub_status_perkara_admin,sub_status_perkara admin,model_petapantau_sub_status_perkara,petapantau.group_admin,1,1,1,1
+access_polres_user,polres user,model_petapantau_polres,petapantau.group_petapantau_user,1,0,0,0
+access_polsek_user,polsek user,model_petapantau_polsek,petapantau.group_petapantau_user,1,0,0,0
+access_kabupaten_user,kabupaten user,model_petapantau_kabupaten,petapantau.group_petapantau_user,1,0,0,0
+access_kecamatan_user,kecamatan user,model_petapantau_kecamatan,petapantau.group_petapantau_user,1,0,0,0
+access_desa_user,desa user,model_petapantau_desa,petapantau.group_petapantau_user,1,0,0,0
+access_sumber_dokumen_user,sumber_dokumen user,model_petapantau_sumber_dokumen,petapantau.group_petapantau_user,1,0,0,0
+access_kategori_kriminal_user,kategori_kriminal user,model_petapantau_kategori_kriminal,petapantau.group_petapantau_user,1,0,0,0
+access_sub_kategori_kriminal_user,sub_kategori_kriminal user,model_petapantau_sub_kategori_kriminal,petapantau.group_petapantau_user,1,0,0,0
+access_kategori_bencana_user,kategori_bencana user,model_petapantau_kategori_bencana,petapantau.group_petapantau_user,1,0,0,0
+access_kategori_lalu_lintas_user,kategori_lalu_lintas user,model_petapantau_kategori_lalu_lintas,petapantau.group_petapantau_user,1,0,0,0
+access_kategori_lokasi_user,kategori_lokasi user,model_petapantau_kategori_lokasi,petapantau.group_petapantau_user,1,0,0,0
+access_jenis_jalan_user,jenis_jalan user,model_petapantau_jenis_jalan,petapantau.group_petapantau_user,1,0,0,0
+access_modus_operandi_user,modus_operandi user,model_petapantau_modus_operandi,petapantau.group_petapantau_user,1,0,0,0
+access_jenis_tkp_user,jenis_tkp user,model_petapantau_jenis_tkp,petapantau.group_petapantau_user,1,0,0,0
+access_subdit_user,subdit user,model_petapantau_subdit,petapantau.group_petapantau_user,1,0,0,0
+access_sub_status_perkara_user,sub_status_perkara user,model_petapantau_sub_status_perkara,petapantau.group_petapantau_user,1,0,0,0
+access_kriminalitas_admin,kriminalitas admin,model_petapantau_kriminalitas,petapantau.group_admin,1,1,1,1
+access_kriminalitas_subdit,kriminalitas subdit,model_petapantau_kriminalitas,petapantau.group_subdit,1,1,1,1
+access_kriminalitas_polres,kriminalitas polres,model_petapantau_kriminalitas,petapantau.group_polres,1,1,1,1
+access_kriminalitas_polsek,kriminalitas polsek,model_petapantau_kriminalitas,petapantau.group_polsek,1,1,1,1
+access_bencana_admin,bencana admin,model_petapantau_bencana,petapantau.group_admin,1,1,1,1
+access_bencana_subdit,bencana subdit read,model_petapantau_bencana,petapantau.group_subdit,1,0,0,0
+access_bencana_polres,bencana polres,model_petapantau_bencana,petapantau.group_polres,1,1,1,1
+access_bencana_polsek,bencana polsek,model_petapantau_bencana,petapantau.group_polsek,1,1,1,1
+access_lalu_lintas_admin,lalu_lintas admin,model_petapantau_lalu_lintas,petapantau.group_admin,1,1,1,1
+access_lalu_lintas_subdit,lalu_lintas subdit read,model_petapantau_lalu_lintas,petapantau.group_subdit,1,0,0,0
+access_lalu_lintas_polres,lalu_lintas polres,model_petapantau_lalu_lintas,petapantau.group_polres,1,1,1,1
+access_lalu_lintas_polsek,lalu_lintas polsek,model_petapantau_lalu_lintas,petapantau.group_polsek,1,1,1,1
+access_lokasi_penting_admin,lokasi_penting admin,model_petapantau_lokasi_penting,petapantau.group_admin,1,1,1,1
+access_lokasi_penting_subdit,lokasi_penting subdit read,model_petapantau_lokasi_penting,petapantau.group_subdit,1,0,0,0
+access_lokasi_penting_polres,lokasi_penting polres,model_petapantau_lokasi_penting,petapantau.group_polres,1,1,1,1
+access_lokasi_penting_polsek,lokasi_penting polsek,model_petapantau_lokasi_penting,petapantau.group_polsek,1,1,1,1
+access_import_lp_wizard_admin,import_lp_wizard admin,model_petapantau_import_lp_wizard,petapantau.group_admin,1,1,1,1
+access_import_lp_wizard_polres,import_lp_wizard polres,model_petapantau_import_lp_wizard,petapantau.group_polres,1,1,1,1
+access_import_lp_wizard_polsek,import_lp_wizard polsek,model_petapantau_import_lp_wizard,petapantau.group_polsek,1,1,1,1
+access_patroli_admin,patroli admin,model_petapantau_patroli,petapantau.group_admin,1,1,1,1
+access_patroli_polres,patroli polres,model_petapantau_patroli,petapantau.group_polres,1,1,1,1
+access_patroli_polsek,patroli polsek,model_petapantau_patroli,petapantau.group_polsek,1,1,1,1
+access_patroli_subdit_sp,patroli subdit sp,model_petapantau_patroli,petapantau.group_subdit_patroli,1,1,1,1
+access_personel_patroli_admin,personel_patroli admin,model_petapantau_personel_patroli,petapantau.group_admin,1,1,1,1
+access_personel_patroli_polres,personel_patroli polres,model_petapantau_personel_patroli,petapantau.group_polres,1,1,1,1
+access_personel_patroli_polsek,personel_patroli polsek,model_petapantau_personel_patroli,petapantau.group_polsek,1,1,1,1
+access_personel_patroli_subdit_sp,personel_patroli subdit sp,model_petapantau_personel_patroli,petapantau.group_subdit_patroli,1,1,1,1
+access_lokasi_patroli_admin,lokasi_patroli admin,model_petapantau_lokasi_patroli,petapantau.group_admin,1,1,1,1
+access_lokasi_patroli_polres,lokasi_patroli polres,model_petapantau_lokasi_patroli,petapantau.group_polres,1,1,1,1
+access_lokasi_patroli_polsek,lokasi_patroli polsek,model_petapantau_lokasi_patroli,petapantau.group_polsek,1,1,1,1
+access_lokasi_patroli_subdit_sp,lokasi_patroli subdit sp,model_petapantau_lokasi_patroli,petapantau.group_subdit_patroli,1,1,1,1
+access_patroli_form_config_admin,patroli_form_config admin,model_petapantau_patroli_form_config,petapantau.group_admin,1,1,1,1
+access_kriminalitas_viewer,kriminalitas viewer,model_petapantau_kriminalitas,petapantau.group_viewer,1,0,0,0
+access_bencana_viewer,bencana viewer,model_petapantau_bencana,petapantau.group_viewer,1,0,0,0
+access_lalu_lintas_viewer,lalu_lintas viewer,model_petapantau_lalu_lintas,petapantau.group_viewer,1,0,0,0
+access_lokasi_penting_viewer,lokasi_penting viewer,model_petapantau_lokasi_penting,petapantau.group_viewer,1,0,0,0
+access_patroli_viewer,patroli viewer,model_petapantau_patroli,petapantau.group_viewer,1,0,0,0
+access_personel_patroli_viewer,personel_patroli viewer,model_petapantau_personel_patroli,petapantau.group_viewer,1,0,0,0
+access_lokasi_patroli_viewer,lokasi_patroli viewer,model_petapantau_lokasi_patroli,petapantau.group_viewer,1,0,0,0

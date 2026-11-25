@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_petapantau_kriminalitas_list" model="ir.ui.view">
+            <field name="name">kriminalitas.list.petapantau</field>
+            <field name="model">petapantau.kriminalitas</field>
+            <field name="arch" type="xml">
+                <list string="Data Kriminalitas">
+                    <header>
+                        <button name="action_open_import_wizard"
+                            string="Import LP"
+                            type="object"
+                            class="btn-secondary"
+                            display="always"/>
+                    </header>
+                    <field name="code"/>
+                    <field name="tahun"/>
+                    <field name="jenis_lp"/>
+                    <field name="no_lp" optional="hide"/>
+                    <field name="kategori_id"/>
+                    <field name="sub_kategori_id" optional="hide"/>
+                    <field name="jenis_tkp_id"/>
+                    <field name="tanggal_kejadian"/>
+                    <field name="tanggal_laporan" optional="hide"/>
+                    <field name="subdit_id"/>
+                    <field name="polres_id"/>
+                    <field name="polsek_id" optional="hide"/>
+                    <field name="kabupaten_id"/>
+                    <field name="kecamatan_id" optional="hide"/>
+                    <field name="desa_id" optional="hide"/>
+                    <field name="penanggung_jawab" optional="hide"/>
+                    <field name="sub_status_perkara_id"/>
+                    <field name="status_perkara" widget="badge"
+                        decoration-success="status_perkara == 'SELESAI'"
+                        decoration-warning="status_perkara == 'PROSES'"/>
+                </list>
+                
+            </field>
+        </record>
+        <!-- Search VIEW Kriminalitas -->
+        <record id="view_petapantau_kriminalitas_search" model="ir.ui.view">
+            <field name="name">kriminalitas.search.petapantau</field>
+            <field name="model">petapantau.kriminalitas</field>
+            <field name="arch" type="xml">
+                <search string="Cari Data Kriminalitas">
+                    <field name="code"/>
+                    <field name="no_lp"/>
+                    <field name="tempat_kejadian"/>
+                    <field name="pelapor"/>
+                    <field name="terlapor"/>
+                    <field name="korban"/>
+                    <field name="tindak_pidana"/>
+                    <field name="uraian_singkat"/>
+                    <field name="kategori_id"/>
+                    <field name="polres_id"/>
+                    <field name="kabupaten_id"/>
+                    <separator/>
+                    <filter string="Status PROSES" name="filter_status_proses" domain="[('status_perkara','=','PROSES')]" />
+                    <filter string="Status SELESAI" name="filter_status_selesai" domain="[('status_perkara','=','SELESAI')]" />
+                    <filter string="Dataku" name="filter_dataku" domain="[('create_uid','=',uid)]"/>
+                    <separator/>
+                    <filter string="LP A" name="filter_lp_a" domain="[('jenis_lp','=','LP A')]" />
+                    <filter string="LP B" name="filter_lp_b" domain="[('jenis_lp','=','LP B')]" />
+                    <filter string="NON-LP" name="filter_non_lp" domain="[('jenis_lp','=','NON-LP')]" />
+                    <separator/>
+                    <filter string="Tahun Ini" name="filter_tahun_sekarang"
+                        domain="[('tahun', '=', context_today().year)]"/>
+                    <filter string="2026" name="filter_tahun_2026" domain="[('tahun', '=', '2026')]"/>
+                    <filter string="2025" name="filter_tahun_2025" domain="[('tahun', '=', '2025')]"/>
+                    <filter string="2024" name="filter_tahun_2024" domain="[('tahun', '=', '2024')]"/>
+                    <filter string="2023" name="filter_tahun_2023" domain="[('tahun', '=', '2023')]"/>
+                    <filter string="Tanggal Kejadian" name="filter_tanggal_kejadian" date="tanggal_kejadian"/>
+                    <group>
+                        <filter string="Tahun" name="groupby_tahun" context="{'group_by': 'tahun'}"/>
+                        <filter string="Kategori" name="groupby_kategori" context="{'group_by': 'kategori_id'}"/>
+                        <filter string="Sub Kategori" name="groupby_sub_kategori" context="{'group_by': 'sub_kategori_id'}"/>
+                        <filter string="Jenis TKP" name="groupby_jenis_tkp" context="{'group_by': 'jenis_tkp_id'}"/>
+                        <filter string="Jenis LP" name="groupby_jenis_lp" context="{'group_by': 'jenis_lp'}"/>
+                        <filter string="Status Perkara" name="groupby_status_perkara" context="{'group_by': 'status_perkara'}"/>
+                        <filter string="Sub Status Perkara" name="groupby_sub_status_perkara" context="{'group_by': 'sub_status_perkara_id'}"/>
+                        <filter string="Tujuan" name="groupby_tujuan" context="{'group_by': 'subdit_id'}"/>
+                        <filter string="Polres" name="groupby_polres" context="{'group_by': 'polres_id'}"/>
+                        <filter string="Polsek" name="groupby_polsek" context="{'group_by': 'polsek_id'}"/>
+                        <filter string="Kabupaten" name="groupby_kabupaten" context="{'group_by': 'kabupaten_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- Graph VIEW Kriminalitas -->
+        <record id="view_petapantau_kriminalitas_graph" model="ir.ui.view">
+            <field name="name">kriminalitas.graph.petapantau</field>
+            <field name="model">petapantau.kriminalitas</field>
+            <field name="arch" type="xml">
+                <graph string="Grafik Kriminalitas" type="bar">
+                    <field name="tanggal_kejadian" interval="month"/>
+                    <field name="kategori_id"/>
+                    <field name="status_perkara"/>
+                    <field name="jenis_lp"/>
+                    <field name="id" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        <!-- FORM VIEW Kriminalitas -->
+        <record id="view_petapantau_kriminalitas_form" model="ir.ui.view">
+            <field name="name">kriminalitas.form.petapantau</field>
+            <field name="model">petapantau.kriminalitas</field>
+            <field name="arch" type="xml">
+                <form string="Data Kriminalitas">
+                    <header>
+                        <button name="action_set_selesai" string="Selesai" type="object"
+                            class="btn-primary" invisible="status_perkara == 'SELESAI'"/>
+                        <button name="action_set_proses" string="Kembalikan ke Proses" type="object"
+                            class="btn-secondary" invisible="status_perkara == 'PROSES'"/>
+                        <field name="status_perkara" widget="statusbar"
+                            statusbar_visible="PROSES,SELESAI"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="code" readonly="1"/></h1>
+                        </div>
+                        <group>
+                            <field name="jenis_lp" widget="radio" no_label="1" options="{'horizontal': true}"/>
+                            <field name="no_lp"/>
+                            <field name="penanggung_jawab"/>
+                            <field name="subdit_id"
+                                   groups="petapantau.group_admin,petapantau.group_polres,petapantau.group_polsek"/>
+                            <field name="subdit_id"
+                                   readonly="1"
+                                   groups="petapantau.group_subdit"/>
+                            <field name="sumber_dokumen_id"/>
+                        </group>
+                        <group>
+                            <group string="KESATUAN">
+                                <!-- Admin / Subdit: bebas pilih -->
+                                <field name="polres_id"
+                                    groups="petapantau.group_admin,petapantau.group_subdit"/>
+                                <field name="polsek_id"
+                                    groups="petapantau.group_admin,petapantau.group_subdit"
+                                    domain="[('polres_id', '=', polres_id)]"/>
+                                <!-- Polres: polres terkunci, polsek bisa dipilih dari polres-nya -->
+                                <field name="polres_id"
+                                    groups="petapantau.group_polres"
+                                    readonly="1"/>
+                                <field name="polsek_id"
+                                    groups="petapantau.group_polres"
+                                    domain="[('polres_id', '=', polres_id)]"/>
+                                <!-- Polsek: keduanya terkunci -->
+                                <field name="polres_id"
+                                    groups="petapantau.group_polsek"
+                                    readonly="1"/>
+                                <field name="polsek_id"
+                                    groups="petapantau.group_polsek"
+                                    readonly="1"/>
+                            </group>
+                            <group string="KATEGORI">
+                                <field name="kategori_id"/>
+                                <field name="sub_kategori_id" domain="[('kategori_kriminal_id', '=', kategori_id)]"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="WILAYAH">
+                                <!-- Admin / Subdit / Polres: kabupaten editable (record rule filter polres) -->
+                                <field name="kabupaten_id"
+                                    groups="petapantau.group_admin,petapantau.group_subdit,petapantau.group_polres"/>
+                                <field name="kecamatan_id"
+                                    groups="petapantau.group_admin,petapantau.group_subdit,petapantau.group_polres"
+                                    domain="[('kabupaten_id', '=', kabupaten_id)]"/>
+                                <field name="desa_id"
+                                    groups="petapantau.group_admin,petapantau.group_subdit,petapantau.group_polres"
+                                    domain="[('kecamatan_id', '=', kecamatan_id)]"/>
+                                <!-- Polsek: kabupaten readonly, kecamatan tanpa domain (record rule sudah filter) -->
+                                <field name="kabupaten_id"
+                                    groups="petapantau.group_polsek"
+                                    readonly="1"/>
+                                <field name="kecamatan_id"
+                                    groups="petapantau.group_polsek"/>
+                                <field name="desa_id"
+                                    groups="petapantau.group_polsek"
+                                    domain="[('kecamatan_id', '=', kecamatan_id)]"/>
+                            </group>
+                            
+                            <group string="STATUS PERKARA">
+                                <field name="sub_status_perkara_id" domain="[('status_perkara', '=', status_perkara)]"/>
+                                <field name="is_perkara_selesai" invisible="1"/>
+                                <field name="tanggal_selesai" invisible="not is_perkara_selesai"/>
+                            </group>
+                        </group>
+                       
+                            <div >
+                                <field name="latitude" widget="latlong_map_picker" 
+                                class="latlong-mappicker-wrapper"
+                                    nolabel="1"/>
+                            </div>
+                       
+                        <group>
+                            <field name="latitude" string="Latitude"/>
+                            <field name="longitude" string="Longitude"/>
+                        </group>
+                        <notebook>
+                            <page string="Detail Informasi">
+                                <group>
+                                    <field name="pelapor" string="Pelapor"/>
+                                </group>
+                                <group string="PERISTIWA YANG TERJADI">  
+                                    <field name="jenis_tkp_id" string="Jenis TKP"/>
+                                    <field name="tanggal_kejadian" string="Waktu Kejadian"/> 
+                                    <field name="tempat_kejadian" string="Tempat Kejadian"/>
+                                    <field name="apa_yang_terjadi" string="Apa yang Terjadi"/>
+                                    <field name="terlapor" string="Siapa Terlapor"/>
+                                    <field name="korban" string="Siapa Korban"/>
+                                    <field name="tanggal_laporan" string="Kapan Dilaporkan"/>
+                                </group>
+                                <group string="KETERANGAN LAINNYA">
+                                    <field name="tindak_pidana" string="Tindak Pidana"/>
+                                    <field name="saksi" string="Saksi"/>
+                                    <field name="barang_bukti" string="Barang Bukti"/>
+                                    <field name="uraian_singkat" string="Uraian Singkat"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- PIVOT VIEW Kriminalitas -->
+        <record id="view_petapantau_kriminalitas_pivot" model="ir.ui.view">
+            <field name="name">kriminalitas.pivot.petapantau</field>
+            <field name="model">petapantau.kriminalitas</field>
+            <field name="arch" type="xml">
+                <pivot string="Analisis Kriminalitas" disable_linking="False">
+                    <field name="kategori_id" type="row"/>
+                    <field name="status_perkara" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- CALENDAR VIEW Kriminalitas -->
+        <record id="view_petapantau_kriminalitas_calendar" model="ir.ui.view">
+            <field name="name">kriminalitas.calendar.petapantau</field>
+            <field name="model">petapantau.kriminalitas</field>
+            <field name="arch" type="xml">
+                <calendar string="Kalender Kriminalitas"
+                          date_start="tanggal_kejadian"
+                          color="status_perkara"
+                          mode="month"
+                          quick_create="False">
+                    <field name="no_lp"/>
+                    <field name="kategori_id"/>
+                    <field name="kabupaten_id"/>
+                    <field name="status_perkara" filters="1" invisible="1"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- ACTION Kriminalitas -->
+        <record id="action_petapantau_kriminalitas" model="ir.actions.act_window">
+            <field name="name">Kriminalitas</field>
+            <field name="res_model">petapantau.kriminalitas</field>
+            <field name="view_mode">list,form,graph,pivot,calendar</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list',     'view_id': ref('view_petapantau_kriminalitas_list')}),
+                (0, 0, {'view_mode': 'form',     'view_id': ref('view_petapantau_kriminalitas_form')}),
+                (0, 0, {'view_mode': 'graph',    'view_id': ref('view_petapantau_kriminalitas_graph')}),
+                (0, 0, {'view_mode': 'pivot',    'view_id': ref('view_petapantau_kriminalitas_pivot')}),
+                (0, 0, {'view_mode': 'calendar', 'view_id': ref('view_petapantau_kriminalitas_calendar')}),
+            ]"/>
+            <field name="search_view_id" ref="petapantau.view_petapantau_kriminalitas_search"/>
+            <field name="context">{'search_default_filter_tahun_sekarang': 1}</field>
+        </record>
+    </data>
+</odoo>

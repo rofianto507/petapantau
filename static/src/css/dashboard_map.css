@@ -1,0 +1,1323 @@
+/* ════════════════════════════════════════════
+   LAYOUT UTAMA
+   flex-row: sidebar | main-content
+════════════════════════════════════════════ */
+.petapantau-dashboard {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: #f0f2f5;
+    font-family: inherit;
+}
+
+/* ════════════════════════════════════════════
+   SIDEBAR
+════════════════════════════════════════════ */
+.petapantau-sidebar {
+    width: 190px;
+    min-width: 190px;
+    background: #1a252f;
+    color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    transition: width 0.3s ease, min-width 0.3s ease;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.petapantau-sidebar.collapsed {
+    width: 48px;
+    min-width: 48px;
+}
+
+/* ── Collapse button di atas ── */
+.petapantau-sidebar-top {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 8px 4px;
+    flex-shrink: 0;
+}
+
+.petapantau-collapse-btn {
+    background: transparent;
+    border: none;
+    color: #7f8c8d;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 7px;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.petapantau-collapse-btn:hover {
+    background: rgba(255,255,255,0.08);
+    color: #ecf0f1;
+}
+
+/* Saat collapsed: icon rotate dan center */
+.petapantau-sidebar.collapsed .petapantau-sidebar-top {
+    justify-content: center;
+    padding: 8px 0 4px;
+}
+.petapantau-sidebar.collapsed .petapantau-collapse-btn i {
+    transform: rotate(180deg);
+}
+
+/* ── Section title ── */
+.petapantau-sidebar-section-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #7f8c8d;
+    padding: 8px 14px 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.petapantau-sidebar.collapsed .petapantau-sidebar-section-title {
+    opacity: 0;
+    padding: 0;
+    height: 0;
+}
+
+/* ── Nav items ── */
+.petapantau-nav {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 2px 0;
+    overflow: hidden;
+}
+
+.petapantau-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    color: #bdc3c7;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+}
+
+.petapantau-nav-item i {
+    font-size: 13px;
+    min-width: 16px;
+    text-align: center;
+    color: #7f8c8d;
+    flex-shrink: 0;
+    transition: color 0.15s;
+}
+
+.petapantau-nav-item span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.petapantau-nav-item:hover {
+    background: rgba(255,255,255,0.06);
+    color: #ffffff;
+}
+.petapantau-nav-item:hover i { color: #ecf0f1; }
+
+.petapantau-nav-item.active {
+    background: rgba(52,152,219,0.18);
+    color: #ffffff;
+    border-left-color: #3498db;
+}
+.petapantau-nav-item.active i { color: #3498db; }
+
+/* ── Collapsed state ── */
+.petapantau-sidebar.collapsed .petapantau-nav-item span {
+    display: none;
+}
+.petapantau-sidebar.collapsed .petapantau-nav-item {
+    justify-content: center;
+    padding: 11px 0;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+}
+.petapantau-sidebar.collapsed .petapantau-nav-item.active {
+    background: rgba(52,152,219,0.2);
+    border-bottom-color: #3498db;
+}
+.petapantau-sidebar.collapsed .petapantau-nav-item i {
+    font-size: 15px;
+    min-width: unset;
+}
+
+/* ════════════════════════════════════════════
+   MAIN CONTENT AREA
+   flex-column: top-row | kpi | map
+════════════════════════════════════════════ */
+.petapantau-main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 14px;
+    gap: 12px;
+}
+
+/* ── STICKY HEADER: filter + summary + KPI ── */
+.petapantau-sticky-header {
+    position: sticky;
+    top: -14px;
+    z-index: 50;
+    background: #f0f2f5;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: -14px -14px 0 -14px;
+    padding: 14px 14px 10px 14px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.07);
+}
+
+/* ── TOP ROW: breadcrumb + filter ── */
+.petapantau-top-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+
+.petapantau-breadcrumb-box {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c3e50;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.petapantau-breadcrumb-box i {
+    font-size: 13px;
+    color: #2980b9;
+    flex-shrink: 0;
+}
+
+.petapantau-filter-box {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 6px;
+    font-size: 12px;
+    color: #7f8c8d;
+    min-width: 0;
+    overflow-x: auto;
+}
+
+.petapantau-filter-box i { color: #95a5a6; }
+
+/* ── Selects di filter box ── */
+.petapantau-select {
+    background: #ffffff;
+    color: #2c3e50;
+    border: 1px solid #d0d7de;
+    border-radius: 5px;
+    padding: 4px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+    min-width: 110px;
+    max-width: 200px;
+}
+.petapantau-select option { background: #fff; color: #2c3e50; }
+.petapantau-select:hover,
+.petapantau-select:focus {
+    border-color: #2980b9;
+    box-shadow: 0 0 0 2px rgba(41,128,185,0.15);
+}
+
+/* ── Date range di filter box ── */
+.petapantau-date-range {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-left: 1px solid #d0d7de;
+    padding-left: 10px;
+}
+
+.petapantau-date-range > i { color: #95a5a6; font-size: 11px; flex-shrink: 0; }
+
+.petapantau-flatpickr-input {
+    background: #ffffff;
+    color: #2c3e50;
+    border: 1px solid #d0d7de;
+    border-radius: 5px;
+    padding: 4px 8px;
+    font-size: 11px;
+    cursor: pointer;
+    outline: none;
+    width: 190px;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+.petapantau-flatpickr-input:hover,
+.petapantau-flatpickr-input:focus {
+    border-color: #2980b9;
+    box-shadow: 0 0 0 2px rgba(41,128,185,0.15);
+}
+
+.petapantau-date-clear {
+    background: transparent;
+    border: none;
+    color: #bbb;
+    font-size: 11px;
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 3px;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: color 0.2s;
+}
+.petapantau-date-clear:hover { color: #e74c3c; }
+
+/* ════════════════════════════════════════════
+   FLATPICKR CALENDAR THEME
+════════════════════════════════════════════ */
+.flatpickr-calendar {
+    border-radius: 8px !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18) !important;
+    font-size: 12px !important;
+    border: 1px solid #d0d7de !important;
+}
+
+/* ── Header bulan/tahun ── */
+.flatpickr-months .flatpickr-month {
+    background: #2c3e50 !important;
+    color: #ecf0f1 !important;
+    fill: #ecf0f1 !important;
+    border-radius: 8px 8px 0 0 !important;
+    height: 38px !important;
+}
+.flatpickr-current-month {
+    color: #ecf0f1 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+    background: #2c3e50 !important;
+    color: #ecf0f1 !important;
+    border: none !important;
+    outline: none !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    cursor: pointer;
+    padding: 0 2px !important;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.flatpickr-current-month .flatpickr-monthDropdown-months:hover {
+    background: #34495e !important;
+}
+.flatpickr-current-month .flatpickr-monthDropdown-months option,
+.flatpickr-monthDropdown-month {
+    background: #2c3e50 !important;
+    color: #ecf0f1 !important;
+}
+.flatpickr-current-month input.cur-year {
+    color: #ecf0f1 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+.flatpickr-current-month input.cur-year:hover { background: #34495e !important; }
+
+/* ── Tombol prev/next ── */
+.flatpickr-prev-month,
+.flatpickr-next-month {
+    color: #ecf0f1 !important;
+    fill: #ecf0f1 !important;
+}
+.flatpickr-prev-month:hover svg,
+.flatpickr-next-month:hover svg { fill: #3498db !important; }
+
+/* ── Header hari ── */
+.flatpickr-weekdays { background: #34495e !important; }
+span.flatpickr-weekday {
+    background: #34495e !important;
+    color: #bdc3c7 !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+}
+
+/* ── Hari-hari ── */
+.flatpickr-day {
+    border-radius: 4px !important;
+    font-size: 12px !important;
+}
+.flatpickr-day:hover { background: #eaf3fb !important; border-color: #eaf3fb !important; }
+.flatpickr-day.today { border-color: #2980b9 !important; font-weight: 700 !important; }
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+    background: #2980b9 !important;
+    border-color: #2980b9 !important;
+    color: #fff !important;
+}
+.flatpickr-day.startRange { border-radius: 4px 0 0 4px !important; }
+.flatpickr-day.endRange   { border-radius: 0 4px 4px 0 !important; }
+.flatpickr-day.inRange {
+    background: rgba(41,128,185,0.12) !important;
+    border-color: transparent !important;
+    box-shadow: -5px 0 0 rgba(41,128,185,0.12), 5px 0 0 rgba(41,128,185,0.12) !important;
+    border-radius: 0 !important;
+}
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover {
+    color: #c0c0c0 !important;
+}
+
+/* ── 2-bulan side-by-side (range mode) ── */
+.flatpickr-calendar.hasTime .flatpickr-time { border-top-color: #d0d7de !important; }
+
+/* Breadcrumb separator & item */
+.petapantau-breadcrumb-item { font-weight: 600; }
+.petapantau-breadcrumb-sep { opacity: 0.6; font-size: 10px; }
+
+/* ── Summary row: filter chips (kiri) + sumber dokumen (kanan) ── */
+.petapantau-summary-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 20px;
+    flex-shrink: 0;
+}
+
+/* ── Filter active summary ── */
+.petapantau-filter-summary {
+    flex: 1;
+    font-size: 11px;
+    color: #7f8c8d;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    min-height: 16px;
+    padding: 0 2px;
+    margin-top: -4px;
+}
+
+/* ── Sumber dokumen info (kanan) ── */
+.petapantau-sumber-info {
+    flex-shrink: 0;
+    max-width: 340px;
+    font-size: 11px;
+    color: #7f8c8d;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    text-align: right;
+    margin-top: -4px;
+}
+.petapantau-sumber-info i {
+    color: #875A7B;
+    font-size: 11px;
+    flex-shrink: 0;
+}
+.petapantau-sumber-label {
+    color: #7f8c8d;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+.petapantau-sumber-text {
+    color: #444;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+/* ── Nav Security: visibilitas sidebar berdasarkan role ── */
+/* Subdit Patroli: tampilkan hanya umum, kriminal, patroli */
+.petapantau-sidebar.nav-role-subdit-sp .petapantau-nav-item[data-mode="bencana"],
+.petapantau-sidebar.nav-role-subdit-sp .petapantau-nav-item[data-mode="lalin"],
+.petapantau-sidebar.nav-role-subdit-sp .petapantau-nav-item[data-mode="lokasi"] {
+    display: none !important;
+}
+/* Subdit biasa: tampilkan hanya umum, kriminal */
+.petapantau-sidebar.nav-role-subdit .petapantau-nav-item[data-mode="bencana"],
+.petapantau-sidebar.nav-role-subdit .petapantau-nav-item[data-mode="lalin"],
+.petapantau-sidebar.nav-role-subdit .petapantau-nav-item[data-mode="patroli"],
+.petapantau-sidebar.nav-role-subdit .petapantau-nav-item[data-mode="lokasi"] {
+    display: none !important;
+}
+.petapantau-sumber-text.expanded {
+    white-space: normal;
+    text-overflow: unset;
+    max-width: none;
+}
+.petapantau-sumber-toggle {
+    flex-shrink: 0;
+    background: none;
+    border: 1px solid #c39bd3;
+    color: #875A7B;
+    cursor: pointer;
+    font-size: 10px;
+    padding: 1px 4px;
+    border-radius: 3px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    transition: background 0.15s, color 0.15s;
+}
+.petapantau-sumber-toggle:hover {
+    background: #875A7B;
+    color: #fff;
+    border-color: #875A7B;
+}
+.petapantau-filter-summary-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #eaf3fb;
+    color: #1a6b9a;
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.petapantau-filter-summary-chip i { font-size: 10px; opacity: 0.75; }
+.petapantau-filter-summary-sep {
+    color: #bdc3c7;
+    font-size: 10px;
+}
+
+/* ── KPI ROW ── */
+.petapantau-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    flex-shrink: 0;
+}
+.petapantau-kpi-row[data-cols="1"] { grid-template-columns: repeat(1, 1fr); }
+.petapantau-kpi-row[data-cols="2"] { grid-template-columns: repeat(2, 1fr); }
+.petapantau-kpi-row[data-cols="3"] { grid-template-columns: repeat(3, 1fr); }
+.petapantau-kpi-row[data-cols="5"] { grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.petapantau-kpi-row[data-cols="6"] { grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.petapantau-kpi-row[data-cols="5"] .petapantau-kpi-card,
+.petapantau-kpi-row[data-cols="6"] .petapantau-kpi-card {
+    padding: 10px 12px;
+    gap: 10px;
+}
+.petapantau-kpi-row[data-cols="5"] .petapantau-kpi-icon,
+.petapantau-kpi-row[data-cols="6"] .petapantau-kpi-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+    border-radius: 6px;
+}
+.petapantau-kpi-row[data-cols="5"] .petapantau-kpi-value,
+.petapantau-kpi-row[data-cols="6"] .petapantau-kpi-value {
+    font-size: 20px;
+}
+.petapantau-kpi-row[data-cols="5"] .petapantau-kpi-label,
+.petapantau-kpi-row[data-cols="6"] .petapantau-kpi-label {
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+@media (max-width: 1100px) {
+    .petapantau-kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .petapantau-kpi-row[data-cols="3"] { grid-template-columns: repeat(3, 1fr); }
+    .petapantau-kpi-row[data-cols="5"] { grid-template-columns: repeat(3, 1fr); }
+    .petapantau-kpi-row[data-cols="6"] { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 700px) {
+    .petapantau-kpi-row[data-cols="5"] { grid-template-columns: repeat(2, 1fr); }
+    .petapantau-kpi-row[data-cols="6"] { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* KPI Card (dibuat oleh JS) */
+.petapantau-kpi-card {
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: box-shadow 0.2s;
+}
+.petapantau-kpi-card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
+}
+.petapantau-kpi-card--clickable {
+    cursor: pointer;
+}
+.petapantau-kpi-card--clickable:hover {
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15), 0 6px 18px rgba(0,0,0,0.08);
+    transform: translateY(-1px);
+    transition: box-shadow 0.2s, transform 0.15s;
+}
+
+.petapantau-kpi-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0eff5;
+    font-size: 20px;
+    flex-shrink: 0;
+     
+}
+
+.petapantau-kpi-body { flex: 1; min-width: 0; }
+
+.petapantau-kpi-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1;
+}
+
+.petapantau-kpi-label {
+    font-size: 11px;
+    color: #95a5a6;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── MAP WRAPPER ── */
+.petapantau-map-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Mode selain Peta Umum: map tinggi tetap agar konten di bawah bisa tampil */
+.petapantau-map-wrapper--fixed {
+    flex: none;
+    height: 500px;
+}
+
+/* Expanded: tinggi diperbesar ke 700px */
+.petapantau-map-wrapper--fixed.petapantau-map-wrapper--expanded {
+    height: 700px;
+}
+
+/* Tombol expand/restore di kiri atas map */
+.petapantau-map-expand-btn a {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: #333;
+    text-decoration: none;
+}
+.petapantau-map-expand-btn a:hover {
+    background-color: #f4f4f4;
+    color: #000;
+}
+
+.petapantau-map-container {
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    outline: none;
+}
+
+/* ════════════════════════════════════════════
+   LABEL NAMA DI TENGAH PETA
+════════════════════════════════════════════ */
+.kabupaten-label {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.kabupaten-label span {
+    font-size: 11px;
+    font-weight: 600;
+    color: #05305e;
+    text-align: center;
+    white-space: normal;
+    max-width: 100px;
+    line-height: 1.3;
+    display: inline-block;
+    text-shadow:
+        -1px -1px 0 #fff,  1px -1px 0 #fff,
+        -1px  1px 0 #fff,  1px  1px 0 #fff;
+}
+
+/* ════════════════════════════════════════════
+   POPUP
+════════════════════════════════════════════ */
+.petapantau-leaflet-popup .leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+}
+.petapantau-leaflet-popup .leaflet-popup-content {
+    margin: 0;
+    min-width: 220px;
+}
+
+.petapantau-popup-header {
+    background: #34495e;
+    color: #ffffff;
+    padding: 10px 14px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.petapantau-popup-header--kecamatan { background: #1a6b9a; }
+.petapantau-popup-header--desa      { background: #1e8449; }
+.petapantau-popup-header i { color: #f1c40f; font-size: 14px; }
+
+.petapantau-popup-body {
+    padding: 10px 14px;
+    background: #ffffff;
+}
+.petapantau-popup-body table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+.petapantau-popup-body table tr { border-bottom: 1px solid #f0f0f0; }
+.petapantau-popup-body table tr:last-child { border-bottom: none; }
+.petapantau-popup-body table td {
+    padding: 6px 4px;
+    color: #444;
+    vertical-align: middle;
+}
+.petapantau-popup-body table td:first-child {
+    color: #888;
+    white-space: nowrap;
+    padding-right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.petapantau-popup-body table td:last-child {
+    word-break: break-all;
+}
+.petapantau-popup-body table td i { color: #3498db; width: 14px; text-align: center; }
+.petapantau-leaflet-popup .leaflet-popup-tip { background: #34495e; }
+
+.petapantau-popup-footer {
+    padding: 8px 14px 12px;
+    background: #f8f9fa;
+    border-top: 1px solid #eee;
+}
+
+.petapantau-btn-detail {
+    width: 100%;
+    padding: 7px 10px;
+    background: #34495e;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
+.petapantau-btn-detail:hover { background: #2c3e50; }
+.petapantau-btn-detail--kecamatan { background: #1a6b9a; }
+.petapantau-btn-detail--kecamatan:hover { background: #155d87; }
+
+/* ── Tombol Kembali ── */
+.petapantau-btn-back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: #ffffff;
+    color: #34495e;
+    border: 1.5px solid #bbb;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: background 0.2s, color 0.2s;
+    margin-top: 8px;
+    white-space: nowrap;
+}
+.petapantau-btn-back:hover {
+    background: #34495e;
+    color: #ffffff;
+    border-color: #34495e;
+}
+
+/* ── Cluster marker — Google Maps POI style ── */
+.petapantau-cluster-icon {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-weight: 700;
+    cursor: pointer;
+    color: #ffffff;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.petapantau-cluster-icon:hover { transform: scale(1.15); }
+.petapantau-cluster-icon--sm {
+    background: radial-gradient(circle at 38% 35%, #f1948a, #c0392b);
+    border: 3px solid rgba(255,255,255,0.65);
+    box-shadow: 0 2px 6px rgba(192,57,43,0.5), 0 0 0 3px rgba(192,57,43,0.18);
+    font-size: 12px;
+}
+.petapantau-cluster-icon--md {
+    background: radial-gradient(circle at 38% 35%, #e74c3c, #922b21);
+    border: 3px solid rgba(255,255,255,0.6);
+    box-shadow: 0 2px 8px rgba(146,43,33,0.55), 0 0 0 4px rgba(146,43,33,0.18);
+    font-size: 13px;
+}
+.petapantau-cluster-icon--lg {
+    background: radial-gradient(circle at 38% 35%, #c0392b, #6e1212);
+    border: 3px solid rgba(255,255,255,0.55);
+    box-shadow: 0 3px 10px rgba(110,18,18,0.6), 0 0 0 5px rgba(110,18,18,0.15);
+    font-size: 13px;
+    font-weight: 800;
+}
+.petapantau-cluster-icon--xl {
+    background: radial-gradient(circle at 38% 35%, #922b21, #4a0a0a);
+    border: 3px solid rgba(255,255,255,0.5);
+    box-shadow: 0 3px 12px rgba(74,10,10,0.65), 0 0 0 6px rgba(74,10,10,0.15);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+/* ── Popup foto lazy-load (shared) ── */
+.petapantau-popup-foto {
+    background: #f0f2f5;
+    border-bottom: 1px solid #e8eaed;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.petapantau-popup-foto-spinner { color: #b0bec5; font-size: 18px; }
+.petapantau-popup-foto-img {
+    display: none;
+    width: 100%;
+    max-height: 160px;
+    object-fit: cover;
+}
+
+/* ── Coming Soon ── */
+.petapantau-coming-soon {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 12px;
+    border-left: 4px solid #888;
+    min-width: 150px;
+    margin: 8px;
+}
+.petapantau-coming-soon i { font-size: 15px; color: #888; margin-bottom: 3px; }
+.petapantau-coming-soon strong { font-size: 12px; color: #2c3e50; }
+.petapantau-coming-soon span { color: #999; font-size: 11px; }
+
+/* ════════════════════════════════════════════
+   LEGENDA PETA
+════════════════════════════════════════════ */
+.petapantau-legend {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 10px 14px 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    font-size: 12px;
+    min-width: 165px;
+    margin: 0 8px 8px 0;
+    border-top: 3px solid #e74c3c;
+}
+.petapantau-legend--kriminal { border-top-color: #e74c3c; }
+
+.petapantau-legend-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.petapantau-legend--kriminal .petapantau-legend-title i { color: #e74c3c; }
+
+.petapantau-legend-list {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.petapantau-legend-list li { display: flex; align-items: center; gap: 8px; }
+.petapantau-legend-swatch {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+.petapantau-legend-label { color: #444; font-size: 11px; line-height: 1; }
+
+/* ── KAM Legend ── */
+.petapantau-legend--kam { border-top-color: #922b21; }
+.petapantau-legend--kam .petapantau-legend-title i { color: #e74c3c; }
+
+/* ── KAM Marker ── */
+.petapantau-kam-marker {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    border: 2px solid #2471a3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+    font-size: 11px;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+.petapantau-kam-marker:hover { transform: scale(1.25); }
+
+/* ── Crime Marker ── */
+.petapantau-crime-marker {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    border: 2px solid #e74c3c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+    font-size: 11px;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+.petapantau-crime-marker:hover { transform: scale(1.25); }
+
+/* ── Generic marker (bencana, lalin, lokasi) ── */
+.petapantau-bencana-marker {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    border: 2px solid #e67e22;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+    font-size: 11px;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+.petapantau-bencana-marker:hover { transform: scale(1.25); }
+
+/* ── Overlay lokasi penting — marker ── */
+.petapantau-overlay-marker {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #6c3483;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 5px rgba(108,52,131,0.45);
+    font-size: 10px;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+.petapantau-overlay-marker:hover { transform: scale(1.3); }
+
+/* ── Overlay lokasi penting — panel checkbox ── */
+.petapantau-lokasi-overlay {
+    background: rgba(255, 255, 255, 0.97);
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.22);
+    min-width: 185px;
+    max-width: 240px;
+    font-family: inherit;
+    font-size: 12px;
+    border: 1px solid #d2b4de;
+    overflow: hidden;
+}
+
+.petapantau-lokasi-overlay-header {
+    background: #6c3483;
+    color: #fff;
+    padding: 7px 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+    font-size: 12px;
+}
+.petapantau-lokasi-overlay-header > span { flex: 1; }
+.petapantau-overlay-toggle-icon { transition: transform 0.2s; font-size: 10px; }
+
+.petapantau-lokasi-overlay-body {
+    padding: 5px 8px;
+    max-height: 210px;
+    overflow-y: auto;
+}
+
+.petapantau-lokasi-overlay-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 3px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.petapantau-lokasi-overlay-item:hover { background: #f4ecf7; }
+.petapantau-lokasi-overlay-item input[type="checkbox"] {
+    cursor: pointer;
+    accent-color: #6c3483;
+    flex-shrink: 0;
+}
+.petapantau-lokasi-overlay-item span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ════════════════════════════════════════════
+   CHART ROW (ECharts — kriminal mode)
+════════════════════════════════════════════ */
+.petapantau-chart-row {
+    display: none;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.petapantau-chart-row + .petapantau-chart-row {
+    margin-top: 12px;
+}
+
+.petapantau-chart-card--wide   { flex: 2; }
+.petapantau-chart-card--narrow { flex: 1; }
+
+.petapantau-chart-body--tall {
+    height: 280px;
+    min-height: 280px;
+}
+
+.petapantau-chart-card {
+    flex: 1;
+    min-width: 0;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px 16px 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.petapantau-chart-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.petapantau-chart-title i { color: #875A7B; }
+
+.petapantau-chart-body {
+    flex: 1;
+    height: 240px;
+    min-height: 240px;
+}
+
+/* ════════════════════════════════════════════
+   DATA TABLE KRIMINALITAS
+════════════════════════════════════════════ */
+.petapantau-data-table-card {
+    flex: 1;
+    min-width: 0;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px 16px 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.petapantau-table-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+}
+
+.petapantau-table-info {
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+.petapantau-table-pagination {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.petapantau-page-btn {
+    background: #fff;
+    border: 1px solid #d0d7de;
+    color: #2c3e50;
+    border-radius: 4px;
+    padding: 4px 9px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    line-height: 1;
+}
+.petapantau-page-btn:hover:not(:disabled) {
+    background: #eaf3fb;
+    border-color: #2980b9;
+    color: #2980b9;
+}
+.petapantau-page-btn:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.petapantau-page-info {
+    font-size: 12px;
+    color: #555;
+    white-space: nowrap;
+    padding: 0 2px;
+}
+
+.petapantau-table-wrapper {
+    overflow-x: auto;
+    border-radius: 4px;
+    border: 1px solid #e5e7eb;
+}
+
+.petapantau-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    min-width: 820px;
+}
+
+.petapantau-th {
+    background: #f8f9fa;
+    color: #555;
+    font-weight: 600;
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 2px solid #e5e7eb;
+    white-space: nowrap;
+    font-size: 11px;
+}
+
+.petapantau-td {
+    padding: 7px 10px;
+    color: #2c3e50;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+    font-size: 12px;
+}
+.petapantau-td--mono {
+    font-family: monospace;
+    font-size: 11px;
+    letter-spacing: 0.2px;
+}
+.petapantau-td--wrap {
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.petapantau-table-row:last-child .petapantau-td { border-bottom: none; }
+.petapantau-table-row:hover .petapantau-td { background: #f4f6f8; }
+
+.petapantau-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.petapantau-badge--green { background: #d5f5e3; color: #1e8449; }
+.petapantau-badge--red   { background: #fadbd8; color: #c0392b; }
+.petapantau-badge--gray  { background: #eaecef; color: #717d7e; }
+.petapantau-badge--blue  { background: #d6eaf8; color: #1a5276; }
+
+/* ════════════════════════════════════════════
+   VIEW TOGGLE (table / kanban)
+════════════════════════════════════════════ */
+.petapantau-view-toggle {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: #f0f2f5;
+    border-radius: 6px;
+    padding: 2px;
+}
+.petapantau-view-btn {
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 13px;
+    color: #7f8c8d;
+    cursor: pointer;
+    line-height: 1;
+    transition: background 0.15s, color 0.15s;
+}
+.petapantau-view-btn:hover { background: #dde1e7; color: #2c3e50; }
+.petapantau-view-btn--active {
+    background: #ffffff;
+    color: #2980b9;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+/* ════════════════════════════════════════════
+   KANBAN GRID
+════════════════════════════════════════════ */
+.petapantau-kanban-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 12px;
+    padding: 4px 2px;
+}
+
+.petapantau-kanban-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.18s, transform 0.14s;
+    display: flex;
+    flex-direction: column;
+}
+.petapantau-kanban-card:hover {
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+}
+
+.petapantau-kanban-thumb {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    display: block;
+    background: #f0f2f5;
+}
+.petapantau-kanban-thumb-placeholder {
+    width: 100%;
+    height: 130px;
+    background: linear-gradient(135deg, #e8ecf0 0%, #d5dbe3 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b0b8c4;
+    font-size: 32px;
+}
+
+.petapantau-kanban-body {
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+.petapantau-kanban-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2c3e50;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.petapantau-kanban-code {
+    font-size: 10px;
+    font-family: monospace;
+    color: #7f8c8d;
+    letter-spacing: 0.3px;
+}
+.petapantau-kanban-meta {
+    font-size: 11px;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.petapantau-kanban-volume {
+    font-size: 10px;
+    color: #7f8c8d;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.petapantau-kanban-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .petapantau-kanban-card { background: #1e2a35; border-color: #2d3e50; }
+    .petapantau-kanban-name { color: #ecf0f1; }
+    .petapantau-kanban-thumb-placeholder { background: linear-gradient(135deg, #1a252f 0%, #243342 100%); }
+    .petapantau-view-toggle { background: #1a252f; }
+    .petapantau-view-btn--active { background: #243342; }
+}

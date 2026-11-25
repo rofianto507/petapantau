@@ -1,0 +1,56 @@
+from odoo import models, fields, api
+
+class SumberDokumen(models.Model):
+    _name = 'petapantau.sumber_dokumen'
+    _description = 'Sumber Dokumen'
+    _order = 'tahun desc, tipe_sumber asc, name asc'
+
+    name = fields.Char(string="Nama Sumber", required=True)
+    tipe_sumber = fields.Selection([
+        ('BENCANA', 'Bencana'),
+        ('KRIMINALITAS', 'Kriminalitas'),
+        ('LALU LINTAS', 'Lalu Lintas'),
+        ('LOKASI PENTING', 'Lokasi Penting'),
+    ], string="Tipe Sumber", required=True)
+    tahun = fields.Selection(
+        [(str(t), str(t)) for t in range(2020, 2031)],
+        string="Tahun", required=True
+    )
+    keterangan = fields.Text(string="Keterangan")
+    jumlah_data = fields.Integer(
+        string="Jumlah Data", compute='_compute_jumlah_data', store=False)
+
+    _MODEL_MAP = {
+        'KRIMINALITAS': 'petapantau.kriminalitas',
+        'BENCANA':      'petapantau.bencana',
+        'LALU LINTAS':  'petapantau.lalu_lintas',
+    }
+
+    @api.depends('tipe_sumber')
+    def _compute_jumlah_data(self):
+        for rec in self:
+            model = self._MODEL_MAP.get(rec.tipe_sumber)
+            if model and rec.id:
+                rec.jumlah_data = self.env[model].search_count(
+                    [('sumber_dokumen_id', '=', rec.id)])
+            else:
+                rec.jumlah_data = 0
+
+    def action_view_data(self):
+        self.ensure_one()
+        model = self._MODEL_MAP.get(self.tipe_sumber)
+        if not model:
+            return
+        _LABEL = {
+            'KRIMINALITAS':   'Kriminalitas',
+            'BENCANA':        'Bencana',
+            'LALU LINTAS':    'Lalu Lintas',
+        }
+        return {
+            'type': 'ir.actions.act_window',
+            'name': f'{_LABEL.get(self.tipe_sumber, "Data")} — {self.name}',
+            'res_model': model,
+            'view_mode': 'list,form',
+            'domain': [('sumber_dokumen_id', '=', self.id)],
+            'context': {'default_sumber_dokumen_id': self.id},
+        }

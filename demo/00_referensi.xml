@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Demo Data — Referensi Master PetaPantau (Polda D.I. Yogyakarta)
+    Subdit, Sumber Dokumen, Kategori, Jenis Jalan, Modus Operandi, Jenis TKP, Sub Status Perkara.
+-->
+<odoo>
+    <data noupdate="1">
+
+        <!-- SUBDIT / DIREKTORAT -->
+        <record id="demo_subdit_reskrimum" model="petapantau.subdit">
+            <field name="name">Ditreskrimum</field>
+            <field name="keterangan">Direktorat Reserse Kriminal Umum</field>
+        </record>
+        <record id="demo_subdit_reskrimsus" model="petapantau.subdit">
+            <field name="name">Ditreskrimsus</field>
+            <field name="keterangan">Direktorat Reserse Kriminal Khusus</field>
+        </record>
+        <record id="demo_subdit_resnarkoba" model="petapantau.subdit">
+            <field name="name">Ditresnarkoba</field>
+            <field name="keterangan">Direktorat Reserse Narkoba</field>
+        </record>
+        <record id="demo_subdit_lantas" model="petapantau.subdit">
+            <field name="name">Ditlantas</field>
+            <field name="keterangan">Direktorat Lalu Lintas</field>
+        </record>
+        <record id="demo_subdit_samapta" model="petapantau.subdit">
+            <field name="name">Ditsamapta</field>
+            <field name="keterangan">Direktorat Samapta</field>
+        </record>
+        <!-- SUMBER DOKUMEN -->
+        <record id="demo_sdok_krim_2025" model="petapantau.sumber_dokumen">
+            <field name="name">Rekap LP Kriminalitas Polda DIY 2025</field>
+            <field name="tipe_sumber">KRIMINALITAS</field>
+            <field name="tahun">2025</field>
+        </record>
+        <record id="demo_sdok_krim_2026" model="petapantau.sumber_dokumen">
+            <field name="name">Rekap LP Kriminalitas Polda DIY 2026</field>
+            <field name="tipe_sumber">KRIMINALITAS</field>
+            <field name="tahun">2026</field>
+        </record>
+        <record id="demo_sdok_bcn_2025" model="petapantau.sumber_dokumen">
+            <field name="name">Laporan Bencana Polda DIY 2025</field>
+            <field name="tipe_sumber">BENCANA</field>
+            <field name="tahun">2025</field>
+        </record>
+        <record id="demo_sdok_bcn_2026" model="petapantau.sumber_dokumen">
+            <field name="name">Laporan Bencana Polda DIY 2026</field>
+            <field name="tipe_sumber">BENCANA</field>
+            <field name="tahun">2026</field>
+        </record>
+        <record id="demo_sdok_lalin_2025" model="petapantau.sumber_dokumen">
+            <field name="name">Laporan Lalu Lintas Ditlantas Polda DIY 2025</field>
+            <field name="tipe_sumber">LALU LINTAS</field>
+            <field name="tahun">2025</field>
+        </record>
+        <record id="demo_sdok_lalin_2026" model="petapantau.sumber_dokumen">
+            <field name="name">Laporan Lalu Lintas Ditlantas Polda DIY 2026</field>
+            <field name="tipe_sumber">LALU LINTAS</field>
+            <field name="tahun">2026</field>
+        </record>
+        <!-- KATEGORI KRIMINAL + SUB KATEGORI -->
+        <record id="demo_kat_krim_curanmor" model="petapantau.kategori_kriminal">
+            <field name="name">Curanmor</field>
+            <field name="icon">fa-car</field>
+        </record>
+        <record id="demo_sub_kat_curanmor_motor" model="petapantau.sub_kategori_kriminal">
+            <field name="name">Sepeda Motor</field>
+            <field name="kategori_kriminal_id" ref="demo_kat_krim_curanmor"/>
+        </record>
+        <record id="demo_sub_kat_curanmor_mobil" model="petapantau.sub_kategori_kriminal">
+            <field name="name">Kendaraan Roda Empat</field>
+            <field name="kategori_kriminal_id" ref="demo_kat_krim_curanmor"/>
+        </record>
+        <record id="demo_kat_krim_curat" model="petapantau.kategori_kriminal">
+            <field name="name">Pencurian dengan Pemberatan (Curat)</field>
+            <field name="icon">fa-home</field>
+        </record>
+        <record id="demo_sub_kat_curat_rumah" model="petapantau.sub_kategori_kriminal">
+            <field name="name">Rumah Tinggal</field>
+            <field name="kategori_kriminal_id" ref="demo_kat_krim_curat"/>
+        </record>
+        <record id="demo_sub_kat_curat_toko" model="petapantau.sub_kategori_kriminal">
+            <field name="name">Toko / Minimarket</field>
+            <field name="kategori_kriminal_id" ref="demo_kat_krim_curat"/>
+        </record>
+        <record id="demo_kat_krim_jalanan" model="petapantau.kategori_kriminal">
+            <field name="name">Kejahatan Jalanan</field>
+            <field name="icon">fa-warning</field>
+        </record>
+        <record id="demo_sub_kat_jalanan_klitih" model="petapantau.sub_kategori_kriminal">
+            <field name="name">Klitih</field>
+            <field name="kategori_kriminal_id" ref="demo_kat_krim_jalanan"/>
+        </record>
+        <record id="demo_sub_kat_jalanan_jambret" model="petapantau.sub_kategori_kriminal">
+            <field name="name">Penjambretan</field>
+            <field name="kategori_kriminal_id" ref="demo_kat_krim_jalanan"/>
+        </record>
+        <record id="demo_kat_krim_narkoba" model="petapantau.kategori_kriminal">
+            <field name="name">Narkoba</field>
+            <field name="icon">fa-exclamation-triangle</field>
+        </record>
+        <record id="demo_sub_kat_narkoba_sabu" model="petapantau.sub_kategori_kriminal">
+            <field name="name">Sabu-Sabu</field>
+            <field name="kategori_kriminal_id" ref="demo_kat_krim_narkoba"/>
+        </record>
+        <record id="demo_sub_kat_narkoba_ganja" model="petapantau.sub_kategori_kriminal">
+            <field name="name">Ganja</field>
+            <field name="kategori_kriminal_id" ref="demo_kat_krim_narkoba"/>
+        </record>
+        <record id="demo_kat_krim_aniaya" model="petapantau.kategori_kriminal">
+            <field name="name">Penganiayaan</field>
+            <field name="icon">fa-male</field>
+        </record>
+        <record id="demo_sub_kat_aniaya_ringan" model="petapantau.sub_kategori_kriminal">
+            <field name="name">Penganiayaan Ringan</field>
+            <field name="kategori_kriminal_id" ref="demo_kat_krim_aniaya"/>
+        </record>
+        <record id="demo_sub_kat_aniaya_berat" model="petapantau.sub_kategori_kriminal">
+            <field name="name">Penganiayaan Berat</field>
+            <field name="kategori_kriminal_id" ref="demo_kat_krim_aniaya"/>
+        </record>
+        <record id="demo_kat_krim_penipuan" model="petapantau.kategori_kriminal">
+            <field name="name">Penipuan / Penggelapan</field>
+            <field name="icon">fa-money</field>
+        </record>
+        <record id="demo_sub_kat_penipuan_online" model="petapantau.sub_kategori_kriminal">
+            <field name="name">Penipuan Online</field>
+            <field name="kategori_kriminal_id" ref="demo_kat_krim_penipuan"/>
+        </record>
+        <record id="demo_sub_kat_penipuan_gelap" model="petapantau.sub_kategori_kriminal">
+            <field name="name">Penggelapan</field>
+            <field name="kategori_kriminal_id" ref="demo_kat_krim_penipuan"/>
+        </record>
+        <!-- KATEGORI BENCANA -->
+        <record id="demo_kat_bcn_banjir" model="petapantau.kategori_bencana">
+            <field name="name">Banjir</field>
+        </record>
+        <record id="demo_kat_bcn_longsor" model="petapantau.kategori_bencana">
+            <field name="name">Tanah Longsor</field>
+        </record>
+        <record id="demo_kat_bcn_kebakaran" model="petapantau.kategori_bencana">
+            <field name="name">Kebakaran</field>
+        </record>
+        <record id="demo_kat_bcn_angin" model="petapantau.kategori_bencana">
+            <field name="name">Angin Kencang / Puting Beliung</field>
+        </record>
+        <record id="demo_kat_bcn_gempa" model="petapantau.kategori_bencana">
+            <field name="name">Gempa Bumi</field>
+        </record>
+        <record id="demo_kat_bcn_merapi" model="petapantau.kategori_bencana">
+            <field name="name">Erupsi / Awan Panas Merapi</field>
+        </record>
+        <!-- KATEGORI LALU LINTAS -->
+        <record id="demo_kat_lalin_laka" model="petapantau.kategori_lalu_lintas">
+            <field name="name">Laka Lantas</field>
+        </record>
+        <record id="demo_kat_lalin_macet" model="petapantau.kategori_lalu_lintas">
+            <field name="name">Kemacetan</field>
+        </record>
+        <record id="demo_kat_lalin_rawan" model="petapantau.kategori_lalu_lintas">
+            <field name="name">Titik Rawan Laka</field>
+        </record>
+        <!-- KATEGORI LOKASI PENTING -->
+        <record id="demo_kat_lokasi_polisi" model="petapantau.kategori_lokasi">
+            <field name="name">Kantor Polisi</field>
+            <field name="icon">fa-shield</field>
+        </record>
+        <record id="demo_kat_lokasi_rs" model="petapantau.kategori_lokasi">
+            <field name="name">Rumah Sakit</field>
+            <field name="icon">fa-hospital-o</field>
+        </record>
+        <record id="demo_kat_lokasi_kampus" model="petapantau.kategori_lokasi">
+            <field name="name">Kampus / Perguruan Tinggi</field>
+            <field name="icon">fa-university</field>
+        </record>
+        <record id="demo_kat_lokasi_pasar" model="petapantau.kategori_lokasi">
+            <field name="name">Pasar / Pusat Belanja</field>
+            <field name="icon">fa-shopping-cart</field>
+        </record>
+        <record id="demo_kat_lokasi_wisata" model="petapantau.kategori_lokasi">
+            <field name="name">Objek Wisata</field>
+            <field name="icon">fa-camera</field>
+        </record>
+        <record id="demo_kat_lokasi_transport" model="petapantau.kategori_lokasi">
+            <field name="name">Bandara / Stasiun / Terminal</field>
+            <field name="icon">fa-plane</field>
+        </record>
+        <record id="demo_kat_lokasi_pemerintahan" model="petapantau.kategori_lokasi">
+            <field name="name">Kantor Pemerintahan</field>
+            <field name="icon">fa-building</field>
+        </record>
+        <!-- JENIS JALAN -->
+        <record id="demo_jenis_jalan_nasional" model="petapantau.jenis_jalan">
+            <field name="name">Jalan Nasional</field>
+        </record>
+        <record id="demo_jenis_jalan_provinsi" model="petapantau.jenis_jalan">
+            <field name="name">Jalan Provinsi</field>
+        </record>
+        <record id="demo_jenis_jalan_kabupaten" model="petapantau.jenis_jalan">
+            <field name="name">Jalan Kota / Kabupaten</field>
+        </record>
+        <record id="demo_jenis_jalan_lingkungan" model="petapantau.jenis_jalan">
+            <field name="name">Jalan Lingkungan</field>
+        </record>
+        <!-- MODUS OPERANDI -->
+        <record id="demo_modus_kunci" model="petapantau.modus_operandi">
+            <field name="name">Merusak Kunci Kontak</field>
+        </record>
+        <record id="demo_modus_congkel" model="petapantau.modus_operandi">
+            <field name="name">Mencongkel Pintu / Jendela</field>
+        </record>
+        <record id="demo_modus_pepet" model="petapantau.modus_operandi">
+            <field name="name">Memepet Korban di Jalan</field>
+        </record>
+        <record id="demo_modus_senjata" model="petapantau.modus_operandi">
+            <field name="name">Menggunakan Senjata Tajam</field>
+        </record>
+        <record id="demo_modus_online" model="petapantau.modus_operandi">
+            <field name="name">Transaksi Online Fiktif</field>
+        </record>
+        <!-- JENIS TKP -->
+        <record id="demo_jenis_tkp_jalan" model="petapantau.jenis_tkp">
+            <field name="name">Jalan Umum</field>
+        </record>
+        <record id="demo_jenis_tkp_rumah" model="petapantau.jenis_tkp">
+            <field name="name">Perumahan / Permukiman</field>
+        </record>
+        <record id="demo_jenis_tkp_toko" model="petapantau.jenis_tkp">
+            <field name="name">Pertokoan / Pusat Belanja</field>
+        </record>
+        <record id="demo_jenis_tkp_kos" model="petapantau.jenis_tkp">
+            <field name="name">Rumah Kos / Asrama</field>
+        </record>
+        <record id="demo_jenis_tkp_parkir" model="petapantau.jenis_tkp">
+            <field name="name">Area Parkir</field>
+        </record>
+        <!-- SUB STATUS PERKARA -->
+        <record id="demo_sub_status_lidik" model="petapantau.sub_status_perkara">
+            <field name="status_perkara">PROSES</field>
+            <field name="name">Dalam Penyelidikan (Lidik)</field>
+        </record>
+        <record id="demo_sub_status_sidik" model="petapantau.sub_status_perkara">
+            <field name="status_perkara">PROSES</field>
+            <field name="name">Dalam Penyidikan (Sidik)</field>
+        </record>
+        <record id="demo_sub_status_p21" model="petapantau.sub_status_perkara">
+            <field name="status_perkara">SELESAI</field>
+            <field name="name">P21 — Berkas Dinyatakan Lengkap</field>
+        </record>
+        <record id="demo_sub_status_rj" model="petapantau.sub_status_perkara">
+            <field name="status_perkara">SELESAI</field>
+            <field name="name">Restorative Justice</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Demo Data — Akun Pengguna per Peran (Polda D.I. Yogyakarta)
+    Password semua akun demo: Demo@12345
+    admin.demo             group_admin
+    subdit.reskrimum       group_subdit
+    subdit.samapta         group_subdit_patroli
+    polresta.yogyakarta    group_polres
+    polresta.sleman        group_polres
+    polres.bantul          group_polres
+    polsek.gondokusuman    group_polsek
+    viewer.demo            group_viewer
+-->
+<odoo>
+    <data noupdate="1">
+
+        <record id="demo_user_admin_demo" model="res.users">
+            <field name="name">Admin PetaPantau (Demo)</field>
+            <field name="login">admin.demo</field>
+            <field name="password">Demo@12345</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('petapantau.group_admin')])]"/>
+        </record>
+        <record id="demo_user_subdit_reskrimum" model="res.users">
+            <field name="name">Operator Ditreskrimum (Demo)</field>
+            <field name="login">subdit.reskrimum</field>
+            <field name="password">Demo@12345</field>
+            <field name="subdit_id" ref="demo_subdit_reskrimum"/>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('petapantau.group_subdit')])]"/>
+        </record>
+        <record id="demo_user_subdit_samapta" model="res.users">
+            <field name="name">Operator Ditsamapta - Patroli (Demo)</field>
+            <field name="login">subdit.samapta</field>
+            <field name="password">Demo@12345</field>
+            <field name="subdit_id" ref="demo_subdit_samapta"/>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('petapantau.group_subdit_patroli')])]"/>
+        </record>
+        <record id="demo_user_polresta_yogyakarta" model="res.users">
+            <field name="name">Operator Polresta Yogyakarta (Demo)</field>
+            <field name="login">polresta.yogyakarta</field>
+            <field name="password">Demo@12345</field>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('petapantau.group_polres')])]"/>
+        </record>
+        <record id="demo_user_polresta_sleman" model="res.users">
+            <field name="name">Operator Polresta Sleman (Demo)</field>
+            <field name="login">polresta.sleman</field>
+            <field name="password">Demo@12345</field>
+            <field name="polres_id" ref="polresta_sleman"/>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('petapantau.group_polres')])]"/>
+        </record>
+        <record id="demo_user_polres_bantul" model="res.users">
+            <field name="name">Operator Polres Bantul (Demo)</field>
+            <field name="login">polres.bantul</field>
+            <field name="password">Demo@12345</field>
+            <field name="polres_id" ref="polres_bantul"/>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('petapantau.group_polres')])]"/>
+        </record>
+        <record id="demo_user_polsek_gondokusuman" model="res.users">
+            <field name="name">Operator Polsek Gondokusuman (Demo)</field>
+            <field name="login">polsek.gondokusuman</field>
+            <field name="password">Demo@12345</field>
+            <field name="polres_id" ref="polresta_yogyakarta"/>
+            <field name="polsek_id" ref="polsek_34_71_03"/>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('petapantau.group_polsek')])]"/>
+        </record>
+        <record id="demo_user_viewer" model="res.users">
+            <field name="name">Pimpinan - Dashboard Viewer (Demo)</field>
+            <field name="login">viewer.demo</field>
+            <field name="password">Demo@12345</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('petapantau.group_viewer')])]"/>
+        </record>
+
+    </data>
+</odoo>
