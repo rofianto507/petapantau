@@ -182,124 +182,44 @@
 .petapantau-sumber-toggle { color: var(--pp-gold-deep); }
 .petapantau-sumber-toggle { border-color: #D9B655; }
 
-/* ─── PETA + KARTU SOROTAN/KPI ────────────────────────────────────── */
-.petapantau-top-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 340px;
-    gap: 18px;
-    flex: 1 0 auto;
-    min-height: 560px;
-    align-items: stretch;
-}
-.petapantau-top-grid > .petapantau-map-wrapper {
-    flex: none;
-    height: auto !important;
-    min-height: 560px;
-    border-radius: 22px;
-    box-shadow: none;
-    background: var(--pp-sand);
-}
-.petapantau-top-grid > .petapantau-map-wrapper.petapantau-map-wrapper--expanded { min-height: 720px; }
-.petapantau-side-col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-@media (max-width: 1180px) {
-    .petapantau-top-grid { grid-template-columns: minmax(0, 1fr); }
-    .petapantau-side-col { flex-direction: row; flex-wrap: wrap; }
-    .petapantau-side-col > * { flex: 1 1 280px; }
-}
-
-/* kartu sorotan */
-.petapantau-hero {
-    position: relative;
-    overflow: hidden;
-    padding: 18px;
-    border-radius: 22px;
-    background: var(--pp-brown);
-    color: #fff;
-}
-.petapantau-hero:empty { display: none; }
-.petapantau-hero-rings {
-    position: absolute;
-    right: -56px;
-    bottom: -64px;
-    width: 170px;
-    height: 170px;
-    pointer-events: none;
-}
-.petapantau-hero-icon {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.12);
-    color: var(--pp-gold);
-    font-size: 16px;
-}
-.petapantau-hero-title {
-    position: relative;
-    margin-top: 12px;
-    font-family: var(--pp-display);
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 1.2;
-}
-.petapantau-hero-sub { position: relative; margin-top: 4px; font-size: 12px; color: rgba(255, 255, 255, 0.82); }
-.petapantau-hero-btn {
-    position: relative;
-    margin-top: 14px;
-    padding: 7px 14px;
-    border: 0;
-    border-radius: 10px;
-    background: var(--pp-gold);
-    color: var(--pp-brown);
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-}
-.petapantau-hero-btn:hover { filter: brightness(1.07); }
-
-/* KPI: ubin 2 kolom di kolom kanan */
-.petapantau-side-col .petapantau-kpi-row {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    grid-auto-rows: 1fr;
-    gap: 12px;
-    flex: 1 1 auto;                 /* ubin mengisi sisa tinggi kolom, sejajar dengan peta */
-}
-.petapantau-kpi-card { justify-content: space-between; }
+/* ─── KPI (satu baris di atas) + PETA SELEBAR PENUH ───────────────── */
+.petapantau-kpi-row { gap: 12px; }
 .petapantau-kpi-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 14px;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
     border: 0;
-    border-radius: 18px;
+    border-radius: 16px;
     background: var(--pp-sand);
     box-shadow: none;
 }
 .petapantau-kpi-card:hover { box-shadow: 0 4px 14px rgba(29, 26, 21, 0.12); }
 .petapantau-kpi-icon {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 10px;
     border: 1px solid var(--pp-line-soft);
     background: #fff;
     font-size: 15px;
     color: var(--pp-brown) !important;       /* seragam; menimpa warna inline dari JS */
 }
-.petapantau-kpi-body { width: 100%; }
 .petapantau-kpi-value {
     font-family: var(--pp-display);
-    font-size: 24px;
+    font-size: 22px;
     line-height: 1.05;
     color: var(--pp-brown);
 }
 .petapantau-kpi-label {
-    margin-top: 2px;
-    font-size: 12px;
+    margin-top: 3px;
+    font-size: 11px;
     color: var(--pp-muted);
-    white-space: normal;
+}
+.petapantau-map-wrapper {
+    min-height: 380px;
+    border-radius: 22px;
+    box-shadow: none;
+    background: var(--pp-sand);
 }
 
 /* ─── OVERLAY PETA ────────────────────────────────────────────────── */

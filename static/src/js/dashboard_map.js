@@ -41,7 +41,6 @@ export class DashboardMap extends Component {
         this.filterSummaryRef       = useRef("filterSummary");
         this.sumberInfoRef          = useRef("sumberInfo");
         this.kpiRowRef              = useRef("kpiRow");
-        this.heroRef                = useRef("hero");
         this.mapWrapperRef          = useRef("mapWrapper");
         this.chartRowRef            = useRef("chartRow");
         this.chartBarRef            = useRef("chartBar");
@@ -834,17 +833,15 @@ export class DashboardMap extends Component {
             row.querySelectorAll('.petapantau-kpi-card--clickable').forEach(el => {
                 el.addEventListener('click', () => this._openCardAction(cards[parseInt(el.dataset.idx)]));
             });
-            this._renderHero(mode, cards);
 
         } catch (e) {
             if (this._modeVersion !== myVersion) return;
             row.innerHTML = '';
-            if (this.heroRef?.el) this.heroRef.el.innerHTML = '';
             console.error('KPI load error:', e);
         }
     }
 
-    // Buka daftar data di balik sebuah kartu KPI / kartu sorotan
+    // Buka daftar data di balik sebuah kartu KPI
     _openCardAction(card) {
         if (!card?.action) return;
         this.action.doAction({
@@ -856,37 +853,6 @@ export class DashboardMap extends Component {
             domain: card.action.domain,
             target: 'current',
         });
-    }
-
-    // Kartu sorotan di atas KPI: ringkasan satu kalimat dari angka KPI mode aktif
-    _renderHero(mode, cards) {
-        const el = this.heroRef?.el;
-        if (!el) return;
-        const v = (i) => {
-            const x = cards[i]?.value;
-            return (x && x.toLocaleString) ? x.toLocaleString('id-ID') : (x ?? 0);
-        };
-        const H = {
-            umum:     { icon: 'fa-map',                  title: `${v(0)} kab/kota · ${v(1)} kecamatan`, sub: `${v(2)} desa/kelurahan · ${v(3)} satuan Polri` },
-            kriminal: { icon: 'fa-exclamation-triangle', title: `${v(0)} laporan kriminalitas`,          sub: `${v(1)} proses · ${v(2)} selesai` },
-            bencana:  { icon: 'fa-bolt',                 title: `${v(0)} kejadian bencana`,              sub: `${v(1)} aktif · ${v(2)} non aktif` },
-            lalin:    { icon: 'fa-car',                  title: `${v(0)} titik lalu lintas`,             sub: `${v(1)} proses · ${v(2)} selesai` },
-            patroli:  { icon: 'fa-car',                  title: `${v(0)} kegiatan patroli`,              sub: `${v(1)} berjalan · ${v(2)} titik · ${v(3)} personel` },
-            lokasi:   { icon: 'fa-map-marker',           title: `${v(0)} lokasi penting`,                sub: `${v(1)} aktif · ${v(2)} non aktif` },
-        }[mode];
-        if (!H) { el.innerHTML = ''; return; }
-        const card = cards[0];
-        el.innerHTML = `
-            <svg class="petapantau-hero-rings" viewBox="0 0 190 190" fill="none" aria-hidden="true">
-                <circle cx="80" cy="100" r="64" stroke="#D4A537" stroke-opacity="0.55" stroke-width="6"/>
-                <circle cx="122" cy="100" r="64" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="6"/>
-            </svg>
-            <div class="petapantau-hero-icon"><i class="fa ${H.icon}"></i></div>
-            <div class="petapantau-hero-title">${H.title}</div>
-            <div class="petapantau-hero-sub">${H.sub}</div>
-            ${card?.action ? '<button type="button" class="petapantau-hero-btn">Lihat semua data</button>' : ''}
-        `;
-        el.querySelector('.petapantau-hero-btn')?.addEventListener('click', () => this._openCardAction(card));
     }
 
     // ─────────────────────────────────────────────

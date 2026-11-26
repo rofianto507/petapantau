@@ -102,17 +102,12 @@
 
                 </div><!-- end petapantau-sticky-header -->
 
-                <!-- PETA (kiri) + KARTU SOROTAN & KPI (kanan) -->
-                <div class="petapantau-top-grid">
-                    <div class="petapantau-map-wrapper" t-ref="mapWrapper">
-                        <div t-ref="mapContainer" class="petapantau-map-container" tabindex="-1"/>
-                    </div>
-                    <div class="petapantau-side-col">
-                        <!-- Kartu sorotan — diisi oleh JS sesuai mode aktif -->
-                        <div class="petapantau-hero" t-ref="hero"/>
-                        <!-- KPI ROW — diisi oleh JS sesuai mode aktif -->
-                        <div class="petapantau-kpi-row" t-ref="kpiRow"/>
-                    </div>
+                <!-- KPI ROW — satu baris di atas peta, diisi oleh JS sesuai mode aktif -->
+                <div class="petapantau-kpi-row" t-ref="kpiRow"/>
+
+                <!-- MAP — selebar penuh -->
+                <div class="petapantau-map-wrapper" t-ref="mapWrapper">
+                    <div t-ref="mapContainer" class="petapantau-map-container" tabindex="-1"/>
                 </div>
 
 
