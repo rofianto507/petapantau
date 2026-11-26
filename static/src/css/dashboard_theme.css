@@ -129,13 +129,13 @@
 
 /* ─── PANEL UTAMA ─────────────────────────────────────────────────── */
 .petapantau-main-content {
-    background: var(--pp-cream);
+    background: #fff;
     border-radius: 13px;
     padding: 18px 22px 22px;
     gap: 18px;
 }
 .petapantau-sticky-header {
-    background: var(--pp-cream);
+    background: #fff;
     margin: -18px -22px 0 -22px;
     padding: 18px 22px 8px;
     top: -18px;
@@ -190,7 +190,7 @@
     align-items: center;
     gap: 12px;
     padding: 10px 14px;
-    border: 0;
+    border: 1px solid var(--pp-line);
     border-radius: 8px;
     background: var(--pp-sand);
     box-shadow: none;
