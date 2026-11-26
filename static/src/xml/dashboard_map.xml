@@ -39,7 +39,7 @@
                         <span>Peta Lalu Lintas</span>
                     </a>
                     <a class="petapantau-nav-item" data-mode="patroli" title="Peta Patroli" t-on-click="onNavClick">
-                        <i class="fa fa-car"/>
+                        <i class="fa fa-binoculars"/>
                         <span>Peta Patroli</span>
                     </a>
                     <a class="petapantau-nav-item" data-mode="lokasi" title="Lokasi Penting" t-on-click="onNavClick">

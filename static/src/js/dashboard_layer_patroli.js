@@ -30,7 +30,7 @@ function _addPatroliLegend(ctx) {
                     `).join('')}
                 </ul>
                 <div class="petapantau-legend-title" style="margin-top:8px;">
-                    <i class="fa fa-car" style="color:#1D1A15;"></i> Kegiatan Patroli
+                    <i class="fa fa-binoculars" style="color:#1D1A15;"></i> Kegiatan Patroli
                 </div>
                 <ul class="petapantau-legend-list">
                     <li>
@@ -166,7 +166,7 @@ async function _loadPatroliMarkers(ctx, filters, geoConditions = []) {
                 </div>
                 <div class="petapantau-popup-body">
                     <table>
-                        <tr><td><i class="fa fa-car"></i> Patroli</td><td><strong>${patroli}</strong></td></tr>
+                        <tr><td><i class="fa fa-binoculars"></i> Patroli</td><td><strong>${patroli}</strong></td></tr>
                         <tr><td><i class="fa fa-calendar"></i> Tanggal</td><td><strong>${_fmtDt(r.tanggal)}</strong></td></tr>
                         <tr><td><i class="fa fa-map-pin"></i> Lat/Lng</td><td><strong>${r.latitude.toFixed(5)}, ${r.longitude.toFixed(5)}</strong></td></tr>
                         <tr><td><i class="fa fa-sticky-note-o"></i> Catatan</td><td><strong>${r.catatan || '-'}</strong></td></tr>
@@ -357,8 +357,8 @@ export async function loadModePatroli(ctx) {
         ctx._fitBoundsZoomedIn(geoLayer.getBounds());
         if (ctx._patroliPolylineLayer) ctx._patroliPolylineLayer.clearLayers();
         renderKabupatenSummaryMarkers(ctx, geoLayer, filters, 'jumlah_patroli',
-            `<i class="fa fa-car"></i> Peta Patroli`,
-            'fa-car', drillDownPatroliKecamatan);
+            `<i class="fa fa-binoculars"></i> Peta Patroli`,
+            'fa-binoculars', drillDownPatroliKecamatan);
     } catch (error) {
         console.error('Gagal memuat data patroli:', error);
     }
@@ -380,7 +380,7 @@ function _showPatroliKabupatenPopup(ctx, e, props, layer, filters) {
         .setContent(`
             <div class="petapantau-popup">
                 <div class="petapantau-popup-header" style="background:#26211A;">
-                    <i class="fa fa-car"></i>
+                    <i class="fa fa-binoculars"></i>
                     <strong>${tipeLabel} ${props.name}</strong>
                 </div>
                 <div class="petapantau-popup-body">
@@ -388,7 +388,7 @@ function _showPatroliKabupatenPopup(ctx, e, props, layer, filters) {
                         <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                         <tr><td><i class="fa fa-list"></i> Kecamatan</td><td><strong>${props.jumlah_kecamatan} Kecamatan</strong></td></tr>
                         <tr><td><i class="fa fa-exclamation-triangle" style="color:#B07F10;"></i> Kriminalitas</td><td>${krimLabel}</td></tr>
-                        <tr><td><i class="fa fa-car" style="color:#1D1A15;"></i> Patroli</td><td>${ptLabel}</td></tr>
+                        <tr><td><i class="fa fa-binoculars" style="color:#1D1A15;"></i> Patroli</td><td>${ptLabel}</td></tr>
                     </table>
                 </div>
                 <div class="petapantau-popup-footer">
@@ -405,8 +405,8 @@ function _showPatroliKabupatenPopup(ctx, e, props, layer, filters) {
             if (btn) {
                 btn.addEventListener('click', () => {
                     ctx.map.closePopup();
-                    ctx._updateBreadcrumb(`<i class="fa fa-car"></i> Peta Patroli`);
-                    ctx._appendBreadcrumb(`<i class="fa fa-car"></i> ${tipeLabel} ${props.name}`);
+                    ctx._updateBreadcrumb(`<i class="fa fa-binoculars"></i> Peta Patroli`);
+                    ctx._appendBreadcrumb(`<i class="fa fa-binoculars"></i> ${tipeLabel} ${props.name}`);
                     drillDownPatroliKecamatan(ctx, props, layer, filters);
                 });
             }
@@ -545,7 +545,7 @@ function _showPatroliKecamatanPopup(ctx, e, props, layer, filters, kabProps, kab
                         <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                         <tr><td><i class="fa fa-home"></i> Desa/Kel.</td><td><strong>${props.jumlah_desa} Desa/Kelurahan</strong></td></tr>
                         <tr><td><i class="fa fa-exclamation-triangle" style="color:#B07F10;"></i> Kriminalitas</td><td>${krimLabel}</td></tr>
-                        <tr><td><i class="fa fa-car" style="color:#1D1A15;"></i> Patroli</td><td>${ptLabel}</td></tr>
+                        <tr><td><i class="fa fa-binoculars" style="color:#1D1A15;"></i> Patroli</td><td>${ptLabel}</td></tr>
                     </table>
                 </div>
                 <div class="petapantau-popup-footer">
@@ -694,7 +694,7 @@ function _showPatroliDesaPopup(ctx, e, props) {
                         <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                         <tr><td><i class="fa fa-tag"></i> Tipe</td><td><strong>${tipeLabel}</strong></td></tr>
                         <tr><td><i class="fa fa-exclamation-triangle" style="color:#B07F10;"></i> Kriminalitas</td><td>${krimLabel}</td></tr>
-                        <tr><td><i class="fa fa-car" style="color:#1D1A15;"></i> Patroli</td><td>${ptLabel}</td></tr>
+                        <tr><td><i class="fa fa-binoculars" style="color:#1D1A15;"></i> Patroli</td><td>${ptLabel}</td></tr>
                     </table>
                 </div>
             </div>
@@ -726,7 +726,7 @@ function _addPatroliBackButton(ctx, targetLevel, backCtx) {
                     ctx.drillKabupatenId = null;
                     ctx.drillKecamatanId = null;
                     if (ctx.filterKabupaten?.el) ctx.filterKabupaten.el.value = '';
-                    ctx._updateBreadcrumb(`<i class="fa fa-car"></i> Peta Patroli`);
+                    ctx._updateBreadcrumb(`<i class="fa fa-binoculars"></i> Peta Patroli`);
                     ctx._updateFilterSummary(ctx.currentMode);
                     await loadModePatroli(ctx);
                     ctx._updateKpiCards(ctx.currentMode);

@@ -346,7 +346,7 @@ export class DashboardMap extends Component {
             lalin:   { icon: 'fa-car',                  label: 'Peta Lalu Lintas' },
             bencana: { icon: 'fa-bolt',                 label: 'Peta Bencana' },
             lokasi:  { icon: 'fa-map-marker',           label: 'Lokasi Penting' },
-            patroli: { icon: 'fa-car',                  label: 'Peta Patroli' },
+            patroli: { icon: 'fa-binoculars',                  label: 'Peta Patroli' },
         };
         const meta = modeLabels[mode] || modeLabels['umum'];
         this._updateBreadcrumb(`<i class="fa ${meta.icon}"></i> ${meta.label}`);
@@ -810,7 +810,7 @@ export class DashboardMap extends Component {
                 ]);
                 const totalPersonel = personelGroups[0]?.personel_count || 0;
                 cards = [
-                    { icon: 'fa-car',        color: '#1D1A15', value: total,         label: 'Total Patroli',      action: { model: 'petapantau.patroli',         domain: d } },
+                    { icon: 'fa-binoculars',        color: '#1D1A15', value: total,         label: 'Total Patroli',      action: { model: 'petapantau.patroli',         domain: d } },
                     { icon: 'fa-spinner',    color: '#8A6410', value: proses,        label: 'Patroli Proses',     action: { model: 'petapantau.patroli',         domain: [...d, ['state','=','PROSES']] } },
                     { icon: 'fa-map-marker', color: '#8C6A3A', value: totalLokasi,   label: 'Total Titik Lokasi', action: { model: 'petapantau.lokasi_patroli',  domain: dLokasi } },
                     { icon: 'fa-users',      color: '#B07F10', value: totalPersonel, label: 'Total Personel',     action: null },
