@@ -19,7 +19,7 @@
 
     box-sizing: border-box;
     padding: 14px 14px 14px 0;      /* kiri 0: menu aktif mepet tepi layar */
-    gap: 14px;
+    gap: 0;                         /* tanpa celah: latar menu aktif menyentuh panel utama */
     background: var(--pp-brown);
     color: var(--pp-ink);
 }
