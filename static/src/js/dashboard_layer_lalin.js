@@ -78,6 +78,21 @@ function _buildDomain(filters, extraDomain = []) {
     return domain;
 }
 
+// ── Sumber data heatmap: filter aktif + cakupan drill-down saat ini ─────────
+export function getLalinHeatSource(ctx) {
+    const filters = _getActiveFilters(ctx);
+    const scope = [];
+    if (ctx.drillKecamatanId)      scope.push(['kecamatan_id', '=', ctx.drillKecamatanId]);
+    else if (ctx.drillKabupatenId) scope.push(['kabupaten_id', '=', ctx.drillKabupatenId]);
+    else if (filters.kabupatenId)  scope.push(['kabupaten_id', '=', filters.kabupatenId]);
+    return {
+        model: 'petapantau.lalu_lintas',
+        domain: _buildDomain(filters, scope),
+        unit: 'kejadian',
+        order: 'tanggal_kejadian desc',
+    };
+}
+
 function _periodeLabel(filters) {
     const parts = [];
     if (filters.tahun)    parts.push(`Tahun ${filters.tahun}`);

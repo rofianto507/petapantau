@@ -92,6 +92,21 @@ function _buildDomain(filters, extraDomain = []) {
     return domain;
 }
 
+// ── Sumber data heatmap: filter aktif + cakupan drill-down saat ini ─────────
+export function getKriminalHeatSource(ctx) {
+    const filters = _getActiveFilters(ctx);
+    const scope = [];
+    if (filters.polresId)          scope.push(['polres_id', '=', filters.polresId]);
+    if (ctx.drillKecamatanId)      scope.push(['kecamatan_id', '=', ctx.drillKecamatanId]);
+    else if (ctx.drillKabupatenId) scope.push(['kabupaten_id', '=', ctx.drillKabupatenId]);
+    return {
+        model: 'petapantau.kriminalitas',
+        domain: _buildDomain(filters, scope),
+        unit: 'kasus',
+        order: 'tanggal_kejadian desc',
+    };
+}
+
 // ── Label periode untuk popup ────────────────────────────────────────────────
 function _periodeLabel(filters) {
     const parts = [];

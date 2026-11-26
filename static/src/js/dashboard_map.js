@@ -13,6 +13,7 @@ import { loadModeBencana, removeBencanaLegend } from "./dashboard_layer_bencana"
 import { loadModeLokasi, removeLokasiLegend } from "./dashboard_layer_lokasi";
 import { loadModePatroli, removePatroliLegend } from "./dashboard_layer_patroli";
 import { removeLokasiOverlay } from "./dashboard_overlay_lokasi";
+import { initHeatmap, refreshHeatmap } from "./dashboard_heatmap";
 import { updateKriminalCharts, disposeKriminalCharts, updateKriminalTable } from "./dashboard_charts_kriminal";
 import { updateBencanaCharts, disposeBencanaCharts, updateBencanaTable } from "./dashboard_charts_bencana";
 import { updateLalinCharts, disposeLalinCharts, updateLalinTable } from "./dashboard_charts_lalin";
@@ -859,6 +860,8 @@ export class DashboardMap extends Component {
     // ECHARTS — lihat dashboard_charts_kriminal.js
     // ─────────────────────────────────────────────
     async _updateCharts(mode) {
+        // Dipanggil di setiap perubahan mode, filter, dan drill-down: heatmap ikut diselaraskan
+        refreshHeatmap(this);
         await Promise.all([
             updateKriminalCharts(this, mode),
             updateBencanaCharts(this, mode),
@@ -971,6 +974,9 @@ export class DashboardMap extends Component {
             clearTimeout(this._labelVisTimer);
             this._labelVisTimer = setTimeout(() => this._updateLabelVisibility(), 60);
         });
+
+        // Tidak ditunggu: peta wilayah tidak perlu tertahan oleh pemuatan library heatmap
+        initHeatmap(this).then(() => refreshHeatmap(this));
 
         await loadKabupatenLayer(this);
     }

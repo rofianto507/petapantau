@@ -116,6 +116,53 @@ function _fmtNum(n) {
 }
 
 // ── Markers + Rute (dari lokasi_patroli) ─────────────────────────────────────
+// ── Sumber data heatmap: titik lokasi patroli ───────────────────────────────
+export function getPatroliHeatSource(ctx) {
+    const filters = _getActiveFilters(ctx);
+    const geo = [];
+    if (ctx.drillKecamatanId)      geo.push(['kecamatan_id', '=', ctx.drillKecamatanId]);
+    else if (ctx.drillKabupatenId) geo.push(['kabupaten_id', '=', ctx.drillKabupatenId]);
+    else if (filters.kabupatenId)  geo.push(['kabupaten_id', '=', filters.kabupatenId]);
+    return {
+        model: 'petapantau.lokasi_patroli',
+        // Syarat koordinat dilepas di sini: heatmap menghitung sendiri berapa titik yang punya koordinat
+        domain: _buildLokasiDomain(filters, geo).filter(([field]) => field !== 'latitude' && field !== 'longitude'),
+        unit: 'titik patroli',
+        order: 'tanggal desc',
+        caveat: 'Titik yang dilaporkan petugas, bukan seluruh rute',
+    };
+}
+
+// ── Sumber data perbandingan: kepadatan kriminalitas vs titik patroli ───────
+export function getPatroliCompareSource(ctx) {
+    const filters = _getActiveFilters(ctx);
+    const geo = [];
+    if (ctx.drillKecamatanId)      geo.push(['kecamatan_id', '=', ctx.drillKecamatanId]);
+    else if (ctx.drillKabupatenId) geo.push(['kabupaten_id', '=', ctx.drillKabupatenId]);
+    else if (filters.kabupatenId)  geo.push(['kabupaten_id', '=', filters.kabupatenId]);
+
+    let periode = 'Semua periode';
+    if (filters.dateFrom || filters.dateTo) {
+        periode = `Periode ${filters.dateFrom || 'awal'} s/d ${filters.dateTo || 'sekarang'}`;
+    }
+    return {
+        heat: {
+            model: 'petapantau.kriminalitas',
+            domain: _buildKriminalDomain(filters, geo),
+            unit: 'kasus',
+            order: 'tanggal_kejadian desc',
+        },
+        // Titik patroli sengaja tidak dibatasi wilayah drill-down: patroli wilayah tetangga yang
+        // melintas dekat perbatasan tetap dihitung, agar tidak muncul celah palsu.
+        patrol: {
+            model: 'petapantau.lokasi_patroli',
+            domain: _buildLokasiDomain(filters),
+            order: 'tanggal desc',
+        },
+        periode,
+    };
+}
+
 async function _loadPatroliMarkers(ctx, filters, geoConditions = []) {
     ctx.markerLayerGroup.clearLayers();
     if (ctx._patroliPolylineLayer) {

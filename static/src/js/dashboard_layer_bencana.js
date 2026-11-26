@@ -78,6 +78,22 @@ function _buildDomain(filters, extraDomain = []) {
     return domain;
 }
 
+// ── Sumber data heatmap: filter aktif + cakupan drill-down saat ini ─────────
+export function getBencanaHeatSource(ctx) {
+    const filters = _getActiveFilters(ctx);
+    const scope = [];
+    if (ctx.drillKecamatanId)      scope.push(['kecamatan_id', '=', ctx.drillKecamatanId]);
+    else if (ctx.drillKabupatenId) scope.push(['kabupaten_id', '=', ctx.drillKabupatenId]);
+    else if (filters.kabupatenId)  scope.push(['kabupaten_id', '=', filters.kabupatenId]);
+    return {
+        model: 'petapantau.bencana',
+        domain: _buildDomain(filters, scope),
+        unit: 'kejadian',
+        order: 'tanggal_kejadian desc',
+        caveat: 'Konsentrasi kejadian, bukan peta risiko bencana',
+    };
+}
+
 function _periodeLabel(filters) {
     const parts = [];
     if (filters.tahun)    parts.push(`Tahun ${filters.tahun}`);

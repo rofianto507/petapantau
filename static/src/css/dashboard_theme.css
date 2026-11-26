@@ -332,3 +332,90 @@
     background-color: rgba(29, 26, 21, 0.32) !important;
     font-weight: 600;
 }
+
+/* ── Heatmap: tombol tampilan, legenda, dan penyesuaian peta ─────────────── */
+.petapantau-heat-toggle {
+    display: flex;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--pp-line);
+    border-radius: 6px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+.petapantau-heat-toggle button {
+    border: 0;
+    background: transparent;
+    color: var(--pp-brown);
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+    cursor: pointer;
+}
+.petapantau-heat-toggle button + button {
+    border-left: 1px solid var(--pp-line);
+}
+.petapantau-heat-toggle button:hover {
+    background: var(--pp-gold-tint);
+}
+.petapantau-heat-toggle button.active {
+    background: var(--pp-gold-deep);
+    color: #fff;
+}
+.petapantau-heat-toggle button:focus-visible {
+    outline: 2px solid var(--pp-brown);
+    outline-offset: -2px;
+}
+/* Tampilan heatmap: arsiran wilayah dihilangkan, garis batas dan klik tetap berfungsi */
+.petapantau-heat-on .leaflet-overlay-pane path.leaflet-interactive {
+    fill-opacity: 0;
+}
+.petapantau-heat-on .leaflet-overlay-pane path.leaflet-interactive:hover {
+    fill-opacity: 0.12;
+}
+.petapantau-heat-on .petapantau-legend--kriminal,
+.petapantau-heat-on .petapantau-legend--lalin,
+.petapantau-heat-on .petapantau-legend--bencana,
+.petapantau-heat-on .petapantau-legend--patroli,
+.petapantau-heat-on .leaflet-patroliRoute-pane {
+    display: none;
+}
+.petapantau-heat-bar {
+    width: 180px;
+    height: 10px;
+    border-radius: 3px;
+}
+.petapantau-heat-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3px;
+    font-size: 11px;
+}
+.petapantau-heat-dot {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-size: 11px;
+}
+.petapantau-heat-dot i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1.5px #fff, 0 0 0 2.5px rgba(0, 0, 0, 0.25);
+}
+.petapantau-heat-coverage {
+    max-width: 180px;
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px solid var(--pp-line);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+.petapantau-heat-note {
+    max-width: 180px;
+    margin-top: 6px;
+    font-size: 11px;
+    opacity: 0.75;
+}
