@@ -8,7 +8,7 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
-    background: #f0f2f5;
+    background: #F4F1EA;
     font-family: inherit;
 }
 
@@ -18,8 +18,8 @@
 .petapantau-sidebar {
     width: 190px;
     min-width: 190px;
-    background: #1a252f;
-    color: #ecf0f1;
+    background: #14110D;
+    color: #F4F1EA;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
@@ -44,7 +44,7 @@
 .petapantau-collapse-btn {
     background: transparent;
     border: none;
-    color: #7f8c8d;
+    color: #6B6256;
     font-size: 14px;
     cursor: pointer;
     padding: 5px 7px;
@@ -57,7 +57,7 @@
 }
 .petapantau-collapse-btn:hover {
     background: rgba(255,255,255,0.08);
-    color: #ecf0f1;
+    color: #F4F1EA;
 }
 
 /* Saat collapsed: icon rotate dan center */
@@ -74,7 +74,7 @@
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.5px;
-    color: #7f8c8d;
+    color: #6B6256;
     padding: 8px 14px 4px;
     white-space: nowrap;
     overflow: hidden;
@@ -100,7 +100,7 @@
     align-items: center;
     gap: 10px;
     padding: 10px 14px;
-    color: #bdc3c7;
+    color: #BDB49F;
     text-decoration: none;
     font-size: 12px;
     font-weight: 500;
@@ -116,7 +116,7 @@
     font-size: 13px;
     min-width: 16px;
     text-align: center;
-    color: #7f8c8d;
+    color: #6B6256;
     flex-shrink: 0;
     transition: color 0.15s;
 }
@@ -131,14 +131,14 @@
     background: rgba(255,255,255,0.06);
     color: #ffffff;
 }
-.petapantau-nav-item:hover i { color: #ecf0f1; }
+.petapantau-nav-item:hover i { color: #F4F1EA; }
 
 .petapantau-nav-item.active {
-    background: rgba(52,152,219,0.18);
+    background: rgba(212,165,55,0.18);
     color: #ffffff;
-    border-left-color: #3498db;
+    border-left-color: #D4A537;
 }
-.petapantau-nav-item.active i { color: #3498db; }
+.petapantau-nav-item.active i { color: #D4A537; }
 
 /* ── Collapsed state ── */
 .petapantau-sidebar.collapsed .petapantau-nav-item span {
@@ -151,8 +151,8 @@
     border-bottom: 3px solid transparent;
 }
 .petapantau-sidebar.collapsed .petapantau-nav-item.active {
-    background: rgba(52,152,219,0.2);
-    border-bottom-color: #3498db;
+    background: rgba(212,165,55,0.2);
+    border-bottom-color: #D4A537;
 }
 .petapantau-sidebar.collapsed .petapantau-nav-item i {
     font-size: 15px;
@@ -179,7 +179,7 @@
     position: sticky;
     top: -14px;
     z-index: 50;
-    background: #f0f2f5;
+    background: #F4F1EA;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -205,7 +205,7 @@
     gap: 8px;
     font-size: 13px;
     font-weight: 600;
-    color: #2c3e50;
+    color: #26211A;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -213,7 +213,7 @@
 
 .petapantau-breadcrumb-box i {
     font-size: 13px;
-    color: #2980b9;
+    color: #8A6410;
     flex-shrink: 0;
 }
 
@@ -223,18 +223,18 @@
     flex-wrap: nowrap;
     gap: 6px;
     font-size: 12px;
-    color: #7f8c8d;
+    color: #6B6256;
     min-width: 0;
     overflow-x: auto;
 }
 
-.petapantau-filter-box i { color: #95a5a6; }
+.petapantau-filter-box i { color: #8B8571; }
 
 /* ── Selects di filter box ── */
 .petapantau-select {
     background: #ffffff;
-    color: #2c3e50;
-    border: 1px solid #d0d7de;
+    color: #26211A;
+    border: 1px solid #DDD6CB;
     border-radius: 5px;
     padding: 4px 10px;
     font-size: 12px;
@@ -244,11 +244,11 @@
     min-width: 110px;
     max-width: 200px;
 }
-.petapantau-select option { background: #fff; color: #2c3e50; }
+.petapantau-select option { background: #fff; color: #26211A; }
 .petapantau-select:hover,
 .petapantau-select:focus {
-    border-color: #2980b9;
-    box-shadow: 0 0 0 2px rgba(41,128,185,0.15);
+    border-color: #8A6410;
+    box-shadow: 0 0 0 2px rgba(138,100,16,0.15);
 }
 
 /* ── Date range di filter box ── */
@@ -256,16 +256,16 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    border-left: 1px solid #d0d7de;
+    border-left: 1px solid #DDD6CB;
     padding-left: 10px;
 }
 
-.petapantau-date-range > i { color: #95a5a6; font-size: 11px; flex-shrink: 0; }
+.petapantau-date-range > i { color: #8B8571; font-size: 11px; flex-shrink: 0; }
 
 .petapantau-flatpickr-input {
     background: #ffffff;
-    color: #2c3e50;
-    border: 1px solid #d0d7de;
+    color: #26211A;
+    border: 1px solid #DDD6CB;
     border-radius: 5px;
     padding: 4px 8px;
     font-size: 11px;
@@ -276,8 +276,8 @@
 }
 .petapantau-flatpickr-input:hover,
 .petapantau-flatpickr-input:focus {
-    border-color: #2980b9;
-    box-shadow: 0 0 0 2px rgba(41,128,185,0.15);
+    border-color: #8A6410;
+    box-shadow: 0 0 0 2px rgba(138,100,16,0.15);
 }
 
 .petapantau-date-clear {
@@ -292,7 +292,7 @@
     flex-shrink: 0;
     transition: color 0.2s;
 }
-.petapantau-date-clear:hover { color: #e74c3c; }
+.petapantau-date-clear:hover { color: #B07F10; }
 
 /* ════════════════════════════════════════════
    FLATPICKR CALENDAR THEME
@@ -301,25 +301,25 @@
     border-radius: 8px !important;
     box-shadow: 0 4px 16px rgba(0,0,0,0.18) !important;
     font-size: 12px !important;
-    border: 1px solid #d0d7de !important;
+    border: 1px solid #DDD6CB !important;
 }
 
 /* ── Header bulan/tahun ── */
 .flatpickr-months .flatpickr-month {
-    background: #2c3e50 !important;
-    color: #ecf0f1 !important;
-    fill: #ecf0f1 !important;
+    background: #26211A !important;
+    color: #F4F1EA !important;
+    fill: #F4F1EA !important;
     border-radius: 8px 8px 0 0 !important;
     height: 38px !important;
 }
 .flatpickr-current-month {
-    color: #ecf0f1 !important;
+    color: #F4F1EA !important;
     font-size: 13px !important;
     font-weight: 600 !important;
 }
 .flatpickr-current-month .flatpickr-monthDropdown-months {
-    background: #2c3e50 !important;
-    color: #ecf0f1 !important;
+    background: #26211A !important;
+    color: #F4F1EA !important;
     border: none !important;
     outline: none !important;
     font-size: 13px !important;
@@ -330,34 +330,34 @@
     appearance: none;
 }
 .flatpickr-current-month .flatpickr-monthDropdown-months:hover {
-    background: #34495e !important;
+    background: #3B2A16 !important;
 }
 .flatpickr-current-month .flatpickr-monthDropdown-months option,
 .flatpickr-monthDropdown-month {
-    background: #2c3e50 !important;
-    color: #ecf0f1 !important;
+    background: #26211A !important;
+    color: #F4F1EA !important;
 }
 .flatpickr-current-month input.cur-year {
-    color: #ecf0f1 !important;
+    color: #F4F1EA !important;
     font-size: 13px !important;
     font-weight: 600 !important;
 }
-.flatpickr-current-month input.cur-year:hover { background: #34495e !important; }
+.flatpickr-current-month input.cur-year:hover { background: #3B2A16 !important; }
 
 /* ── Tombol prev/next ── */
 .flatpickr-prev-month,
 .flatpickr-next-month {
-    color: #ecf0f1 !important;
-    fill: #ecf0f1 !important;
+    color: #F4F1EA !important;
+    fill: #F4F1EA !important;
 }
 .flatpickr-prev-month:hover svg,
-.flatpickr-next-month:hover svg { fill: #3498db !important; }
+.flatpickr-next-month:hover svg { fill: #D4A537 !important; }
 
 /* ── Header hari ── */
-.flatpickr-weekdays { background: #34495e !important; }
+.flatpickr-weekdays { background: #3B2A16 !important; }
 span.flatpickr-weekday {
-    background: #34495e !important;
-    color: #bdc3c7 !important;
+    background: #3B2A16 !important;
+    color: #BDB49F !important;
     font-size: 11px !important;
     font-weight: 600 !important;
 }
@@ -367,21 +367,21 @@ span.flatpickr-weekday {
     border-radius: 4px !important;
     font-size: 12px !important;
 }
-.flatpickr-day:hover { background: #eaf3fb !important; border-color: #eaf3fb !important; }
-.flatpickr-day.today { border-color: #2980b9 !important; font-weight: 700 !important; }
+.flatpickr-day:hover { background: #F6ECCB !important; border-color: #F6ECCB !important; }
+.flatpickr-day.today { border-color: #8A6410 !important; font-weight: 700 !important; }
 .flatpickr-day.selected,
 .flatpickr-day.startRange,
 .flatpickr-day.endRange {
-    background: #2980b9 !important;
-    border-color: #2980b9 !important;
+    background: #8A6410 !important;
+    border-color: #8A6410 !important;
     color: #fff !important;
 }
 .flatpickr-day.startRange { border-radius: 4px 0 0 4px !important; }
 .flatpickr-day.endRange   { border-radius: 0 4px 4px 0 !important; }
 .flatpickr-day.inRange {
-    background: rgba(41,128,185,0.12) !important;
+    background: rgba(138,100,16,0.12) !important;
     border-color: transparent !important;
-    box-shadow: -5px 0 0 rgba(41,128,185,0.12), 5px 0 0 rgba(41,128,185,0.12) !important;
+    box-shadow: -5px 0 0 rgba(138,100,16,0.12), 5px 0 0 rgba(138,100,16,0.12) !important;
     border-radius: 0 !important;
 }
 .flatpickr-day.flatpickr-disabled,
@@ -390,7 +390,7 @@ span.flatpickr-weekday {
 }
 
 /* ── 2-bulan side-by-side (range mode) ── */
-.flatpickr-calendar.hasTime .flatpickr-time { border-top-color: #d0d7de !important; }
+.flatpickr-calendar.hasTime .flatpickr-time { border-top-color: #DDD6CB !important; }
 
 /* Breadcrumb separator & item */
 .petapantau-breadcrumb-item { font-weight: 600; }
@@ -410,7 +410,7 @@ span.flatpickr-weekday {
 .petapantau-filter-summary {
     flex: 1;
     font-size: 11px;
-    color: #7f8c8d;
+    color: #6B6256;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -425,7 +425,7 @@ span.flatpickr-weekday {
     flex-shrink: 0;
     max-width: 340px;
     font-size: 11px;
-    color: #7f8c8d;
+    color: #6B6256;
     display: flex;
     align-items: baseline;
     gap: 4px;
@@ -435,12 +435,12 @@ span.flatpickr-weekday {
     margin-top: -4px;
 }
 .petapantau-sumber-info i {
-    color: #875A7B;
+    color: #8A6410;
     font-size: 11px;
     flex-shrink: 0;
 }
 .petapantau-sumber-label {
-    color: #7f8c8d;
+    color: #6B6256;
     flex-shrink: 0;
     white-space: nowrap;
 }
@@ -477,8 +477,8 @@ span.flatpickr-weekday {
 .petapantau-sumber-toggle {
     flex-shrink: 0;
     background: none;
-    border: 1px solid #c39bd3;
-    color: #875A7B;
+    border: 1px solid #D9B655;
+    color: #8A6410;
     cursor: pointer;
     font-size: 10px;
     padding: 1px 4px;
@@ -489,16 +489,16 @@ span.flatpickr-weekday {
     transition: background 0.15s, color 0.15s;
 }
 .petapantau-sumber-toggle:hover {
-    background: #875A7B;
+    background: #8A6410;
     color: #fff;
-    border-color: #875A7B;
+    border-color: #8A6410;
 }
 .petapantau-filter-summary-chip {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    background: #eaf3fb;
-    color: #1a6b9a;
+    background: #F6ECCB;
+    color: #8A6410;
     border-radius: 4px;
     padding: 2px 7px;
     font-size: 11px;
@@ -507,7 +507,7 @@ span.flatpickr-weekday {
 }
 .petapantau-filter-summary-chip i { font-size: 10px; opacity: 0.75; }
 .petapantau-filter-summary-sep {
-    color: #bdc3c7;
+    color: #BDB49F;
     font-size: 10px;
 }
 
@@ -585,7 +585,7 @@ span.flatpickr-weekday {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f0eff5;
+    background: #F1EEE6;
     font-size: 20px;
     flex-shrink: 0;
      
@@ -596,13 +596,13 @@ span.flatpickr-weekday {
 .petapantau-kpi-value {
     font-size: 28px;
     font-weight: 700;
-    color: #2c3e50;
+    color: #26211A;
     line-height: 1;
 }
 
 .petapantau-kpi-label {
     font-size: 11px;
-    color: #95a5a6;
+    color: #8B8571;
     margin-top: 5px;
     white-space: nowrap;
     overflow: hidden;
@@ -642,7 +642,7 @@ span.flatpickr-weekday {
     text-decoration: none;
 }
 .petapantau-map-expand-btn a:hover {
-    background-color: #f4f4f4;
+    background-color: #F4F1EA;
     color: #000;
 }
 
@@ -664,7 +664,7 @@ span.flatpickr-weekday {
 .kabupaten-label span {
     font-size: 11px;
     font-weight: 600;
-    color: #05305e;
+    color: #1D1A15;
     text-align: center;
     white-space: normal;
     max-width: 100px;
@@ -690,7 +690,7 @@ span.flatpickr-weekday {
 }
 
 .petapantau-popup-header {
-    background: #34495e;
+    background: #3B2A16;
     color: #ffffff;
     padding: 10px 14px;
     font-size: 13px;
@@ -698,9 +698,9 @@ span.flatpickr-weekday {
     align-items: center;
     gap: 8px;
 }
-.petapantau-popup-header--kecamatan { background: #1a6b9a; }
-.petapantau-popup-header--desa      { background: #1e8449; }
-.petapantau-popup-header i { color: #f1c40f; font-size: 14px; }
+.petapantau-popup-header--kecamatan { background: #8A6410; }
+.petapantau-popup-header--desa      { background: #3D3022; }
+.petapantau-popup-header i { color: #E9C05A; font-size: 14px; }
 
 .petapantau-popup-body {
     padding: 10px 14px;
@@ -711,7 +711,7 @@ span.flatpickr-weekday {
     border-collapse: collapse;
     font-size: 12px;
 }
-.petapantau-popup-body table tr { border-bottom: 1px solid #f0f0f0; }
+.petapantau-popup-body table tr { border-bottom: 1px solid #F1EEE6; }
 .petapantau-popup-body table tr:last-child { border-bottom: none; }
 .petapantau-popup-body table td {
     padding: 6px 4px;
@@ -729,19 +729,19 @@ span.flatpickr-weekday {
 .petapantau-popup-body table td:last-child {
     word-break: break-all;
 }
-.petapantau-popup-body table td i { color: #3498db; width: 14px; text-align: center; }
-.petapantau-leaflet-popup .leaflet-popup-tip { background: #34495e; }
+.petapantau-popup-body table td i { color: #D4A537; width: 14px; text-align: center; }
+.petapantau-leaflet-popup .leaflet-popup-tip { background: #3B2A16; }
 
 .petapantau-popup-footer {
     padding: 8px 14px 12px;
-    background: #f8f9fa;
-    border-top: 1px solid #eee;
+    background: #FBFAF7;
+    border-top: 1px solid #EEE9E0;
 }
 
 .petapantau-btn-detail {
     width: 100%;
     padding: 7px 10px;
-    background: #34495e;
+    background: #3B2A16;
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -754,9 +754,9 @@ span.flatpickr-weekday {
     gap: 6px;
     transition: background 0.2s;
 }
-.petapantau-btn-detail:hover { background: #2c3e50; }
-.petapantau-btn-detail--kecamatan { background: #1a6b9a; }
-.petapantau-btn-detail--kecamatan:hover { background: #155d87; }
+.petapantau-btn-detail:hover { background: #26211A; }
+.petapantau-btn-detail--kecamatan { background: #8A6410; }
+.petapantau-btn-detail--kecamatan:hover { background: #6E4E0C; }
 
 /* ── Tombol Kembali ── */
 .petapantau-btn-back {
@@ -765,7 +765,7 @@ span.flatpickr-weekday {
     gap: 6px;
     padding: 6px 12px;
     background: #ffffff;
-    color: #34495e;
+    color: #3B2A16;
     border: 1.5px solid #bbb;
     border-radius: 6px;
     font-size: 12px;
@@ -777,9 +777,9 @@ span.flatpickr-weekday {
     white-space: nowrap;
 }
 .petapantau-btn-back:hover {
-    background: #34495e;
+    background: #3B2A16;
     color: #ffffff;
-    border-color: #34495e;
+    border-color: #3B2A16;
 }
 
 /* ── Cluster marker — Google Maps POI style ── */
@@ -796,28 +796,28 @@ span.flatpickr-weekday {
 }
 .petapantau-cluster-icon:hover { transform: scale(1.15); }
 .petapantau-cluster-icon--sm {
-    background: radial-gradient(circle at 38% 35%, #f1948a, #c0392b);
+    background: radial-gradient(circle at 38% 35%, #E9C05A, #8A6410);
     border: 3px solid rgba(255,255,255,0.65);
-    box-shadow: 0 2px 6px rgba(192,57,43,0.5), 0 0 0 3px rgba(192,57,43,0.18);
+    box-shadow: 0 2px 6px rgba(138,100,16,0.5), 0 0 0 3px rgba(138,100,16,0.18);
     font-size: 12px;
 }
 .petapantau-cluster-icon--md {
-    background: radial-gradient(circle at 38% 35%, #e74c3c, #922b21);
+    background: radial-gradient(circle at 38% 35%, #B07F10, #3B2A16);
     border: 3px solid rgba(255,255,255,0.6);
-    box-shadow: 0 2px 8px rgba(146,43,33,0.55), 0 0 0 4px rgba(146,43,33,0.18);
+    box-shadow: 0 2px 8px rgba(59,42,22,0.55), 0 0 0 4px rgba(59,42,22,0.18);
     font-size: 13px;
 }
 .petapantau-cluster-icon--lg {
-    background: radial-gradient(circle at 38% 35%, #c0392b, #6e1212);
+    background: radial-gradient(circle at 38% 35%, #8A6410, #2B1F0A);
     border: 3px solid rgba(255,255,255,0.55);
-    box-shadow: 0 3px 10px rgba(110,18,18,0.6), 0 0 0 5px rgba(110,18,18,0.15);
+    box-shadow: 0 3px 10px rgba(43,31,10,0.6), 0 0 0 5px rgba(43,31,10,0.15);
     font-size: 13px;
     font-weight: 800;
 }
 .petapantau-cluster-icon--xl {
-    background: radial-gradient(circle at 38% 35%, #922b21, #4a0a0a);
+    background: radial-gradient(circle at 38% 35%, #3B2A16, #1D1A15);
     border: 3px solid rgba(255,255,255,0.5);
-    box-shadow: 0 3px 12px rgba(74,10,10,0.65), 0 0 0 6px rgba(74,10,10,0.15);
+    box-shadow: 0 3px 12px rgba(29,26,21,0.65), 0 0 0 6px rgba(29,26,21,0.15);
     font-size: 14px;
     font-weight: 800;
     letter-spacing: -0.5px;
@@ -825,15 +825,15 @@ span.flatpickr-weekday {
 
 /* ── Popup foto lazy-load (shared) ── */
 .petapantau-popup-foto {
-    background: #f0f2f5;
-    border-bottom: 1px solid #e8eaed;
+    background: #F4F1EA;
+    border-bottom: 1px solid #E9E4DA;
     min-height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
 }
-.petapantau-popup-foto-spinner { color: #b0bec5; font-size: 18px; }
+.petapantau-popup-foto-spinner { color: #BDB49F; font-size: 18px; }
 .petapantau-popup-foto-img {
     display: none;
     width: 100%;
@@ -856,7 +856,7 @@ span.flatpickr-weekday {
     margin: 8px;
 }
 .petapantau-coming-soon i { font-size: 15px; color: #888; margin-bottom: 3px; }
-.petapantau-coming-soon strong { font-size: 12px; color: #2c3e50; }
+.petapantau-coming-soon strong { font-size: 12px; color: #26211A; }
 .petapantau-coming-soon span { color: #999; font-size: 11px; }
 
 /* ════════════════════════════════════════════
@@ -870,20 +870,20 @@ span.flatpickr-weekday {
     font-size: 12px;
     min-width: 165px;
     margin: 0 8px 8px 0;
-    border-top: 3px solid #e74c3c;
+    border-top: 3px solid #B07F10;
 }
-.petapantau-legend--kriminal { border-top-color: #e74c3c; }
+.petapantau-legend--kriminal { border-top-color: #B07F10; }
 
 .petapantau-legend-title {
     font-size: 12px;
     font-weight: 700;
-    color: #2c3e50;
+    color: #26211A;
     margin-bottom: 8px;
     display: flex;
     align-items: center;
     gap: 6px;
 }
-.petapantau-legend--kriminal .petapantau-legend-title i { color: #e74c3c; }
+.petapantau-legend--kriminal .petapantau-legend-title i { color: #B07F10; }
 
 .petapantau-legend-list {
     list-style: none;
@@ -903,15 +903,15 @@ span.flatpickr-weekday {
 .petapantau-legend-label { color: #444; font-size: 11px; line-height: 1; }
 
 /* ── KAM Legend ── */
-.petapantau-legend--kam { border-top-color: #922b21; }
-.petapantau-legend--kam .petapantau-legend-title i { color: #e74c3c; }
+.petapantau-legend--kam { border-top-color: #3B2A16; }
+.petapantau-legend--kam .petapantau-legend-title i { color: #B07F10; }
 
 /* ── KAM Marker ── */
 .petapantau-kam-marker {
     width: 24px; height: 24px;
     border-radius: 50%;
     background: rgba(255,255,255,0.92);
-    border: 2px solid #2471a3;
+    border: 2px solid #8A6410;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -927,7 +927,7 @@ span.flatpickr-weekday {
     width: 24px; height: 24px;
     border-radius: 50%;
     background: rgba(255,255,255,0.92);
-    border: 2px solid #e74c3c;
+    border: 2px solid #B07F10;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -943,7 +943,7 @@ span.flatpickr-weekday {
     width: 24px; height: 24px;
     border-radius: 50%;
     background: rgba(255,255,255,0.92);
-    border: 2px solid #e67e22;
+    border: 2px solid #8C6A3A;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -959,7 +959,7 @@ span.flatpickr-weekday {
     width: 22px; height: 22px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.95);
-    border: 2px solid #6c3483;
+    border: 2px solid #8A6410;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -979,12 +979,12 @@ span.flatpickr-weekday {
     max-width: 240px;
     font-family: inherit;
     font-size: 12px;
-    border: 1px solid #d2b4de;
+    border: 1px solid #E3CF9D;
     overflow: hidden;
 }
 
 .petapantau-lokasi-overlay-header {
-    background: #6c3483;
+    background: #8A6410;
     color: #fff;
     padding: 7px 10px;
     display: flex;
@@ -1016,10 +1016,10 @@ span.flatpickr-weekday {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.petapantau-lokasi-overlay-item:hover { background: #f4ecf7; }
+.petapantau-lokasi-overlay-item:hover { background: #F6ECCB; }
 .petapantau-lokasi-overlay-item input[type="checkbox"] {
     cursor: pointer;
-    accent-color: #6c3483;
+    accent-color: #8A6410;
     flex-shrink: 0;
 }
 .petapantau-lokasi-overlay-item span {
@@ -1052,7 +1052,7 @@ span.flatpickr-weekday {
     flex: 1;
     min-width: 0;
     background: #ffffff;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #E3DDD0;
     border-radius: 8px;
     padding: 12px 16px 14px;
     display: flex;
@@ -1062,7 +1062,7 @@ span.flatpickr-weekday {
 .petapantau-chart-title {
     font-size: 13px;
     font-weight: 600;
-    color: #2c3e50;
+    color: #26211A;
     margin-bottom: 8px;
     display: flex;
     align-items: center;
@@ -1070,7 +1070,7 @@ span.flatpickr-weekday {
     flex-shrink: 0;
 }
 
-.petapantau-chart-title i { color: #875A7B; }
+.petapantau-chart-title i { color: #8A6410; }
 
 .petapantau-chart-body {
     flex: 1;
@@ -1085,7 +1085,7 @@ span.flatpickr-weekday {
     flex: 1;
     min-width: 0;
     background: #ffffff;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #E3DDD0;
     border-radius: 8px;
     padding: 12px 16px 16px;
     display: flex;
@@ -1102,7 +1102,7 @@ span.flatpickr-weekday {
 
 .petapantau-table-info {
     font-size: 12px;
-    color: #7f8c8d;
+    color: #6B6256;
 }
 
 .petapantau-table-pagination {
@@ -1113,8 +1113,8 @@ span.flatpickr-weekday {
 
 .petapantau-page-btn {
     background: #fff;
-    border: 1px solid #d0d7de;
-    color: #2c3e50;
+    border: 1px solid #DDD6CB;
+    color: #26211A;
     border-radius: 4px;
     padding: 4px 9px;
     font-size: 12px;
@@ -1123,9 +1123,9 @@ span.flatpickr-weekday {
     line-height: 1;
 }
 .petapantau-page-btn:hover:not(:disabled) {
-    background: #eaf3fb;
-    border-color: #2980b9;
-    color: #2980b9;
+    background: #F6ECCB;
+    border-color: #8A6410;
+    color: #8A6410;
 }
 .petapantau-page-btn:disabled {
     color: #ccc;
@@ -1142,7 +1142,7 @@ span.flatpickr-weekday {
 .petapantau-table-wrapper {
     overflow-x: auto;
     border-radius: 4px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #E3DDD0;
 }
 
 .petapantau-table {
@@ -1153,20 +1153,20 @@ span.flatpickr-weekday {
 }
 
 .petapantau-th {
-    background: #f8f9fa;
+    background: #FBFAF7;
     color: #555;
     font-weight: 600;
     padding: 8px 10px;
     text-align: left;
-    border-bottom: 2px solid #e5e7eb;
+    border-bottom: 2px solid #E3DDD0;
     white-space: nowrap;
     font-size: 11px;
 }
 
 .petapantau-td {
     padding: 7px 10px;
-    color: #2c3e50;
-    border-bottom: 1px solid #f0f0f0;
+    color: #26211A;
+    border-bottom: 1px solid #F1EEE6;
     vertical-align: middle;
     font-size: 12px;
 }
@@ -1183,7 +1183,7 @@ span.flatpickr-weekday {
 }
 
 .petapantau-table-row:last-child .petapantau-td { border-bottom: none; }
-.petapantau-table-row:hover .petapantau-td { background: #f4f6f8; }
+.petapantau-table-row:hover .petapantau-td { background: #F4F1EA; }
 
 .petapantau-badge {
     display: inline-flex;
@@ -1194,10 +1194,10 @@ span.flatpickr-weekday {
     font-weight: 600;
     white-space: nowrap;
 }
-.petapantau-badge--green { background: #d5f5e3; color: #1e8449; }
-.petapantau-badge--red   { background: #fadbd8; color: #c0392b; }
-.petapantau-badge--gray  { background: #eaecef; color: #717d7e; }
-.petapantau-badge--blue  { background: #d6eaf8; color: #1a5276; }
+.petapantau-badge--green { background: #EFE6D2; color: #3D3022; }
+.petapantau-badge--red   { background: #F6ECCB; color: #8A6410; }
+.petapantau-badge--gray  { background: #E9E4DA; color: #6B6256; }
+.petapantau-badge--blue  { background: #F6ECCB; color: #5C4000; }
 
 /* ════════════════════════════════════════════
    VIEW TOGGLE (table / kanban)
@@ -1206,7 +1206,7 @@ span.flatpickr-weekday {
     display: flex;
     align-items: center;
     gap: 2px;
-    background: #f0f2f5;
+    background: #F4F1EA;
     border-radius: 6px;
     padding: 2px;
 }
@@ -1216,15 +1216,15 @@ span.flatpickr-weekday {
     border-radius: 4px;
     padding: 4px 8px;
     font-size: 13px;
-    color: #7f8c8d;
+    color: #6B6256;
     cursor: pointer;
     line-height: 1;
     transition: background 0.15s, color 0.15s;
 }
-.petapantau-view-btn:hover { background: #dde1e7; color: #2c3e50; }
+.petapantau-view-btn:hover { background: #E3DDD0; color: #26211A; }
 .petapantau-view-btn--active {
     background: #ffffff;
-    color: #2980b9;
+    color: #8A6410;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
 
@@ -1240,7 +1240,7 @@ span.flatpickr-weekday {
 
 .petapantau-kanban-card {
     background: #fff;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #E3DDD0;
     border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
@@ -1258,16 +1258,16 @@ span.flatpickr-weekday {
     height: 130px;
     object-fit: cover;
     display: block;
-    background: #f0f2f5;
+    background: #F4F1EA;
 }
 .petapantau-kanban-thumb-placeholder {
     width: 100%;
     height: 130px;
-    background: linear-gradient(135deg, #e8ecf0 0%, #d5dbe3 100%);
+    background: linear-gradient(135deg, #E9E4DA 0%, #DDD6CB 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #b0b8c4;
+    color: #BDB49F;
     font-size: 32px;
 }
 
@@ -1281,7 +1281,7 @@ span.flatpickr-weekday {
 .petapantau-kanban-name {
     font-size: 12px;
     font-weight: 700;
-    color: #2c3e50;
+    color: #26211A;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1289,7 +1289,7 @@ span.flatpickr-weekday {
 .petapantau-kanban-code {
     font-size: 10px;
     font-family: monospace;
-    color: #7f8c8d;
+    color: #6B6256;
     letter-spacing: 0.3px;
 }
 .petapantau-kanban-meta {
@@ -1301,7 +1301,7 @@ span.flatpickr-weekday {
 }
 .petapantau-kanban-volume {
     font-size: 10px;
-    color: #7f8c8d;
+    color: #6B6256;
     margin-top: 2px;
     white-space: nowrap;
     overflow: hidden;
@@ -1315,9 +1315,9 @@ span.flatpickr-weekday {
 }
 
 @media (prefers-color-scheme: dark) {
-    .petapantau-kanban-card { background: #1e2a35; border-color: #2d3e50; }
-    .petapantau-kanban-name { color: #ecf0f1; }
-    .petapantau-kanban-thumb-placeholder { background: linear-gradient(135deg, #1a252f 0%, #243342 100%); }
-    .petapantau-view-toggle { background: #1a252f; }
-    .petapantau-view-btn--active { background: #243342; }
+    .petapantau-kanban-card { background: #1F1A14; border-color: #2B251C; }
+    .petapantau-kanban-name { color: #F4F1EA; }
+    .petapantau-kanban-thumb-placeholder { background: linear-gradient(135deg, #14110D 0%, #2B251C 100%); }
+    .petapantau-view-toggle { background: #14110D; }
+    .petapantau-view-btn--active { background: #2B251C; }
 }

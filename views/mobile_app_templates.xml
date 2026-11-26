@@ -10,16 +10,17 @@
             <head>
                 <meta charset="UTF-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-                <meta name="theme-color" content="#71639e"/>
+                <meta name="theme-color" content="#1d1a15"/>
                 <meta name="mobile-web-app-capable" content="yes"/>
                 <meta name="apple-mobile-web-app-capable" content="yes"/>
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
                 <title>PetaPantau – Polda DIY</title>
                 <link rel="preconnect" href="https://fonts.googleapis.com"/>
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&amp;display=swap"/>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&amp;family=Barlow+Semi+Condensed:wght@600;700&amp;display=swap"/>
                 <link rel="stylesheet" href="/petapantau/static/lib/fontawesome/css/font-awesome.css"/>
-                <link rel="stylesheet" type="text/css" t-attf-href="/petapantau/static/src/css/mobile_app.css?v=20261125"/>
+                <link rel="stylesheet" type="text/css" t-attf-href="/petapantau/static/src/css/mobile_app.css?v=20261126b"/>
+                <link rel="stylesheet" type="text/css" t-attf-href="/petapantau/static/src/css/mobile_theme.css?v=20261126c"/>
             </head>
             <body>
 
@@ -27,9 +28,7 @@
 
                     <!-- Brand Header dengan kurva bawah -->
                     <div class="sp-login-header">
-                        <div class="sp-login-logo">
-                            <i class="fa fa-map-marker"/>
-                        </div>
+                        <img class="sp-login-logo" src="/petapantau/static/img/logo/petapantau-mark.svg" alt="PetaPantau"/>
                         <div class="sp-login-app-name">PetaPantau Mobile</div>
                         <div class="sp-login-app-sub">Polda D.I. Yogyakarta</div>
                     </div>
@@ -158,7 +157,7 @@
             <head>
                 <meta charset="UTF-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-                <meta name="theme-color" content="#71639e"/>
+                <meta name="theme-color" content="#8a6410"/>
                 <meta name="mobile-web-app-capable" content="yes"/>
                 <meta name="apple-mobile-web-app-capable" content="yes"/>
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -170,10 +169,11 @@
                 <link rel="apple-touch-icon" sizes="152x152" href="/petapantau/static/img/icons/icon-152.png"/>
                 <link rel="icon" type="image/png" sizes="192x192" href="/petapantau/static/img/icons/icon-192.png"/>
                 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&amp;display=swap"/>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&amp;family=Barlow+Semi+Condensed:wght@600;700&amp;display=swap"/>
                 <link rel="stylesheet" href="/petapantau/static/lib/fontawesome/css/font-awesome.css"/>
                 <link rel="stylesheet" type="text/css" href="/petapantau/static/lib/leaflet/leaflet.css"/>
-                <link rel="stylesheet" type="text/css" t-attf-href="/petapantau/static/src/css/mobile_app.css?v=20261125"/>
+                <link rel="stylesheet" type="text/css" t-attf-href="/petapantau/static/src/css/mobile_app.css?v=20261126b"/>
+                <link rel="stylesheet" type="text/css" t-attf-href="/petapantau/static/src/css/mobile_theme.css?v=20261126c"/>
             </head>
             <body>
 
@@ -182,7 +182,7 @@
                     <!-- ── App Bar ── -->
                     <div class="sp-appbar">
                         <div class="sp-appbar-logo">
-                            <i class="fa fa-map-marker"/>
+                            <img src="/petapantau/static/img/logo/petapantau-mark.svg" alt="PetaPantau"/>
                         </div>
                         <div class="sp-appbar-content">
                             <div class="sp-appbar-title">PetaPantau Mobile</div>
@@ -194,7 +194,7 @@
                     <div class="sp-tab" id="tab-home">
                         <div class="sp-page-body" id="home-content">
                             <!-- Diisi oleh JS -->
-                            <div style="display:flex;flex-direction:column;align-items:center;padding:40px 0;gap:12px;color:#9e9bb8;">
+                            <div style="display:flex;flex-direction:column;align-items:center;padding:40px 0;gap:12px;color:#8b8571;">
                                 <i class="fa fa-spinner fa-spin" style="font-size:28px;"/>
                                 <span style="font-size:13px;">Memuat dashboard...</span>
                             </div>
@@ -239,7 +239,7 @@
 
                 <script type="text/javascript" src="/petapantau/static/lib/leaflet/leaflet.js"/>
                 <script type="text/javascript" src="/petapantau/static/lib/echart/echarts.min.js"/>
-                <script type="text/javascript" t-attf-src="/petapantau/static/src/js/mobile_app.js?v=20261125"/>
+                <script type="text/javascript" t-attf-src="/petapantau/static/src/js/mobile_app.js?v=20261126d"/>
                 <script>
                 if ('serviceWorker' in navigator) {
                     window.addEventListener('load', function () {

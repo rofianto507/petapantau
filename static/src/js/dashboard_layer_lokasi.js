@@ -9,18 +9,18 @@ import { renderKabupatenSummaryMarkers, renderSummaryMarkers } from './dashboard
 
 // ── Skala warna ungu (berbeda dari semua peta lain) ──────────────────────────
 const LOKASI_COLORS = [
-    { min: 51, max: Infinity, color: '#4a235a', label: '> 50 Lokasi'    },
-    { min: 21, max: 50,       color: '#7d3c98', label: '21 – 50 Lokasi' },
-    { min: 11, max: 20,       color: '#a569bd', label: '11 – 20 Lokasi' },
-    { min:  1, max: 10,       color: '#d2b4de', label: '1 – 10 Lokasi'  },
-    { min:  0, max:  0,       color: '#f4ecf7', label: 'Tidak Ada Lokasi' },
+    { min: 51, max: Infinity, color: '#1D1A15', label: '> 50 Lokasi'    },
+    { min: 21, max: 50,       color: '#5A4530', label: '21 – 50 Lokasi' },
+    { min: 11, max: 20,       color: '#8C6A3A', label: '11 – 20 Lokasi' },
+    { min:  1, max: 10,       color: '#D1B88A', label: '1 – 10 Lokasi'  },
+    { min:  0, max:  0,       color: '#EFE6D2', label: 'Tidak Ada Lokasi' },
 ];
 
 function getLokasiColor(jumlah) {
     for (const tier of LOKASI_COLORS) {
         if (jumlah >= tier.min) return tier.color;
     }
-    return '#f4ecf7';
+    return '#F6ECCB';
 }
 
 // ── Legend ───────────────────────────────────────────────────────────────────
@@ -101,7 +101,7 @@ async function _loadLokasiMarkers(ctx, domain) {
     );
 
     records.forEach(r => {
-        const stateColor = r.state === 'AKTIF' ? '#27ae60' : '#c0392b';
+        const stateColor = r.state === 'AKTIF' ? '#1D1A15' : '#8A6410';
         const stateLabel = r.state === 'AKTIF' ? 'Aktif' : 'Non Aktif';
         const kategori   = Array.isArray(r.kategori_id) ? r.kategori_id[1] : '-';
         const alamat     = r.alamat_lengkap ? r.alamat_lengkap.slice(0, 60) + (r.alamat_lengkap.length > 60 ? '…' : '') : '-';
@@ -122,7 +122,7 @@ async function _loadLokasiMarkers(ctx, domain) {
         const marker = L.marker([r.latitude, r.longitude], { icon });
         marker.bindPopup(`
             <div class="petapantau-popup">
-                <div class="petapantau-popup-header" style="background:#6c3483;">
+                <div class="petapantau-popup-header" style="background:#8A6410;">
                     <i class="fa ${faIcon}"></i>
                     <strong>${r.code}</strong>
                 </div>
@@ -137,7 +137,7 @@ async function _loadLokasiMarkers(ctx, domain) {
                     </table>
                 </div>
                 <div class="petapantau-popup-footer">
-                    <button class="petapantau-btn-detail" style="background:#6c3483;" id="btn-detail-lokasi-${r.id}">
+                    <button class="petapantau-btn-detail" style="background:#8A6410;" id="btn-detail-lokasi-${r.id}">
                         <i class="fa fa-external-link"></i> Lihat Detail
                     </button>
                 </div>
@@ -249,14 +249,14 @@ export async function loadModeLokasi(ctx) {
 function _showLokasiKabupatenPopup(ctx, e, props, layer, filters) {
     const tipeLabel   = props.type === 'KOTA' ? 'Kota' : 'Kabupaten';
     const lokasiLabel = props.jumlah_lokasi > 0
-        ? `<strong style="color:${props.color === '#f4ecf7' ? '#7d3c98' : props.color};">${props.jumlah_lokasi.toLocaleString('id-ID')} Lokasi</strong>`
+        ? `<strong style="color:${props.color === '#F6ECCB' ? '#8A6410' : props.color};">${props.jumlah_lokasi.toLocaleString('id-ID')} Lokasi</strong>`
         : `<strong style="color:#999;">Tidak Ada Lokasi</strong>`;
 
     const popup = L.popup({ maxWidth: 280, className: 'petapantau-leaflet-popup' })
         .setLatLng(e.latlng)
         .setContent(`
             <div class="petapantau-popup">
-                <div class="petapantau-popup-header" style="background:#6c3483;">
+                <div class="petapantau-popup-header" style="background:#8A6410;">
                     <i class="fa fa-map-marker"></i>
                     <strong>${tipeLabel} ${props.name}</strong>
                 </div>
@@ -264,11 +264,11 @@ function _showLokasiKabupatenPopup(ctx, e, props, layer, filters) {
                     <table>
                         <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                         <tr><td><i class="fa fa-list"></i> Kecamatan</td><td><strong>${props.jumlah_kecamatan} Kecamatan</strong></td></tr>
-                        <tr><td><i class="fa fa-map-marker" style="color:#8e44ad;"></i> Lokasi</td><td>${lokasiLabel}</td></tr>
+                        <tr><td><i class="fa fa-map-marker" style="color:#B07F10;"></i> Lokasi</td><td>${lokasiLabel}</td></tr>
                     </table>
                 </div>
                 <div class="petapantau-popup-footer">
-                    <button class="petapantau-btn-detail" style="background:#6c3483;" id="btn-lokasi-kec-${props.id}">
+                    <button class="petapantau-btn-detail" style="background:#8A6410;" id="btn-lokasi-kec-${props.id}">
                         <i class="fa fa-search-plus"></i> Lihat Detail Kecamatan
                     </button>
                 </div>
@@ -390,14 +390,14 @@ export async function drillDownLokasiKecamatan(ctx, kabProps, kabLayer, filters)
 // ── Popup Kecamatan ──────────────────────────────────────────────────────────
 function _showLokasiKecamatanPopup(ctx, e, props, layer, filters, kabProps, kabLayer) {
     const lokasiLabel = props.jumlah_lokasi > 0
-        ? `<strong style="color:${props.color === '#f4ecf7' ? '#7d3c98' : props.color};">${props.jumlah_lokasi.toLocaleString('id-ID')} Lokasi</strong>`
+        ? `<strong style="color:${props.color === '#F6ECCB' ? '#8A6410' : props.color};">${props.jumlah_lokasi.toLocaleString('id-ID')} Lokasi</strong>`
         : `<strong style="color:#999;">Tidak Ada Lokasi</strong>`;
 
     const popup = L.popup({ maxWidth: 280, className: 'petapantau-leaflet-popup' })
         .setLatLng(e.latlng)
         .setContent(`
             <div class="petapantau-popup">
-                <div class="petapantau-popup-header" style="background:#7d3c98;">
+                <div class="petapantau-popup-header" style="background:#8A6410;">
                     <i class="fa fa-map"></i>
                     <strong>Kec. ${props.name}</strong>
                 </div>
@@ -405,11 +405,11 @@ function _showLokasiKecamatanPopup(ctx, e, props, layer, filters, kabProps, kabL
                     <table>
                         <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                         <tr><td><i class="fa fa-home"></i> Desa/Kel.</td><td><strong>${props.jumlah_desa} Desa/Kelurahan</strong></td></tr>
-                        <tr><td><i class="fa fa-map-marker" style="color:#8e44ad;"></i> Lokasi</td><td>${lokasiLabel}</td></tr>
+                        <tr><td><i class="fa fa-map-marker" style="color:#B07F10;"></i> Lokasi</td><td>${lokasiLabel}</td></tr>
                     </table>
                 </div>
                 <div class="petapantau-popup-footer">
-                    <button class="petapantau-btn-detail" style="background:#7d3c98;" id="btn-lokasi-desa-${props.id}">
+                    <button class="petapantau-btn-detail" style="background:#8A6410;" id="btn-lokasi-desa-${props.id}">
                         <i class="fa fa-search-plus"></i> Lihat Detail Desa/Kelurahan
                     </button>
                 </div>
@@ -524,14 +524,14 @@ export async function drillDownLokasiKelurahan(ctx, kecProps, kecLayer, filters,
 function _showLokasiDesaPopup(ctx, e, props) {
     const tipeLabel   = props.type === 'KELURAHAN' ? 'Kelurahan' : 'Desa';
     const lokasiLabel = props.jumlah_lokasi > 0
-        ? `<strong style="color:${props.color === '#f4ecf7' ? '#7d3c98' : props.color};">${props.jumlah_lokasi.toLocaleString('id-ID')} Lokasi</strong>`
+        ? `<strong style="color:${props.color === '#F6ECCB' ? '#8A6410' : props.color};">${props.jumlah_lokasi.toLocaleString('id-ID')} Lokasi</strong>`
         : `<strong style="color:#999;">Tidak Ada Lokasi</strong>`;
 
     L.popup({ maxWidth: 280, className: 'petapantau-leaflet-popup' })
         .setLatLng(e.latlng)
         .setContent(`
             <div class="petapantau-popup">
-                <div class="petapantau-popup-header" style="background:#6c3483;">
+                <div class="petapantau-popup-header" style="background:#8A6410;">
                     <i class="fa fa-home"></i>
                     <strong>${tipeLabel} ${props.name}</strong>
                 </div>
@@ -539,7 +539,7 @@ function _showLokasiDesaPopup(ctx, e, props) {
                     <table>
                         <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                         <tr><td><i class="fa fa-tag"></i> Tipe</td><td><strong>${tipeLabel}</strong></td></tr>
-                        <tr><td><i class="fa fa-map-marker" style="color:#8e44ad;"></i> Lokasi</td><td>${lokasiLabel}</td></tr>
+                        <tr><td><i class="fa fa-map-marker" style="color:#B07F10;"></i> Lokasi</td><td>${lokasiLabel}</td></tr>
                     </table>
                 </div>
             </div>

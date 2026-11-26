@@ -13,9 +13,9 @@ function _renderBarChart(ctx, names, values) {
         tooltip: {
             trigger: 'axis',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: params => {
                 const p = params[0];
                 return `${p.name}<br/><b>Total Patroli: ${p.value.toLocaleString('id-ID')}</b>`;
@@ -26,13 +26,13 @@ function _renderBarChart(ctx, names, values) {
             type: 'category',
             data: names,
             axisLabel: { rotate: 40, fontSize: 10, color: '#666', interval: 0 },
-            axisLine: { lineStyle: { color: '#d0d7de' } },
+            axisLine: { lineStyle: { color: '#DDD6CB' } },
             axisTick: { show: false },
         },
         yAxis: {
             type: 'value',
             axisLabel: { fontSize: 10, color: '#888' },
-            splitLine: { lineStyle: { color: '#f3f0f5', type: 'dashed' } },
+            splitLine: { lineStyle: { color: '#F1EEE6', type: 'dashed' } },
         },
         series: [{
             type: 'bar',
@@ -40,12 +40,12 @@ function _renderBarChart(ctx, names, values) {
             barMaxWidth: 36,
             itemStyle: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    { offset: 0, color: '#27ae60' },
-                    { offset: 1, color: '#145a32' },
+                    { offset: 0, color: '#1D1A15' },
+                    { offset: 1, color: '#1D1A15' },
                 ]),
                 borderRadius: [4, 4, 0, 0],
             },
-            emphasis: { itemStyle: { color: '#1e8449' } },
+            emphasis: { itemStyle: { color: '#3D3022' } },
         }],
     });
 }
@@ -59,43 +59,43 @@ function _renderTrendChart(ctx, months, patroliData, lokasiData) {
         tooltip: {
             trigger: 'axis',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: params => {
                 const pat = params.find(p => p.seriesName === 'Patroli');
                 const lok = params.find(p => p.seriesName === 'Titik Lokasi');
                 return `<b>${params[0]?.name}</b><br/>`
-                    + `<span style="color:#27ae60">&#9632;</span> Patroli: <b>${(pat?.value || 0).toLocaleString('id-ID')}</b><br/>`
-                    + `<span style="color:#148F77">&#9632;</span> Titik Lokasi: <b>${(lok?.value || 0).toLocaleString('id-ID')}</b>`;
+                    + `<span style="color:#1D1A15">&#9632;</span> Patroli: <b>${(pat?.value || 0).toLocaleString('id-ID')}</b><br/>`
+                    + `<span style="color:#8C6A3A">&#9632;</span> Titik Lokasi: <b>${(lok?.value || 0).toLocaleString('id-ID')}</b>`;
             },
         },
         legend: {
-            top: 4,
-            textStyle: { fontSize: 11, color: '#555' },
+            bottom: 0,   // di bawah agar tidak berhimpitan dengan label di atas batang
+            textStyle: { fontSize: 11, color: '#6B6256' },
             icon: 'roundRect',
             itemWidth: 12,
             itemHeight: 8,
         },
-        grid: { left: 12, right: 48, top: 36, bottom: 24, containLabel: true },
+        grid: { left: 12, right: 48, top: 26, bottom: 40, containLabel: true },
         xAxis: {
             type: 'category',
             data: months,
             axisLabel: { fontSize: 10, color: '#666' },
-            axisLine: { lineStyle: { color: '#d0d7de' } },
+            axisLine: { lineStyle: { color: '#DDD6CB' } },
             axisTick: { show: false },
         },
         yAxis: [
             {
                 type: 'value',
                 minInterval: 1,
-                axisLabel: { fontSize: 10, color: '#27ae60', margin: 4 },
-                splitLine: { lineStyle: { color: '#f3f0f5', type: 'dashed' } },
+                axisLabel: { fontSize: 10, color: '#1D1A15', margin: 4 },
+                splitLine: { lineStyle: { color: '#F1EEE6', type: 'dashed' } },
             },
             {
                 type: 'value',
                 minInterval: 1,
-                axisLabel: { fontSize: 10, color: '#148F77', margin: 4 },
+                axisLabel: { fontSize: 10, color: '#8C6A3A', margin: 4 },
                 splitLine: { show: false },
             },
         ],
@@ -108,12 +108,12 @@ function _renderTrendChart(ctx, months, patroliData, lokasiData) {
                 smooth: false,
                 symbol: 'circle',
                 symbolSize: 6,
-                lineStyle: { color: '#27ae60', width: 2 },
-                itemStyle: { color: '#27ae60', borderColor: '#fff', borderWidth: 2 },
+                lineStyle: { color: '#1D1A15', width: 2 },
+                itemStyle: { color: '#1D1A15', borderColor: '#fff', borderWidth: 2 },
                 areaStyle: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                        { offset: 0, color: 'rgba(39,174,96,0.20)' },
-                        { offset: 1, color: 'rgba(39,174,96,0.02)' },
+                        { offset: 0, color: 'rgba(29,26,21,0.20)' },
+                        { offset: 1, color: 'rgba(29,26,21,0.02)' },
                     ]),
                 },
                 label: { show: false },
@@ -126,8 +126,8 @@ function _renderTrendChart(ctx, months, patroliData, lokasiData) {
                 barMaxWidth: 28,
                 itemStyle: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                        { offset: 0, color: '#1abc9c' },
-                        { offset: 1, color: '#148F77' },
+                        { offset: 0, color: '#8C6A3A' },
+                        { offset: 1, color: '#8C6A3A' },
                     ]),
                     borderRadius: [4, 4, 0, 0],
                 },
@@ -135,7 +135,7 @@ function _renderTrendChart(ctx, months, patroliData, lokasiData) {
                     show: true,
                     position: 'top',
                     fontSize: 10,
-                    color: '#148F77',
+                    color: '#8C6A3A',
                     fontWeight: '600',
                     formatter: p => p.value > 0 ? p.value.toLocaleString('id-ID') : '',
                 },
@@ -156,15 +156,15 @@ function _renderWaktuChart(ctx, patroliSlots, krimSlots) {
         tooltip: {
             trigger: 'axis',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: params => {
                 const pat  = params.find(p => p.seriesName === 'Patroli');
                 const krim = params.find(p => p.seriesName === 'Kriminalitas');
                 return `<b>${params[0]?.name}</b><br/>`
-                    + `<span style="color:#27ae60">&#9632;</span> Patroli: <b>${(pat?.value || 0).toLocaleString('id-ID')}</b><br/>`
-                    + `<span style="color:#e74c3c">&#9632;</span> Kriminalitas: <b>${(krim?.value || 0).toLocaleString('id-ID')}</b>`;
+                    + `<span style="color:#1D1A15">&#9632;</span> Patroli: <b>${(pat?.value || 0).toLocaleString('id-ID')}</b><br/>`
+                    + `<span style="color:#B07F10">&#9632;</span> Kriminalitas: <b>${(krim?.value || 0).toLocaleString('id-ID')}</b>`;
             },
         },
         legend: {
@@ -173,19 +173,19 @@ function _renderWaktuChart(ctx, patroliSlots, krimSlots) {
             icon: 'roundRect',
             itemWidth: 12, itemHeight: 8,
         },
-        grid: { left: 12, right: 24, top: 12, bottom: 48, containLabel: true },
+        grid: { left: 12, right: 24, top: 26, bottom: 48, containLabel: true },
         xAxis: {
             type: 'category',
             data: WAKTU_LABELS,
             axisLabel: { fontSize: 10, color: '#666', rotate: 30, interval: 0 },
-            axisLine: { lineStyle: { color: '#e5e7eb' } },
+            axisLine: { lineStyle: { color: '#E3DDD0' } },
             axisTick: { show: false },
         },
         yAxis: {
             type: 'value',
             minInterval: 1,
             axisLabel: { fontSize: 10, color: '#999' },
-            splitLine: { lineStyle: { color: '#f0f0f0' } },
+            splitLine: { lineStyle: { color: '#F1EEE6' } },
         },
         series: [
             {
@@ -193,19 +193,19 @@ function _renderWaktuChart(ctx, patroliSlots, krimSlots) {
                 type: 'line',
                 smooth: false,
                 data: patroliSlots,
-                lineStyle: { color: '#27ae60', width: 2 },
-                itemStyle: { color: '#27ae60' },
+                lineStyle: { color: '#1D1A15', width: 2 },
+                itemStyle: { color: '#1D1A15' },
                 symbol: 'circle',
                 symbolSize: 6,
                 areaStyle: {
                     color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
-                        colorStops: [{ offset: 0, color: 'rgba(39,174,96,0.18)' }, { offset: 1, color: 'rgba(39,174,96,0)' }] },
+                        colorStops: [{ offset: 0, color: 'rgba(29,26,21,0.18)' }, { offset: 1, color: 'rgba(29,26,21,0)' }] },
                 },
                 label: {
                     show: true,
                     position: 'top',
                     fontSize: 10,
-                    color: '#27ae60',
+                    color: '#1D1A15',
                     fontWeight: '600',
                     formatter: p => p.value > 0 ? p.value.toLocaleString('id-ID') : '',
                 },
@@ -215,19 +215,19 @@ function _renderWaktuChart(ctx, patroliSlots, krimSlots) {
                 type: 'line',
                 smooth: false,
                 data: krimSlots,
-                lineStyle: { color: '#e74c3c', width: 2 },
-                itemStyle: { color: '#e74c3c' },
+                lineStyle: { color: '#B07F10', width: 2 },
+                itemStyle: { color: '#B07F10' },
                 symbol: 'circle',
                 symbolSize: 6,
                 areaStyle: {
                     color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
-                        colorStops: [{ offset: 0, color: 'rgba(231,76,60,0.14)' }, { offset: 1, color: 'rgba(231,76,60,0)' }] },
+                        colorStops: [{ offset: 0, color: 'rgba(176,127,16,0.14)' }, { offset: 1, color: 'rgba(176,127,16,0)' }] },
                 },
                 label: {
                     show: true,
-                    position: 'top',
+                    position: 'bottom',   // label kriminalitas di bawah titik, patroli di atas: tidak saling menimpa
                     fontSize: 10,
-                    color: '#e74c3c',
+                    color: '#B07F10',
                     fontWeight: '600',
                     formatter: p => p.value > 0 ? p.value.toLocaleString('id-ID') : '',
                 },
@@ -515,6 +515,6 @@ export async function updatePatroliTable(ctx, mode, page) {
 
     } catch (e) {
         console.error('Patroli table load error:', e);
-        bodyEl.innerHTML = `<div style="text-align:center;padding:24px;color:#e74c3c;font-size:13px;">Gagal memuat data</div>`;
+        bodyEl.innerHTML = `<div style="text-align:center;padding:24px;color:#B07F10;font-size:13px;">Gagal memuat data</div>`;
     }
 }

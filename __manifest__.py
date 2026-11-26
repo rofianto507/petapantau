@@ -72,6 +72,7 @@ Akses berbasis peran: Admin, Subdit, Subdit Patroli, Polres, Polsek, User, Dashb
             'petapantau/static/lib/flatpickr/flatpickr.min.js',
             'petapantau/static/lib/echart/echarts.min.js',
             'petapantau/static/src/css/dashboard_map.css',
+            'petapantau/static/src/css/dashboard_theme.css',
             'petapantau/static/src/xml/dashboard_map.xml',
             'petapantau/static/lib/leaflet/leaflet.editable.js',
             'petapantau/static/src/js/kabupaten_map_widget.js',

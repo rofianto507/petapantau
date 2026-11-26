@@ -5,7 +5,7 @@
  * Panel checkbox di sudut kiri bawah. Pilihan kategori persisten antar drill-down.
  */
 
-const OVERLAY_COLOR = '#6c3483';
+const OVERLAY_COLOR = '#8A6410';
 
 // ── Init Panel ────────────────────────────────────────────────────────────────
 export async function initLokasiOverlay(ctx) {
@@ -135,7 +135,7 @@ export async function updateLokasiOverlayMarkers(ctx) {
             const katId     = Array.isArray(r.kategori_id) ? r.kategori_id[0] : null;
             const faIcon    = (katId && catIconMap[katId]) ? catIconMap[katId] : 'fa-map-marker';
             const kategori  = Array.isArray(r.kategori_id) ? r.kategori_id[1] : '-';
-            const stateColor = r.state === 'AKTIF' ? '#27ae60' : '#c0392b';
+            const stateColor = r.state === 'AKTIF' ? '#1D1A15' : '#8A6410';
             const stateLabel = r.state === 'AKTIF' ? 'Aktif' : 'Non Aktif';
             const alamat     = r.alamat_lengkap
                 ? r.alamat_lengkap.slice(0, 50) + (r.alamat_lengkap.length > 50 ? '…' : '')

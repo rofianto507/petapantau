@@ -5,38 +5,44 @@
 
             <!-- ══ SIDEBAR ══ -->
             <div class="petapantau-sidebar" t-ref="sidebar" t-att-class="navSecurity.cls">
-                <!-- Collapse button di atas -->
-                <div class="petapantau-sidebar-top">
-                    <button class="petapantau-collapse-btn" t-on-click="onToggleSidebar">
+                <!-- Merek -->
+                <div class="petapantau-brand">
+                    <img class="petapantau-brand-logo" src="/petapantau/static/img/logo/petapantau-mark.svg" alt="PetaPantau"/>
+                    <div class="petapantau-brand-text">
+                        <span class="petapantau-brand-name">PetaPantau</span>
+                        <span class="petapantau-brand-tag">Polisi bersama masyarakat</span>
+                    </div>
+                    <!-- Minimalkan / perluas sidebar -->
+                    <button type="button" class="petapantau-collapse-btn" t-on-click="onToggleSidebar"
+                        title="Minimalkan menu" aria-label="Minimalkan atau perluas menu samping" aria-expanded="true">
                         <i class="fa fa-angle-double-left" t-ref="collapseIcon"/>
-                        <span t-ref="collapseText"/>
                     </button>
                 </div>
 
                 <div class="petapantau-sidebar-section-title">PETA</div>
 
                 <nav class="petapantau-nav">
-                    <a class="petapantau-nav-item active" data-mode="umum" t-on-click="onNavClick">
+                    <a class="petapantau-nav-item active" data-mode="umum" title="Peta Umum" t-on-click="onNavClick">
                         <i class="fa fa-map"/>
                         <span>Peta Umum</span>
                     </a>
-                    <a class="petapantau-nav-item" data-mode="kriminal" t-on-click="onNavClick">
+                    <a class="petapantau-nav-item" data-mode="kriminal" title="Peta Kriminalitas" t-on-click="onNavClick">
                         <i class="fa fa-exclamation-triangle"/>
                         <span>Peta Kriminalitas</span>
                     </a>
-                    <a class="petapantau-nav-item" data-mode="bencana" t-on-click="onNavClick">
+                    <a class="petapantau-nav-item" data-mode="bencana" title="Peta Bencana" t-on-click="onNavClick">
                         <i class="fa fa-bolt"/>
                         <span>Peta Bencana</span>
                     </a>
-                    <a class="petapantau-nav-item" data-mode="lalin" t-on-click="onNavClick">
+                    <a class="petapantau-nav-item" data-mode="lalin" title="Peta Lalu Lintas" t-on-click="onNavClick">
                         <i class="fa fa-car"/>
                         <span>Peta Lalu Lintas</span>
                     </a>
-                    <a class="petapantau-nav-item" data-mode="patroli" t-on-click="onNavClick">
+                    <a class="petapantau-nav-item" data-mode="patroli" title="Peta Patroli" t-on-click="onNavClick">
                         <i class="fa fa-car"/>
                         <span>Peta Patroli</span>
                     </a>
-                    <a class="petapantau-nav-item" data-mode="lokasi" t-on-click="onNavClick">
+                    <a class="petapantau-nav-item" data-mode="lokasi" title="Lokasi Penting" t-on-click="onNavClick">
                         <i class="fa fa-map-marker"/>
                         <span>Lokasi Penting</span>
                     </a>
@@ -94,14 +100,19 @@
                     <div class="petapantau-sumber-info" t-ref="sumberInfo"/>
                 </div>
 
-                <!-- KPI ROW — diisi oleh JS sesuai mode aktif -->
-                <div class="petapantau-kpi-row" t-ref="kpiRow"/>
-
                 </div><!-- end petapantau-sticky-header -->
 
-                <!-- MAP -->
-                <div class="petapantau-map-wrapper" t-ref="mapWrapper">
-                    <div t-ref="mapContainer" class="petapantau-map-container" tabindex="-1"/>
+                <!-- PETA (kiri) + KARTU SOROTAN & KPI (kanan) -->
+                <div class="petapantau-top-grid">
+                    <div class="petapantau-map-wrapper" t-ref="mapWrapper">
+                        <div t-ref="mapContainer" class="petapantau-map-container" tabindex="-1"/>
+                    </div>
+                    <div class="petapantau-side-col">
+                        <!-- Kartu sorotan — diisi oleh JS sesuai mode aktif -->
+                        <div class="petapantau-hero" t-ref="hero"/>
+                        <!-- KPI ROW — diisi oleh JS sesuai mode aktif -->
+                        <div class="petapantau-kpi-row" t-ref="kpiRow"/>
+                    </div>
                 </div>
 
 

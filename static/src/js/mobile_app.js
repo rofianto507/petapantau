@@ -81,6 +81,18 @@
         return name.trim().split(/\s+/).slice(0, 2).map(function (w) { return w[0]; }).join('').toUpperCase();
     }
 
+    // Odoo mengembalikan SVG berwarna acak untuk pengguna tanpa foto. Sembunyikan avatar bawaan itu
+    // agar yang tampil inisial bertema (coklat/emas); foto asli (PNG/JPEG) tetap ditampilkan.
+    function _hideDefaultAvatars(root) {
+        if (!root || !window.fetch) return;
+        root.querySelectorAll('.sp-greeting-av-img, #sp-profile-img').forEach(function (img) {
+            if (!img.src || img.src.indexOf('data:') === 0) return;
+            fetch(img.src, { method: 'HEAD', credentials: 'same-origin' }).then(function (r) {
+                if ((r.headers.get('content-type') || '').indexOf('svg') !== -1) img.style.display = 'none';
+            }).catch(function () {});
+        });
+    }
+
     // ── Number formatter (thousand separator) ───────────────────────────────
     function _fmtNum(n) {
         return String(n || 0).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -216,6 +228,7 @@
             +     '<div class="sp-recent-skeleton"></div><div class="sp-recent-skeleton"></div><div class="sp-recent-skeleton"></div>'
             +   '</div>'
             + '</div>';
+        _hideDefaultAvatars(homeEl);
 
     }
 
@@ -227,8 +240,8 @@
             var elPt = document.getElementById('kpi-pt');
             if (elPt) {
                 elPt.innerHTML =
-                    kpiCardPt(pt.today || 0, pt.titik_today || 0, 'Patroli Hari Ini', 'fa-calendar-o', '#71639e', 'today')
-                  + kpiCardPt(pt.total || 0, pt.titik_total || 0, 'Total Patroli',    'fa-car',        '#5a4f7f', 'all');
+                    kpiCardPt(pt.today || 0, pt.titik_today || 0, 'Patroli Hari Ini', 'fa-calendar-o', '#8a6410', 'today')
+                  + kpiCardPt(pt.total || 0, pt.titik_total || 0, 'Total Patroli',    'fa-car',        '#6e4e0c', 'all');
                 elPt.querySelectorAll('.sp-kpi2-card').forEach(function (card) {
                     card.addEventListener('click', function () { _navigateToPatroliWithFilter(card.dataset.filter); });
                 });
@@ -256,25 +269,25 @@
                 grid: { left: 6, right: 6, top: 14, bottom: 0, containLabel: true },
                 xAxis: {
                     type: 'category', data: labels,
-                    axisLabel: { fontSize: 11, color: '#9e97b8' },
+                    axisLabel: { fontSize: 11, color: '#8b8571' },
                     axisTick: { show: false }, axisLine: { show: false },
                 },
                 yAxis: {
                     type: 'value', minInterval: 1,
                     max: function (v) { return Math.ceil(v.max * 1.25) || 5; },
-                    splitLine: { lineStyle: { color: '#f0eef8', type: 'dashed' } },
-                    axisLabel: { fontSize: 10, color: '#b3acc8' },
+                    splitLine: { lineStyle: { color: '#f4f1ea', type: 'dashed' } },
+                    axisLabel: { fontSize: 10, color: '#bdb49f' },
                 },
                 series: [{
                     type: 'bar',
                     data: counts.map(function (v, i) {
-                        return { value: v, itemStyle: { color: i === 6 ? '#71639e' : '#c4bedd', borderRadius: [4, 4, 0, 0] } };
+                        return { value: v, itemStyle: { color: i === 6 ? '#8a6410' : '#d1b88a', borderRadius: [4, 4, 0, 0] } };
                     }),
                     barMaxWidth: 36,
-                    label: { show: true, position: 'top', fontSize: 10, color: '#71639e', formatter: function (p) { return p.value > 0 ? p.value : ''; } },
+                    label: { show: true, position: 'top', fontSize: 10, color: '#8a6410', formatter: function (p) { return p.value > 0 ? p.value : ''; } },
                 }],
                 tooltip: {
-                    trigger: 'axis', backgroundColor: '#3d3461', borderWidth: 0,
+                    trigger: 'axis', backgroundColor: '#3b2a16', borderWidth: 0,
                     textStyle: { color: '#fff', fontSize: 12 },
                     formatter: function (p) { return '<b>' + p[0].name + '</b>: ' + p[0].value + ' Patroli'; },
                 },
@@ -404,7 +417,8 @@
             + '<div class="sp-profile-card">'
             +   '<div class="sp-profile-photo-wrap">'
             +     '<div class="sp-profile-photo" id="sp-profile-photo-el">'
-            +       (photoSrc ? '<img id="sp-profile-img" src="' + photoSrc + '" alt="foto" onerror="this.style.display=\'none\'">' : getInitials(ctx.user_name))
+            +       '<span class="sp-profile-initials">' + _esc(getInitials(ctx.user_name)) + '</span>'
+            +       (photoSrc ? '<img id="sp-profile-img" src="' + photoSrc + '" alt="foto" onerror="this.style.display=\'none\'">' : '')
             +     '</div>'
             +     '<button class="sp-profile-photo-edit" id="sp-photo-edit-btn" title="Ganti foto profil">'
             +       '<i class="fa fa-camera"></i>'
@@ -457,6 +471,7 @@
                                 photoEl.appendChild(img);
                             }
                             img.src = e.target.result;
+                            img.style.display = '';   // bisa tersembunyi bila sebelumnya memakai avatar bawaan
                             showToast('Foto profil diperbarui', 'success');
                         } else { showToast(res && res.error || 'Gagal memperbarui foto', 'error'); }
                     })
@@ -465,6 +480,8 @@
             };
             reader.readAsDataURL(file);
         });
+
+        _hideDefaultAvatars(el);
 
         // Logout dengan konfirmasi
         document.getElementById('sp-logout-btn').addEventListener('click', function () {
@@ -535,7 +552,6 @@
             fab.id        = 'pt-fab-add';
             fab.title     = 'Tambah Patroli';
             fab.innerHTML = '<i class="fa fa-plus"></i>';
-            fab.style.background = 'var(--sp-primary)';
             fab.addEventListener('click', _openPatroliCreate);
             tabEl.appendChild(fab);
         }
@@ -752,7 +768,7 @@
             +   '<textarea class="sp-textarea" id="pt-keterangan" rows="3" placeholder="Keterangan tambahan (opsional)..."></textarea>'
             + '</div>'
             + '<div class="sp-submit-bar">'
-            +   '<button type="button" class="sp-btn-primary" id="pt-create-submit" style="background:var(--sp-primary);">'
+            +   '<button type="button" class="sp-btn-primary" id="pt-create-submit">'
             +     '<i class="fa fa-paper-plane"></i><span id="pt-create-label">Buat Patroli</span>'
             +   '</button>'
             + '</div>';
@@ -856,7 +872,7 @@
         var personelRows = '';
         (data.personel || []).forEach(function (p) {
             personelRows += '<div class="sp-personel-row" id="pt-pr-' + p.id + '">'
-                + '<div class="sp-personel-avatar" style="background:#e8f8f5;color:var(--sp-primary);"><i class="fa fa-user"></i></div>'
+                + '<div class="sp-personel-avatar" style="background:#efe6d2;color:var(--sp-primary);"><i class="fa fa-user"></i></div>'
                 + '<div class="sp-personel-name">' + _esc(p.nama_lengkap) + '</div>'
                 + '<button class="sp-personel-del" data-pid="' + p.id + '"><i class="fa fa-times"></i></button>'
                 + '</div>';
@@ -1042,7 +1058,7 @@
         var empty = list.querySelector('.sp-personel-empty'); if (empty) empty.remove();
         var div = document.createElement('div');
         div.className = 'sp-personel-row'; div.id = 'pt-pr-' + pid;
-        div.innerHTML = '<div class="sp-personel-avatar" style="background:#e8f8f5;color:var(--sp-primary);"><i class="fa fa-user"></i></div>'
+        div.innerHTML = '<div class="sp-personel-avatar" style="background:#efe6d2;color:var(--sp-primary);"><i class="fa fa-user"></i></div>'
             + '<div class="sp-personel-name">' + _esc(namaLengkap) + '</div>'
             + '<button class="sp-personel-del" data-pid="' + pid + '"><i class="fa fa-times"></i></button>';
         div.querySelector('.sp-personel-del').addEventListener('click', function () {
@@ -1231,7 +1247,7 @@
             +   '<textarea class="sp-textarea" id="pt-titik-catatan" rows="2" placeholder="Catatan lokasi (opsional)..."></textarea>'
             + '</div>'
             + '<div class="sp-submit-bar">'
-            +   '<button type="button" class="sp-btn-primary" id="pt-titik-submit" style="background:var(--sp-primary);">'
+            +   '<button type="button" class="sp-btn-primary" id="pt-titik-submit">'
             +     '<i class="fa fa-paper-plane"></i><span id="pt-titik-label">Simpan Titik</span>'
             +   '</button>'
             + '</div>';
@@ -1241,7 +1257,7 @@
         document.getElementById('pt-gps-btn').addEventListener('click', function () {
             var btn = this, statusEl = document.getElementById('pt-gps-status');
             btn.disabled = true;
-            btn.innerHTML = '<span class="sp-spinner" style="border-color:rgba(113,99,158,.25);border-top-color:var(--sp-primary);width:13px;height:13px;"></span>';
+            btn.innerHTML = '<span class="sp-spinner" style="border-color:rgba(60,45,15,.25);border-top-color:var(--sp-primary);width:13px;height:13px;"></span>';
             if (!navigator.geolocation) {
                 statusEl.innerHTML = '<i class="fa fa-times" style="color:var(--sp-error);margin-right:5px;"></i>GPS tidak tersedia';
                 btn.disabled = false; btn.innerHTML = '<i class="fa fa-crosshairs"></i> Ambil GPS'; return;

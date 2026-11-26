@@ -10,18 +10,18 @@ import { fmtTanggal, renderKabupatenSummaryMarkers, renderSummaryMarkers, wibDat
 
 // ── Skala warna bencana ──────────────────────────────────────────────────────
 const BENCANA_COLORS = [
-    { min: 51, max: Infinity, color: '#922b21', label: '> 50 Kejadian'    },
-    { min: 21, max: 50,       color: '#e74c3c', label: '21 – 50 Kejadian' },
-    { min: 11, max: 20,       color: '#e67e22', label: '11 – 20 Kejadian' },
-    { min:  1, max: 10,       color: '#f1c40f', label: '1 – 10 Kejadian'  },
-    { min:  0, max:  0,       color: '#abebc6', label: 'Tidak Ada Kejadian' },
+    { min: 51, max: Infinity, color: '#1D1A15', label: '> 50 Kejadian'    },
+    { min: 21, max: 50,       color: '#5A4530', label: '21 – 50 Kejadian' },
+    { min: 11, max: 20,       color: '#8C6A3A', label: '11 – 20 Kejadian' },
+    { min:  1, max: 10,       color: '#D1B88A', label: '1 – 10 Kejadian'  },
+    { min:  0, max:  0,       color: '#EFE6D2', label: 'Tidak Ada Kejadian' },
 ];
 
 function getBencanaColor(jumlah) {
     for (const tier of BENCANA_COLORS) {
         if (jumlah >= tier.min) return tier.color;
     }
-    return '#abebc6';
+    return '#EFE6D2';
 }
 
 // ── Legend ───────────────────────────────────────────────────────────────────
@@ -117,7 +117,7 @@ async function _loadBencanaMarkers(ctx, domain, limit) {
     }
 
     records.forEach(r => {
-        const stateColor  = r.state === 'AKTIF' ? '#e74c3c' : '#27ae60';
+        const stateColor  = r.state === 'AKTIF' ? '#B07F10' : '#1D1A15';
         const stateLabel  = r.state === 'AKTIF' ? 'Aktif' : 'Non Aktif';
         const kategori    = Array.isArray(r.kategori_id) ? r.kategori_id[1] : '-';
         const penyebab    = r.penyebab ? r.penyebab.slice(0, 60) + (r.penyebab.length > 60 ? '…' : '') : '-';
@@ -138,7 +138,7 @@ async function _loadBencanaMarkers(ctx, domain, limit) {
         const marker = L.marker([r.latitude, r.longitude], { icon });
         marker.bindPopup(`
             <div class="petapantau-popup">
-                <div class="petapantau-popup-header" style="background:#922b21;">
+                <div class="petapantau-popup-header" style="background:#3B2A16;">
                     <i class="fa ${faIcon}"></i>
                     <strong>${r.code}</strong>
                 </div>
@@ -157,7 +157,7 @@ async function _loadBencanaMarkers(ctx, domain, limit) {
                     </table>
                 </div>
                 <div class="petapantau-popup-footer">
-                    <button class="petapantau-btn-detail" style="background:#922b21;" id="btn-detail-bencana-${r.id}">
+                    <button class="petapantau-btn-detail" style="background:#3B2A16;" id="btn-detail-bencana-${r.id}">
                         <i class="fa fa-external-link"></i> Lihat Detail
                     </button>
                 </div>
@@ -292,13 +292,13 @@ function _showBencanaKabupatenPopup(ctx, e, props, layer, filters) {
     const tipeLabel  = props.type === 'KOTA' ? 'Kota' : 'Kabupaten';
     const kasusLabel = props.jumlah_kasus > 0
         ? `<strong style="color:${props.color};">${props.jumlah_kasus.toLocaleString('id-ID')} Kejadian</strong>`
-        : `<strong style="color:#27ae60;">Tidak Ada Kejadian</strong>`;
+        : `<strong style="color:#1D1A15;">Tidak Ada Kejadian</strong>`;
 
     const popup = L.popup({ maxWidth: 280, className: 'petapantau-leaflet-popup' })
         .setLatLng(e.latlng)
         .setContent(`
             <div class="petapantau-popup">
-                <div class="petapantau-popup-header" style="background:#1a5276;">
+                <div class="petapantau-popup-header" style="background:#5C4000;">
                     <i class="fa fa-bolt"></i>
                     <strong>${tipeLabel} ${props.name}</strong>
                 </div>
@@ -307,11 +307,11 @@ function _showBencanaKabupatenPopup(ctx, e, props, layer, filters) {
                         <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                         <tr><td><i class="fa fa-calendar"></i> Periode</td><td><strong>${_periodeLabel(filters)}</strong></td></tr>
                         <tr><td><i class="fa fa-list"></i> Kecamatan</td><td><strong>${props.jumlah_kecamatan} Kecamatan</strong></td></tr>
-                        <tr><td><i class="fa fa-bolt" style="color:#2980b9;"></i> Kejadian</td><td>${kasusLabel}</td></tr>
+                        <tr><td><i class="fa fa-bolt" style="color:#8A6410;"></i> Kejadian</td><td>${kasusLabel}</td></tr>
                     </table>
                 </div>
                 <div class="petapantau-popup-footer">
-                    <button class="petapantau-btn-detail" style="background:#1a5276;" id="btn-bencana-kec-${props.id}">
+                    <button class="petapantau-btn-detail" style="background:#5C4000;" id="btn-bencana-kec-${props.id}">
                         <i class="fa fa-search-plus"></i> Lihat Detail Kecamatan
                     </button>
                 </div>
@@ -435,13 +435,13 @@ export async function drillDownBencanaKecamatan(ctx, kabProps, kabLayer, filters
 function _showBencanaKecamatanPopup(ctx, e, props, layer, filters, kabProps, kabLayer) {
     const kasusLabel = props.jumlah_kasus > 0
         ? `<strong style="color:${props.color};">${props.jumlah_kasus.toLocaleString('id-ID')} Kejadian</strong>`
-        : `<strong style="color:#27ae60;">Tidak Ada Kejadian</strong>`;
+        : `<strong style="color:#1D1A15;">Tidak Ada Kejadian</strong>`;
 
     const popup = L.popup({ maxWidth: 280, className: 'petapantau-leaflet-popup' })
         .setLatLng(e.latlng)
         .setContent(`
             <div class="petapantau-popup">
-                <div class="petapantau-popup-header" style="background:#2471a3;">
+                <div class="petapantau-popup-header" style="background:#8A6410;">
                     <i class="fa fa-map"></i>
                     <strong>Kec. ${props.name}</strong>
                 </div>
@@ -450,11 +450,11 @@ function _showBencanaKecamatanPopup(ctx, e, props, layer, filters, kabProps, kab
                         <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                         <tr><td><i class="fa fa-calendar"></i> Periode</td><td><strong>${_periodeLabel(filters)}</strong></td></tr>
                         <tr><td><i class="fa fa-home"></i> Desa/Kel.</td><td><strong>${props.jumlah_desa} Desa/Kelurahan</strong></td></tr>
-                        <tr><td><i class="fa fa-bolt" style="color:#2980b9;"></i> Kejadian</td><td>${kasusLabel}</td></tr>
+                        <tr><td><i class="fa fa-bolt" style="color:#8A6410;"></i> Kejadian</td><td>${kasusLabel}</td></tr>
                     </table>
                 </div>
                 <div class="petapantau-popup-footer">
-                    <button class="petapantau-btn-detail" style="background:#2471a3;" id="btn-bencana-desa-${props.id}">
+                    <button class="petapantau-btn-detail" style="background:#8A6410;" id="btn-bencana-desa-${props.id}">
                         <i class="fa fa-search-plus"></i> Lihat Detail Desa/Kelurahan
                     </button>
                 </div>
@@ -571,13 +571,13 @@ function _showBencanaDesaPopup(ctx, e, props, filters) {
     const tipeLabel  = props.type === 'KELURAHAN' ? 'Kelurahan' : 'Desa';
     const kasusLabel = props.jumlah_kasus > 0
         ? `<strong style="color:${props.color};">${props.jumlah_kasus.toLocaleString('id-ID')} Kejadian</strong>`
-        : `<strong style="color:#27ae60;">Tidak Ada Kejadian</strong>`;
+        : `<strong style="color:#1D1A15;">Tidak Ada Kejadian</strong>`;
 
     L.popup({ maxWidth: 280, className: 'petapantau-leaflet-popup' })
         .setLatLng(e.latlng)
         .setContent(`
             <div class="petapantau-popup">
-                <div class="petapantau-popup-header" style="background:#1a5276;">
+                <div class="petapantau-popup-header" style="background:#5C4000;">
                     <i class="fa fa-home"></i>
                     <strong>${tipeLabel} ${props.name}</strong>
                 </div>
@@ -586,7 +586,7 @@ function _showBencanaDesaPopup(ctx, e, props, filters) {
                         <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                         <tr><td><i class="fa fa-tag"></i> Tipe</td><td><strong>${tipeLabel}</strong></td></tr>
                         <tr><td><i class="fa fa-calendar"></i> Periode</td><td><strong>${_periodeLabel(filters)}</strong></td></tr>
-                        <tr><td><i class="fa fa-bolt" style="color:#2980b9;"></i> Kejadian</td><td>${kasusLabel}</td></tr>
+                        <tr><td><i class="fa fa-bolt" style="color:#8A6410;"></i> Kejadian</td><td>${kasusLabel}</td></tr>
                     </table>
                 </div>
             </div>

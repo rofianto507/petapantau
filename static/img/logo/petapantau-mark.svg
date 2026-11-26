@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="pb-mark-title">
+  <title id="pb-mark-title">PetaPantau</title>
+  <!-- Tanda PetaPantau: perisai (keamanan) + dua cincin berkait (bersama) + titik (lokasi). Geometri sama dengan tools/generate_app_icons.py -->
+  <defs>
+    <linearGradient id="pb-gold" gradientUnits="userSpaceOnUse" x1="0" y1="8" x2="0" y2="120">
+      <stop offset="0" stop-color="#E9C05A"/>
+      <stop offset="1" stop-color="#B5821A"/>
+    </linearGradient>
+    <clipPath id="pb-shield"><path d="M64 8L108 24V60C108 87 90 108 64 120C38 108 20 87 20 60V24Z"/></clipPath>
+    <clipPath id="pb-top"><rect width="128" height="60"/></clipPath>
+    <clipPath id="pb-bot"><rect y="60" width="128" height="68"/></clipPath>
+  </defs>
+  <path d="M64 8L108 24V60C108 87 90 108 64 120C38 108 20 87 20 60V24Z" fill="url(#pb-gold)"/>
+  <path d="M64 8L108 24V60C108 87 90 108 64 120C38 108 20 87 20 60V24Z" fill="none" stroke="#1D1A15" stroke-width="8" clip-path="url(#pb-shield)"/>
+  <g fill="none" stroke="#1D1A15" stroke-width="6.5">
+    <circle cx="52" cy="60" r="20"/>
+    <circle cx="76" cy="60" r="20"/>
+  </g>
+  <!-- anyaman: cincin kiri di atas pada persilangan atas, cincin kanan di atas pada persilangan bawah -->
+  <g clip-path="url(#pb-top)" fill="none">
+    <circle cx="52" cy="60" r="20" stroke="url(#pb-gold)" stroke-width="11.7"/>
+    <circle cx="52" cy="60" r="20" stroke="#1D1A15" stroke-width="6.5"/>
+  </g>
+  <g clip-path="url(#pb-bot)" fill="none">
+    <circle cx="76" cy="60" r="20" stroke="url(#pb-gold)" stroke-width="11.7"/>
+    <circle cx="76" cy="60" r="20" stroke="#1D1A15" stroke-width="6.5"/>
+  </g>
+  <circle cx="64" cy="60" r="3.7" fill="#1D1A15"/>
+</svg>

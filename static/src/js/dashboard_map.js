@@ -41,6 +41,7 @@ export class DashboardMap extends Component {
         this.filterSummaryRef       = useRef("filterSummary");
         this.sumberInfoRef          = useRef("sumberInfo");
         this.kpiRowRef              = useRef("kpiRow");
+        this.heroRef                = useRef("hero");
         this.mapWrapperRef          = useRef("mapWrapper");
         this.chartRowRef            = useRef("chartRow");
         this.chartBarRef            = useRef("chartBar");
@@ -102,7 +103,10 @@ export class DashboardMap extends Component {
         // Reactive state untuk nav security — harus useState agar OWL tidak reset saat re-render
         this.navSecurity = useState({ cls: '' });
 
-        this.sidebarOpen    = true;
+        // Status sidebar diingat per browser; tanpa preferensi tersimpan, layar sempit mulai dalam keadaan diminimalkan
+        let sidebarPref = null;
+        try { sidebarPref = localStorage.getItem('petapantau.sidebar'); } catch (_) { /* mode privat */ }
+        this.sidebarOpen    = sidebarPref ? sidebarPref === 'open' : window.innerWidth >= 1100;
         this.currentMode    = 'umum';
         this.currentLevel   = 'kabupaten';
         this.backButton     = null;
@@ -152,6 +156,7 @@ export class DashboardMap extends Component {
         };
 
         onMounted(async () => {
+            this._applySidebarState(false);   // terapkan status sidebar tersimpan sebelum peta dibuat
             // Role-based polres filter: cek group dan ambil polres_id via ORM
             try {
                 const [isPolsek, isPolresBase, isAdmin, isSubdit, isSubditSP] = await Promise.all([
@@ -238,17 +243,30 @@ export class DashboardMap extends Component {
     // ─────────────────────────────────────────────
     onToggleSidebar() {
         this.sidebarOpen = !this.sidebarOpen;
-        const sidebar = this.sidebarRef.el;
-        const icon    = this.collapseIcon.el;
+        try { localStorage.setItem('petapantau.sidebar', this.sidebarOpen ? 'open' : 'closed'); } catch (_) { /* mode privat */ }
+        this._applySidebarState(true);
+    }
 
-        if (this.sidebarOpen) {
-            sidebar.classList.remove('collapsed');
-            icon.style.transform = '';
-        } else {
-            sidebar.classList.add('collapsed');
-            icon.style.transform = 'rotate(180deg)';
+    // Terapkan status sidebar (terbuka / diminimalkan) ke DOM.
+    _applySidebarState(resizeAfter) {
+        const sidebar = this.sidebarRef.el;
+        if (!sidebar) return;
+        sidebar.classList.toggle('collapsed', !this.sidebarOpen);
+        const btn = sidebar.querySelector('.petapantau-collapse-btn');
+        if (btn) {
+            btn.setAttribute('aria-expanded', String(this.sidebarOpen));
+            btn.title = this.sidebarOpen ? 'Minimalkan menu' : 'Perluas menu';
         }
-        setTimeout(() => { if (this.map) this.map.invalidateSize(); }, 320);
+        // lebar area dashboard berubah setelah transisi CSS (0,3 dtk): peta dan grafik perlu menyesuaikan
+        if (resizeAfter) setTimeout(() => this._resizeAfterLayout(), 340);
+    }
+
+    _resizeAfterLayout() {
+        if (this.map) this.map.invalidateSize();
+        document.querySelectorAll('.petapantau-chart-body').forEach((el) => {
+            const chart = window.echarts?.getInstanceByDom(el);
+            if (chart) chart.resize();
+        });
     }
 
     // ─────────────────────────────────────────────
@@ -711,10 +729,10 @@ export class DashboardMap extends Component {
                 ]);
                 const persen = total > 0 ? Math.round(selesai / total * 100) : 0;
                 cards = [
-                    { icon: 'fa-database',    color: '#2980b9', value: total,        label: 'Total Data (JTP)',    action: { model: 'petapantau.kriminalitas', domain: d } },
-                    { icon: 'fa-spinner',     color: '#d35400', value: proses,       label: 'Total Proses',        action: { model: 'petapantau.kriminalitas', domain: [...d, ['status_perkara','=','PROSES']] } },
-                    { icon: 'fa-check-circle',color: '#27ae60', value: selesai,      label: 'Total Selesai (PTP)', action: { model: 'petapantau.kriminalitas', domain: [...d, ['status_perkara','=','SELESAI']] } },
-                    { icon: 'fa-percent',     color: '#8e44ad', value: persen + '%', label: 'Persentase Selesai',  action: { model: 'petapantau.kriminalitas', domain: [...d, ['status_perkara','=','SELESAI']] } },
+                    { icon: 'fa-database',    color: '#8A6410', value: total,        label: 'Total Data (JTP)',    action: { model: 'petapantau.kriminalitas', domain: d } },
+                    { icon: 'fa-spinner',     color: '#8A6410', value: proses,       label: 'Total Proses',        action: { model: 'petapantau.kriminalitas', domain: [...d, ['status_perkara','=','PROSES']] } },
+                    { icon: 'fa-check-circle',color: '#1D1A15', value: selesai,      label: 'Total Selesai (PTP)', action: { model: 'petapantau.kriminalitas', domain: [...d, ['status_perkara','=','SELESAI']] } },
+                    { icon: 'fa-percent',     color: '#B07F10', value: persen + '%', label: 'Persentase Selesai',  action: { model: 'petapantau.kriminalitas', domain: [...d, ['status_perkara','=','SELESAI']] } },
                 ];
             } else if (mode === 'umum') {
                 // Peta umum = data geografis, filter tahun & tanggal tidak relevan
@@ -725,10 +743,10 @@ export class DashboardMap extends Component {
                     this.orm.searchCount('petapantau.polres', []),
                 ]);
                 cards = [
-                    { icon: 'fa-building', color: '#2980b9', value: kab,    label: 'Total Kabupaten/Kota', action: { model: 'petapantau.kabupaten',  domain: [] } },
-                    { icon: 'fa-map',      color: '#8e44ad', value: kec,    label: 'Total Kecamatan',      action: { model: 'petapantau.kecamatan',  domain: [] } },
-                    { icon: 'fa-home',     color: '#27ae60', value: desa,   label: 'Total Desa/Kelurahan', action: { model: 'petapantau.desa',        domain: [] } },
-                    { icon: 'fa-shield',   color: '#c0392b', value: polres, label: 'Total Polres',         action: { model: 'petapantau.polres',      domain: [] } },
+                    { icon: 'fa-building', color: '#8A6410', value: kab,    label: 'Total Kabupaten/Kota', action: { model: 'petapantau.kabupaten',  domain: [] } },
+                    { icon: 'fa-map',      color: '#B07F10', value: kec,    label: 'Total Kecamatan',      action: { model: 'petapantau.kecamatan',  domain: [] } },
+                    { icon: 'fa-home',     color: '#1D1A15', value: desa,   label: 'Total Desa/Kelurahan', action: { model: 'petapantau.desa',        domain: [] } },
+                    { icon: 'fa-shield',   color: '#8A6410', value: polres, label: 'Total Polres',         action: { model: 'petapantau.polres',      domain: [] } },
                 ];
             } else if (mode === 'bencana') {
                 const d = [...tf, ...df, ...kf, ...sts, ...drillDomain];
@@ -739,10 +757,10 @@ export class DashboardMap extends Component {
                 ]);
                 const persen = total > 0 ? Math.round(nonAktif / total * 100) : 0;
                 cards = [
-                    { icon: 'fa-database',    color: '#2980b9', value: total,        label: 'Total Data',             action: { model: 'petapantau.bencana', domain: d } },
-                    { icon: 'fa-bolt',        color: '#c0392b', value: aktif,        label: 'Masih Aktif',            action: { model: 'petapantau.bencana', domain: [...d, ['state','=','AKTIF']] } },
-                    { icon: 'fa-check-circle',color: '#27ae60', value: nonAktif,     label: 'Non Aktif',              action: { model: 'petapantau.bencana', domain: [...d, ['state','=','NON AKTIF']] } },
-                    { icon: 'fa-percent',     color: '#8e44ad', value: persen + '%', label: 'Persentase Tertangani',  action: { model: 'petapantau.bencana', domain: [...d, ['state','=','NON AKTIF']] } },
+                    { icon: 'fa-database',    color: '#8A6410', value: total,        label: 'Total Data',             action: { model: 'petapantau.bencana', domain: d } },
+                    { icon: 'fa-bolt',        color: '#8A6410', value: aktif,        label: 'Masih Aktif',            action: { model: 'petapantau.bencana', domain: [...d, ['state','=','AKTIF']] } },
+                    { icon: 'fa-check-circle',color: '#1D1A15', value: nonAktif,     label: 'Non Aktif',              action: { model: 'petapantau.bencana', domain: [...d, ['state','=','NON AKTIF']] } },
+                    { icon: 'fa-percent',     color: '#B07F10', value: persen + '%', label: 'Persentase Tertangani',  action: { model: 'petapantau.bencana', domain: [...d, ['state','=','NON AKTIF']] } },
                 ];
             } else if (mode === 'lalin') {
                 const d = [...tf, ...df, ...kf, ...sts, ...drillDomain];
@@ -753,10 +771,10 @@ export class DashboardMap extends Component {
                 ]);
                 const persen = total > 0 ? Math.round(selesai / total * 100) : 0;
                 cards = [
-                    { icon: 'fa-database',    color: '#d35400', value: total,        label: 'Total Data',       action: { model: 'petapantau.lalu_lintas', domain: d } },
-                    { icon: 'fa-spinner',     color: '#c0392b', value: proses,       label: 'Total Proses',     action: { model: 'petapantau.lalu_lintas', domain: [...d, ['state','=','PROSES']] } },
-                    { icon: 'fa-check-circle',color: '#27ae60', value: selesai,      label: 'Total Selesai',    action: { model: 'petapantau.lalu_lintas', domain: [...d, ['state','=','SELESAI']] } },
-                    { icon: 'fa-percent',     color: '#1a6b9a', value: persen + '%', label: 'Persentase Selesai', action: { model: 'petapantau.lalu_lintas', domain: [...d, ['state','=','SELESAI']] } },
+                    { icon: 'fa-database',    color: '#8A6410', value: total,        label: 'Total Data',       action: { model: 'petapantau.lalu_lintas', domain: d } },
+                    { icon: 'fa-spinner',     color: '#8A6410', value: proses,       label: 'Total Proses',     action: { model: 'petapantau.lalu_lintas', domain: [...d, ['state','=','PROSES']] } },
+                    { icon: 'fa-check-circle',color: '#1D1A15', value: selesai,      label: 'Total Selesai',    action: { model: 'petapantau.lalu_lintas', domain: [...d, ['state','=','SELESAI']] } },
+                    { icon: 'fa-percent',     color: '#8A6410', value: persen + '%', label: 'Persentase Selesai', action: { model: 'petapantau.lalu_lintas', domain: [...d, ['state','=','SELESAI']] } },
                 ];
             } else if (mode === 'lokasi') {
                 // lokasi_penting tidak punya sumber_dokumen_id & tanggal_kejadian
@@ -765,10 +783,10 @@ export class DashboardMap extends Component {
                     this.orm.searchCount('petapantau.lokasi_penting', [...kf, ...sts, ['state','=','AKTIF']]),
                 ]);
                 cards = [
-                    { icon: 'fa-database',    color: '#27ae60', value: total,       label: 'Total Lokasi',    action: { model: 'petapantau.lokasi_penting', domain: [...kf, ...sts] } },
-                    { icon: 'fa-check-circle',color: '#1a6b9a', value: aktif,       label: 'Lokasi Aktif',    action: { model: 'petapantau.lokasi_penting', domain: [...kf, ...sts, ['state','=','AKTIF']] } },
-                    { icon: 'fa-times-circle',color: '#c0392b', value: total-aktif, label: 'Non Aktif',       action: { model: 'petapantau.lokasi_penting', domain: [...kf, ...sts, ['state','!=','AKTIF']] } },
-                    { icon: 'fa-map-marker',  color: '#8e44ad', value: total,       label: 'Total Terdaftar', action: { model: 'petapantau.lokasi_penting', domain: [...kf, ...sts] } },
+                    { icon: 'fa-database',    color: '#1D1A15', value: total,       label: 'Total Lokasi',    action: { model: 'petapantau.lokasi_penting', domain: [...kf, ...sts] } },
+                    { icon: 'fa-check-circle',color: '#8A6410', value: aktif,       label: 'Lokasi Aktif',    action: { model: 'petapantau.lokasi_penting', domain: [...kf, ...sts, ['state','=','AKTIF']] } },
+                    { icon: 'fa-times-circle',color: '#8A6410', value: total-aktif, label: 'Non Aktif',       action: { model: 'petapantau.lokasi_penting', domain: [...kf, ...sts, ['state','!=','AKTIF']] } },
+                    { icon: 'fa-map-marker',  color: '#B07F10', value: total,       label: 'Total Terdaftar', action: { model: 'petapantau.lokasi_penting', domain: [...kf, ...sts] } },
                 ];
             } else if (mode === 'patroli') {
                 const df_p = [
@@ -793,10 +811,10 @@ export class DashboardMap extends Component {
                 ]);
                 const totalPersonel = personelGroups[0]?.personel_count || 0;
                 cards = [
-                    { icon: 'fa-car',        color: '#27ae60', value: total,         label: 'Total Patroli',      action: { model: 'petapantau.patroli',         domain: d } },
-                    { icon: 'fa-spinner',    color: '#d35400', value: proses,        label: 'Patroli Proses',     action: { model: 'petapantau.patroli',         domain: [...d, ['state','=','PROSES']] } },
-                    { icon: 'fa-map-marker', color: '#148F77', value: totalLokasi,   label: 'Total Titik Lokasi', action: { model: 'petapantau.lokasi_patroli',  domain: dLokasi } },
-                    { icon: 'fa-users',      color: '#8e44ad', value: totalPersonel, label: 'Total Personel',     action: null },
+                    { icon: 'fa-car',        color: '#1D1A15', value: total,         label: 'Total Patroli',      action: { model: 'petapantau.patroli',         domain: d } },
+                    { icon: 'fa-spinner',    color: '#8A6410', value: proses,        label: 'Patroli Proses',     action: { model: 'petapantau.patroli',         domain: [...d, ['state','=','PROSES']] } },
+                    { icon: 'fa-map-marker', color: '#8C6A3A', value: totalLokasi,   label: 'Total Titik Lokasi', action: { model: 'petapantau.lokasi_patroli',  domain: dLokasi } },
+                    { icon: 'fa-users',      color: '#B07F10', value: totalPersonel, label: 'Total Personel',     action: null },
                 ];
             }
 
@@ -814,26 +832,61 @@ export class DashboardMap extends Component {
                 </div>
             `).join('');
             row.querySelectorAll('.petapantau-kpi-card--clickable').forEach(el => {
-                el.addEventListener('click', () => {
-                    const card = cards[parseInt(el.dataset.idx)];
-                    if (!card?.action) return;
-                    this.action.doAction({
-                        type: 'ir.actions.act_window',
-                        name: card.label,
-                        res_model: card.action.model,
-                        view_mode: 'list,form',
-                        views: [[false, 'list'], [false, 'form']],
-                        domain: card.action.domain,
-                        target: 'current',
-                    });
-                });
+                el.addEventListener('click', () => this._openCardAction(cards[parseInt(el.dataset.idx)]));
             });
+            this._renderHero(mode, cards);
 
         } catch (e) {
             if (this._modeVersion !== myVersion) return;
             row.innerHTML = '';
+            if (this.heroRef?.el) this.heroRef.el.innerHTML = '';
             console.error('KPI load error:', e);
         }
+    }
+
+    // Buka daftar data di balik sebuah kartu KPI / kartu sorotan
+    _openCardAction(card) {
+        if (!card?.action) return;
+        this.action.doAction({
+            type: 'ir.actions.act_window',
+            name: card.label,
+            res_model: card.action.model,
+            view_mode: 'list,form',
+            views: [[false, 'list'], [false, 'form']],
+            domain: card.action.domain,
+            target: 'current',
+        });
+    }
+
+    // Kartu sorotan di atas KPI: ringkasan satu kalimat dari angka KPI mode aktif
+    _renderHero(mode, cards) {
+        const el = this.heroRef?.el;
+        if (!el) return;
+        const v = (i) => {
+            const x = cards[i]?.value;
+            return (x && x.toLocaleString) ? x.toLocaleString('id-ID') : (x ?? 0);
+        };
+        const H = {
+            umum:     { icon: 'fa-map',                  title: `${v(0)} kab/kota · ${v(1)} kecamatan`, sub: `${v(2)} desa/kelurahan · ${v(3)} satuan Polri` },
+            kriminal: { icon: 'fa-exclamation-triangle', title: `${v(0)} laporan kriminalitas`,          sub: `${v(1)} proses · ${v(2)} selesai` },
+            bencana:  { icon: 'fa-bolt',                 title: `${v(0)} kejadian bencana`,              sub: `${v(1)} aktif · ${v(2)} non aktif` },
+            lalin:    { icon: 'fa-car',                  title: `${v(0)} titik lalu lintas`,             sub: `${v(1)} proses · ${v(2)} selesai` },
+            patroli:  { icon: 'fa-car',                  title: `${v(0)} kegiatan patroli`,              sub: `${v(1)} berjalan · ${v(2)} titik · ${v(3)} personel` },
+            lokasi:   { icon: 'fa-map-marker',           title: `${v(0)} lokasi penting`,                sub: `${v(1)} aktif · ${v(2)} non aktif` },
+        }[mode];
+        if (!H) { el.innerHTML = ''; return; }
+        const card = cards[0];
+        el.innerHTML = `
+            <svg class="petapantau-hero-rings" viewBox="0 0 190 190" fill="none" aria-hidden="true">
+                <circle cx="80" cy="100" r="64" stroke="#D4A537" stroke-opacity="0.55" stroke-width="6"/>
+                <circle cx="122" cy="100" r="64" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="6"/>
+            </svg>
+            <div class="petapantau-hero-icon"><i class="fa ${H.icon}"></i></div>
+            <div class="petapantau-hero-title">${H.title}</div>
+            <div class="petapantau-hero-sub">${H.sub}</div>
+            ${card?.action ? '<button type="button" class="petapantau-hero-btn">Lihat semua data</button>' : ''}
+        `;
+        el.querySelector('.petapantau-hero-btn')?.addEventListener('click', () => this._openCardAction(card));
     }
 
     // ─────────────────────────────────────────────

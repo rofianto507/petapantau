@@ -15,9 +15,9 @@ function _renderLalinBarChart(ctx, names, values) {
         tooltip: {
             trigger: 'axis',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: params => {
                 const p = params[0];
                 return `${p.name}<br/><b>Total Kejadian: ${p.value.toLocaleString('id-ID')}</b>`;
@@ -28,13 +28,13 @@ function _renderLalinBarChart(ctx, names, values) {
             type: 'category',
             data: names,
             axisLabel: { rotate: 40, fontSize: 10, color: '#666', interval: 0 },
-            axisLine: { lineStyle: { color: '#d0d7de' } },
+            axisLine: { lineStyle: { color: '#DDD6CB' } },
             axisTick: { show: false },
         },
         yAxis: {
             type: 'value',
             axisLabel: { fontSize: 10, color: '#888' },
-            splitLine: { lineStyle: { color: '#f3f0f5', type: 'dashed' } },
+            splitLine: { lineStyle: { color: '#F1EEE6', type: 'dashed' } },
         },
         series: [{
             type: 'bar',
@@ -42,12 +42,12 @@ function _renderLalinBarChart(ctx, names, values) {
             barMaxWidth: 36,
             itemStyle: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    { offset: 0, color: '#E67E22' },
-                    { offset: 1, color: '#7D6608' },
+                    { offset: 0, color: '#8C6A3A' },
+                    { offset: 1, color: '#5C4000' },
                 ]),
                 borderRadius: [4, 4, 0, 0],
             },
-            emphasis: { itemStyle: { color: '#6E2F1A' } },
+            emphasis: { itemStyle: { color: '#3D2A00' } },
         }],
     });
 }
@@ -58,33 +58,39 @@ function _renderLalinDonutChart(ctx, data) {
     if (!el || typeof echarts === 'undefined') return;
     if (ctx._echartsLalinDonut) ctx._echartsLalinDonut.dispose();
     ctx._echartsLalinDonut = echarts.init(el);
-    const COLORS = ['#E74C3C', '#E67E22', '#F1C40F', '#2ECC71', '#3498DB',
-                    '#9B59B6', '#1ABC9C', '#E91E63', '#FF5722', '#795548'];
+    const COLORS = ['#B07F10', '#8C6A3A', '#E9C05A', '#3D3022', '#D4A537',
+                    '#D4A537', '#8C6A3A', '#8C6A3A', '#B07F10', '#3B2716'];
     ctx._echartsLalinDonut.setOption({
         tooltip: {
             trigger: 'item',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: '{b}: {c} ({d}%)',
         },
+        // Keterangan di bawah grafik agar tidak menimpa label busur
         legend: {
-            orient: 'vertical',
-            right: 8,
-            top: 'middle',
-            textStyle: { fontSize: 11, color: '#555' },
+            type: 'plain',
+            orient: 'horizontal',
+            left: 'center',
+            bottom: 4,
+            width: '92%',
+            textStyle: { fontSize: 11, color: '#6B6256' },
             icon: 'circle',
-            itemWidth: 10,
-            itemHeight: 10,
+            itemWidth: 8,
+            itemHeight: 8,
+            itemGap: 14,
+            formatter: name => name.length > 22 ? name.slice(0, 22) + '…' : name,
         },
         color: COLORS,
         series: [{
             type: 'pie',
-            radius: ['42%', '68%'],
-            center: ['36%', '50%'],
+            radius: ['40%', '62%'],
+            center: ['50%', '44%'],
             data,
-            label: { show: true, formatter: '{b}\n{c}', fontSize: 10, color: '#555' },
+            label: { show: true, formatter: p => (p.name.length > 20 ? p.name.slice(0, 20) + '…' : p.name) + '\n' + p.value, fontSize: 10, color: '#555' },
+            labelLayout: { hideOverlap: true },
             labelLine: { length: 8, length2: 10 },
             itemStyle: { borderRadius: 4, borderColor: '#fff', borderWidth: 2 },
             emphasis: { itemStyle: { shadowBlur: 8, shadowOffsetX: 0, shadowColor: 'rgba(0,0,0,0.2)' } },
@@ -98,33 +104,39 @@ function _renderLalinJenisJalanChart(ctx, data) {
     if (!el || typeof echarts === 'undefined') return;
     if (ctx._echartsLalinJenisJalan) ctx._echartsLalinJenisJalan.dispose();
     ctx._echartsLalinJenisJalan = echarts.init(el);
-    const COLORS = ['#3498DB', '#2471A3', '#1ABC9C', '#117A65', '#F39C12',
-                    '#E74C3C', '#8E44AD', '#2ECC71', '#E67E22', '#BDC3C7'];
+    const COLORS = ['#D4A537', '#8A6410', '#8C6A3A', '#6E4E0C', '#D4A537',
+                    '#B07F10', '#B07F10', '#3D3022', '#8C6A3A', '#BDB49F'];
     ctx._echartsLalinJenisJalan.setOption({
         tooltip: {
             trigger: 'item',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: '{b}: {c} ({d}%)',
         },
+        // Keterangan di bawah grafik agar tidak menimpa label busur
         legend: {
-            orient: 'vertical',
-            right: 8,
-            top: 'middle',
-            textStyle: { fontSize: 11, color: '#555' },
+            type: 'plain',
+            orient: 'horizontal',
+            left: 'center',
+            bottom: 4,
+            width: '92%',
+            textStyle: { fontSize: 11, color: '#6B6256' },
             icon: 'circle',
-            itemWidth: 10,
-            itemHeight: 10,
+            itemWidth: 8,
+            itemHeight: 8,
+            itemGap: 14,
+            formatter: name => name.length > 22 ? name.slice(0, 22) + '…' : name,
         },
         color: COLORS,
         series: [{
             type: 'pie',
-            radius: '68%',
-            center: ['36%', '50%'],
+            radius: '60%',
+            center: ['50%', '44%'],
             data,
-            label: { show: true, formatter: '{b}\n{c}', fontSize: 10, color: '#555' },
+            label: { show: true, formatter: p => (p.name.length > 20 ? p.name.slice(0, 20) + '…' : p.name) + '\n' + p.value, fontSize: 10, color: '#555' },
+            labelLayout: { hideOverlap: true },
             labelLine: { length: 8, length2: 10 },
             itemStyle: { borderColor: '#fff', borderWidth: 2 },
             emphasis: { itemStyle: { shadowBlur: 8, shadowOffsetX: 0, shadowColor: 'rgba(0,0,0,0.3)' } },
@@ -156,9 +168,9 @@ function _renderLalinWaktuChart(ctx, labels, values) {
         tooltip: {
             trigger: 'axis',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: params => {
                 const p = params[0];
                 return `${p.name}<br/><b>Total: ${p.value.toLocaleString('id-ID')}</b>`;
@@ -170,13 +182,13 @@ function _renderLalinWaktuChart(ctx, labels, values) {
             data: labels,
             boundaryGap: false,
             axisLabel: { rotate: 35, fontSize: 9, color: '#666', interval: 0 },
-            axisLine: { lineStyle: { color: '#d0d7de' } },
+            axisLine: { lineStyle: { color: '#DDD6CB' } },
             axisTick: { show: false },
         },
         yAxis: {
             type: 'value',
             axisLabel: { fontSize: 10, color: '#888' },
-            splitLine: { lineStyle: { color: '#f3f0f5', type: 'dashed' } },
+            splitLine: { lineStyle: { color: '#F1EEE6', type: 'dashed' } },
         },
         series: [{
             type: 'line',
@@ -184,16 +196,16 @@ function _renderLalinWaktuChart(ctx, labels, values) {
             smooth: true,
             symbol: 'circle',
             symbolSize: 6,
-            lineStyle: { color: '#E67E22', width: 2 },
-            itemStyle: { color: '#D35400' },
+            lineStyle: { color: '#8C6A3A', width: 2 },
+            itemStyle: { color: '#8A6410' },
             areaStyle: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    { offset: 0, color: 'rgba(230,126,34,0.34)' },
-                    { offset: 1, color: 'rgba(211,84,0,0.03)' },
+                    { offset: 0, color: 'rgba(140,106,58,0.34)' },
+                    { offset: 1, color: 'rgba(138,100,16,0.03)' },
                 ]),
             },
             label: {
-                show: true, position: 'top', fontSize: 10, color: '#D35400', fontWeight: '600',
+                show: true, position: 'top', fontSize: 10, color: '#8A6410', fontWeight: '600',
                 formatter: p => p.value > 0 ? p.value.toLocaleString('id-ID') : '',
             },
         }],
@@ -421,6 +433,6 @@ export async function updateLalinTable(ctx, mode, page) {
 
     } catch (e) {
         console.error('Lalin table load error:', e);
-        bodyEl.innerHTML = `<div style="text-align:center;padding:24px;color:#e74c3c;font-size:13px;">Gagal memuat data</div>`;
+        bodyEl.innerHTML = `<div style="text-align:center;padding:24px;color:#B07F10;font-size:13px;">Gagal memuat data</div>`;
     }
 }

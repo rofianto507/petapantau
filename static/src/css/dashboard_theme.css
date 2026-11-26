@@ -1,0 +1,413 @@
+/* ═══════════════════════════════════════════════════════════════════
+   PETAPANTAU — TEMA "PETA BERSAMA" (dimuat SETELAH dashboard_map.css)
+   Palet: coklat tua #1D1A15 · emas #D4A537 / #8A6410 · krem #FBFAF7 / #F4F1EA
+   Skala tipografi mengikuti proporsi dashboard Odoo: 10 · 11 · 12 · 13 · 15 (judul kartu) · 20–22 (judul)
+═══════════════════════════════════════════════════════════════════ */
+
+.petapantau-dashboard {
+    --pp-brown: #1D1A15;
+    --pp-ink: #26211A;
+    --pp-gold: #D4A537;
+    --pp-gold-deep: #8A6410;
+    --pp-gold-tint: #F6ECCB;
+    --pp-cream: #FBFAF7;
+    --pp-sand: #F4F1EA;
+    --pp-line: #DDD6CB;
+    --pp-line-soft: #E3DDD0;
+    --pp-muted: #6B6256;
+    --pp-display: 'Barlow Semi Condensed', 'Roboto Condensed', 'Arial Narrow', 'Segoe UI', sans-serif;
+
+    box-sizing: border-box;
+    padding: 14px 14px 14px 0;      /* kiri 0: menu aktif mepet tepi layar */
+    gap: 14px;
+    background: var(--pp-brown);
+    color: var(--pp-ink);
+}
+
+/* ─── SIDEBAR ─────────────────────────────────────────────────────── */
+.petapantau-sidebar {
+    background: transparent;
+    width: 228px;
+    min-width: 228px;
+    color: #F5F3EF;
+}
+.petapantau-sidebar.collapsed { width: 64px; min-width: 64px; }
+
+.petapantau-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px 6px 24px;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+.petapantau-brand-logo { width: 38px; height: 38px; flex-shrink: 0; }
+.petapantau-brand-text { display: flex; flex-direction: column; min-width: 0; }
+.petapantau-brand-name {
+    font-family: var(--pp-display);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
+    color: #fff;
+    white-space: nowrap;
+}
+.petapantau-brand-tag {
+    margin-top: 4px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: var(--pp-gold);
+    white-space: normal;
+}
+.petapantau-sidebar.collapsed .petapantau-brand { padding: 6px 0; justify-content: center; }
+.petapantau-sidebar.collapsed .petapantau-brand-text { display: none; }
+
+.petapantau-sidebar-section-title {
+    padding: 4px 24px 8px;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: rgba(245, 243, 239, 0.55);
+}
+
+.petapantau-nav { flex: 0 0 auto; padding: 0; }
+.petapantau-nav-item {
+    gap: 11px;
+    padding: 11px 14px 11px 20px;            /* + border kiri 4px = sejajar dengan merek (24px) */
+    border-left: 4px solid transparent;
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(245, 243, 239, 0.78);
+}
+.petapantau-nav-item i {
+    min-width: 18px;
+    font-size: 15px;
+    color: rgba(245, 243, 239, 0.6);
+}
+.petapantau-nav-item:hover { background: rgba(255, 255, 255, 0.06); color: #fff; }
+.petapantau-nav-item:hover i { color: #fff; }
+.petapantau-nav-item.active {
+    background: rgba(255, 255, 255, 0.1);     /* terang selebar sidebar */
+    color: #fff;
+    border-left-color: var(--pp-gold);        /* garis vertikal lurus mepet kiri */
+}
+.petapantau-nav-item.active i { color: var(--pp-gold); }
+
+.petapantau-sidebar.collapsed .petapantau-nav-item {
+    justify-content: center;
+    padding: 12px 0;
+    border-left: 4px solid transparent;
+    border-bottom: 0;
+}
+.petapantau-sidebar.collapsed .petapantau-nav-item.active {
+    background: rgba(255, 255, 255, 0.1);
+    border-left-color: var(--pp-gold);
+    border-bottom: 0;
+}
+
+/* tombol minimalkan: di baris merek (terlihat jelas); saat diminimalkan turun ke bawah logo */
+.petapantau-brand { gap: 8px; padding-right: 12px; }
+.petapantau-brand .petapantau-collapse-btn {
+    margin-left: auto;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(245, 243, 239, 0.8);
+    font-size: 14px;
+}
+.petapantau-brand .petapantau-collapse-btn:hover { background: rgba(255, 255, 255, 0.18); color: #fff; }
+.petapantau-brand .petapantau-collapse-btn:focus-visible { outline: 2px solid var(--pp-gold); outline-offset: 1px; }
+.petapantau-collapse-btn i { transition: transform 0.25s ease; }
+.petapantau-sidebar.collapsed .petapantau-brand { flex-direction: column; gap: 12px; padding: 6px 0; }
+.petapantau-sidebar.collapsed .petapantau-brand .petapantau-collapse-btn { margin: 0; }
+
+/* ─── PANEL UTAMA ─────────────────────────────────────────────────── */
+.petapantau-main-content {
+    background: var(--pp-cream);
+    border-radius: 26px;
+    padding: 18px 22px 22px;
+    gap: 18px;
+}
+.petapantau-sticky-header {
+    background: var(--pp-cream);
+    margin: -18px -22px 0 -22px;
+    padding: 18px 22px 8px;
+    top: -18px;
+    gap: 6px;
+    box-shadow: none;
+    border-radius: 26px 26px 0 0;
+}
+.petapantau-top-row { align-items: center; gap: 10px 16px; }
+.petapantau-breadcrumb-box {
+    font-family: var(--pp-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--pp-brown);
+}
+.petapantau-breadcrumb-box i { font-size: 16px; color: var(--pp-gold-deep); }
+
+.petapantau-breadcrumb-box { flex: 0 0 auto; }
+.petapantau-filter-box {
+    flex: 1 1 480px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    overflow: visible;
+    gap: 6px;
+}
+.petapantau-flatpickr-input { width: 150px; }
+.petapantau-select {
+    min-width: 0;
+    width: auto;
+    max-width: 128px;
+    text-overflow: ellipsis;
+    border-radius: 999px;
+    padding: 4px 10px;
+    border: 1px solid var(--pp-line);
+    background-color: #fff;
+    color: var(--pp-ink);
+}
+.petapantau-date-range { border-left: 0; padding-left: 0; }
+.petapantau-flatpickr-input { border-radius: 999px; padding: 5px 12px; border: 1px solid var(--pp-line); }
+.petapantau-summary-row { min-height: 0; }
+.petapantau-filter-summary { margin-top: 0; min-height: 0; }
+.petapantau-sumber-info { margin-top: 0; }
+.petapantau-filter-summary-chip { background: var(--pp-gold-tint); color: #5C4000; border-radius: 999px; }
+.petapantau-sumber-info i,
+.petapantau-sumber-toggle { color: var(--pp-gold-deep); }
+.petapantau-sumber-toggle { border-color: #D9B655; }
+
+/* ─── PETA + KARTU SOROTAN/KPI ────────────────────────────────────── */
+.petapantau-top-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 18px;
+    flex: 1 0 auto;
+    min-height: 560px;
+    align-items: stretch;
+}
+.petapantau-top-grid > .petapantau-map-wrapper {
+    flex: none;
+    height: auto !important;
+    min-height: 560px;
+    border-radius: 22px;
+    box-shadow: none;
+    background: var(--pp-sand);
+}
+.petapantau-top-grid > .petapantau-map-wrapper.petapantau-map-wrapper--expanded { min-height: 720px; }
+.petapantau-side-col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+@media (max-width: 1180px) {
+    .petapantau-top-grid { grid-template-columns: minmax(0, 1fr); }
+    .petapantau-side-col { flex-direction: row; flex-wrap: wrap; }
+    .petapantau-side-col > * { flex: 1 1 280px; }
+}
+
+/* kartu sorotan */
+.petapantau-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 18px;
+    border-radius: 22px;
+    background: var(--pp-brown);
+    color: #fff;
+}
+.petapantau-hero:empty { display: none; }
+.petapantau-hero-rings {
+    position: absolute;
+    right: -56px;
+    bottom: -64px;
+    width: 170px;
+    height: 170px;
+    pointer-events: none;
+}
+.petapantau-hero-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--pp-gold);
+    font-size: 16px;
+}
+.petapantau-hero-title {
+    position: relative;
+    margin-top: 12px;
+    font-family: var(--pp-display);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.2;
+}
+.petapantau-hero-sub { position: relative; margin-top: 4px; font-size: 12px; color: rgba(255, 255, 255, 0.82); }
+.petapantau-hero-btn {
+    position: relative;
+    margin-top: 14px;
+    padding: 7px 14px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--pp-gold);
+    color: var(--pp-brown);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.petapantau-hero-btn:hover { filter: brightness(1.07); }
+
+/* KPI: ubin 2 kolom di kolom kanan */
+.petapantau-side-col .petapantau-kpi-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-rows: 1fr;
+    gap: 12px;
+    flex: 1 1 auto;                 /* ubin mengisi sisa tinggi kolom, sejajar dengan peta */
+}
+.petapantau-kpi-card { justify-content: space-between; }
+.petapantau-kpi-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 14px;
+    border: 0;
+    border-radius: 18px;
+    background: var(--pp-sand);
+    box-shadow: none;
+}
+.petapantau-kpi-card:hover { box-shadow: 0 4px 14px rgba(29, 26, 21, 0.12); }
+.petapantau-kpi-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    border: 1px solid var(--pp-line-soft);
+    background: #fff;
+    font-size: 15px;
+    color: var(--pp-brown) !important;       /* seragam; menimpa warna inline dari JS */
+}
+.petapantau-kpi-body { width: 100%; }
+.petapantau-kpi-value {
+    font-family: var(--pp-display);
+    font-size: 24px;
+    line-height: 1.05;
+    color: var(--pp-brown);
+}
+.petapantau-kpi-label {
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--pp-muted);
+    white-space: normal;
+}
+
+/* ─── OVERLAY PETA ────────────────────────────────────────────────── */
+.petapantau-legend,
+.petapantau-legend--kriminal,
+.petapantau-legend--kam {
+    border-radius: 14px;
+    border-top: 3px solid var(--pp-gold);
+}
+.petapantau-lokasi-overlay { border-radius: 14px; border-color: var(--pp-line); }
+.petapantau-lokasi-overlay-header { background: var(--pp-brown); }
+.petapantau-leaflet-popup .leaflet-popup-content-wrapper { border-radius: 14px; }
+.petapantau-popup-header { background: var(--pp-brown); }
+.petapantau-popup-header--kecamatan { background: var(--pp-gold-deep); }
+.petapantau-popup-header i { color: var(--pp-gold); }
+.petapantau-leaflet-popup .leaflet-popup-tip { background: var(--pp-brown); }
+.petapantau-btn-detail { background: var(--pp-brown); border-radius: 10px; }
+.petapantau-btn-detail:hover { background: #3B2A16; }
+.petapantau-btn-back { border-radius: 10px; border-color: var(--pp-line); color: var(--pp-brown); }
+.petapantau-btn-back:hover { background: var(--pp-brown); border-color: var(--pp-brown); color: #fff; }
+
+/* klaster: emas -> perunggu -> coklat (makin padat makin gelap) */
+.petapantau-cluster-icon--sm {
+    background: radial-gradient(circle at 38% 35%, #F3D58A, #D4A537);
+    color: var(--pp-brown);
+    border: 3px solid rgba(29, 26, 21, 0.75);
+    box-shadow: 0 2px 6px rgba(29, 26, 21, 0.35), 0 0 0 3px rgba(212, 165, 55, 0.25);
+}
+.petapantau-cluster-icon--md {
+    background: radial-gradient(circle at 38% 35%, #E9C05A, #B07F10);
+    color: var(--pp-brown);
+    border: 3px solid rgba(29, 26, 21, 0.8);
+    box-shadow: 0 2px 8px rgba(29, 26, 21, 0.4), 0 0 0 4px rgba(176, 127, 16, 0.25);
+}
+.petapantau-cluster-icon--lg {
+    background: radial-gradient(circle at 38% 35%, #B07F10, #5C4000);
+    color: #fff;
+    border: 3px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 3px 10px rgba(29, 26, 21, 0.5), 0 0 0 5px rgba(92, 64, 0, 0.22);
+}
+.petapantau-cluster-icon--xl {
+    background: radial-gradient(circle at 38% 35%, #5C4000, #1D1A15);
+    color: #E9C05A;
+    border: 3px solid rgba(233, 192, 90, 0.7);
+    box-shadow: 0 3px 12px rgba(29, 26, 21, 0.6), 0 0 0 6px rgba(29, 26, 21, 0.2);
+}
+
+/* ─── KARTU GRAFIK & TABEL ────────────────────────────────────────── */
+.petapantau-chart-row { gap: 18px; }
+.petapantau-chart-row + .petapantau-chart-row { margin-top: 0; }
+.petapantau-chart-card,
+.petapantau-data-table-card {
+    border: 0;
+    border-radius: 22px;
+    background: var(--pp-sand);
+    padding: 16px 18px 18px;
+}
+.petapantau-chart-title {
+    font-family: var(--pp-display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--pp-brown);
+}
+.petapantau-chart-title i { color: var(--pp-gold-deep); }
+
+.petapantau-table-wrapper { border-radius: 14px; border: 1px solid var(--pp-line-soft); background: #fff; }
+.petapantau-th { background: var(--pp-sand); color: var(--pp-muted); border-bottom-color: var(--pp-line-soft); }
+.petapantau-td { color: var(--pp-ink); border-bottom-color: #EEE9E0; }
+.petapantau-table-row:hover .petapantau-td { background: #FBF6E6; }
+.petapantau-page-btn { border-radius: 8px; border-color: var(--pp-line); color: var(--pp-ink); }
+.petapantau-page-btn:hover:not(:disabled) { background: var(--pp-gold-tint); border-color: var(--pp-gold-deep); color: #5C4000; }
+.petapantau-badge--green { background: var(--pp-brown); color: #F6ECCB; }
+.petapantau-badge--red { background: var(--pp-gold-tint); color: #5C4000; }
+.petapantau-badge--gray { background: #EEE9E0; color: var(--pp-muted); }
+.petapantau-badge--blue { background: #EFE6D2; color: #5C4000; }
+.petapantau-view-toggle { background: #EEE9E0; border-radius: 10px; }
+.petapantau-view-btn--active { background: #fff; color: var(--pp-gold-deep); }
+.petapantau-kanban-card { border-radius: 16px; border-color: var(--pp-line-soft); }
+
+/* ─── BAR MENU BAWAAN ODOO: emas gelap + teks putih (hanya saat di aplikasi PetaPantau) ── */
+.o_main_navbar:has([data-menu-xmlid^="petapantau."]) {
+    background-color: #8A6410 !important;
+    box-shadow: inset 0 -1px 0 rgba(29, 26, 21, 0.3);
+}
+.o_main_navbar:has([data-menu-xmlid^="petapantau."]) .o_menu_brand,
+.o_main_navbar:has([data-menu-xmlid^="petapantau."]) .o_menu_sections .dropdown-toggle,
+.o_main_navbar:has([data-menu-xmlid^="petapantau."]) .o_menu_sections .o-dropdown-item,
+.o_main_navbar:has([data-menu-xmlid^="petapantau."]) .o_menu_systray,
+.o_main_navbar:has([data-menu-xmlid^="petapantau."]) .o_menu_systray .dropdown-toggle,
+.o_main_navbar:has([data-menu-xmlid^="petapantau."]) .o_navbar_apps_menu .dropdown-toggle {
+    color: #fff !important;
+}
+.o_main_navbar:has([data-menu-xmlid^="petapantau."]) .o_menu_sections .dropdown-toggle:hover,
+.o_main_navbar:has([data-menu-xmlid^="petapantau."]) .o_menu_sections .o-dropdown-item:hover,
+.o_main_navbar:has([data-menu-xmlid^="petapantau."]) .o_menu_systray .dropdown-toggle:hover,
+.o_main_navbar:has([data-menu-xmlid^="petapantau."]) .o_navbar_apps_menu .dropdown-toggle:hover {
+    background-color: rgba(29, 26, 21, 0.22) !important;
+}
+/* semua entri: tanpa latar ungu bawaan Odoo */
+.o_main_navbar:has([data-menu-xmlid^="petapantau."]) .o_menu_sections .dropdown-toggle,
+.o_main_navbar:has([data-menu-xmlid^="petapantau."]) .o_menu_sections .o_nav_entry {
+    background-color: transparent !important;
+}
+.o_main_navbar:has([data-menu-xmlid^="petapantau."]) .o_menu_sections .show > .dropdown-toggle {
+    background-color: rgba(29, 26, 21, 0.32) !important;
+}
+/* "Dashboard" disorot hanya ketika dashboard memang sedang terbuka */
+.o_web_client:has(.petapantau-dashboard) .o_main_navbar .o_menu_sections .o_nav_entry[data-menu-xmlid="petapantau.menu_petapantau_dashboard"] {
+    background-color: rgba(29, 26, 21, 0.32) !important;
+    font-weight: 600;
+}

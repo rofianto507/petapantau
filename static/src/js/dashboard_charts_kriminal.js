@@ -13,9 +13,9 @@ function _renderBarChart(ctx, names, values) {
         tooltip: {
             trigger: 'axis',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: params => {
                 const p = params[0];
                 return `${p.name}<br/><b>Total Kriminalitas: ${p.value.toLocaleString('id-ID')}</b>`;
@@ -26,13 +26,13 @@ function _renderBarChart(ctx, names, values) {
             type: 'category',
             data: names,
             axisLabel: { rotate: 40, fontSize: 10, color: '#666', interval: 0 },
-            axisLine: { lineStyle: { color: '#d0d7de' } },
+            axisLine: { lineStyle: { color: '#DDD6CB' } },
             axisTick: { show: false },
         },
         yAxis: {
             type: 'value',
             axisLabel: { fontSize: 10, color: '#888' },
-            splitLine: { lineStyle: { color: '#f3f0f5', type: 'dashed' } },
+            splitLine: { lineStyle: { color: '#F1EEE6', type: 'dashed' } },
         },
         series: [{
             type: 'bar',
@@ -40,12 +40,12 @@ function _renderBarChart(ctx, names, values) {
             barMaxWidth: 36,
             itemStyle: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    { offset: 0, color: '#9B59B6' },
-                    { offset: 1, color: '#6C3483' },
+                    { offset: 0, color: '#D4A537' },
+                    { offset: 1, color: '#8A6410' },
                 ]),
                 borderRadius: [4, 4, 0, 0],
             },
-            emphasis: { itemStyle: { color: '#875A7B' } },
+            emphasis: { itemStyle: { color: '#8A6410' } },
         }],
     });
 }
@@ -55,32 +55,38 @@ function _renderDonutChart(ctx, data) {
     if (!el || typeof echarts === 'undefined') return;
     if (ctx._echartsDonut) ctx._echartsDonut.dispose();
     ctx._echartsDonut = echarts.init(el);
-    const COLORS = ['#875A7B', '#9B59B6', '#6C3483', '#A569BD', '#C39BD3', '#7D3C98', '#D2B4DE', '#BDC3C7'];
+    const COLORS = ['#8A6410', '#D4A537', '#8A6410', '#C99A2E', '#D9B655', '#8A6410', '#E3CF9D', '#BDB49F'];
     ctx._echartsDonut.setOption({
         tooltip: {
             trigger: 'item',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: '{b}: {c} ({d}%)',
         },
+        // Keterangan di bawah grafik agar tidak menimpa label busur
         legend: {
-            orient: 'vertical',
-            right: 8,
-            top: 'middle',
-            textStyle: { fontSize: 11, color: '#555' },
+            type: 'plain',
+            orient: 'horizontal',
+            left: 'center',
+            bottom: 4,
+            width: '92%',
+            textStyle: { fontSize: 11, color: '#6B6256' },
             icon: 'circle',
-            itemWidth: 10,
-            itemHeight: 10,
+            itemWidth: 8,
+            itemHeight: 8,
+            itemGap: 14,
+            formatter: name => name.length > 22 ? name.slice(0, 22) + '…' : name,
         },
         color: COLORS,
         series: [{
             type: 'pie',
-            radius: ['42%', '68%'],
-            center: ['36%', '50%'],
+            radius: ['40%', '62%'],
+            center: ['50%', '44%'],
             data,
-            label: { show: true, formatter: '{b}\n{c}', fontSize: 10, color: '#555' },
+            label: { show: true, formatter: p => (p.name.length > 20 ? p.name.slice(0, 20) + '…' : p.name) + '\n' + p.value, fontSize: 10, color: '#555' },
+            labelLayout: { hideOverlap: true },
             labelLine: { length: 8, length2: 10 },
             itemStyle: { borderRadius: 4, borderColor: '#fff', borderWidth: 2 },
             emphasis: { itemStyle: { shadowBlur: 8, shadowOffsetX: 0, shadowColor: 'rgba(0,0,0,0.2)' } },
@@ -93,44 +99,48 @@ function _renderTkpChart(ctx, data) {
     if (!el || typeof echarts === 'undefined') return;
     if (ctx._echartsTkp) ctx._echartsTkp.dispose();
     ctx._echartsTkp = echarts.init(el);
-    const COLORS = ['#875A7B', '#9B59B6', '#6C3483', '#A509BD', '#C39BD3',
-                    '#7D3C98', '#D2B4DE', '#BDC3C7', '#E8DAEF', '#D7BDE2'];
+    const COLORS = ['#8A6410', '#D4A537', '#8A6410', '#C99A2E', '#D9B655',
+                    '#8A6410', '#E3CF9D', '#BDB49F', '#EFE6D2', '#E3CF9D'];
 
     ctx._echartsTkp.setOption({
         tooltip: {
             trigger: 'item',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: '{b}: {c} ({d}%)',
         },
+        // Keterangan di bawah grafik (bukan di kanan) agar tidak menimpa label busur
         legend: {
-            orient: 'vertical',
-            right: 8,
-            top: 'middle',
-            textStyle: { fontSize: 10, color: '#555' },
+            type: 'plain',                 // membungkus ke beberapa baris, semua entri langsung terlihat
+            orient: 'horizontal',
+            left: 'center',
+            bottom: 4,
+            width: '92%',
+            textStyle: { fontSize: 11, color: '#6B6256' },
             icon: 'circle',
             itemWidth: 8,
             itemHeight: 8,
-            itemGap: 8,
-            formatter: name => name.length > 16 ? name.slice(0, 16) + '…' : name,
+            itemGap: 14,
+            formatter: name => name.length > 22 ? name.slice(0, 22) + '…' : name,
         },
         color: COLORS,
         series: [{
             type: 'pie',
             // startAngle 180 → 0: setengah lingkaran bagian atas (half doughnut)
-            radius: ['38%', '70%'],
-            center: ['38%', '62%'],
+            radius: ['38%', '64%'],
+            center: ['50%', '62%'],
             startAngle: 180,
             endAngle: 0,
             data,
             label: {
                 show: true,
-                formatter: '{b}\n{c}',
+                formatter: p => (p.name.length > 20 ? p.name.slice(0, 20) + '…' : p.name) + '\n' + p.value,
                 fontSize: 10,
                 color: '#555',
             },
+            labelLayout: { hideOverlap: true },   // label yang bertabrakan disembunyikan (nilai tetap terlihat di tooltip)
             labelLine: { length: 6, length2: 8 },
             itemStyle: { borderColor: '#fff', borderWidth: 2, borderRadius: 3 },
             emphasis: { itemStyle: { shadowBlur: 8, shadowOffsetX: 0, shadowColor: 'rgba(0,0,0,0.3)' } },
@@ -147,9 +157,9 @@ function _renderSubKatChart(ctx, names, values) {
         tooltip: {
             trigger: 'axis',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: params => {
                 const p = params[0];
                 return `${p.name}<br/><b>Total: ${p.value.toLocaleString('id-ID')}</b>`;
@@ -166,13 +176,13 @@ function _renderSubKatChart(ctx, names, values) {
                 interval: 0,
                 formatter: v => v.length > 20 ? v.slice(0, 20) + '…' : v,
             },
-            axisLine: { lineStyle: { color: '#d0d7de' } },
+            axisLine: { lineStyle: { color: '#DDD6CB' } },
             axisTick: { show: false },
         },
         yAxis: {
             type: 'value',
             axisLabel: { fontSize: 10, color: '#888' },
-            splitLine: { lineStyle: { color: '#f3f0f5', type: 'dashed' } },
+            splitLine: { lineStyle: { color: '#F1EEE6', type: 'dashed' } },
         },
         series: [{
             type: 'bar',
@@ -180,12 +190,12 @@ function _renderSubKatChart(ctx, names, values) {
             barMaxWidth: 36,
             itemStyle: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    { offset: 0, color: '#48C9B0' },
-                    { offset: 1, color: '#117A65' },
+                    { offset: 0, color: '#C99A2E' },
+                    { offset: 1, color: '#6E4E0C' },
                 ]),
                 borderRadius: [4, 4, 0, 0],
             },
-            emphasis: { itemStyle: { color: '#0E6655' } },
+            emphasis: { itemStyle: { color: '#5C4000' } },
         }],
     });
 }
@@ -199,38 +209,38 @@ function _renderTrendChart(ctx, months, selesaiData, prosesData) {
         tooltip: {
             trigger: 'axis',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: params => {
                 const month   = params[0]?.name || '';
                 const selesai = params.find(p => p.seriesName === 'Selesai')?.value || 0;
                 const proses  = params.find(p => p.seriesName === 'Proses')?.value  || 0;
                 const total   = selesai + proses;
                 return `<b>${month}</b><br/>Total: <b>${total.toLocaleString('id-ID')}</b><br/>`
-                     + `<span style="color:#F39C12">&#9632;</span> Proses: ${proses.toLocaleString('id-ID')} (${total ? Math.round(proses / total * 100) : 0}%)<br/>`
-                     + `<span style="color:#27AE60">&#9632;</span> Selesai: ${selesai.toLocaleString('id-ID')} (${total ? Math.round(selesai / total * 100) : 0}%)`;
+                     + `<span style="color:#D4A537">&#9632;</span> Proses: ${proses.toLocaleString('id-ID')} (${total ? Math.round(proses / total * 100) : 0}%)<br/>`
+                     + `<span style="color:#1D1A15">&#9632;</span> Selesai: ${selesai.toLocaleString('id-ID')} (${total ? Math.round(selesai / total * 100) : 0}%)`;
             },
         },
         legend: {
-            top: 6,
-            textStyle: { fontSize: 11, color: '#555' },
+            bottom: 0,   // di bawah agar tidak berhimpitan dengan label total di atas batang
+            textStyle: { fontSize: 11, color: '#6B6256' },
             icon: 'roundRect',
             itemWidth: 12,
             itemHeight: 8,
         },
-        grid: { left: 10, right: 16, top: 36, bottom: 24, containLabel: true },
+        grid: { left: 10, right: 16, top: 26, bottom: 40, containLabel: true },
         xAxis: {
             type: 'category',
             data: months,
             axisLabel: { fontSize: 10, color: '#666' },
-            axisLine: { lineStyle: { color: '#d0d7de' } },
+            axisLine: { lineStyle: { color: '#DDD6CB' } },
             axisTick: { show: false },
         },
         yAxis: {
             type: 'value',
             axisLabel: { fontSize: 10, color: '#888' },
-            splitLine: { lineStyle: { color: '#f3f0f5', type: 'dashed' } },
+            splitLine: { lineStyle: { color: '#F1EEE6', type: 'dashed' } },
         },
         series: [
             {
@@ -238,7 +248,7 @@ function _renderTrendChart(ctx, months, selesaiData, prosesData) {
                 type: 'bar',
                 stack: 'total',
                 data: selesaiData,
-                itemStyle: { color: '#27AE60' },
+                itemStyle: { color: '#1D1A15' },
                 barMaxWidth: 40,
             },
             {
@@ -246,13 +256,13 @@ function _renderTrendChart(ctx, months, selesaiData, prosesData) {
                 type: 'bar',
                 stack: 'total',
                 data: prosesData,
-                itemStyle: { color: '#F39C12', borderRadius: [4, 4, 0, 0] },
+                itemStyle: { color: '#D4A537', borderRadius: [4, 4, 0, 0] },
                 barMaxWidth: 40,
                 label: {
                     show: true,
                     position: 'top',
                     fontSize: 10,
-                    color: '#71639e',
+                    color: '#8A6410',
                     fontWeight: '600',
                     formatter: params => {
                         const total = (prosesData[params.dataIndex] || 0) + (selesaiData[params.dataIndex] || 0);
@@ -274,9 +284,9 @@ function _renderWaktuChart(ctx, labels, values) {
         tooltip: {
             trigger: 'axis',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: params => {
                 const p = params[0];
                 return `${p.name}<br/><b>Total: ${p.value.toLocaleString('id-ID')}</b>`;
@@ -287,29 +297,29 @@ function _renderWaktuChart(ctx, labels, values) {
             type: 'category',
             data: labels,
             axisLabel: { fontSize: 9, color: '#666', rotate: 30 },
-            axisLine:  { lineStyle: { color: '#e5e7eb' } },
+            axisLine:  { lineStyle: { color: '#E3DDD0' } },
             axisTick:  { show: false },
         },
         yAxis: {
             type: 'value',
             minInterval: 1,
             axisLabel: { fontSize: 10, color: '#999' },
-            splitLine: { lineStyle: { color: '#f0f0f0' } },
+            splitLine: { lineStyle: { color: '#F1EEE6' } },
         },
         series: [{
             type: 'line',
             smooth: false,
             data: values,
-            lineStyle: { color: '#3B6BDB', width: 2 },
-            itemStyle: { color: '#3B6BDB' },
-            areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: 'rgba(59,107,219,0.18)' }, { offset: 1, color: 'rgba(59,107,219,0)' }] } },
+            lineStyle: { color: '#8A6410', width: 2 },
+            itemStyle: { color: '#8A6410' },
+            areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: 'rgba(138,100,16,0.18)' }, { offset: 1, color: 'rgba(138,100,16,0)' }] } },
             symbol: 'circle',
             symbolSize: 6,
             label: {
                 show: true,
                 position: 'top',
                 fontSize: 10,
-                color: '#3B6BDB',
+                color: '#8A6410',
                 fontWeight: '600',
                 formatter: p => p.value > 0 ? p.value.toLocaleString('id-ID') : '',
             },
@@ -353,7 +363,7 @@ function _renderTahunanChart(ctx, months, currentData, prevData, selectedYear, p
             top: 10,
             style: {
                 text: trendText,
-                fill: '#E74C3C',
+                fill: '#B07F10',
                 fontSize: 12,
                 fontWeight: 'bold',
             },
@@ -361,16 +371,16 @@ function _renderTahunanChart(ctx, months, currentData, prevData, selectedYear, p
         tooltip: {
             trigger: 'axis',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: params => {
                 const month = params[0]?.name || '';
                 const cur   = params.find(p => p.seriesName === `Total ${selectedYear}`)?.value || 0;
                 const prv   = params.find(p => p.seriesName === `Total ${prevYear}`)?.value     || 0;
                 return `<b>${month}</b><br/>`
-                     + `<span style="color:#5DADE2">&#9632;</span> ${selectedYear}: <b>${cur.toLocaleString('id-ID')}</b><br/>`
-                     + `<span style="color:#F39C12">&#9632;</span> ${prevYear}: <b>${prv.toLocaleString('id-ID')}</b>`;
+                     + `<span style="color:#D4A537">&#9632;</span> ${selectedYear}: <b>${cur.toLocaleString('id-ID')}</b><br/>`
+                     + `<span style="color:#D4A537">&#9632;</span> ${prevYear}: <b>${prv.toLocaleString('id-ID')}</b>`;
             },
         },
         legend: {
@@ -386,13 +396,13 @@ function _renderTahunanChart(ctx, months, currentData, prevData, selectedYear, p
             data: months,
             boundaryGap: false,
             axisLabel: { fontSize: 10, color: '#666' },
-            axisLine: { lineStyle: { color: '#d0d7de' } },
+            axisLine: { lineStyle: { color: '#DDD6CB' } },
             axisTick: { show: false },
         },
         yAxis: {
             type: 'value',
             axisLabel: { fontSize: 10, color: '#888' },
-            splitLine: { lineStyle: { color: '#f3f0f5', type: 'dashed' } },
+            splitLine: { lineStyle: { color: '#F1EEE6', type: 'dashed' } },
         },
         series: [
             {
@@ -402,19 +412,19 @@ function _renderTahunanChart(ctx, months, currentData, prevData, selectedYear, p
                 smooth: true,
                 symbol: 'circle',
                 symbolSize: 5,
-                lineStyle: { color: '#F5CBA7', width: 2, type: 'dashed' },
-                itemStyle: { color: '#F39C12' },
+                lineStyle: { color: '#F6ECCB', width: 2, type: 'dashed' },
+                itemStyle: { color: '#D4A537' },
                 areaStyle: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                        { offset: 0, color: 'rgba(243,156,18,0.15)' },
-                        { offset: 1, color: 'rgba(243,156,18,0.01)' },
+                        { offset: 0, color: 'rgba(212,165,55,0.15)' },
+                        { offset: 1, color: 'rgba(212,165,55,0.01)' },
                     ]),
                 },
                 label: {
                     show: true,
                     position: 'top',
                     fontSize: 10,
-                    color: '#E67E22',
+                    color: '#8C6A3A',
                     fontWeight: '600',
                     formatter: params => params.value > 0 ? params.value.toLocaleString('id-ID') : '',
                 },
@@ -426,19 +436,19 @@ function _renderTahunanChart(ctx, months, currentData, prevData, selectedYear, p
                 smooth: true,
                 symbol: 'circle',
                 symbolSize: 6,
-                lineStyle: { color: '#5DADE2', width: 2.5 },
-                itemStyle: { color: '#2471A3' },
+                lineStyle: { color: '#D4A537', width: 2.5 },
+                itemStyle: { color: '#8A6410' },
                 areaStyle: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                        { offset: 0, color: 'rgba(93,173,226,0.35)' },
-                        { offset: 1, color: 'rgba(93,173,226,0.02)' },
+                        { offset: 0, color: 'rgba(212,165,55,0.35)' },
+                        { offset: 1, color: 'rgba(212,165,55,0.02)' },
                     ]),
                 },
                 label: {
                     show: true,
                     position: 'top',
                     fontSize: 10,
-                    color: '#2471A3',
+                    color: '#8A6410',
                     fontWeight: '600',
                     formatter: params => params.value > 0 ? params.value.toLocaleString('id-ID') : '',
                 },
@@ -471,9 +481,9 @@ function _renderWaktuSubKatChart(ctx, elRef, chartKey, lineColor, areaColorStart
         tooltip: {
             trigger: 'axis',
             backgroundColor: '#fff',
-            borderColor: '#e5e7eb',
+            borderColor: '#E3DDD0',
             borderWidth: 1,
-            textStyle: { color: '#2c3e50', fontSize: 12 },
+            textStyle: { color: '#26211A', fontSize: 12 },
             formatter: params => {
                 const p = params[0];
                 return `${p.name}<br/><b>Total: ${p.value.toLocaleString('id-ID')}</b>`;
@@ -485,13 +495,13 @@ function _renderWaktuSubKatChart(ctx, elRef, chartKey, lineColor, areaColorStart
             data: labels,
             boundaryGap: false,
             axisLabel: { rotate: 35, fontSize: 9, color: '#666', interval: 0 },
-            axisLine: { lineStyle: { color: '#d0d7de' } },
+            axisLine: { lineStyle: { color: '#DDD6CB' } },
             axisTick: { show: false },
         },
         yAxis: {
             type: 'value',
             axisLabel: { fontSize: 10, color: '#888' },
-            splitLine: { lineStyle: { color: '#f3f0f5', type: 'dashed' } },
+            splitLine: { lineStyle: { color: '#F1EEE6', type: 'dashed' } },
         },
         series: [{
             type: 'line',
@@ -719,9 +729,9 @@ export async function updateKriminalCharts(ctx, mode) {
         _renderSubKatChart(ctx, subKatNames, subKatValues);
         _renderTrendChart(ctx, MONTHS_ID, selesaiData, prosesData);
         _renderWaktuChart(ctx, TIME_LABELS, waktuData);
-        _renderWaktuSubKatChart(ctx, 'chartCuratRef',    '_echartsCurat',    '#E74C3C', 'rgba(231,76,60,0.28)',    TIME_LABELS, curatData);
-        _renderWaktuSubKatChart(ctx, 'chartCurasRef',    '_echartsCuras',    '#BB8FCE', 'rgba(187,143,206,0.3)',   TIME_LABELS, curasData);
-        _renderWaktuSubKatChart(ctx, 'chartCuranmorRef', '_echartsCuranmor', '#8E44AD', 'rgba(142,68,173,0.3)',    TIME_LABELS, curanmorData);
+        _renderWaktuSubKatChart(ctx, 'chartCuratRef',    '_echartsCurat',    '#B07F10', 'rgba(176,127,16,0.28)',    TIME_LABELS, curatData);
+        _renderWaktuSubKatChart(ctx, 'chartCurasRef',    '_echartsCuras',    '#C99A2E', 'rgba(201,154,46,0.3)',   TIME_LABELS, curasData);
+        _renderWaktuSubKatChart(ctx, 'chartCuranmorRef', '_echartsCuranmor', '#B07F10', 'rgba(176,127,16,0.3)',    TIME_LABELS, curanmorData);
 
         // Data tahunan — perbandingan tahun terpilih vs tahun sebelumnya
         const currentYrData = _processMonthGroups(currentYrGroups);
@@ -889,6 +899,6 @@ export async function updateKriminalTable(ctx, mode, page) {
 
     } catch (e) {
         console.error('Table load error:', e);
-        bodyEl.innerHTML = `<div style="text-align:center;padding:24px;color:#e74c3c;font-size:13px;">Gagal memuat data</div>`;
+        bodyEl.innerHTML = `<div style="text-align:center;padding:24px;color:#B07F10;font-size:13px;">Gagal memuat data</div>`;
     }
 }

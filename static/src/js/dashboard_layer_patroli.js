@@ -30,15 +30,15 @@ function _addPatroliLegend(ctx) {
                     `).join('')}
                 </ul>
                 <div class="petapantau-legend-title" style="margin-top:8px;">
-                    <i class="fa fa-car" style="color:#27ae60;"></i> Kegiatan Patroli
+                    <i class="fa fa-car" style="color:#1D1A15;"></i> Kegiatan Patroli
                 </div>
                 <ul class="petapantau-legend-list">
                     <li>
-                        <span class="petapantau-legend-swatch" style="background:#27ae60;border-radius:50%;"></span>
+                        <span class="petapantau-legend-swatch" style="background:#1D1A15;border-radius:50%;"></span>
                         <span class="petapantau-legend-label">Titik Lokasi Patroli</span>
                     </li>
                     <li>
-                        <span class="petapantau-legend-swatch" style="background:transparent;border:2px dashed #1e8449;border-radius:0;height:2px;margin-top:6px;"></span>
+                        <span class="petapantau-legend-swatch" style="background:transparent;border:2px dashed #3D3022;border-radius:0;height:2px;margin-top:6px;"></span>
                         <span class="petapantau-legend-label">Rute Patroli</span>
                     </li>
                 </ul>`;
@@ -141,7 +141,7 @@ async function _loadPatroliMarkers(ctx, filters, geoConditions = []) {
     records.forEach(r => {
         const patroli   = Array.isArray(r.patroli_id) ? r.patroli_id[1] : '-';
         const patroliId = Array.isArray(r.patroli_id) ? r.patroli_id[0] : null;
-        const color     = '#27ae60';
+        const color     = '#1D1A15';
 
         const icon = L.divIcon({
             className: '',
@@ -231,7 +231,7 @@ async function _loadPatroliMarkers(ctx, filters, geoConditions = []) {
         group.sort((a, b) => (a.tanggal || '').localeCompare(b.tanggal || ''));
         const latlngs = group.map(r => [r.latitude, r.longitude]);
         L.polyline(latlngs, {
-            color:     '#1e8449',
+            color:     '#3D3022',
             weight:    2.5,
             opacity:   0.85,
             dashArray: '8, 5',
@@ -367,19 +367,19 @@ export async function loadModePatroli(ctx) {
 // ── Popup Kabupaten ───────────────────────────────────────────────────────────
 function _showPatroliKabupatenPopup(ctx, e, props, layer, filters) {
     const tipeLabel = props.type === 'KOTA' ? 'Kota' : 'Kabupaten';
-    const krimColor = props.color === '#abebc6' ? '#27ae60' : props.color;
+    const krimColor = props.color === '#EFE6D2' ? '#1D1A15' : props.color;
     const krimLabel = props.jumlah_kriminal > 0
         ? `<strong style="color:${krimColor};">${_fmtNum(props.jumlah_kriminal)} Kasus</strong>`
         : `<strong style="color:#999;">Tidak Ada Kasus</strong>`;
     const ptLabel = props.jumlah_patroli > 0
-        ? `<strong style="color:#1e8449;">${_fmtNum(props.jumlah_patroli)} Kegiatan</strong>`
+        ? `<strong style="color:#3D3022;">${_fmtNum(props.jumlah_patroli)} Kegiatan</strong>`
         : `<strong style="color:#999;">Belum Ada Patroli</strong>`;
 
     const popup = L.popup({ maxWidth: 280, className: 'petapantau-leaflet-popup' })
         .setLatLng(e.latlng)
         .setContent(`
             <div class="petapantau-popup">
-                <div class="petapantau-popup-header" style="background:#2c3e50;">
+                <div class="petapantau-popup-header" style="background:#26211A;">
                     <i class="fa fa-car"></i>
                     <strong>${tipeLabel} ${props.name}</strong>
                 </div>
@@ -387,12 +387,12 @@ function _showPatroliKabupatenPopup(ctx, e, props, layer, filters) {
                     <table>
                         <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                         <tr><td><i class="fa fa-list"></i> Kecamatan</td><td><strong>${props.jumlah_kecamatan} Kecamatan</strong></td></tr>
-                        <tr><td><i class="fa fa-exclamation-triangle" style="color:#e74c3c;"></i> Kriminalitas</td><td>${krimLabel}</td></tr>
-                        <tr><td><i class="fa fa-car" style="color:#27ae60;"></i> Patroli</td><td>${ptLabel}</td></tr>
+                        <tr><td><i class="fa fa-exclamation-triangle" style="color:#B07F10;"></i> Kriminalitas</td><td>${krimLabel}</td></tr>
+                        <tr><td><i class="fa fa-car" style="color:#1D1A15;"></i> Patroli</td><td>${ptLabel}</td></tr>
                     </table>
                 </div>
                 <div class="petapantau-popup-footer">
-                    <button class="petapantau-btn-detail" style="background:#2c3e50;" id="btn-patroli-kec-${props.id}">
+                    <button class="petapantau-btn-detail" style="background:#26211A;" id="btn-patroli-kec-${props.id}">
                         <i class="fa fa-search-plus"></i> Lihat Detail Kecamatan
                     </button>
                 </div>
@@ -524,19 +524,19 @@ export async function drillDownPatroliKecamatan(ctx, kabProps, kabLayer, filters
 
 // ── Popup Kecamatan ───────────────────────────────────────────────────────────
 function _showPatroliKecamatanPopup(ctx, e, props, layer, filters, kabProps, kabLayer) {
-    const krimColor = props.color === '#abebc6' ? '#27ae60' : props.color;
+    const krimColor = props.color === '#EFE6D2' ? '#1D1A15' : props.color;
     const krimLabel = props.jumlah_kriminal > 0
         ? `<strong style="color:${krimColor};">${_fmtNum(props.jumlah_kriminal)} Kasus</strong>`
         : `<strong style="color:#999;">Tidak Ada Kasus</strong>`;
     const ptLabel = props.jumlah_patroli > 0
-        ? `<strong style="color:#1e8449;">${_fmtNum(props.jumlah_patroli)} Kegiatan</strong>`
+        ? `<strong style="color:#3D3022;">${_fmtNum(props.jumlah_patroli)} Kegiatan</strong>`
         : `<strong style="color:#999;">Belum Ada Patroli</strong>`;
 
     const popup = L.popup({ maxWidth: 280, className: 'petapantau-leaflet-popup' })
         .setLatLng(e.latlng)
         .setContent(`
             <div class="petapantau-popup">
-                <div class="petapantau-popup-header" style="background:#2c3e50;">
+                <div class="petapantau-popup-header" style="background:#26211A;">
                     <i class="fa fa-map"></i>
                     <strong>Kec. ${props.name}</strong>
                 </div>
@@ -544,12 +544,12 @@ function _showPatroliKecamatanPopup(ctx, e, props, layer, filters, kabProps, kab
                     <table>
                         <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                         <tr><td><i class="fa fa-home"></i> Desa/Kel.</td><td><strong>${props.jumlah_desa} Desa/Kelurahan</strong></td></tr>
-                        <tr><td><i class="fa fa-exclamation-triangle" style="color:#e74c3c;"></i> Kriminalitas</td><td>${krimLabel}</td></tr>
-                        <tr><td><i class="fa fa-car" style="color:#27ae60;"></i> Patroli</td><td>${ptLabel}</td></tr>
+                        <tr><td><i class="fa fa-exclamation-triangle" style="color:#B07F10;"></i> Kriminalitas</td><td>${krimLabel}</td></tr>
+                        <tr><td><i class="fa fa-car" style="color:#1D1A15;"></i> Patroli</td><td>${ptLabel}</td></tr>
                     </table>
                 </div>
                 <div class="petapantau-popup-footer">
-                    <button class="petapantau-btn-detail" style="background:#2c3e50;" id="btn-patroli-desa-${props.id}">
+                    <button class="petapantau-btn-detail" style="background:#26211A;" id="btn-patroli-desa-${props.id}">
                         <i class="fa fa-search-plus"></i> Lihat Detail Desa/Kelurahan
                     </button>
                 </div>
@@ -673,19 +673,19 @@ export async function drillDownPatroliKelurahan(ctx, kecProps, kecLayer, filters
 // ── Popup Desa ────────────────────────────────────────────────────────────────
 function _showPatroliDesaPopup(ctx, e, props) {
     const tipeLabel = props.type === 'KELURAHAN' ? 'Kelurahan' : 'Desa';
-    const krimColor = props.color === '#abebc6' ? '#27ae60' : props.color;
+    const krimColor = props.color === '#EFE6D2' ? '#1D1A15' : props.color;
     const krimLabel = props.jumlah_kriminal > 0
         ? `<strong style="color:${krimColor};">${_fmtNum(props.jumlah_kriminal)} Kasus</strong>`
         : `<strong style="color:#999;">Tidak Ada Kasus</strong>`;
     const ptLabel = props.jumlah_patroli > 0
-        ? `<strong style="color:#1e8449;">${_fmtNum(props.jumlah_patroli)} Kegiatan</strong>`
+        ? `<strong style="color:#3D3022;">${_fmtNum(props.jumlah_patroli)} Kegiatan</strong>`
         : `<strong style="color:#999;">Belum Ada Patroli</strong>`;
 
     L.popup({ maxWidth: 280, className: 'petapantau-leaflet-popup' })
         .setLatLng(e.latlng)
         .setContent(`
             <div class="petapantau-popup">
-                <div class="petapantau-popup-header" style="background:#2c3e50;">
+                <div class="petapantau-popup-header" style="background:#26211A;">
                     <i class="fa fa-home"></i>
                     <strong>${tipeLabel} ${props.name}</strong>
                 </div>
@@ -693,8 +693,8 @@ function _showPatroliDesaPopup(ctx, e, props) {
                     <table>
                         <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                         <tr><td><i class="fa fa-tag"></i> Tipe</td><td><strong>${tipeLabel}</strong></td></tr>
-                        <tr><td><i class="fa fa-exclamation-triangle" style="color:#e74c3c;"></i> Kriminalitas</td><td>${krimLabel}</td></tr>
-                        <tr><td><i class="fa fa-car" style="color:#27ae60;"></i> Patroli</td><td>${ptLabel}</td></tr>
+                        <tr><td><i class="fa fa-exclamation-triangle" style="color:#B07F10;"></i> Kriminalitas</td><td>${krimLabel}</td></tr>
+                        <tr><td><i class="fa fa-car" style="color:#1D1A15;"></i> Patroli</td><td>${ptLabel}</td></tr>
                     </table>
                 </div>
             </div>

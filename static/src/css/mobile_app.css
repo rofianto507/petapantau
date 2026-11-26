@@ -1,35 +1,38 @@
 /* ====================================================
    PETAPANTAU — Mobile App CSS
-   Primary: #71639e (Odoo Purple)
+   Tema "Peta Bersama": coklat tua #1D1A15 · emas #D4A537 / #8A6410 · krem #F4F1EA
    ==================================================== */
 
 :root {
-    --sp-primary:       #71639e;
-    --sp-primary-dk:    #5a4f7f;
-    --sp-primary-lt:    #ede9f6;
-    --sp-primary-xs:    #f5f3fb;
-    --sp-accent:        #8978b2;
+    --sp-brown:         #1D1A15;
+    --sp-gold:          #D4A537;
+    --sp-primary:       #8a6410;   /* emas gelap: appbar, tautan, tab aktif (putih di atasnya 5,4:1) */
+    --sp-primary-dk:    #6e4e0c;
+    --sp-primary-lt:    #f6eccb;
+    --sp-primary-xs:    #f7f2e4;
+    --sp-accent:        #b07f10;
     --sp-on-primary:    #ffffff;
     --sp-surface:       #ffffff;
-    --sp-bg:            #f4f3f8;
-    --sp-outline:       #ddd8ef;
-    --sp-outline-focus: #71639e;
-    --sp-on-surface:    #1c1b1e;
-    --sp-on-surf-var:   #49454f;
-    --sp-error:         #b3261e;
+    --sp-bg:            #f4f1ea;
+    --sp-outline:       #ddd6cb;
+    --sp-outline-focus: #8a6410;
+    --sp-on-surface:    #26211a;
+    --sp-on-surf-var:   #6b6256;
+    --sp-error:         #b3261e;   /* galat tetap merah agar langsung dikenali */
     --sp-error-lt:      #fce8e6;
-    --sp-success:       #1e6b37;
-    --sp-success-lt:    #e6f4ea;
-    --sp-warning:       #e67e22;
-    --sp-warning-lt:    #fff3e0;
+    --sp-success:       #1d1a15;   /* selesai = coklat tua (sama dengan dashboard) */
+    --sp-success-lt:    #efe6d2;
+    --sp-warning:       #b07f10;   /* proses = emas gelap (sama dengan dashboard) */
+    --sp-warning-lt:    #fbefc9;
     --sp-radius-sm:     10px;
     --sp-radius:        14px;
     --sp-radius-lg:     20px;
     --sp-radius-xl:     28px;
-    --sp-shadow-sm:     0 1px 3px rgba(113,99,158,0.08), 0 1px 2px rgba(0,0,0,0.04);
-    --sp-shadow:        0 4px 16px rgba(113,99,158,0.12), 0 1px 4px rgba(0,0,0,0.06);
-    --sp-shadow-lg:     0 8px 28px rgba(113,99,158,0.18), 0 2px 8px rgba(0,0,0,0.08);
+    --sp-shadow-sm:     0 1px 3px rgba(60,45,15,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --sp-shadow:        0 4px 16px rgba(60,45,15,0.12), 0 1px 4px rgba(0,0,0,0.06);
+    --sp-shadow-lg:     0 8px 28px rgba(60,45,15,0.18), 0 2px 8px rgba(0,0,0,0.08);
     --sp-font:          'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --sp-display:       'Barlow Semi Condensed', 'Roboto Condensed', 'Arial Narrow', 'Roboto', sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -177,7 +180,7 @@ html, body {
 .sp-input:focus {
     border-color: var(--sp-outline-focus);
     background: var(--sp-surface);
-    box-shadow: 0 0 0 3px rgba(113,99,158,0.14);
+    box-shadow: 0 0 0 3px rgba(60,45,15,0.14);
 }
 .sp-input-pass { padding-right: 46px; }
 .sp-pass-toggle {
@@ -213,11 +216,11 @@ html, body {
     justify-content: center;
     gap: 8px;
     min-height: 50px;
-    box-shadow: 0 2px 8px rgba(113,99,158,0.30);
+    box-shadow: 0 2px 8px rgba(60,45,15,0.30);
 }
 .sp-btn-primary:hover  {
     background: var(--sp-primary-dk);
-    box-shadow: 0 4px 14px rgba(113,99,158,0.40);
+    box-shadow: 0 4px 14px rgba(60,45,15,0.40);
 }
 .sp-btn-primary:active { transform: scale(0.98); }
 .sp-btn-primary:disabled { opacity: 0.6; cursor: not-allowed; box-shadow: none; }
@@ -237,7 +240,7 @@ html, body {
     gap: 6px;
     transition: background 0.15s;
 }
-.sp-btn-secondary:hover { background: #ddd8f0; }
+.sp-btn-secondary:hover { background: #ddd6cb; }
 
 /* ── Alerts ─────────────────────────────────────────── */
 .sp-alert {
@@ -257,12 +260,12 @@ html, body {
 }
 .sp-alert--warning {
     background: var(--sp-warning-lt);
-    border: 1px solid #ffcc80;
-    color: #b45309;
+    border: 1px solid #e0be5e;
+    color: #5c4000;
 }
 .sp-alert--success {
     background: var(--sp-success-lt);
-    border: 1px solid #a8d5b5;
+    border: 1px solid #cdb88e;
     color: var(--sp-success);
 }
 .sp-alert-icon { font-size: 15px; margin-top: 1px; flex-shrink: 0; }
@@ -318,7 +321,7 @@ html, body {
     gap: 12px;
     position: sticky;
     top: 0; z-index: 30;
-    box-shadow: 0 2px 8px rgba(90,79,127,0.30);
+    box-shadow: 0 2px 8px rgba(110,78,12,0.30);
     flex-shrink: 0;
 }
 .sp-appbar-logo {
@@ -400,7 +403,7 @@ html, body {
     border-radius: var(--sp-radius);
     box-shadow: var(--sp-shadow-sm);
     padding: 16px;
-    border: 1px solid rgba(113,99,158,0.08);
+    border: 1px solid rgba(60,45,15,0.08);
 }
 .sp-card-title {
     font-size: 13px;
@@ -437,14 +440,14 @@ html, body {
     appearance: none;          /* standard */
     cursor: pointer;
     transition: border-color 0.18s, box-shadow 0.18s;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2371639e' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a6410' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
 }
 .sp-select:focus {
     border-color: var(--sp-outline-focus);
     background-color: var(--sp-surface);
-    box-shadow: 0 0 0 3px rgba(113,99,158,0.14);
+    box-shadow: 0 0 0 3px rgba(60,45,15,0.14);
 }
 .sp-select:disabled {
     opacity: 0.6;
@@ -470,7 +473,7 @@ html, body {
 .sp-textarea:focus {
     border-color: var(--sp-outline-focus);
     background: var(--sp-surface);
-    box-shadow: 0 0 0 3px rgba(113,99,158,0.14);
+    box-shadow: 0 0 0 3px rgba(60,45,15,0.14);
 }
 
 /* Number input ────────────────────────────────────────── */
@@ -504,7 +507,7 @@ html, body {
     transition: background 0.15s, border-color 0.15s;
     flex-shrink: 0;
 }
-.sp-gps-btn:hover { background: #ddd8f0; border-color: var(--sp-primary); }
+.sp-gps-btn:hover { background: #ddd6cb; border-color: var(--sp-primary); }
 .sp-gps-btn.sp-gps-active {
     background: var(--sp-primary);
     color: #fff;
@@ -563,7 +566,7 @@ html, body {
     max-width: 480px;
     height: 64px;
     background: var(--sp-surface);
-    border-top: 1px solid rgba(113,99,158,0.10);
+    border-top: 1px solid rgba(60,45,15,0.10);
     display: flex;
     align-items: stretch;
     z-index: 50;
@@ -580,7 +583,7 @@ html, body {
     border: none;
     background: none;
     font-family: var(--sp-font);
-    color: #aaa5bb;
+    color: #bdb49f;
     padding: 8px 4px;
     position: relative;
     transition: color 0.2s;
@@ -657,7 +660,7 @@ html, body {
 }
 .sp-greeting-icon {
     font-size: 24px;
-    color: #f59e0b;
+    color: #d4a537;
     flex-shrink: 0;
 }
 .sp-greeting-text-wrap { flex: 1; min-width: 0; }
@@ -685,7 +688,7 @@ html, body {
     flex-shrink: 0;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 0 2px rgba(113,99,158,0.25);
+    box-shadow: 0 0 0 2px rgba(60,45,15,0.25);
 }
 .sp-greeting-av-initials {
     color: #fff;
@@ -737,7 +740,7 @@ html, body {
     display: flex;
     gap: 16px;
     align-items: center;
-    box-shadow: 0 4px 16px rgba(113,99,158,0.35);
+    box-shadow: 0 4px 16px rgba(60,45,15,0.35);
     position: relative;
     overflow: hidden;
 }
@@ -857,7 +860,7 @@ html, body {
     background: var(--sp-surface);
     border-radius: var(--sp-radius);
     padding: 16px 14px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px rgba(113,99,158,0.06);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px rgba(60,45,15,0.06);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -906,7 +909,7 @@ html, body {
     background: var(--sp-surface);
     border-radius: var(--sp-radius);
     padding: 14px 14px 16px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px rgba(113,99,158,0.06);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px rgba(60,45,15,0.06);
     cursor: pointer;
     transition: transform 0.1s, box-shadow 0.15s;
     -webkit-tap-highlight-color: transparent;
@@ -950,7 +953,7 @@ html, body {
 .sp-kpi2-lbl .fa { color: var(--kpi2-color, var(--sp-primary)); font-size: 11px; }
 /* Skeleton */
 .sp-kpi2-skel-line {
-    background: linear-gradient(90deg, #e8e4f2 25%, #f3f1fa 50%, #e8e4f2 75%);
+    background: linear-gradient(90deg, #eee9e0 25%, #f4f1ea 50%, #eee9e0 75%);
     background-size: 400px 100%;
     animation: sp-shimmer 1.4s infinite;
     border-radius: 6px;
@@ -965,7 +968,7 @@ html, body {
     background: var(--sp-surface);
     border-radius: var(--sp-radius);
     padding: 14px 14px 10px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px rgba(113,99,158,0.06);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px rgba(60,45,15,0.06);
 }
 .sp-chart-header {
     font-size: 11px;
@@ -1018,7 +1021,7 @@ html, body {
 /* Skeleton loading for KPI */
 .sp-kpi-skeleton .sp-kpi-value {
     width: 60px; height: 28px;
-    background: linear-gradient(90deg, #e8e4f2 25%, #f3f1fa 50%, #e8e4f2 75%);
+    background: linear-gradient(90deg, #eee9e0 25%, #f4f1ea 50%, #eee9e0 75%);
     background-size: 400px 100%;
     animation: sp-shimmer 1.4s infinite;
     border-radius: 6px;
@@ -1026,7 +1029,7 @@ html, body {
 }
 .sp-kpi-skeleton .sp-kpi-label {
     width: 80px; height: 12px;
-    background: linear-gradient(90deg, #e8e4f2 25%, #f3f1fa 50%, #e8e4f2 75%);
+    background: linear-gradient(90deg, #eee9e0 25%, #f4f1ea 50%, #eee9e0 75%);
     background-size: 400px 100%;
     animation: sp-shimmer 1.4s infinite;
     border-radius: 4px;
@@ -1050,7 +1053,7 @@ html, body {
     100% { background-position: 400px 0; }
 }
 .sp-skeleton {
-    background: linear-gradient(90deg, #e8e4f2 25%, #f3f1fa 50%, #e8e4f2 75%);
+    background: linear-gradient(90deg, #eee9e0 25%, #f4f1ea 50%, #eee9e0 75%);
     background-size: 800px 100%;
     animation: sp-shimmer 1.4s infinite;
     border-radius: 6px;
@@ -1062,7 +1065,7 @@ html, body {
     position: fixed;
     bottom: 80px; left: 50%;
     transform: translateX(-50%) translateY(20px);
-    background: #1c1b1e;
+    background: #26211a;
     color: #fff;
     padding: 10px 18px;
     border-radius: 20px;
@@ -1082,7 +1085,7 @@ html, body {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
-.sp-toast.sp-toast--success { background: #2d6a4f; }
+.sp-toast.sp-toast--success { background: #3d3022; }
 .sp-toast.sp-toast--error   { background: #b3261e; }
 
 /* ══════════════════════════════════════════════════════
@@ -1120,8 +1123,8 @@ html, body {
     padding: 3px 10px;
     border-radius: 20px;
 }
-.sp-gps-pill--ok  { background: #e6f4ea; color: var(--sp-success); }
-.sp-gps-pill--off { background: #fff3e0; color: var(--sp-warning); }
+.sp-gps-pill--ok  { background: #efe6d2; color: var(--sp-success); }
+.sp-gps-pill--off { background: #fbefc9; color: var(--sp-warning); }
 
 /* ── Lokasi list skeleton ────────────────────────────── */
 .sp-lokasi-loading {
@@ -1154,7 +1157,7 @@ html, body {
 .sp-lokasi-item {
     width: 100%;
     background: var(--sp-surface);
-    border: 1px solid rgba(113,99,158,0.10);
+    border: 1px solid rgba(60,45,15,0.10);
     border-radius: var(--sp-radius);
     box-shadow: var(--sp-shadow-sm);
     padding: 14px 12px;
@@ -1207,10 +1210,10 @@ html, body {
     white-space: nowrap;
     flex-shrink: 0;
 }
-.sp-dist--near { background: #e6f4ea; color: #1e6b37; }
-.sp-dist--mid  { background: #fff3e0; color: #b45309; }
-.sp-dist--far  { background: #f3f0f5; color: #7a6ba0; }
-.sp-dist--none { background: #f3f0f5; color: #aaa; font-size: 14px; padding: 0 6px; }
+.sp-dist--near { background: #efe6d2; color: #1d1a15; }
+.sp-dist--mid  { background: #fbefc9; color: #5c4000; }
+.sp-dist--far  { background: #f1eee6; color: #8b8571; }
+.sp-dist--none { background: #f1eee6; color: #aaa; font-size: 14px; padding: 0 6px; }
 
 .sp-lokasi-arrow {
     color: var(--sp-outline);
@@ -1280,7 +1283,7 @@ html, body {
     overflow: hidden;
     margin-top: 12px;
     border: 1.5px solid var(--sp-outline);
-    background: #e8e4f2;
+    background: #eee9e0;
     position: relative;
     z-index: 0;
 }
@@ -1289,7 +1292,7 @@ html, body {
     bottom: 8px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(28,27,30,0.72);
+    background: rgba(29,26,21,0.72);
     color: #fff;
     font-size: 11px;
     padding: 4px 10px;
@@ -1403,7 +1406,7 @@ html, body {
     -webkit-tap-highlight-color: transparent;
 }
 .sp-filter-btn--active {
-    background: rgba(113,99,158,.12);
+    background: rgba(60,45,15,.12);
     color: var(--sp-primary);
 }
 .sp-filter-dot {
@@ -1413,7 +1416,7 @@ html, body {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: var(--sp-primary, #71639e);
+    background: var(--sp-primary, #8a6410);
     border: 1.5px solid var(--sp-surface, #fff);
 }
 .sp-filter-panel {
@@ -1525,8 +1528,8 @@ html, body {
 }
 
 /* Badges for light background (record list) */
-.sp-badge--proses-lw  { background: #fff3e0; color: #b45a00; border: 1px solid #f0a830; }
-.sp-badge--selesai-lw { background: #e6f4ea; color: #1e6b37; border: 1px solid #7bcf9c; }
+.sp-badge--proses-lw  { background: #fbefc9; color: #5c4000; border: 1px solid #d4a537; }
+.sp-badge--selesai-lw { background: #efe6d2; color: #1d1a15; border: 1px solid #8c6a3a; }
 
 .sp-list-sentinel {
     padding: 20px 0;
@@ -1578,8 +1581,8 @@ html, body {
     border: 1px solid rgba(255,255,255,.35);
 }
 .sp-badge--selesai {
-    background: rgba(30,107,55,.28);
-    color: #d4f8e4;
+    background: rgba(29,26,21,.28);
+    color: #efe6d2;
     border: 1px solid rgba(212,248,228,.4);
 }
 
@@ -1742,7 +1745,7 @@ html, body {
     cursor: pointer;
     transition: background .15s, opacity .15s;
 }
-.sp-btn-selesai:hover   { background: #165a2e; }
+.sp-btn-selesai:hover   { background: #1d1a15; }
 .sp-btn-selesai:disabled { opacity: .55; }
 .sp-btn-secondary {
     display: inline-flex;
@@ -1804,7 +1807,7 @@ html, body {
     flex-shrink: 0;
 }
 .sp-recent-icon--sp  { background: var(--sp-primary-lt); color: var(--sp-primary); }
-.sp-recent-icon--pt  { background: #e8f8f5;              color: #1e8449; }
+.sp-recent-icon--pt  { background: #efe6d2;              color: #3d3022; }
 .sp-recent-body { flex: 1; min-width: 0; }
 .sp-recent-head {
     display: flex;

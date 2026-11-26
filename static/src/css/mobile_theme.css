@@ -1,0 +1,104 @@
+/* ═══════════════════════════════════════════════════════════════════
+   PETAPANTAU MOBILE — TEMA "PETA BERSAMA" (dimuat SETELAH mobile_app.css)
+   Warna dasar ada di token :root pada mobile_app.css; berkas ini hanya mengatur bentuk
+   dan identitas: merek, ornamen cincin, tombol emas, kartu identitas coklat.
+═══════════════════════════════════════════════════════════════════ */
+
+/* ─── LOGIN ───────────────────────────────────────────────────────── */
+.sp-login-header {
+    background: var(--sp-brown);
+    padding: 44px 24px 60px;
+}
+.sp-login-header::before {          /* dua cincin berkait sebagai ornamen */
+    content: '';
+    position: absolute;
+    right: -72px;
+    top: -56px;
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 190 190' fill='none'%3E%3Ccircle cx='80' cy='100' r='64' stroke='%23D4A537' stroke-opacity='.55' stroke-width='6'/%3E%3Ccircle cx='122' cy='100' r='64' stroke='%23FFFFFF' stroke-opacity='.2' stroke-width='6'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.sp-login-logo {
+    width: 76px;
+    height: 76px;
+    border-radius: 0;
+    background: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+.sp-login-app-name {
+    font-family: var(--sp-display);
+    font-size: 28px;
+    letter-spacing: 0;
+}
+.sp-login-app-sub {
+    color: var(--sp-gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+.sp-login-card-heading { font-family: var(--sp-display); font-size: 20px; }
+
+/* ─── TOMBOL: emas dengan teks coklat (sama dengan dashboard) ─────── */
+.sp-btn-primary {
+    background: var(--sp-gold);
+    color: var(--sp-brown);
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(110, 78, 12, 0.30);
+}
+.sp-btn-primary:hover { background: #e0b84f; box-shadow: 0 4px 14px rgba(110, 78, 12, 0.40); }
+.sp-btn-secondary { color: #5c4000; }
+.sp-btn-secondary:hover { background: #efe0b0; }
+
+/* tombol "+" mengambang: emas dengan ikon coklat, seperti tombol utama */
+.sp-fab { background: var(--sp-gold); color: var(--sp-brown); box-shadow: 0 6px 18px rgba(110, 78, 12, 0.35); }
+.sp-fab:hover { background: #e0b84f; }
+
+/* ─── APP BAR ─────────────────────────────────────────────────────── */
+.sp-appbar-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 0;
+    background: none;
+}
+.sp-appbar-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.sp-appbar-title { font-family: var(--sp-display); font-size: 19px; letter-spacing: 0; }
+.sp-appbar-sub { opacity: 0.88; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* ─── KARTU IDENTITAS: coklat tua + cincin emas (seperti kartu sorotan dashboard) ── */
+.sp-profile-card {
+    background: linear-gradient(135deg, #1d1a15 0%, #3b2a16 100%);
+    box-shadow: 0 4px 16px rgba(29, 26, 21, 0.35);
+}
+.sp-profile-card::before {
+    top: auto;
+    right: -46px;
+    bottom: -60px;
+    width: 150px;
+    height: 150px;
+    background: none;
+    border: 6px solid rgba(212, 165, 55, 0.5);
+}
+.sp-profile-card::after {
+    top: auto;
+    right: -4px;
+    bottom: -60px;
+    width: 150px;
+    height: 150px;
+    background: none;
+    border: 6px solid rgba(255, 255, 255, 0.16);
+}
+.sp-profile-photo { position: relative; border-color: rgba(212, 165, 55, 0.9); }
+.sp-profile-photo img { position: absolute; inset: 0; }     /* foto menutupi inisial; avatar bawaan disembunyikan JS */
+.sp-profile-initials { font-family: var(--sp-display); color: var(--sp-gold); }
+.sp-greeting-avatar { background: var(--sp-brown); }
+.sp-greeting-av-initials { color: var(--sp-gold); font-family: var(--sp-display); font-size: 15px; }
+.sp-profile-photo-edit { background: var(--sp-gold); color: var(--sp-brown); border-color: #fff; }
+.sp-profile-photo-edit:hover { background: #e0b84f; }
+.sp-profile-badge { background: rgba(212, 165, 55, 0.18); border-color: rgba(212, 165, 55, 0.45); color: #f3d58a; }
+.sp-profile-name { font-family: var(--sp-display); font-size: 18px; }

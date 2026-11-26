@@ -10,18 +10,18 @@ import { fmtTanggal, renderKabupatenSummaryMarkers, renderSummaryMarkers, wibDat
 
 // ── Skala warna berdasarkan jumlah kasus ────────────────────────────────────
 export const KRIMINAL_COLORS = [
-    { min: 2001, max: Infinity, color: '#922b21', label: '> 2.000 Kasus' },
-    { min: 1001, max: 2000,    color: '#e74c3c', label: '> 1.000 Kasus' },
-    { min:  501, max: 1000,    color: '#e67e22', label: '> 500 Kasus'   },
-    { min:    1, max:  500,    color: '#f1c40f', label: '>= 1 Kasus'    },
-    { min:    0, max:    0,    color: '#abebc6', label: 'Tidak Ada Kasus' },
+    { min: 2001, max: Infinity, color: '#1D1A15', label: '> 2.000 Kasus' },
+    { min: 1001, max: 2000,    color: '#5A4530', label: '> 1.000 Kasus' },
+    { min:  501, max: 1000,    color: '#8C6A3A', label: '> 500 Kasus'   },
+    { min:    1, max:  500,    color: '#D1B88A', label: '>= 1 Kasus'    },
+    { min:    0, max:    0,    color: '#EFE6D2', label: 'Tidak Ada Kasus' },
 ];
 
 export function getKriminalColor(jumlah) {
     for (const tier of KRIMINAL_COLORS) {
         if (jumlah >= tier.min) return tier.color;
     }
-    return '#abebc6';
+    return '#EFE6D2';
 }
 
 // ── Legend Control ───────────────────────────────────────────────────────────
@@ -156,7 +156,7 @@ async function _loadKriminalMarkers(ctx, domain, limit) {
 
     records.forEach(r => {
         const isSelesai   = r.status_perkara === 'SELESAI';
-        const statusColor = isSelesai ? '#27ae60' : '#e74c3c';
+        const statusColor = isSelesai ? '#1D1A15' : '#B07F10';
         const statusLabel = isSelesai ? 'Selesai' : 'Proses';
         const kategori    = Array.isArray(r.kategori_id)     ? r.kategori_id[1]     : '-';
         const subKategori = Array.isArray(r.sub_kategori_id) ? r.sub_kategori_id[1] : '-';
@@ -178,7 +178,7 @@ async function _loadKriminalMarkers(ctx, domain, limit) {
 
         marker.bindPopup(`
             <div class="petapantau-popup">
-                <div class="petapantau-popup-header" style="background:#922b21;">
+                <div class="petapantau-popup-header" style="background:#3B2A16;">
                     <i class="fa ${faIcon}"></i>
                     <strong>${r.code}</strong>
                 </div>
@@ -215,7 +215,7 @@ async function _loadKriminalMarkers(ctx, domain, limit) {
                     </table>
                 </div>
                 <div class="petapantau-popup-footer">
-                    <button class="petapantau-btn-detail" style="background:#922b21;" id="btn-detail-kriminal-${r.id}">
+                    <button class="petapantau-btn-detail" style="background:#3B2A16;" id="btn-detail-kriminal-${r.id}">
                         <i class="fa fa-external-link"></i> Lihat Detail
                     </button>
                 </div>
@@ -338,11 +338,11 @@ function _showKriminalKabupatenPopup(ctx, e, props, layer, filters) {
     const tipeLabel  = props.type === 'KOTA' ? 'Kota' : 'Kabupaten';
     const kasusLabel = props.jumlah_kasus > 0
         ? `<strong style="color:${props.color};">${props.jumlah_kasus.toLocaleString('id-ID')} Kasus</strong>`
-        : `<strong style="color:#27ae60;">Tidak Ada Kasus</strong>`;
+        : `<strong style="color:#1D1A15;">Tidak Ada Kasus</strong>`;
 
     const popupContent = `
         <div class="petapantau-popup">
-            <div class="petapantau-popup-header" style="background:#922b21;">
+            <div class="petapantau-popup-header" style="background:#3B2A16;">
                 <i class="fa fa-exclamation-triangle"></i>
                 <strong>${tipeLabel} ${props.name}</strong>
             </div>
@@ -351,11 +351,11 @@ function _showKriminalKabupatenPopup(ctx, e, props, layer, filters) {
                     <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                     <tr><td><i class="fa fa-calendar"></i> Periode</td><td><strong>${_periodeLabel(filters)}</strong></td></tr>
                     <tr><td><i class="fa fa-list"></i> Kecamatan</td><td><strong>${props.jumlah_kecamatan} Kecamatan</strong></td></tr>
-                    <tr><td><i class="fa fa-exclamation-circle" style="color:#e74c3c;"></i> Kasus</td><td>${kasusLabel}</td></tr>
+                    <tr><td><i class="fa fa-exclamation-circle" style="color:#B07F10;"></i> Kasus</td><td>${kasusLabel}</td></tr>
                 </table>
             </div>
             <div class="petapantau-popup-footer">
-                <button class="petapantau-btn-detail" style="background:#922b21;" id="btn-kriminal-kec-${props.id}">
+                <button class="petapantau-btn-detail" style="background:#3B2A16;" id="btn-kriminal-kec-${props.id}">
                     <i class="fa fa-search-plus"></i> Lihat Detail Kecamatan
                 </button>
             </div>
@@ -493,11 +493,11 @@ export async function drillDownKriminalKecamatan(ctx, kabProps, kabLayer, filter
 function _showKriminalKecamatanPopup(ctx, e, props, layer, filters, kabProps, kabLayer) {
     const kasusLabel = props.jumlah_kasus > 0
         ? `<strong style="color:${props.color};">${props.jumlah_kasus.toLocaleString('id-ID')} Kasus</strong>`
-        : `<strong style="color:#27ae60;">Tidak Ada Kasus</strong>`;
+        : `<strong style="color:#1D1A15;">Tidak Ada Kasus</strong>`;
 
     const popupContent = `
         <div class="petapantau-popup">
-            <div class="petapantau-popup-header" style="background:#c0392b;">
+            <div class="petapantau-popup-header" style="background:#8A6410;">
                 <i class="fa fa-map"></i>
                 <strong>Kec. ${props.name}</strong>
             </div>
@@ -506,11 +506,11 @@ function _showKriminalKecamatanPopup(ctx, e, props, layer, filters, kabProps, ka
                     <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                     <tr><td><i class="fa fa-calendar"></i> Periode</td><td><strong>${_periodeLabel(filters)}</strong></td></tr>
                     <tr><td><i class="fa fa-home"></i> Desa/Kel.</td><td><strong>${props.jumlah_desa} Desa/Kelurahan</strong></td></tr>
-                    <tr><td><i class="fa fa-exclamation-circle" style="color:#e74c3c;"></i> Kasus</td><td>${kasusLabel}</td></tr>
+                    <tr><td><i class="fa fa-exclamation-circle" style="color:#B07F10;"></i> Kasus</td><td>${kasusLabel}</td></tr>
                 </table>
             </div>
             <div class="petapantau-popup-footer">
-                <button class="petapantau-btn-detail" style="background:#c0392b;" id="btn-kriminal-desa-${props.id}">
+                <button class="petapantau-btn-detail" style="background:#8A6410;" id="btn-kriminal-desa-${props.id}">
                     <i class="fa fa-search-plus"></i> Lihat Detail Desa/Kelurahan
                 </button>
             </div>
@@ -643,11 +643,11 @@ function _showKriminalDesaPopup(ctx, e, props, filters) {
     const tipeLabel  = props.type === 'KELURAHAN' ? 'Kelurahan' : 'Desa';
     const kasusLabel = props.jumlah_kasus > 0
         ? `<strong style="color:${props.color};">${props.jumlah_kasus.toLocaleString('id-ID')} Kasus</strong>`
-        : `<strong style="color:#27ae60;">Tidak Ada Kasus</strong>`;
+        : `<strong style="color:#1D1A15;">Tidak Ada Kasus</strong>`;
 
     const popupContent = `
         <div class="petapantau-popup">
-            <div class="petapantau-popup-header" style="background:#922b21;">
+            <div class="petapantau-popup-header" style="background:#3B2A16;">
                 <i class="fa fa-home"></i>
                 <strong>${tipeLabel} ${props.name}</strong>
             </div>
@@ -656,7 +656,7 @@ function _showKriminalDesaPopup(ctx, e, props, filters) {
                     <tr><td><i class="fa fa-barcode"></i> Kode</td><td><strong>${props.code}</strong></td></tr>
                     <tr><td><i class="fa fa-tag"></i> Tipe</td><td><strong>${tipeLabel}</strong></td></tr>
                     <tr><td><i class="fa fa-calendar"></i> Periode</td><td><strong>${_periodeLabel(filters)}</strong></td></tr>
-                    <tr><td><i class="fa fa-exclamation-circle" style="color:#e74c3c;"></i> Kasus</td><td>${kasusLabel}</td></tr>
+                    <tr><td><i class="fa fa-exclamation-circle" style="color:#B07F10;"></i> Kasus</td><td>${kasusLabel}</td></tr>
                 </table>
             </div>
         </div>

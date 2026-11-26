@@ -150,13 +150,13 @@ class PetaPantauMobileController(http.Controller):
         manifest = {
             "name": "PetaPantau Mobile",
             "short_name": "PetaPantau",
-            "description": "Sistem Pemetaan Digital - Polri",
+            "description": "PetaPantau — pemetaan terpadu pemantauan keamanan wilayah. Polisi bersama masyarakat.",
             "start_url": "/petapantau/form",
             "scope": "/petapantau/",
             "display": "standalone",
             "orientation": "portrait-primary",
-            "background_color": "#71639e",
-            "theme_color": "#71639e",
+            "background_color": "#1d1a15",
+            "theme_color": "#8a6410",
             "lang": "id",
             "icons": [
                 {"src": "/petapantau/static/img/icons/icon-72.png",  "sizes": "72x72",   "type": "image/png", "purpose": "any"},
