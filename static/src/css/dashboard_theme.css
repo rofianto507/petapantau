@@ -116,7 +116,7 @@
     height: 28px;
     padding: 0;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 4px;
     background: rgba(255, 255, 255, 0.08);
     color: rgba(245, 243, 239, 0.8);
     font-size: 14px;
@@ -130,7 +130,7 @@
 /* ─── PANEL UTAMA ─────────────────────────────────────────────────── */
 .petapantau-main-content {
     background: var(--pp-cream);
-    border-radius: 26px;
+    border-radius: 13px;
     padding: 18px 22px 22px;
     gap: 18px;
 }
@@ -141,16 +141,17 @@
     top: -18px;
     gap: 6px;
     box-shadow: none;
-    border-radius: 26px 26px 0 0;
+    border-radius: 13px 13px 0 0;
 }
 .petapantau-top-row { align-items: center; gap: 10px 16px; }
 .petapantau-breadcrumb-box {
     font-family: var(--pp-display);
-    font-size: 22px;
+    font-size: 14px;
     font-weight: 700;
     color: var(--pp-brown);
 }
-.petapantau-breadcrumb-box i { font-size: 16px; color: var(--pp-gold-deep); }
+.petapantau-breadcrumb-box i { font-size: 12px; color: var(--pp-gold-deep); }
+.petapantau-breadcrumb-box .petapantau-breadcrumb-sep { font-size: 8px; margin: 0 4px !important; }
 
 .petapantau-breadcrumb-box { flex: 0 0 auto; }
 .petapantau-filter-box {
@@ -166,18 +167,18 @@
     width: auto;
     max-width: 128px;
     text-overflow: ellipsis;
-    border-radius: 999px;
+    border-radius: 8px;
     padding: 4px 10px;
     border: 1px solid var(--pp-line);
     background-color: #fff;
     color: var(--pp-ink);
 }
 .petapantau-date-range { border-left: 0; padding-left: 0; }
-.petapantau-flatpickr-input { border-radius: 999px; padding: 5px 12px; border: 1px solid var(--pp-line); }
+.petapantau-flatpickr-input { border-radius: 8px; padding: 5px 12px; border: 1px solid var(--pp-line); }
 .petapantau-summary-row { min-height: 0; }
 .petapantau-filter-summary { margin-top: 0; min-height: 0; }
 .petapantau-sumber-info { margin-top: 0; }
-.petapantau-filter-summary-chip { background: var(--pp-gold-tint); color: #5C4000; border-radius: 999px; }
+.petapantau-filter-summary-chip { background: var(--pp-gold-tint); color: #5C4000; border-radius: 8px; }
 .petapantau-sumber-info i,
 .petapantau-sumber-toggle { color: var(--pp-gold-deep); }
 .petapantau-sumber-toggle { border-color: #D9B655; }
@@ -190,7 +191,7 @@
     gap: 12px;
     padding: 10px 14px;
     border: 0;
-    border-radius: 16px;
+    border-radius: 8px;
     background: var(--pp-sand);
     box-shadow: none;
 }
@@ -198,7 +199,7 @@
 .petapantau-kpi-icon {
     width: 36px;
     height: 36px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid var(--pp-line-soft);
     background: #fff;
     font-size: 15px;
@@ -217,7 +218,7 @@
 }
 .petapantau-map-wrapper {
     min-height: 380px;
-    border-radius: 22px;
+    border-radius: 11px;
     box-shadow: none;
     background: var(--pp-sand);
 }
@@ -226,19 +227,19 @@
 .petapantau-legend,
 .petapantau-legend--kriminal,
 .petapantau-legend--kam {
-    border-radius: 14px;
+    border-radius: 7px;
     border-top: 3px solid var(--pp-gold);
 }
-.petapantau-lokasi-overlay { border-radius: 14px; border-color: var(--pp-line); }
+.petapantau-lokasi-overlay { border-radius: 7px; border-color: var(--pp-line); }
 .petapantau-lokasi-overlay-header { background: var(--pp-brown); }
-.petapantau-leaflet-popup .leaflet-popup-content-wrapper { border-radius: 14px; }
+.petapantau-leaflet-popup .leaflet-popup-content-wrapper { border-radius: 7px; }
 .petapantau-popup-header { background: var(--pp-brown); }
 .petapantau-popup-header--kecamatan { background: var(--pp-gold-deep); }
 .petapantau-popup-header i { color: var(--pp-gold); }
 .petapantau-leaflet-popup .leaflet-popup-tip { background: var(--pp-brown); }
-.petapantau-btn-detail { background: var(--pp-brown); border-radius: 10px; }
+.petapantau-btn-detail { background: var(--pp-brown); border-radius: 5px; }
 .petapantau-btn-detail:hover { background: #3B2A16; }
-.petapantau-btn-back { border-radius: 10px; border-color: var(--pp-line); color: var(--pp-brown); }
+.petapantau-btn-back { border-radius: 5px; border-color: var(--pp-line); color: var(--pp-brown); }
 .petapantau-btn-back:hover { background: var(--pp-brown); border-color: var(--pp-brown); color: #fff; }
 
 /* klaster: emas -> perunggu -> coklat (makin padat makin gelap) */
@@ -273,7 +274,7 @@
 .petapantau-chart-card,
 .petapantau-data-table-card {
     border: 0;
-    border-radius: 22px;
+    border-radius: 11px;
     background: var(--pp-sand);
     padding: 16px 18px 18px;
 }
@@ -285,19 +286,19 @@
 }
 .petapantau-chart-title i { color: var(--pp-gold-deep); }
 
-.petapantau-table-wrapper { border-radius: 14px; border: 1px solid var(--pp-line-soft); background: #fff; }
+.petapantau-table-wrapper { border-radius: 7px; border: 1px solid var(--pp-line-soft); background: #fff; }
 .petapantau-th { background: var(--pp-sand); color: var(--pp-muted); border-bottom-color: var(--pp-line-soft); }
 .petapantau-td { color: var(--pp-ink); border-bottom-color: #EEE9E0; }
 .petapantau-table-row:hover .petapantau-td { background: #FBF6E6; }
-.petapantau-page-btn { border-radius: 8px; border-color: var(--pp-line); color: var(--pp-ink); }
+.petapantau-page-btn { border-radius: 4px; border-color: var(--pp-line); color: var(--pp-ink); }
 .petapantau-page-btn:hover:not(:disabled) { background: var(--pp-gold-tint); border-color: var(--pp-gold-deep); color: #5C4000; }
 .petapantau-badge--green { background: var(--pp-brown); color: #F6ECCB; }
 .petapantau-badge--red { background: var(--pp-gold-tint); color: #5C4000; }
 .petapantau-badge--gray { background: #EEE9E0; color: var(--pp-muted); }
 .petapantau-badge--blue { background: #EFE6D2; color: #5C4000; }
-.petapantau-view-toggle { background: #EEE9E0; border-radius: 10px; }
+.petapantau-view-toggle { background: #EEE9E0; border-radius: 5px; }
 .petapantau-view-btn--active { background: #fff; color: var(--pp-gold-deep); }
-.petapantau-kanban-card { border-radius: 16px; border-color: var(--pp-line-soft); }
+.petapantau-kanban-card { border-radius: 8px; border-color: var(--pp-line-soft); }
 
 /* ─── BAR MENU BAWAAN ODOO: emas gelap + teks putih (hanya saat di aplikasi PetaPantau) ── */
 .o_main_navbar:has([data-menu-xmlid^="petapantau."]) {

@@ -48,7 +48,7 @@
     font-size: 14px;
     cursor: pointer;
     padding: 5px 7px;
-    border-radius: 4px;
+    border-radius: 2px;
     transition: background 0.2s, color 0.2s;
     display: flex;
     align-items: center;
@@ -235,7 +235,7 @@
     background: #ffffff;
     color: #26211A;
     border: 1px solid #DDD6CB;
-    border-radius: 5px;
+    border-radius: 2.5px;
     padding: 4px 10px;
     font-size: 12px;
     cursor: pointer;
@@ -266,7 +266,7 @@
     background: #ffffff;
     color: #26211A;
     border: 1px solid #DDD6CB;
-    border-radius: 5px;
+    border-radius: 2.5px;
     padding: 4px 8px;
     font-size: 11px;
     cursor: pointer;
@@ -287,7 +287,7 @@
     font-size: 11px;
     cursor: pointer;
     padding: 3px 5px;
-    border-radius: 3px;
+    border-radius: 1.5px;
     line-height: 1;
     flex-shrink: 0;
     transition: color 0.2s;
@@ -298,7 +298,7 @@
    FLATPICKR CALENDAR THEME
 ════════════════════════════════════════════ */
 .flatpickr-calendar {
-    border-radius: 8px !important;
+    border-radius: 4px !important;
     box-shadow: 0 4px 16px rgba(0,0,0,0.18) !important;
     font-size: 12px !important;
     border: 1px solid #DDD6CB !important;
@@ -309,7 +309,7 @@
     background: #26211A !important;
     color: #F4F1EA !important;
     fill: #F4F1EA !important;
-    border-radius: 8px 8px 0 0 !important;
+    border-radius: 4px 4px 0 0 !important;
     height: 38px !important;
 }
 .flatpickr-current-month {
@@ -364,7 +364,7 @@ span.flatpickr-weekday {
 
 /* ── Hari-hari ── */
 .flatpickr-day {
-    border-radius: 4px !important;
+    border-radius: 2px !important;
     font-size: 12px !important;
 }
 .flatpickr-day:hover { background: #F6ECCB !important; border-color: #F6ECCB !important; }
@@ -376,8 +376,8 @@ span.flatpickr-weekday {
     border-color: #8A6410 !important;
     color: #fff !important;
 }
-.flatpickr-day.startRange { border-radius: 4px 0 0 4px !important; }
-.flatpickr-day.endRange   { border-radius: 0 4px 4px 0 !important; }
+.flatpickr-day.startRange { border-radius: 2px 0 0 2px !important; }
+.flatpickr-day.endRange   { border-radius: 0 2px 2px 0 !important; }
 .flatpickr-day.inRange {
     background: rgba(138,100,16,0.12) !important;
     border-color: transparent !important;
@@ -482,7 +482,7 @@ span.flatpickr-weekday {
     cursor: pointer;
     font-size: 10px;
     padding: 1px 4px;
-    border-radius: 3px;
+    border-radius: 1.5px;
     line-height: 1;
     display: inline-flex;
     align-items: center;
@@ -499,7 +499,7 @@ span.flatpickr-weekday {
     gap: 4px;
     background: #F6ECCB;
     color: #8A6410;
-    border-radius: 4px;
+    border-radius: 2px;
     padding: 2px 7px;
     font-size: 11px;
     font-weight: 500;
@@ -533,7 +533,7 @@ span.flatpickr-weekday {
     width: 36px;
     height: 36px;
     font-size: 15px;
-    border-radius: 6px;
+    border-radius: 3px;
 }
 .petapantau-kpi-row[data-cols="5"] .petapantau-kpi-value,
 .petapantau-kpi-row[data-cols="6"] .petapantau-kpi-value {
@@ -559,7 +559,7 @@ span.flatpickr-weekday {
 /* KPI Card (dibuat oleh JS) */
 .petapantau-kpi-card {
     background: #ffffff;
-    border-radius: 4px;
+    border-radius: 2px;
     padding: 14px 18px;
     display: flex;
     align-items: center;
@@ -581,7 +581,7 @@ span.flatpickr-weekday {
 .petapantau-kpi-icon {
     width: 48px;
     height: 48px;
-    border-radius: 8px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -617,7 +617,7 @@ span.flatpickr-weekday {
     position: relative;
     overflow: hidden;
     min-height: 0;
-    border-radius: 8px;
+    border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
@@ -679,7 +679,7 @@ span.flatpickr-weekday {
    POPUP
 ════════════════════════════════════════════ */
 .petapantau-leaflet-popup .leaflet-popup-content-wrapper {
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 0;
     overflow: hidden;
     box-shadow: 0 4px 16px rgba(0,0,0,0.18);
@@ -744,7 +744,7 @@ span.flatpickr-weekday {
     background: #3B2A16;
     color: #ffffff;
     border: none;
-    border-radius: 5px;
+    border-radius: 2.5px;
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
@@ -767,7 +767,7 @@ span.flatpickr-weekday {
     background: #ffffff;
     color: #3B2A16;
     border: 1.5px solid #bbb;
-    border-radius: 6px;
+    border-radius: 3px;
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
@@ -844,7 +844,7 @@ span.flatpickr-weekday {
 /* ── Coming Soon ── */
 .petapantau-coming-soon {
     background: #ffffff;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 10px 14px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.12);
     display: flex;
@@ -864,7 +864,7 @@ span.flatpickr-weekday {
 ════════════════════════════════════════════ */
 .petapantau-legend {
     background: #ffffff;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 10px 14px 12px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.15);
     font-size: 12px;
@@ -896,7 +896,7 @@ span.flatpickr-weekday {
 .petapantau-legend-swatch {
     display: inline-block;
     width: 14px; height: 14px;
-    border-radius: 3px;
+    border-radius: 1.5px;
     flex-shrink: 0;
     border: 1px solid rgba(0,0,0,0.1);
 }
@@ -973,7 +973,7 @@ span.flatpickr-weekday {
 /* ── Overlay lokasi penting — panel checkbox ── */
 .petapantau-lokasi-overlay {
     background: rgba(255, 255, 255, 0.97);
-    border-radius: 6px;
+    border-radius: 3px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.22);
     min-width: 185px;
     max-width: 240px;
@@ -1010,7 +1010,7 @@ span.flatpickr-weekday {
     gap: 5px;
     padding: 4px 3px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 2px;
     color: #333;
     white-space: nowrap;
     overflow: hidden;
@@ -1053,7 +1053,7 @@ span.flatpickr-weekday {
     min-width: 0;
     background: #ffffff;
     border: 1px solid #E3DDD0;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 12px 16px 14px;
     display: flex;
     flex-direction: column;
@@ -1086,7 +1086,7 @@ span.flatpickr-weekday {
     min-width: 0;
     background: #ffffff;
     border: 1px solid #E3DDD0;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 12px 16px 16px;
     display: flex;
     flex-direction: column;
@@ -1115,7 +1115,7 @@ span.flatpickr-weekday {
     background: #fff;
     border: 1px solid #DDD6CB;
     color: #26211A;
-    border-radius: 4px;
+    border-radius: 2px;
     padding: 4px 9px;
     font-size: 12px;
     cursor: pointer;
@@ -1141,7 +1141,7 @@ span.flatpickr-weekday {
 
 .petapantau-table-wrapper {
     overflow-x: auto;
-    border-radius: 4px;
+    border-radius: 2px;
     border: 1px solid #E3DDD0;
 }
 
@@ -1189,7 +1189,7 @@ span.flatpickr-weekday {
     display: inline-flex;
     align-items: center;
     padding: 2px 8px;
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 11px;
     font-weight: 600;
     white-space: nowrap;
@@ -1207,13 +1207,13 @@ span.flatpickr-weekday {
     align-items: center;
     gap: 2px;
     background: #F4F1EA;
-    border-radius: 6px;
+    border-radius: 3px;
     padding: 2px;
 }
 .petapantau-view-btn {
     background: transparent;
     border: none;
-    border-radius: 4px;
+    border-radius: 2px;
     padding: 4px 8px;
     font-size: 13px;
     color: #6B6256;
@@ -1241,7 +1241,7 @@ span.flatpickr-weekday {
 .petapantau-kanban-card {
     background: #fff;
     border: 1px solid #E3DDD0;
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
     cursor: pointer;
     transition: box-shadow 0.18s, transform 0.14s;

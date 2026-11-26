@@ -43,7 +43,7 @@ function _renderBarChart(ctx, names, values) {
                     { offset: 0, color: '#1D1A15' },
                     { offset: 1, color: '#1D1A15' },
                 ]),
-                borderRadius: [4, 4, 0, 0],
+                borderRadius: [2, 2, 0, 0],
             },
             emphasis: { itemStyle: { color: '#3D3022' } },
         }],
@@ -129,7 +129,7 @@ function _renderTrendChart(ctx, months, patroliData, lokasiData) {
                         { offset: 0, color: '#8C6A3A' },
                         { offset: 1, color: '#8C6A3A' },
                     ]),
-                    borderRadius: [4, 4, 0, 0],
+                    borderRadius: [2, 2, 0, 0],
                 },
                 label: {
                     show: true,

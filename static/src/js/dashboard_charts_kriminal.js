@@ -43,7 +43,7 @@ function _renderBarChart(ctx, names, values) {
                     { offset: 0, color: '#D4A537' },
                     { offset: 1, color: '#8A6410' },
                 ]),
-                borderRadius: [4, 4, 0, 0],
+                borderRadius: [2, 2, 0, 0],
             },
             emphasis: { itemStyle: { color: '#8A6410' } },
         }],
@@ -88,7 +88,7 @@ function _renderDonutChart(ctx, data) {
             label: { show: true, formatter: p => (p.name.length > 20 ? p.name.slice(0, 20) + '…' : p.name) + '\n' + p.value, fontSize: 10, color: '#555' },
             labelLayout: { hideOverlap: true },
             labelLine: { length: 8, length2: 10 },
-            itemStyle: { borderRadius: 4, borderColor: '#fff', borderWidth: 2 },
+            itemStyle: { borderRadius: 2, borderColor: '#fff', borderWidth: 2 },
             emphasis: { itemStyle: { shadowBlur: 8, shadowOffsetX: 0, shadowColor: 'rgba(0,0,0,0.2)' } },
         }],
     });
@@ -142,7 +142,7 @@ function _renderTkpChart(ctx, data) {
             },
             labelLayout: { hideOverlap: true },   // label yang bertabrakan disembunyikan (nilai tetap terlihat di tooltip)
             labelLine: { length: 6, length2: 8 },
-            itemStyle: { borderColor: '#fff', borderWidth: 2, borderRadius: 3 },
+            itemStyle: { borderColor: '#fff', borderWidth: 2, borderRadius: 1.5 },
             emphasis: { itemStyle: { shadowBlur: 8, shadowOffsetX: 0, shadowColor: 'rgba(0,0,0,0.3)' } },
         }],
     });
@@ -193,7 +193,7 @@ function _renderSubKatChart(ctx, names, values) {
                     { offset: 0, color: '#C99A2E' },
                     { offset: 1, color: '#6E4E0C' },
                 ]),
-                borderRadius: [4, 4, 0, 0],
+                borderRadius: [2, 2, 0, 0],
             },
             emphasis: { itemStyle: { color: '#5C4000' } },
         }],
@@ -256,7 +256,7 @@ function _renderTrendChart(ctx, months, selesaiData, prosesData) {
                 type: 'bar',
                 stack: 'total',
                 data: prosesData,
-                itemStyle: { color: '#D4A537', borderRadius: [4, 4, 0, 0] },
+                itemStyle: { color: '#D4A537', borderRadius: [2, 2, 0, 0] },
                 barMaxWidth: 40,
                 label: {
                     show: true,

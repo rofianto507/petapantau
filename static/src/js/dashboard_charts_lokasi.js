@@ -43,7 +43,7 @@ function _renderLokasiBarChart(ctx, names, values) {
                     { offset: 0, color: '#C99A2E' },
                     { offset: 1, color: '#2B1F0A' },
                 ]),
-                borderRadius: [4, 4, 0, 0],
+                borderRadius: [2, 2, 0, 0],
             },
             emphasis: { itemStyle: { color: '#2B1F0A' } },
         }],
@@ -90,7 +90,7 @@ function _renderLokasiDonutChart(ctx, data) {
             label: { show: true, formatter: p => (p.name.length > 20 ? p.name.slice(0, 20) + '…' : p.name) + '\n' + p.value, fontSize: 10, color: '#555' },
             labelLayout: { hideOverlap: true },
             labelLine: { length: 8, length2: 10 },
-            itemStyle: { borderRadius: 4, borderColor: '#fff', borderWidth: 2 },
+            itemStyle: { borderRadius: 2, borderColor: '#fff', borderWidth: 2 },
             emphasis: { itemStyle: { shadowBlur: 8, shadowOffsetX: 0, shadowColor: 'rgba(0,0,0,0.2)' } },
         }],
     });
