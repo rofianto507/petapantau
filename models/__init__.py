@@ -21,5 +21,4 @@ from . import lokasi_penting
 from . import patroli
 from . import personel_patroli
 from . import lokasi_patroli
-from . import patroli_form_config
 from . import res_users

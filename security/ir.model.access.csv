@@ -62,7 +62,6 @@ access_lokasi_patroli_admin,lokasi_patroli admin,model_petapantau_lokasi_patroli
 access_lokasi_patroli_polres,lokasi_patroli polres,model_petapantau_lokasi_patroli,petapantau.group_polres,1,1,1,1
 access_lokasi_patroli_polsek,lokasi_patroli polsek,model_petapantau_lokasi_patroli,petapantau.group_polsek,1,1,1,1
 access_lokasi_patroli_subdit_sp,lokasi_patroli subdit sp,model_petapantau_lokasi_patroli,petapantau.group_subdit_patroli,1,1,1,1
-access_patroli_form_config_admin,patroli_form_config admin,model_petapantau_patroli_form_config,petapantau.group_admin,1,1,1,1
 access_kriminalitas_viewer,kriminalitas viewer,model_petapantau_kriminalitas,petapantau.group_viewer,1,0,0,0
 access_bencana_viewer,bencana viewer,model_petapantau_bencana,petapantau.group_viewer,1,0,0,0
 access_lalu_lintas_viewer,lalu_lintas viewer,model_petapantau_lalu_lintas,petapantau.group_viewer,1,0,0,0

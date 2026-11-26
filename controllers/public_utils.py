@@ -1,5 +1,4 @@
 import re
-import base64
 import time
 import threading
 from collections import defaultdict
@@ -30,23 +29,6 @@ def check_rate_limit(ip, namespace='', limit=RATE_LIMIT_MAX, window=RATE_LIMIT_W
             return False
         _rate_cache[key].append(now)
         return True
-
-
-def is_valid_image(b64_data):
-    """Validasi magic bytes: JPEG, PNG, atau WebP."""
-    try:
-        sample = b64_data[:40]
-        rem = len(sample) % 4
-        if rem:
-            sample += '=' * (4 - rem)
-        raw = base64.b64decode(sample)
-        return (
-            raw[:3] == b'\xff\xd8\xff' or
-            raw[:8] == b'\x89PNG\r\n\x1a\n' or
-            (len(raw) >= 12 and raw[:4] == b'RIFF' and raw[8:12] == b'WEBP')
-        )
-    except Exception:
-        return False
 
 
 def parse_user_agent(ua):

@@ -13,7 +13,7 @@ FITUR:
    Kabupaten -> Kecamatan -> Desa/Kelurahan.
 2. Data Kriminalitas (LP A/B) + wizard Import LP dari dokumen .docx.
 3. Data Bencana, Lalu Lintas, dan Lokasi Penting.
-4. Patroli: backend, aplikasi mobile PWA (/petapantau), dan form publik QR (/patroli/<token>).
+4. Patroli: backend dan aplikasi mobile PWA (/petapantau).
 5. Data wilayah D.I. Yogyakarta: 5 kabupaten/kota, 78 kecamatan, desa/kelurahan beserta batas GeoJSON.
 
 Akses berbasis peran: Admin, Subdit, Subdit Patroli, Polres, Polsek, User, Dashboard Viewer.
@@ -51,8 +51,6 @@ Akses berbasis peran: Admin, Subdit, Subdit Patroli, Polres, Polsek, User, Dashb
         'views/lokasi_penting_views.xml',
         'views/sub_status_perkara_views.xml',
         'views/mobile_app_templates.xml',
-        'views/patroli_public_form_template.xml',
-        'views/patroli_form_config_views.xml',
         'views/res_users_views.xml',
         'views/menu.xml',
         'views/menu_restrictions.xml',

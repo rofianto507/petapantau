@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/Leaflet-ECharts-199900?logo=leaflet&logoColor=white" alt="Leaflet & ECharts">
 </p>
 
-> Modul Odoo 19 untuk pemetaan dan pemantauan keamanan wilayah: dashboard peta interaktif, data kriminalitas, bencana, lalu lintas, lokasi penting, serta pencatatan patroli lewat backend, aplikasi mobile, dan form publik QR code.
+> Modul Odoo 19 untuk pemetaan dan pemantauan keamanan wilayah: dashboard peta interaktif, data kriminalitas, bencana, lalu lintas, lokasi penting, serta pencatatan patroli lewat backend dan aplikasi mobile.
 
 ---
 
@@ -36,7 +36,6 @@
 ### Patroli
 - **Backend Odoo** — pencatatan dan monitoring patroli.
 - **Aplikasi mobile PWA** `/petapantau` — Beranda (KPI & aktivitas 7 hari), daftar & input Patroli, Profil.
-- **Form publik QR** `/patroli/<token>` — input tanpa login, dapat dikaitkan ke subdit.
 
 ### Data Wilayah D.I. Yogyakarta
 Terpasang otomatis saat instalasi (`data/wilayah_diy.xml`):
@@ -73,7 +72,7 @@ Sumber batas wilayah: [COD-AB Indonesia](https://data.humdata.org/dataset/cod-ab
 1. Salin folder `petapantau` ke direktori addons Odoo 19.
 2. Pasang dependensi Python:
    ```bash
-   pip install python-docx qrcode[pil]
+   pip install python-docx
    ```
 3. Instal modul (tambahkan `--with-demo` untuk data contoh):
    ```bash
@@ -94,7 +93,7 @@ Dengan `--with-demo`, tersedia data contoh di wilayah DIY: 60 kriminalitas, 10 b
 | `viewer.demo` | Dashboard Viewer |
 
 ### Catatan deployment
-- Form publik dan aplikasi mobile mengunggah foto dalam base64; jika memakai Nginx + ModSecurity, nonaktifkan ModSecurity untuk path `/patroli/` dan `/petapantau/`.
+- Aplikasi mobile mengunggah foto dalam base64; jika memakai Nginx + ModSecurity, nonaktifkan ModSecurity untuk path `/petapantau/`.
 
 ---
 
@@ -103,7 +102,7 @@ Dengan `--with-demo`, tersedia data contoh di wilayah DIY: 60 kriminalitas, 10 b
 ```
 petapantau/
 ├── models/        # wilayah, kriminalitas, bencana, lalu lintas, lokasi penting, patroli
-├── controllers/   # mobile_public.py (/petapantau, /patroli/<token>), public_utils.py
+├── controllers/   # mobile_public.py (/petapantau), public_utils.py
 ├── wizard/        # import LP
 ├── utils/         # parser LP A / LP B
 ├── data/          # sequence, wilayah DIY
@@ -111,7 +110,7 @@ petapantau/
 ├── security/      # grup, record rules, ACL
 ├── tools/         # generator data wilayah & skrip migrasi
 ├── views/
-└── static/        # dashboard JS, aplikasi mobile, form publik, library peta
+└── static/        # dashboard JS, aplikasi mobile, library peta
 ```
 
 ---

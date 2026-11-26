@@ -183,12 +183,5 @@
             action="action_petapantau_sub_status_perkara"
             groups="petapantau.group_admin"
             sequence="170"/>
-        <menuitem
-            id="menu_config_patroli_form_publik"
-            name="Form Publik Patroli"
-            parent="menu_petapantau_configuration"
-            action="action_patroli_form_config"
-            groups="petapantau.group_admin"
-            sequence="186"/>
     </data>
 </odoo>
