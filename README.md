@@ -51,7 +51,7 @@ Terpasang otomatis saat instalasi (`data/wilayah_diy.xml`):
 | Polres Gunungkidul | Kabupaten Gunungkidul |
 
 Total **5 kabupaten/kota, 78 kecamatan (masing-masing satu Polsek), 438 desa/kelurahan** beserta batas wilayah GeoJSON.
-Sumber batas wilayah: [cahyadsn/wilayah_boundaries](https://github.com/cahyadsn/wilayah_boundaries) (MIT). File dapat dibuat ulang dengan `tools/generate_wilayah_diy.py`.
+Sumber batas wilayah: [COD-AB Indonesia](https://data.humdata.org/dataset/cod-ab-idn) — Badan Pusat Statistik (BPS) via OCHA/HDX, lisensi CC BY-IGO. Desa/kelurahan disederhanakan bersama (batas bersama tetap berimpit), lalu digabung menjadi kecamatan dan kabupaten sehingga ketiga level konsisten tanpa celah maupun tumpang tindih. Geometri dapat dibuat ulang dengan `tools/rebuild_geometry_hdx.py` (butuh `shapely` >= 2.1); id, kode, dan nama berasal dari `tools/generate_wilayah_diy.py`.
 
 ---
 

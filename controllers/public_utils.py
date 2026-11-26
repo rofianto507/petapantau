@@ -11,16 +11,22 @@ RATE_LIMIT_MAX    = 10    # maks submit per IP per jam
 RATE_LIMIT_WINDOW = 3600  # 1 jam dalam detik
 
 
-def check_rate_limit(ip, namespace=''):
+def check_rate_limit(ip, namespace='', limit=RATE_LIMIT_MAX, window=RATE_LIMIT_WINDOW):
     """Cek dan catat satu request. Kembalikan False jika melebihi batas.
 
-    Gunakan namespace berbeda per form agar limit-nya independen.
+    Gunakan namespace berbeda per jenis aksi agar limit-nya independen.
+    Catatan: penyimpanan in-memory per proses (tidak dibagi antar worker),
+    jadi ini pagar kasar; untuk aksi penting tambahkan pengecekan berbasis DB.
     """
     key = f"{namespace}:{ip}" if namespace else ip
     now = time.time()
     with _rate_lock:
-        _rate_cache[key] = [t for t in _rate_cache[key] if now - t < RATE_LIMIT_WINDOW]
-        if len(_rate_cache[key]) >= RATE_LIMIT_MAX:
+        # Bersihkan entri kedaluwarsa agar memori tidak membengkak
+        if len(_rate_cache) > 10000:
+            for k in [k for k, v in _rate_cache.items() if not v or now - v[-1] >= RATE_LIMIT_WINDOW]:
+                del _rate_cache[k]
+        _rate_cache[key] = [t for t in _rate_cache[key] if now - t < window]
+        if len(_rate_cache[key]) >= limit:
             return False
         _rate_cache[key].append(now)
         return True

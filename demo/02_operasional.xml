@@ -35,8 +35,8 @@
             <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=317)).strftime('%Y-%m-%d 18:11:00')"/>
             <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=316)).strftime('%Y-%m-%d 16:05:00')"/>
             <field name="tempat_kejadian">Tambakromo, Kec. Ponjong</field>
-            <field name="latitude">-7.916321</field>
-            <field name="longitude">110.767844</field>
+            <field name="latitude">-7.916816</field>
+            <field name="longitude">110.768816</field>
             <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
             <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_motor"/>
             <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
@@ -57,8 +57,8 @@
             <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=138)).strftime('%Y-%m-%d 00:51:00')"/>
             <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=137)).strftime('%Y-%m-%d 19:48:00')"/>
             <field name="tempat_kejadian">Umbulharjo, Kec. Cangkringan</field>
-            <field name="latitude">-7.563116</field>
-            <field name="longitude">110.442063</field>
+            <field name="latitude">-7.571399</field>
+            <field name="longitude">110.445379</field>
             <field name="kategori_id" ref="demo_kat_krim_jalanan"/>
             <field name="sub_kategori_id" ref="demo_sub_kat_jalanan_jambret"/>
             <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
@@ -343,8 +343,8 @@
             <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=66)).strftime('%Y-%m-%d 15:13:00')"/>
             <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=65)).strftime('%Y-%m-%d 13:53:00')"/>
             <field name="tempat_kejadian">Kepuharjo, Kec. Cangkringan</field>
-            <field name="latitude">-7.619683</field>
-            <field name="longitude">110.461207</field>
+            <field name="latitude">-7.619219</field>
+            <field name="longitude">110.460126</field>
             <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
             <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_berat"/>
             <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
@@ -453,8 +453,8 @@
             <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=181)).strftime('%Y-%m-%d 01:27:00')"/>
             <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=180)).strftime('%Y-%m-%d 20:51:00')"/>
             <field name="tempat_kejadian">Kadipaten, Kec. Kraton</field>
-            <field name="latitude">-7.810434</field>
-            <field name="longitude">110.357751</field>
+            <field name="latitude">-7.810409</field>
+            <field name="longitude">110.357510</field>
             <field name="kategori_id" ref="demo_kat_krim_aniaya"/>
             <field name="sub_kategori_id" ref="demo_sub_kat_aniaya_berat"/>
             <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
@@ -651,8 +651,8 @@
             <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=32)).strftime('%Y-%m-%d 13:19:00')"/>
             <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=31)).strftime('%Y-%m-%d 14:30:00')"/>
             <field name="tempat_kejadian">Ambarketawang, Kec. Gamping</field>
-            <field name="latitude">-7.82276</field>
-            <field name="longitude">110.314158</field>
+            <field name="latitude">-7.822298</field>
+            <field name="longitude">110.314406</field>
             <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
             <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_motor"/>
             <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
@@ -761,8 +761,8 @@
             <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=139)).strftime('%Y-%m-%d 04:53:00')"/>
             <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=138)).strftime('%Y-%m-%d 07:29:00')"/>
             <field name="tempat_kejadian">Umbulharjo, Kec. Cangkringan</field>
-            <field name="latitude">-7.583952</field>
-            <field name="longitude">110.440212</field>
+            <field name="latitude">-7.584106</field>
+            <field name="longitude">110.441540</field>
             <field name="kategori_id" ref="demo_kat_krim_jalanan"/>
             <field name="sub_kategori_id" ref="demo_sub_kat_jalanan_jambret"/>
             <field name="jenis_tkp_id" ref="demo_jenis_tkp_jalan"/>
@@ -893,8 +893,8 @@
             <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=85)).strftime('%Y-%m-%d 15:56:00')"/>
             <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=84)).strftime('%Y-%m-%d 10:37:00')"/>
             <field name="tempat_kejadian">Bener, Kec. Tegalrejo</field>
-            <field name="latitude">-7.782289</field>
-            <field name="longitude">110.355432</field>
+            <field name="latitude">-7.782113</field>
+            <field name="longitude">110.355473</field>
             <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
             <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_mobil"/>
             <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
@@ -1179,8 +1179,8 @@
             <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=21)).strftime('%Y-%m-%d 00:37:00')"/>
             <field name="tanggal_laporan" eval="(DateTime.today() - relativedelta(days=20)).strftime('%Y-%m-%d 18:37:00')"/>
             <field name="tempat_kejadian">Potorono, Kec. Banguntapan</field>
-            <field name="latitude">-7.843054</field>
-            <field name="longitude">110.42775</field>
+            <field name="latitude">-7.843183</field>
+            <field name="longitude">110.428227</field>
             <field name="kategori_id" ref="demo_kat_krim_curanmor"/>
             <field name="sub_kategori_id" ref="demo_sub_kat_curanmor_mobil"/>
             <field name="jenis_tkp_id" ref="demo_jenis_tkp_parkir"/>
@@ -1475,8 +1475,8 @@
             <field name="nama_lokasi">Simpang Empat Janti (Ring Road Timur)</field>
             <field name="penanggung_jawab">Satlantas Polres Bantul</field>
             <field name="tanggal_kejadian" eval="(DateTime.today() - relativedelta(days=283)).strftime('%Y-%m-%d 05:51:00')"/>
-            <field name="latitude">-7.7832</field>
-            <field name="longitude">110.414</field>
+            <field name="latitude">-7.783464</field>
+            <field name="longitude">110.413997</field>
             <field name="penyebab">Data demo</field>
             <field name="sumber_dokumen_id" ref="demo_sdok_lalin_2026"/>
             <field name="state">PROSES</field>

@@ -1,10 +1,14 @@
 from odoo import http
+from odoo.exceptions import UserError, AccessError
 from odoo.http import request
 from datetime import datetime, timedelta
 import json
 import base64
 import logging
-from .public_utils import check_rate_limit, is_valid_image, parse_user_agent
+from .public_utils import (
+    check_rate_limit, is_valid_image, parse_user_agent,
+    RATE_LIMIT_MAX, RATE_LIMIT_WINDOW,
+)
 
 _logger = logging.getLogger(__name__)
 
@@ -35,9 +39,43 @@ def _wib_to_utc(dt_str):
     return dt_str
 
 
+# Batas request per IP (dihitung per proses). NAT kantor bisa dipakai banyak petugas,
+# jadi batas aksi tulis lanjutan dibuat longgar; submit patroli baru dibatasi ketat.
+WRITE_LIMIT_MAX    = 300         # aksi tulis form publik / jam / IP
+LOGIN_LIMIT_MAX    = 30          # percobaan login / 15 menit / IP
+LOGIN_LIMIT_WINDOW = 15 * 60
+
+
+def _safe_redirect(target, default='/petapantau/form'):
+    """Hanya izinkan redirect ke path internal (cegah open redirect)."""
+    if (isinstance(target, str) and target.startswith('/')
+            and not target.startswith('//') and '\\' not in target):
+        return target
+    return default
+
+
 class PetaPantauMobileController(http.Controller):
 
     # ── Helpers ──────────────────────────────────────────────────────────────
+
+    def _client_ip(self):
+        """IP klien. Di belakang Nginx aktifkan `proxy_mode = True` di odoo.conf
+        agar remote_addr berisi IP asli (header X-Forwarded-For dari klien tidak
+        dipercaya begitu saja karena bisa dipalsukan)."""
+        return request.httprequest.remote_addr or ''
+
+    def _error(self, exc, context=''):
+        """Pesan error aman untuk klien; detail teknis hanya masuk log server."""
+        if isinstance(exc, AccessError):
+            _logger.warning('%s: akses ditolak: %s', context or 'api', exc)
+            return {'error': 'unauthorized'}
+        if isinstance(exc, UserError):  # termasuk ValidationError: pesannya memang untuk user
+            return {'error': exc.args[0] if exc.args else 'Data tidak valid'}
+        _logger.error('%s error: %s', context or 'api', exc, exc_info=True)
+        return {'error': 'Terjadi kesalahan pada server. Silakan coba lagi.'}
+
+    def _pub_write_allowed(self):
+        return check_rate_limit(self._client_ip(), 'patroli_write', limit=WRITE_LIMIT_MAX)
 
     def _auth_check(self):
         user = request.env.user
@@ -191,15 +229,20 @@ self.addEventListener('fetch', e => {
 
     @http.route('/petapantau/login', type='http', auth='public', csrf=False, website=False, methods=['GET'])
     def strong_login_get(self, error=None, redirect=None, **kwargs):
+        redirect = _safe_redirect(redirect)
         if self._auth_check():
-            return request.redirect(redirect or '/petapantau/form')
+            return request.redirect(redirect)
         return request.render('petapantau.template_strong_login', {
             'error': error,
-            'redirect': redirect or '/petapantau/form',
+            'redirect': redirect,
         })
 
-    @http.route('/petapantau/login', type='http', auth='public', csrf=False, website=False, methods=['POST'])
+    @http.route('/petapantau/login', type='http', auth='public', website=False, methods=['POST'])
     def strong_login_post(self, login='', password='', redirect=None, **kwargs):
+        redirect = _safe_redirect(redirect)
+        if not check_rate_limit(self._client_ip(), 'login', limit=LOGIN_LIMIT_MAX, window=LOGIN_LIMIT_WINDOW):
+            _logger.warning('PetaPantau Mobile login: rate limit (ip=%s)', self._client_ip())
+            return request.redirect('/petapantau/login?error=invalid')
         try:
             credential = {'type': 'password', 'login': login.strip(), 'password': password}
             request.session.authenticate(request.env, credential)
@@ -211,7 +254,7 @@ self.addEventListener('fetch', e => {
                 if not user.polres_id and not is_sp:
                     request.session.logout(keep_db=True)
                     return request.redirect('/petapantau/login?error=unauthorized')
-                return request.redirect(redirect or '/petapantau/form')
+                return request.redirect(redirect)
         except Exception as e:
             _logger.warning('PetaPantau Mobile login gagal untuk "%s": %s', login, e)
         return request.redirect('/petapantau/login?error=invalid')
@@ -355,7 +398,7 @@ self.addEventListener('fetch', e => {
             return {'success': True}
         except Exception as e:
             _logger.error('update_photo error: %s', e, exc_info=True)
-            return {'error': str(e)}
+            return self._error(e)
 
     # ── API: Foto ─────────────────────────────────────────────────────────────
 
@@ -491,8 +534,7 @@ self.addEventListener('fetch', e => {
                 else:
                     resolved_polsek = False
                 resolved_polres = user.polres_id.id
-            client_ip = (request.httprequest.environ.get('HTTP_X_FORWARDED_FOR', '').split(',')[0].strip()
-                         or request.httprequest.remote_addr)
+            client_ip = self._client_ip()
             client_ua = parse_user_agent(request.httprequest.environ.get('HTTP_USER_AGENT', ''))
             vals = {
                 'polres_id':     resolved_polres,
@@ -511,7 +553,7 @@ self.addEventListener('fetch', e => {
             return {'success': True, 'code': record.code, 'record_id': record.id}
         except Exception as e:
             _logger.error('Patroli create error: %s', e, exc_info=True)
-            return {'error': str(e)}
+            return self._error(e)
 
     @http.route('/petapantau/api/patroli/set_selesai', type='jsonrpc', auth='public', csrf=False)
     def api_patroli_set_selesai(self, record_id=None, tanggal_selesai=None, **kwargs):
@@ -530,7 +572,7 @@ self.addEventListener('fetch', e => {
             })
             return {'success': True}
         except Exception as e:
-            return {'error': str(e)}
+            return self._error(e)
 
     @http.route('/petapantau/api/patroli/personel_add', type='jsonrpc', auth='public', csrf=False)
     def api_patroli_personel_add(self, record_id=None, nama=None, pangkat=None, **kwargs):
@@ -548,7 +590,7 @@ self.addEventListener('fetch', e => {
             })
             return {'success': True, 'id': p.id, 'nama_lengkap': p.nama_lengkap}
         except Exception as e:
-            return {'error': str(e)}
+            return self._error(e)
 
     @http.route('/petapantau/api/patroli/personel_remove', type='jsonrpc', auth='public', csrf=False)
     def api_patroli_personel_remove(self, personel_id=None, **kwargs):
@@ -570,7 +612,7 @@ self.addEventListener('fetch', e => {
             p.with_user(user.id).unlink()
             return {'success': True}
         except Exception as e:
-            return {'error': str(e)}
+            return self._error(e)
 
     @http.route('/petapantau/api/patroli/lokasi_add', type='jsonrpc', auth='public', csrf=False)
     def api_patroli_lokasi_add(self, record_id=None, latitude=None, longitude=None,
@@ -594,7 +636,7 @@ self.addEventListener('fetch', e => {
             return {'success': True, 'id': l.id}
         except Exception as e:
             _logger.error('Patroli lokasi_add error: %s', e, exc_info=True)
-            return {'error': str(e)}
+            return self._error(e)
 
     @http.route('/petapantau/api/patroli/lokasi_foto', type='jsonrpc', auth='public', csrf=False)
     def api_patroli_lokasi_foto(self, lokasi_id=None, foto_data=None, foto_filename=None, **kwargs):
@@ -611,7 +653,7 @@ self.addEventListener('fetch', e => {
             return {'success': True}
         except Exception as e:
             _logger.error('Patroli lokasi_foto error: %s', e, exc_info=True)
-            return {'error': str(e)}
+            return self._error(e)
 
     # ── PUBLIC PATROLI FORM ───────────────────────────────────────────────────
 
@@ -709,11 +751,7 @@ self.addEventListener('fetch', e => {
     @http.route('/patroli/api/submit', type='jsonrpc', auth='public', csrf=False)
     def patroli_pub_submit(self, token, data, **kwargs):
         # ── Rate limiting ─────────────────────────────────────────────────────
-        client_ip = (
-            request.httprequest.environ.get('HTTP_X_FORWARDED_FOR', '')
-            .split(',')[0].strip()
-            or request.httprequest.remote_addr
-        )
+        client_ip = self._client_ip()
         if not check_rate_limit(client_ip, 'patroli'):
             _logger.warning('patroli_pub_submit: rate limit exceeded (ip=%s)', client_ip)
             return {'error': 'Terlalu banyak pengiriman. Silakan coba lagi dalam 1 jam.'}
@@ -727,6 +765,13 @@ self.addEventListener('fetch', e => {
         config = self._patroli_pub_valid(token)
         if not config:
             return {'error': 'unauthorized'}
+
+        # Batas berbasis DB (berlaku lintas worker): patroli baru dari IP ini dalam 1 jam terakhir
+        if client_ip and request.env['petapantau.patroli'].sudo().search_count([
+            ('submitter_ip', '=', client_ip),
+            ('create_date', '>=', datetime.utcnow() - timedelta(seconds=RATE_LIMIT_WINDOW)),
+        ]) >= RATE_LIMIT_MAX:
+            return {'error': 'Terlalu banyak pengiriman. Silakan coba lagi dalam 1 jam.'}
 
         # ── Validasi wilayah ──────────────────────────────────────────────────
         try:
@@ -823,13 +868,15 @@ self.addEventListener('fetch', e => {
             return {'success': True, 'code': result.code, 'record_id': result.id}
         except Exception as e:
             _logger.error('patroli_pub_submit error: %s', e, exc_info=True)
-            return {'error': str(e)}
+            return self._error(e)
 
     @http.route('/patroli/api/personel_add', type='jsonrpc', auth='public', csrf=False)
     def patroli_pub_personel_add(self, token, record_id, nama, pangkat=None, **kwargs):
         config = self._patroli_pub_valid(token) if token else False
         if not config:
             return {'error': 'unauthorized'}
+        if not self._pub_write_allowed():
+            return {'error': 'Terlalu banyak permintaan. Silakan coba lagi nanti.'}
         nama = (nama or '').strip()
         if not nama:
             return {'error': 'Nama personel wajib diisi'}
@@ -852,13 +899,15 @@ self.addEventListener('fetch', e => {
             return {'success': True, 'id': p.id, 'nama_lengkap': p.nama_lengkap}
         except Exception as e:
             _logger.error('patroli_pub_personel_add error: %s', e, exc_info=True)
-            return {'error': str(e)}
+            return self._error(e)
 
     @http.route('/patroli/api/personel_remove', type='jsonrpc', auth='public', csrf=False)
     def patroli_pub_personel_remove(self, token, personel_id, **kwargs):
         config = self._patroli_pub_valid(token) if token else False
         if not config:
             return {'error': 'unauthorized'}
+        if not self._pub_write_allowed():
+            return {'error': 'Terlalu banyak permintaan. Silakan coba lagi nanti.'}
         try:
             p = request.env['petapantau.personel_patroli'].sudo().browse(int(personel_id))
             if not p.exists() or p.patroli_id.form_config_id != config:
@@ -869,7 +918,7 @@ self.addEventListener('fetch', e => {
             return {'success': True}
         except Exception as e:
             _logger.error('patroli_pub_personel_remove error: %s', e, exc_info=True)
-            return {'error': str(e)}
+            return self._error(e)
 
     @http.route('/patroli/api/lokasi_add', type='jsonrpc', auth='public', csrf=False)
     def patroli_pub_lokasi_add(self, token, record_id, latitude, longitude,
@@ -877,6 +926,8 @@ self.addEventListener('fetch', e => {
         config = self._patroli_pub_valid(token) if token else False
         if not config:
             return {'error': 'unauthorized'}
+        if not self._pub_write_allowed():
+            return {'error': 'Terlalu banyak permintaan. Silakan coba lagi nanti.'}
 
         # ── Validasi wajib ────────────────────────────────────────────────────
         if not tanggal:
@@ -929,13 +980,15 @@ self.addEventListener('fetch', e => {
             return {'success': True, 'id': l.id, 'tanggal_display': tanggal_display}
         except Exception as e:
             _logger.error('patroli_pub_lokasi_add error: %s', e, exc_info=True)
-            return {'error': str(e)}
+            return self._error(e)
 
     @http.route('/patroli/api/lokasi_remove', type='jsonrpc', auth='public', csrf=False)
     def patroli_pub_lokasi_remove(self, token, lokasi_id, **kwargs):
         config = self._patroli_pub_valid(token) if token else False
         if not config:
             return {'error': 'unauthorized'}
+        if not self._pub_write_allowed():
+            return {'error': 'Terlalu banyak permintaan. Silakan coba lagi nanti.'}
         try:
             l = request.env['petapantau.lokasi_patroli'].sudo().browse(int(lokasi_id))
             if not l.exists() or l.patroli_id.form_config_id != config:
@@ -946,13 +999,15 @@ self.addEventListener('fetch', e => {
             return {'success': True}
         except Exception as e:
             _logger.error('patroli_pub_lokasi_remove error: %s', e, exc_info=True)
-            return {'error': str(e)}
+            return self._error(e)
 
     @http.route('/patroli/api/set_selesai', type='jsonrpc', auth='public', csrf=False)
     def patroli_pub_set_selesai(self, token, record_id, tanggal_selesai, **kwargs):
         config = self._patroli_pub_valid(token) if token else False
         if not config:
             return {'error': 'unauthorized'}
+        if not self._pub_write_allowed():
+            return {'error': 'Terlalu banyak permintaan. Silakan coba lagi nanti.'}
         if not tanggal_selesai:
             return {'error': 'Tanggal selesai harus diisi'}
         tgl_str = tanggal_selesai.replace('T', ' ').strip()
@@ -983,7 +1038,7 @@ self.addEventListener('fetch', e => {
             return {'success': True}
         except Exception as e:
             _logger.error('patroli_pub_set_selesai error: %s', e, exc_info=True)
-            return {'error': str(e)}
+            return self._error(e)
 
     @http.route('/petapantau/api/patroli/lokasi_remove', type='jsonrpc', auth='public', csrf=False)
     def api_patroli_lokasi_remove(self, lokasi_id=None, **kwargs):
@@ -998,4 +1053,4 @@ self.addEventListener('fetch', e => {
             return {'success': True}
         except Exception as e:
             _logger.error('Patroli lokasi_remove error: %s', e, exc_info=True)
-            return {'error': str(e)}
+            return self._error(e)
